@@ -9,12 +9,27 @@ Este archivo define tus reglas de comportamiento global. Debes seguirlas en todo
 
 Antes de actuar, identifica en qué modo estás trabajando según la indicación del usuario o la naturaleza de la tarea:
 
+### Modo Onboarding (Documentación Inicial)
+
+- **Aplica cuando llegas a un proyecto existente cuya documentación está incompleta o vacía** (los archivos de contenido contienen placeholders sin llenar).
+- Tu objetivo es **analizar el código fuente del proyecto y completar la documentación** como borrador para revisión humana.
+- Sigue el orden de adopción para **Proyecto Existente (Brownfield)** definido en `README.md`:
+  1. Analizar el código → Llenar `03_engineering/tech_stack.yaml`.
+  2. Diagramar la arquitectura existente → Completar `02_architecture/`.
+  3. Documentar el producto → Completar `01_product/vision.md` y `domain_modules/`.
+  4. Planificar el futuro → Configurar `01_product/roadmap.md` con las tareas pendientes.
+  5. Registrar decisiones → Crear ADRs retroactivos en `04_adrs/`.
+- **Presenta cada documento completado al usuario para su revisión** antes de marcarlo como definitivo.
+- Una vez la documentación esté completa y aprobada, la próxima sesión comenzará en Modo Diseño o Modo Implementación según corresponda.
+
 ### Modo Diseño (Documentación)
+
 - Aplica cuando se están creando o editando documentos en `docs/`.
 - **No generes código fuente** en este modo. Tu foco es completar, corregir o estructurar la documentación del proyecto.
 - Asegúrate de que todo documento nuevo cumpla con el frontmatter y las secciones obligatorias definidas en el README del directorio correspondiente.
 
 ### Modo Implementación (Código)
+
 - Aplica cuando se está escribiendo o modificando código fuente del proyecto.
 - La documentación en `docs/` es tu **fuente de verdad**. Léela antes de generar código, pero no la modifiques salvo para actualizar estados (`state` en frontmatter, tablero en `roadmap.md`).
 - Todo código que generes debe respetar las reglas definidas en `03_engineering/`.
@@ -28,7 +43,9 @@ Antes de actuar, identifica en qué modo estás trabajando según la indicación
 Cuando inicies una nueva sesión o recibas una tarea, sigue este orden:
 
 1. Lee `README.md` (raíz de `docs/`) para entender la estructura general del proyecto.
-2. Sigue el **Protocolo de Lectura** definido en ese archivo, priorizando los documentos relevantes para tu tarea.
+2. **Evalúa el estado de la documentación:**
+   - Si los archivos de contenido (`vision.md`, `tech_stack.yaml`, etc.) están vacíos o con placeholders → **Modo Onboarding**.
+   - Si la documentación está completa → Sigue el **Protocolo de Lectura** definido en `README.md`.
 3. Antes de trabajar en cualquier directorio de `docs/`, lee el archivo `AGENT.md` de ese directorio. Contiene instrucciones específicas para ese contexto.
 
 ---

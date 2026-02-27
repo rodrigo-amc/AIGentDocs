@@ -1,0 +1,36 @@
+# Stack Tecnológico del Proyecto
+# Todo agente de IA debe leerlo antes de generar código.
+# Cada tecnología debe tener un ADR asociado en 04_adrs/.
+
+backend:
+  lenguaje:
+    nombre: ""
+    version: ""
+    adr: ""
+  framework:
+    nombre: ""
+    version: ""
+    adr: ""
+  gestor_de_dependencias:
+    nombre: ""
+    version: ""
+    adr: ""
+
+frontend:
+  framework:
+    nombre: ""
+    version: ""
+    adr: ""
+  gestor_de_paquetes:
+    nombre: ""
+    version: ""
+    adr: ""
+
+base_de_datos:
+  motor:
+    nombre: ""
+    version: ""
+    adr: ""
+
+restricciones_globales:
+  - "No instalar ni proponer nuevas dependencias sin discutirlo con el desarrollador humano y registrar el ADR correspondiente."
