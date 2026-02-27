@@ -1,6 +1,52 @@
 # Estándar de Documentación para Ingeniería de Software Aumentada por IA
 
-Este documento es el **punto de entrada** a la documentación del proyecto. Define la estructura oficial, los protocolos de lectura y mantenimiento, y sirve como índice maestro para desarrolladores y agentes de IA.
+Este repositorio contiene un **framework de documentación como código** diseñado para que agentes de IA puedan entender, documentar y desarrollar proyectos de software de forma eficiente. Se puede adoptar tanto en proyectos nuevos como en proyectos existentes.
+
+---
+
+## Tabla de Contenidos
+
+<!-- [OBLIGATORIO] Índice completo con rutas relativas a cada archivo de /docs. Debe mantenerse actualizado. -->
+
+### Raíz
+
+- [README.md](./README.md) — Este archivo (punto de entrada)
+- [AGENT.md](./AGENT.md) — Instrucciones operativas globales para agentes de IA
+- [AGENT_REVIEW.md](./AGENT_REVIEW.md) — Prompt de auditoría de documentación
+- [QUICKSTART.md](./QUICKSTART.md) — Guía de uso del framework
+- [changelog.yaml](./changelog.yaml) — Historial de versiones del estándar
+
+### 01_product — Contexto de Producto
+
+- [README.md](./01_product/README.md) — Instrucciones para los archivos de producto
+- [AGENT.md](./01_product/AGENT.md) — Instrucciones operativas para agentes en este contexto
+- [vision.md](./01_product/vision.md) — Visión del producto, Elevator Pitch y Alcance
+- [roadmap.md](./01_product/roadmap.md) — Estado actual del proyecto, hitos y futuro
+- [quality_attributes.md](./01_product/quality_attributes.md) — Requerimientos No Funcionales
+- [domain_modules/README.md](./01_product/domain_modules/README.md) — Instrucciones para módulos de dominio
+
+### 02_architecture — Arquitectura del Sistema
+
+- [README.md](./02_architecture/README.md) — Instrucciones para los Design Docs
+- [AGENT.md](./02_architecture/AGENT.md) — Instrucciones operativas para agentes en este contexto
+- [system_overview.md](./02_architecture/system_overview.md) — Diagramas C4, estructura de carpetas y patrones
+- [data_flow.md](./02_architecture/data_flow.md) — Flujos de datos y modelo de datos
+- [infrastructure.md](./02_architecture/infrastructure.md) — Topología, despliegue y CI/CD
+
+### 03_engineering — Ingeniería
+
+- [README.md](./03_engineering/README.md) — Instrucciones y regla de interacción ADR → Engineering
+- [AGENT.md](./03_engineering/AGENT.md) — Instrucciones operativas para agentes en este contexto
+- [tech_stack.yaml](./03_engineering/tech_stack.yaml) — Stack tecnológico exacto (YAML)
+- [testing_strategy.md](./03_engineering/testing_strategy.md) — Estrategia de pruebas y cobertura
+
+### 04_adrs — Architecture Decision Records
+
+- [README.md](./04_adrs/README.md) — Instrucciones, estructura y guía de creación de ADRs
+- [AGENT.md](./04_adrs/AGENT.md) — Instrucciones operativas para agentes en este contexto
+- [0001-registrar-decisiones-de-arquitectura.md](./04_adrs/0001-registrar-decisiones-de-arquitectura.md) — Adopción de ADRs
+
+---
 
 ## Filosofía del Estándar
 
@@ -17,8 +63,9 @@ Todos los documentos deben mantener un **formato legible por humanos** — los h
 ```text
 /docs
 ├── README.md                  # Este archivo (punto de entrada)
-├── AGENT.md                   # Instrucciones operativas globales y gestión de sesiones
+├── AGENT.md                   # Instrucciones operativas globales para agentes de IA
 ├── AGENT_REVIEW.md            # Prompt de auditoría de documentación (bajo demanda)
+├── QUICKSTART.md              # Guía de uso del framework
 ├── changelog.yaml             # Historial de versiones del estándar
 ├── 01_product/                # El "Por qué" y el Negocio
 │   ├── README.md              # Instrucciones para vision.md, roadmap.md y quality_attributes.md
@@ -62,6 +109,38 @@ Todos los documentos deben mantener un **formato legible por humanos** — los h
 | Protocolo de Mantenimiento | **[OBLIGATORIO]** | Reglas para editar, crear o eliminar archivos de documentación (ver guía abajo). |
 | Convenciones | **[OBLIGATORIO]** | Idioma elegido, formato de fechas, estilo de escritura. |
 | Historial de Versiones | **[OBLIGATORIO]** | Registro estructurado de cambios del estándar en `changelog.yaml`. |
+
+> **Nota:** Al adoptar el framework en un proyecto, el encabezado de este archivo debe reemplazarse con el nombre y descripción del proyecto concreto.
+
+---
+
+## Guía de Adopción
+
+### Proyecto Nuevo (Greenfield)
+
+Si el proyecto aún no tiene código, llenar la documentación **antes de implementar**:
+
+1. Completar `01_product/vision.md` → Definir qué se va a construir.
+2. Crear los `domain_modules/` necesarios → Documentar User Stories y ACs.
+3. Completar `01_product/roadmap.md` → Priorizar las tareas.
+4. Diseñar `02_architecture/` → system_overview, data_flow, infrastructure.
+5. Definir `03_engineering/tech_stack.yaml` → Elegir tecnologías (con ADRs).
+6. Definir `03_engineering/testing_strategy.md` → Estrategia de tests.
+7. Implementar el código siguiendo la documentación.
+
+### Proyecto Existente (Brownfield)
+
+Si el proyecto ya tiene código, documentar por **ingeniería inversa**. El orden es diferente — se parte de lo concreto (código) hacia lo abstracto (producto):
+
+1. **`03_engineering/tech_stack.yaml`** → Analizar el código y registrar las tecnologías reales.
+2. **`02_architecture/system_overview.md`** → Diagramar la arquitectura que ya existe.
+3. **`02_architecture/infrastructure.md`** → Documentar dónde y cómo corre.
+4. **`01_product/vision.md`** → Describir qué hace el producto y para quién.
+5. **`01_product/domain_modules/`** → Identificar entidades del código y crear módulos con User Stories documentadas como ya implementadas (`state: done`).
+6. **`01_product/roadmap.md`** → Usar el tablero para planificar lo que **falta**: nuevas features, refactors, bugs.
+7. **`04_adrs/`** → Crear ADRs retroactivos (`status: accepted`) para las decisiones técnicas ya tomadas.
+
+> **Tip:** Un agente de IA puede acelerar enormemente el paso de Brownfield. Puede analizar el código fuente y generar borradores de la documentación para revisión humana. Ver `AGENT.md` para el Modo Onboarding.
 
 ---
 
@@ -129,3 +208,24 @@ Cada directorio define en su `README.md` el esquema de frontmatter completo para
 4. **Design Docs**: La carpeta `02_architecture/` actúa como el repositorio de Design Docs, donde se describe la solución técnica a los requerimientos definidos en el nivel de producto.
 5. **Contexto Mínimo Suficiente**: La documentación está estructurada para que un Agente de IA pueda leer solo lo necesario para realizar una tarea específica sin saturar su contexto.
 6. **Trazabilidad**: Las decisiones arquitectónicas (ADRs) se reflejan en la ingeniería (`03_engineering/`) cuando modifican estándares técnicos.
+7. **Documentación como Código**: Los archivos de documentación viven junto al código fuente, se versionan con Git y se mantienen como parte del flujo de desarrollo.
+
+---
+
+## Convenciones
+
+<!-- [OBLIGATORIO] Idioma elegido, formato de fechas, estilo de escritura. -->
+
+| Convención | Valor |
+|---|---|
+| Idioma de documentación | *A definir por el equipo del proyecto* |
+| Formato de fechas | `YYYY-MM-DD` |
+| Estilo de escritura | Claro, orientado a resultados, legible por humanos y agentes de IA |
+
+---
+
+## Historial de Versiones
+
+<!-- [OBLIGATORIO] Registro estructurado de cambios del estándar. -->
+
+Ver [changelog.yaml](./changelog.yaml) para el registro completo de versiones.

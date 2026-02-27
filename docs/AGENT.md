@@ -9,12 +9,27 @@ Este archivo define tus reglas de comportamiento global. Debes seguirlas en todo
 
 Antes de actuar, identifica en qué modo estás trabajando según la indicación del usuario o la naturaleza de la tarea:
 
+### Modo Onboarding (Documentación Inicial)
+
+- **Aplica cuando llegas a un proyecto existente cuya documentación está incompleta o vacía** (los archivos de contenido contienen placeholders sin llenar).
+- Tu objetivo es **analizar el código fuente del proyecto y completar la documentación** como borrador para revisión humana.
+- Sigue el orden de adopción para **Proyecto Existente (Brownfield)** definido en `README.md`:
+  1. Analizar el código → Llenar `03_engineering/tech_stack.yaml`.
+  2. Diagramar la arquitectura existente → Completar `02_architecture/`.
+  3. Documentar el producto → Completar `01_product/vision.md` y `domain_modules/`.
+  4. Planificar el futuro → Configurar `01_product/roadmap.md` con las tareas pendientes.
+  5. Registrar decisiones → Crear ADRs retroactivos en `04_adrs/`.
+- **Presenta cada documento completado al usuario para su revisión** antes de marcarlo como definitivo.
+- Una vez la documentación esté completa y aprobada, la próxima sesión comenzará en Modo Diseño o Modo Implementación según corresponda.
+
 ### Modo Diseño (Documentación)
+
 - Aplica cuando se están creando o editando documentos en `docs/`.
 - **No generes código fuente** en este modo. Tu foco es completar, corregir o estructurar la documentación del proyecto.
 - Asegúrate de que todo documento nuevo cumpla con el frontmatter y las secciones obligatorias definidas en el README del directorio correspondiente.
 
 ### Modo Implementación (Código)
+
 - Aplica cuando se está escribiendo o modificando código fuente del proyecto.
 - La documentación en `docs/` es tu **fuente de verdad**. Léela antes de generar código, pero no la modifiques salvo para actualizar estados (`state` en frontmatter, tablero en `roadmap.md`).
 - Todo código que generes debe respetar las reglas definidas en `03_engineering/`.
@@ -28,145 +43,10 @@ Antes de actuar, identifica en qué modo estás trabajando según la indicación
 Cuando inicies una nueva sesión o recibas una tarea, sigue este orden:
 
 1. Lee `README.md` (raíz de `docs/`) para entender la estructura general del proyecto.
-2. Sigue el **Protocolo de Lectura** definido en ese archivo, priorizando los documentos relevantes para tu tarea.
+2. **Evalúa el estado de la documentación:**
+   - Si los archivos de contenido (`vision.md`, `tech_stack.yaml`, etc.) están vacíos o con placeholders → **Modo Onboarding**.
+   - Si la documentación está completa → Sigue el **Protocolo de Lectura** definido en `README.md`.
 3. Antes de trabajar en cualquier directorio de `docs/`, lee el archivo `AGENT.md` de ese directorio. Contiene instrucciones específicas para ese contexto.
-
----
-
-## Gestión de Sesiones
-
-La documentación de un proyecto no puede completarse en una única sesión de agente. Para evitar la saturación de la ventana de contexto y mantener la coherencia, el trabajo se organiza en **sesiones independientes y enfocadas**, cada una con un alcance de escritura definido.
-
-> **Principio clave:** La sesión define tu **alcance de escritura**: qué archivos y directorios podés crear o modificar. **No limita tu capacidad de lectura** — el Protocolo de Lectura de `README.md` aplica en su totalidad, independientemente de la sesión activa.
-
-Al iniciar una sesión, el usuario te indicará en qué parte de la documentación van a trabajar. Esa indicación define tu alcance. Si el usuario no especifica una sesión, presentale la **Tabla de Referencia Rápida** de esta sección y solicitale que elija una antes de proceder.
-
-### Regla de Guardia de Sesión
-
-**Si durante la sesión el usuario te solicita crear o modificar un documento que, según la tabla de sesiones, pertenece a otra sesión, debes:**
-
-1. **Detenerte.** No inicies el trabajo solicitado.
-2. **Informar al usuario** que el trabajo solicitado corresponde a otra sesión según esta guía.
-3. **Recomendar** que se abra una nueva sesión enfocada en esa área.
-4. **Esperar instrucción explícita** del usuario antes de proceder. Si el usuario decide continuar de todas formas, respeta su decisión.
-
-**Si la instrucción del usuario es ambigua, contradictoria con esta guía, o no podés determinar a qué sesión corresponde el trabajo solicitado, debes:**
-
-1. **Detenerte.** No asumas una interpretación.
-2. **Explicar al usuario** cuál es la duda, ambigüedad o contradicción que detectás.
-3. **Esperar instrucción explícita** antes de continuar.
-
-#### Excepción: Propagación de ADR
-
-La sesión `04_adrs` es la única que permite modificar archivos fuera de su propio directorio. Si un ADR aceptado afecta un estándar técnico, el agente **debe** actualizar el archivo correspondiente en `03_engineering/` dentro de la misma sesión. Esta es una excepción intencional y necesaria para mantener la trazabilidad definida en las Reglas Globales.
-
-#### Excepción: Trazabilidad Global
-
-Para cumplir con las **Reglas Globales de Trazabilidad**, toda sesión tiene permiso concurrente de escritura para modificar metadatos de estado. Esto significa que el agente **debe** actualizar los estados de sus tareas en `01_product/roadmap.md` y el campo `state` en el frontmatter de los documentos de `01_product/domain_modules/` al completar un avance, sin importar el tipo de sesión activa.
-
-### Tipos de Sesión
-
-Cada tipo de sesión tiene un **objetivo único**, un **alcance de escritura delimitado** y una **frecuencia** esperada.
-
-#### Sesión: `01_product`
-
-**Objetivo:** Establecer la identidad del producto, su alcance, la hoja de ruta inicial y los atributos de calidad base.
-
-| Entregable | Directorio |
-|---|---|
-| `vision.md` | `01_product/` |
-| `roadmap.md` | `01_product/` |
-| `quality_attributes.md` | `01_product/` |
-
-**Alcance de escritura:** Solo documentos estratégicos de producto. No se crean módulos de dominio, ni documentos de arquitectura, ni de ingeniería en esta sesión.
-
-**Frecuencia:** Una única vez al inicio del proyecto.
-
----
-
-#### Sesión: `01_product_domain_modules`
-
-**Objetivo:** Definir las User Stories, Criterios de Aceptación y Reglas de Negocio de **un único módulo de dominio**.
-
-| Entregable | Directorio |
-|---|---|
-| Un archivo `[module_name].md` | `01_product/domain_modules/` |
-
-**Alcance de escritura:** Se trabaja exclusivamente en un solo módulo por sesión. Si el módulo tiene dependencias con otros módulos ya aprobados (campo `depends_on` del frontmatter), el agente debe leerlos como referencia, pero **no modificarlos**.
-
-**Frecuencia:** Una sesión por cada módulo del Roadmap.
-
-> **Importante:** Si durante la definición de un módulo se detectan nuevos NFRs o reglas de negocio que afectan a `quality_attributes.md` o a módulos ya aprobados, el agente debe **registrar la observación** y comunicarla al usuario, pero no debe modificar esos documentos en esta sesión.
-
----
-
-#### Sesión: `02_architecture`
-
-**Objetivo:** Diseñar la solución técnica que responde a los requerimientos funcionales ya definidos en los módulos de dominio.
-
-| Entregable | Directorio |
-|---|---|
-| `system_overview.md` | `02_architecture/` |
-| `data_flow.md` | `02_architecture/` |
-| `infrastructure.md` | `02_architecture/` |
-
-**Alcance de escritura:** Solo documentos de arquitectura. No se modifican módulos de dominio ni documentos de ingeniería.
-
-**Frecuencia:** Una vez, después de aprobar todos los módulos de dominio de la fase actual del Roadmap.
-
----
-
-#### Sesión: `03_engineering`
-
-**Objetivo:** Definir las reglas técnicas concretas del proyecto: stack tecnológico, estrategia de testing y guías de API.
-
-| Entregable | Directorio |
-|---|---|
-| `tech_stack.yaml` | `03_engineering/` |
-| `testing_strategy.md` | `03_engineering/` |
-| `api_guidelines.md` *(condicional)* | `03_engineering/` |
-
-**Alcance de escritura:** Solo documentos de ingeniería. Cada tecnología definida en `tech_stack.yaml` debe tener un ADR asociado; si no existe, el agente debe señalarlo pero **no crear el ADR en esta sesión** (corresponde a una sesión `04_adrs`).
-
-**Frecuencia:** Una vez, después de aprobar la arquitectura.
-
----
-
-#### Sesión: `04_adrs`
-
-**Objetivo:** Registrar **una única decisión arquitectónica** significativa.
-
-| Entregable | Directorio |
-|---|---|
-| Un archivo `[NNNN]-[titulo].md` | `04_adrs/` |
-
-**Alcance de escritura:** Crear el ADR y, si aplica la **Propagación de ADR**, actualizar el documento afectado en `03_engineering/`. No se modifican módulos de dominio ni documentos de arquitectura.
-
-**Frecuencia:** Bajo demanda, cada vez que surja una decisión técnica relevante. Puede ejecutarse en cualquier momento del proyecto.
-
-### Orden Recomendado de Ejecución
-
-```text
-01_product
-    ↓
-01_product_domain_modules × N (un módulo por sesión)
-    ↓
-02_architecture
-    ↓
-03_engineering
-
-04_adrs → puede ejecutarse en cualquier momento, de forma independiente.
-```
-
-### Tabla de Referencia Rápida
-
-| Sesión | ¿Qué se crea/modifica? | ¿Dónde? | ¿Cuándo? | ¿Cuántas veces? |
-|---|---|---|---|---|
-| `01_product` | `vision.md`, `roadmap.md`, `quality_attributes.md` | `01_product/` | Al inicio del proyecto | 1 |
-| `01_product_domain_modules` | Un `[module_name].md` | `01_product/domain_modules/` | Después de `01_product` | 1 por módulo |
-| `02_architecture` | `system_overview.md`, `data_flow.md`, `infrastructure.md` | `02_architecture/` | Después de aprobar módulos | 1 |
-| `03_engineering` | `tech_stack.yaml`, `testing_strategy.md`, `api_guidelines.md` | `03_engineering/` | Después de aprobar arquitectura | 1 |
-| `04_adrs` | Un `[NNNN]-[titulo].md` + Propagación | `04_adrs/` + `03_engineering/` | Cuando surja una decisión | Bajo demanda |
 
 ---
 
