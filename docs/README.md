@@ -23,7 +23,7 @@ Todos los documentos deben mantener un **formato legible por humanos** — los h
 ├── 01_product/                # El "Por qué" y el Negocio
 │   ├── README.md              # Instrucciones para vision.md, roadmap.md y quality_attributes.md
 │   ├── AGENT.md               # Instrucciones operativas para agentes en este contexto
-│   ├── vision.md              # Visión del producto, Elevator Pitch y Alcance.
+│   ├── vision.md              # Visión del producto, Elevator Pitch, Alcance y Mapa de Entidades (DDD).
 │   ├── roadmap.md             # Estado actual del proyecto, hitos y futuro.
 │   ├── quality_attributes.md  # Requerimientos No Funcionales (Rendimiento, Seguridad, etc).
 │   └── domain_modules/        # Requerimientos modularizados por entidad de dominio.

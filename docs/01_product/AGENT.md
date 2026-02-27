@@ -11,6 +11,88 @@ Aquí se define el **"Por qué"** del proyecto: la visión, el estado actual y l
 
 ---
 
+## Descubrimiento de Dominio (Knowledge Crunching — DDD)
+
+Este estándar adopta principios de **Domain-Driven Design (DDD)** de Eric Evans para el descubrimiento del dominio del proyecto. Cuando trabajes en la creación de `vision.md`, no te limites a documentar lo que el usuario dice textualmente. Tu rol es actuar como **analista de dominio**: debes extraer, estructurar y devolver al usuario un modelo de dominio validado.
+
+### Qué es DDD y por qué lo usamos
+
+Domain-Driven Design (DDD) es una metodología de diseño de software que pone el **dominio del negocio** en el centro del proceso de desarrollo. Su premisa es que la complejidad del software radica en la complejidad del negocio, no en la tecnología. Por lo tanto, entender el dominio antes de diseñar o programar es el paso más crítico.
+
+En el contexto de este estándar, DDD se aplica en la **fase de producto** para:
+1. Descubrir las **entidades** del dominio (los conceptos centrales del negocio).
+2. Establecer un **lenguaje ubicuo** (Ubiquitous Language) que todos los participantes — humanos y agentes — usen de forma consistente.
+3. Identificar las **reglas de negocio** (invariantes) que gobiernan el comportamiento de cada entidad.
+4. Definir las **relaciones** entre entidades para entender cómo interactúa el sistema.
+
+### Proceso obligatorio al crear `vision.md`
+
+Al trabajar con el usuario en la creación de `vision.md`, debes ejecutar el siguiente proceso de **Knowledge Crunching** (extracción de conocimiento del dominio):
+
+**Paso 1 — Elicitación Narrativa**
+
+Solicita al usuario que describa sus procesos de negocio en lenguaje natural. Guía la conversación con preguntas orientadas a descubrir entidades:
+
+- *"¿Cuáles son las cosas (personas, objetos, conceptos) más importantes con las que trabaja su negocio?"*
+- *"Cuando [actor] quiere [acción], ¿qué pasos sigue? ¿Qué cosas del negocio se involucran?"*
+- *"¿Qué reglas o restricciones deben cumplirse para que eso funcione correctamente?"*
+- *"¿Hay algo que nunca debería pasar en su negocio? ¿Qué lo impide?"*
+
+**Paso 2 — Identificación y Clasificación (DDD)**
+
+A partir del relato del usuario, identifica y clasifica según los conceptos de DDD:
+
+| Qué buscar | Cómo identificarlo | Concepto DDD |
+|---|---|---|
+| **Sustantivos recurrentes** con identidad propia | El usuario se refiere a ellos con nombres propios o IDs: "el cliente X", "la orden #123" | **Entidad** |
+| **Sustantivos descriptivos** sin identidad | El usuario los menciona como propiedades: "la dirección", "el rango de fechas" | **Value Object** |
+| **Verbos y acciones** que los actores realizan | "Registrar", "Aprobar", "Cancelar", "Asignar" | **Comandos / Acciones** |
+| **Restricciones o condiciones** | "No se puede X sin Y", "Siempre debe cumplir Z", "Solo si..." | **Regla de Negocio (Invariante)** |
+| **Términos del negocio** con significado específico | Palabras que el usuario usa con un significado preciso que podría diferir del uso cotidiano | **Ubiquitous Language** |
+| **Roles de usuario** que interactúan con el sistema | "El mecánico", "El administrador", "El cliente" | **Actores** (Usuarios Objetivo) |
+
+**Paso 3 — Estructurar y Presentar para Validación**
+
+Organiza los hallazgos y preséntalos al usuario en este formato:
+
+1. **Entidades descubiertas**: Tabla con nombre, descripción de 1-2 líneas y relaciones de alto nivel.
+2. **Reglas de negocio preliminares**: Lista agrupada por entidad, indicando qué restricciones mencionó el usuario.
+3. **Términos del dominio**: Lista de términos candidatos para el Glosario con su definición propuesta.
+4. **Actores identificados**: Roles de usuario con su descripción.
+
+**Paso 4 — Validación Iterativa**
+
+Presenta los hallazgos al usuario y solicita validación explícita:
+- ¿Las entidades identificadas son correctas? ¿Falta alguna? ¿Alguna sobra?
+- ¿Las relaciones son correctas?
+- ¿Las reglas de negocio reflejan la realidad?
+- ¿Los términos del glosario tienen el significado correcto?
+
+Itera hasta que el usuario apruebe el modelo. Solo entonces, procede a completar `vision.md`.
+
+### Dónde se documenta cada concepto DDD
+
+Una vez validado el modelo con el usuario, documenta los resultados en los lugares correctos del estándar:
+
+| Concepto DDD descubierto | Dónde se documenta | Nivel de detalle |
+|---|---|---|
+| Entidades | `vision.md` → **Mapa de Entidades del Dominio** | Nombre + descripción + relaciones de alto nivel |
+| Ubiquitous Language | `vision.md` → **Glosario del Dominio** | Término + definición acordada |
+| Actores | `vision.md` → **Usuarios Objetivo (Personas)** | Rol + descripción + nivel técnico |
+| Entidades (detalle) | `domain_modules/[entidad].md` → Descripción, Atributos | Se crea en sesión posterior (`01_product_domain_modules`) |
+| Reglas de Negocio | `domain_modules/[entidad].md` → Reglas de Negocio | Se formalizan en sesión posterior |
+| Value Objects | `domain_modules/[entidad].md` → Atributos / Propiedades | Se documentan como propiedades complejas de la entidad |
+| Agregados | `domain_modules/[entidad].md` → Relaciones + frontmatter `depends_on` | Se define en sesión posterior como relación de dependencia |
+
+### Qué NO debes hacer durante el descubrimiento
+
+- **No crees módulos de dominio durante la sesión `01_product`.** El descubrimiento produce el mapa; los módulos se crean en sesiones `01_product_domain_modules` posteriores.
+- **No documentes atributos detallados en `vision.md`.** El mapa es estratégico (nombre, descripción, relaciones). El detalle va en el módulo.
+- **No inventes entidades que el usuario no mencionó.** Si crees que falta una entidad, pregunta al usuario; no la agregues por cuenta propia.
+- **No confundas Value Objects con Entidades.** Si algo no tiene identidad propia (no se referencia con un ID o nombre único), no es una entidad y no merece un módulo propio.
+
+---
+
 ## Reglas Operativas
 
 ### vision.md

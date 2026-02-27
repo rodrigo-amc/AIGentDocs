@@ -1,0 +1,25 @@
+# Historial de Versiones del Estándar de Documentación
+# Cada entrada registra una versión del estándar con sus cambios.
+
+- version: "1.1.0"
+  date: "2026-02-27"
+  summary: "Integración de Domain-Driven Design (DDD) al estándar"
+  changes:
+    - type: added
+      description: >
+        Sección 'Descubrimiento de Dominio (Knowledge Crunching — DDD)' en 01_product/AGENT.md.
+        Define el proceso obligatorio de 4 pasos para descubrir entidades, reglas de negocio y
+        Ubiquitous Language antes de crear módulos de dominio.
+    - type: added
+      description: >
+        Nueva sección obligatoria 'Mapa de Entidades del Dominio' para vision.md,
+        definida en 01_product/README.md. Actúa como puente entre vision.md y domain_modules/.
+    - type: changed
+      description: >
+        Descripción del Glosario del Dominio en 01_product/README.md enriquecida para
+        referenciar DDD y Knowledge Crunching.
+    - type: changed
+      description: >
+        Descripción de vision.md en la estructura de directorios de docs/README.md
+        actualizada para reflejar el nuevo alcance (Mapa de Entidades + DDD).
+
