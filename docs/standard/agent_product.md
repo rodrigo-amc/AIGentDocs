@@ -1,7 +1,17 @@
+---
+type: agent_instructions
+scope: product
+version: 1.2
+last_updated: 2026-03-01
+sessions: ["01_product", "01_product_domain_modules"]
+reads: "guide_product.md"
+project_path: "project/01_product/"
+---
+
 # Instrucciones para Agentes — Contexto de Producto
 
-Este archivo contiene las reglas operativas específicas para trabajar dentro de `01_product/`.
-Antes de leer este archivo, asegúrate de haber leído el `AGENT.md` global en `docs/`.
+Este archivo contiene las reglas operativas específicas para trabajar dentro de `project/01_product/`.
+Antes de leer este archivo, asegúrate de haber leído el `AGENT.md` global en `standard/`.
 
 ---
 
@@ -102,14 +112,14 @@ Una vez validado el modelo con el usuario, documenta los resultados en los lugar
 
 ### roadmap.md (Tablero Kanban)
 
-- **Antes de empezar cualquier tarea de implementación**, consulta el tablero de tareas en `01_product/roadmap.md` para verificar qué está en `[In Progress]` y qué sigue en `[To Do / Next]`.
+- **Antes de empezar cualquier tarea de implementación**, consulta el tablero de tareas en `project/01_product/roadmap.md` para verificar qué está en `[In Progress]` y qué sigue en `[To Do / Next]`.
 - Si el usuario te pide trabajar en algo que no está en el tablero, **pregúntale si desea agregarlo** antes de proceder.
 - Al completar una tarea, muévela a `[Done]`. Al iniciar una nueva, muévela a `[In Progress]`.
 - Nunca modifiques la sección de `Fase/Hito Actual` sin aprobación del usuario.
 
 ### domain_modules/ (Módulos de Dominio)
 
-- Al crear un nuevo módulo, sigue estrictamente la estructura definida en `01_product/domain_modules/README.md`. Completa todas las secciones `[OBLIGATORIO]` y el frontmatter YAML.
+- Al crear un nuevo módulo, sigue estrictamente la estructura definida en `guide_domain_modules.md`. Completa todas las secciones `[OBLIGATORIO]` y el frontmatter YAML.
 - Respeta las **Guías de Tamaño y Granularidad**:
   - Si una User Story tiene **más de 6 Criterios de Aceptación**, propon dividirla.
   - Si una User Story afecta **más de 2 módulos de dominio**, propon dividirla.
@@ -122,7 +132,7 @@ Una vez validado el modelo con el usuario, documenta los resultados en los lugar
 
 ## Modo Onboarding — Ingeniería Inversa de Producto
 
-Cuando estés en **Modo Onboarding** (proyecto existente con documentación vacía), este directorio se completa **después** de `03_engineering/` y `02_architecture/`. El flujo es:
+Cuando estés en **Modo Onboarding** (proyecto existente con documentación vacía), este directorio se completa **después** de `project/03_engineering/` y `project/02_architecture/`. El flujo es:
 
 ### Paso 1: Completar `vision.md`
 

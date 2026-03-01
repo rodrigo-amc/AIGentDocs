@@ -1,3 +1,13 @@
+---
+type: standard_guide
+scope: adrs
+version: 1.2
+last_updated: 2026-03-01
+project_path: "project/04_adrs/"
+required_files: []
+optional_files: []
+---
+
 # 04_adrs — Architecture Decision Records
 
 Este directorio contiene el registro inmutable de decisiones arquitectónicas significativas del proyecto. Sigue el estándar de la industria (AWS/Google) para explicar el **Contexto**, la **Decisión** tomada y sus **Consecuencias**.
@@ -12,7 +22,7 @@ Los ADRs evitan que se re-discutan decisiones pasadas y explican el "por qué" d
 2. El **frontmatter (YAML)** de un ADR **sí puede actualizarse** exclusivamente para reflejar cambios de estado (`status: superseded`) y trazabilidad (`superseded_by: [ID]`).
 3. Para cambiar una decisión, se crea un **nuevo ADR** con estado `Reemplazado` que referencia al anterior en su contexto, y se actualiza el frontmatter del ADR viejo.
 4. La numeración es **secuencial**: 0001, 0002, 0003...
-5. Todo ADR con estado **Aceptado** que modifique un estándar técnico **debe** reflejarse actualizando el archivo correspondiente en `03_engineering/`.
+5. Todo ADR con estado **Aceptado** que modifique un estándar técnico **debe** reflejarse actualizando el archivo correspondiente en `project/03_engineering/`.
 
 ---
 
@@ -22,7 +32,7 @@ Los ADRs evitan que se re-discutan decisiones pasadas y explican el "por qué" d
 2. Escribir el contenido siguiendo la estructura definida en la sección **"Estructura de un ADR"** de este documento.
 3. Completar todas las secciones **[OBLIGATORIO]**.
 4. Establecer el estado como `Propuesto` hasta que sea revisado y aprobado.
-5. Actualizar la Tabla de Contenidos en `docs/README.md`.
+5. Actualizar la Tabla de Contenidos en `standard/README.md`.
 
 ## Cómo registrar el reemplazo de una decisión
 
@@ -30,7 +40,7 @@ Los ADRs evitan que se re-discutan decisiones pasadas y explican el "por qué" d
 2. En el nuevo ADR, referenciar al ADR que se está reemplazando en la sección de Contexto y en el campo `supersedes` del frontmatter.
 3. Abrir el ADR viejo y **actualizar su frontmatter**: cambiar `status: superseded` y completar `superseded_by: [ID del nuevo ADR]`.
 4. **No modificar bajo ningún concepto el contenido (Markdown)** del ADR original.
-5. Si la decisión afecta un estándar técnico, actualizar el archivo correspondiente en `03_engineering/`.
+5. Si la decisión afecta un estándar técnico, actualizar el archivo correspondiente en `project/03_engineering/`.
 
 ---
 
@@ -93,5 +103,5 @@ Las consecuencias deben organizarse en tres categorías:
 Es el primer ADR de todo proyecto. Documenta la decisión de adoptar ADRs. Su contenido base es:
 
 - **Contexto:** "Necesitamos un mecanismo formal para registrar decisiones arquitectónicas significativas y sus razones, de modo que cualquier miembro del equipo (humano o agente de IA) pueda entender la evolución del proyecto."
-- **Decisión:** "Usaremos Architecture Decision Records (ADRs) almacenados en `docs/04_adrs/`, siguiendo la estructura definida en este README."
+- **Decisión:** "Usaremos Architecture Decision Records (ADRs) almacenados en `project/04_adrs/`, siguiendo la estructura definida en `guide_adrs.md`."
 - **Consecuencias:** "Todas las decisiones arquitectónicas serán trazables. Se requiere disciplina para crear un ADR ante cada decisión significativa."

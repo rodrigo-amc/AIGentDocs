@@ -1,6 +1,16 @@
+---
+type: standard_guide
+scope: architecture
+version: 1.2
+last_updated: 2026-03-01
+project_path: "project/02_architecture/"
+required_files: [system_overview.md, data_flow.md, infrastructure.md]
+optional_files: []
+---
+
 # 02_architecture — Arquitectura del Sistema (Design Docs)
 
-Este directorio actúa como el repositorio de **Design Docs** técnicos del proyecto. Su función es describir el **"Cómo"** (la solución técnica) que responde a los requerimientos definidos en los PRD modulares de `01_product/`.
+Este directorio actúa como el repositorio de **Design Docs** técnicos del proyecto. Su función es describir el **"Cómo"** (la solución técnica) que responde a los requerimientos definidos en los PRD modulares de `project/01_product/`.
 
 ---
 

@@ -28,18 +28,18 @@ Cada capa tiene un `README.md` (qué contiene y cómo llenarla) y un `AGENT.md` 
 cp -r /ruta/al/framework/docs ./docs
 ```
 
-O simplemente copia la carpeta `docs/` completa a la raíz de tu repositorio.
+O simplemente copia la carpeta `docs/` completa a la raíz de tu repositorio. La estructura incluye `docs/standard/` (el framework) y `docs/project/` (donde vivirá la documentación de tu proyecto).
 
-### 2. Personalizar este archivo
+### 2. Personalizar el README
 
-Abrir `docs/README.md` y reemplazar:
+Abrir `docs/standard/README.md` y reemplazar:
 
 - El título `# Estándar de Documentación...` → `# [Nombre de tu proyecto]`
 - La descripción genérica → Una descripción de tu proyecto en 1-2 líneas
 
 ### 3. Configurar las convenciones
 
-En la sección **Convenciones** de `docs/README.md`, definir:
+En la sección **Convenciones** de `docs/standard/README.md`, definir:
 
 - **Idioma de documentación**: español, inglés, etc.
 
@@ -61,7 +61,9 @@ Ir archivo por archivo siguiendo la estructura de cada template. Los comentarios
 - **Proyecto nuevo** → `vision.md` → `domain_modules/` → `roadmap.md` → `architecture/` → `engineering/`
 - **Proyecto existente** → `tech_stack.yaml` → `architecture/` → `vision.md` → `domain_modules/` → `roadmap.md`
 
-Ver la sección **Guía de Adopción** en `README.md` para el detalle completo.
+Los templates de referencia están en `standard/templates/`. El agente los usa como guía para crear archivos en `project/`.
+
+Ver la sección **Guía de Adopción** en `standard/README.md` para el detalle completo.
 
 ### Opción B: Con un agente de IA (Modo Onboarding)
 
@@ -69,7 +71,7 @@ Este es el flujo diseñado para proyectos existentes. Indicarle al agente:
 
 ```
 Analiza el código de este proyecto y completa la documentación siguiendo
-el framework en docs/. Empieza por leer docs/AGENT.md.
+el framework en docs/. Empieza por leer docs/standard/AGENT.md.
 ```
 
 El agente:
@@ -123,8 +125,8 @@ Una vez que la documentación está completa, el flujo de trabajo con un agente 
 
 | Archivo | Propósito |
 |---|---|
-| `*/README.md` | Explica qué contiene cada directorio y cómo crear archivos nuevos |
-| `*/AGENT.md` | Instrucciones operativas para agentes de IA en ese contexto |
+| `*/README.md` | *Ahora son `standard/guide_*.md`* — Explican estructura y formato de cada área |
+| `*/AGENT.md` | *Ahora son `standard/agent_*.md`* — Instrucciones operativas para agentes |
 | `AGENT_REVIEW.md` | Prompt para auditar la documentación bajo demanda |
 | `QUICKSTART.md` | Esta guía |
 
@@ -132,17 +134,17 @@ Una vez que la documentación está completa, el flujo de trabajo con un agente 
 
 | Archivo | Propósito |
 |---|---|
-| `01_product/vision.md` | Visión del producto, usuarios, alcance |
-| `01_product/roadmap.md` | Tablero Kanban con tareas |
-| `01_product/quality_attributes.md` | Requerimientos no funcionales |
-| `01_product/domain_modules/*.md` | Un archivo por entidad de dominio |
-| `02_architecture/system_overview.md` | Diagrama C4 y patrones |
-| `02_architecture/data_flow.md` | Flujos de datos y modelo ER |
-| `02_architecture/infrastructure.md` | Despliegue, CI/CD, variables |
-| `03_engineering/tech_stack.yaml` | Stack tecnológico exacto |
-| `03_engineering/testing_strategy.md` | Estrategia de testing |
-| `03_engineering/api_guidelines.md` | Guías de API *(condicional)* |
-| `04_adrs/NNNN-titulo.md` | Decisiones arquitectónicas |
+| `project/01_product/vision.md` | Visión del producto, usuarios, alcance |
+| `project/01_product/roadmap.md` | Tablero Kanban con tareas |
+| `project/01_product/quality_attributes.md` | Requerimientos no funcionales |
+| `project/01_product/domain_modules/*.md` | Un archivo por entidad de dominio |
+| `project/02_architecture/system_overview.md` | Diagrama C4 y patrones |
+| `project/02_architecture/data_flow.md` | Flujos de datos y modelo ER |
+| `project/02_architecture/infrastructure.md` | Despliegue, CI/CD, variables |
+| `project/03_engineering/tech_stack.yaml` | Stack tecnológico exacto |
+| `project/03_engineering/testing_strategy.md` | Estrategia de testing |
+| `project/03_engineering/api_guidelines.md` | Guías de API *(condicional)* |
+| `project/04_adrs/NNNN-titulo.md` | Decisiones arquitectónicas |
 
 ---
 
@@ -151,7 +153,7 @@ Una vez que la documentación está completa, el flujo de trabajo con un agente 
 Para verificar que la documentación cumple con el estándar, usa el prompt de auditoría:
 
 ```
-Ejecuta la auditoría de documentación siguiendo las instrucciones de docs/AGENT_REVIEW.md.
+Ejecuta la auditoría de documentación siguiendo las instrucciones de docs/standard/AGENT_REVIEW.md.
 ```
 
 El agente revisará: estructura, frontmatter, secciones obligatorias, consistencia y calidad. El resultado es un reporte con severidades (🔴 Crítico, 🟡 Advertencia, 🟢 Sugerencia).

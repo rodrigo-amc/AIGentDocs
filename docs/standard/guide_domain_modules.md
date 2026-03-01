@@ -1,3 +1,13 @@
+---
+type: standard_guide
+scope: domain_modules
+version: 1.2
+last_updated: 2026-03-01
+project_path: "project/01_product/domain_modules/"
+required_files: []
+optional_files: []
+---
+
 # domain_modules — Módulos de Dominio
 
 Este directorio contiene un archivo markdown por cada entidad de negocio del proyecto. Cada módulo es **independiente y autocontenido**.
@@ -9,7 +19,7 @@ Este directorio contiene un archivo markdown por cada entidad de negocio del pro
 1. Crear un nuevo archivo `.md` en este directorio con el nombre de la entidad en minúsculas (ej: `clients.md`, `invoices.md`, `orders.md`).
 2. Escribir el contenido siguiendo la estructura definida en la sección **"Estructura de un Módulo de Dominio"** de este documento.
 3. Completar todas las secciones marcadas como **[OBLIGATORIO]**.
-4. Actualizar la Tabla de Contenidos en `docs/README.md`.
+4. Actualizar la Tabla de Contenidos en `standard/README.md`.
 
 ## Cómo actualizar un módulo existente
 
@@ -69,7 +79,7 @@ Para procesos que involucran múltiples módulos (ej: una "Venta" que afecta a P
 1. **Cada módulo documenta su parte**: En la sección de User Stories, el módulo describe el impacto funcional en sí mismo.
 2. **Referencias**: Si un proceso requiere que otro módulo reaccione, se especifica en los AC. 
    * *Ejemplo en `orders.md`*: "AC: Al confirmar, se debe invocar la reserva de stock definida en `stock.md`".
-3. **Visión Global**: El flujo completo del proceso cruzado se visualiza mediante diagramas en `docs/02_architecture/data_flow.md`, referenciando las historias de cada módulo.
+3. **Visión Global**: El flujo completo del proceso cruzado se visualiza mediante diagramas en `project/02_architecture/data_flow.md`, referenciando las historias de cada módulo.
 
 ---
 

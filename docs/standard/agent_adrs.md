@@ -1,7 +1,17 @@
+---
+type: agent_instructions
+scope: adrs
+version: 1.2
+last_updated: 2026-03-01
+sessions: ["04_adrs"]
+reads: "guide_adrs.md"
+project_path: "project/04_adrs/"
+---
+
 # Instrucciones para Agentes — Contexto de ADRs
 
-Este archivo contiene las reglas operativas específicas para trabajar dentro de `04_adrs/`.
-Antes de leer este archivo, asegúrate de haber leído el `AGENT.md` global en `docs/`.
+Este archivo contiene las reglas operativas específicas para trabajar con ADRs en `project/04_adrs/`.
+Antes de leer este archivo, asegúrate de haber leído el `AGENT.md` global en `standard/`.
 
 ---
 
@@ -15,7 +25,7 @@ Aquí se registra el **"Por qué" histórico** de las decisiones arquitectónica
 
 ### Creación de ADRs
 
-- Sigue estrictamente la estructura definida en `04_adrs/README.md`: frontmatter YAML, encabezado, Contexto y Problema, Decisión, y Consecuencias.
+- Sigue estrictamente la estructura definida en `guide_adrs.md`: frontmatter YAML, encabezado, Contexto y Problema, Decisión, y Consecuencias.
 - La numeración es **secuencial**. Antes de crear un nuevo ADR, verifica cuál es el último número existente y usa el siguiente.
 - Todo ADR nuevo debe crearse con estado `proposed` hasta que el usuario lo apruebe.
 - **No crees un ADR por iniciativa propia.** La necesidad de registrar una decisión arquitectónica debe surgir de una discusión con el desarrollador humano o como resultado de una tarea que lo requiera.

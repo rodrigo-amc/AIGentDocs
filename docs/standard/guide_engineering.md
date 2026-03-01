@@ -1,8 +1,18 @@
+---
+type: standard_guide
+scope: engineering
+version: 1.2
+last_updated: 2026-03-01
+project_path: "project/03_engineering/"
+required_files: [tech_stack.yaml, testing_strategy.md]
+optional_files: [api_guidelines.md]
+---
+
 # 03_engineering — Ingeniería e Implementación
 
 Este directorio define las reglas del juego técnico y los estándares de calidad. Actúa como "guardarrail" para evitar que los agentes utilicen librerías obsoletas, patrones de código no deseados o generen tests inconsistentes.
 
-> **Regla de Interacción con ADRs:** Todo ADR con estado **Aceptado** que modifique un estándar técnico (stack, testing, API) **debe** reflejarse actualizando el archivo correspondiente en este directorio. El ADR registra el **"por qué" histórico**; este directorio mantiene el **"qué" vigente**.
+> **Regla de Interacción con ADRs:** Todo ADR con estado **Aceptado** que modifique un estándar técnico (stack, testing, API) **debe** reflejarse actualizando el archivo correspondiente en este directorio. El ADR registra el **"por qué" histórico**; este directorio mantiene el **"qué" vigente**. Ver `guide_adrs.md` para más detalle.
 
 ---
 
@@ -68,7 +78,7 @@ restricciones_globales:
 ```
 
 **Guía de Llenado:**
-- **Proyecto nuevo:** Definir al menos `backend`, `base_de_datos` y `restricciones_globales` antes de escribir código. Cada tecnología debe tener su ADR creado en `04_adrs/`.
+- **Proyecto nuevo:** Definir al menos `backend`, `base_de_datos` y `restricciones_globales` antes de escribir código. Cada tecnología debe tener su ADR creado en `project/04_adrs/`.
 - **Proyecto existente:** Verificar que el archivo refleje la realidad del repositorio. Toda adición o cambio de tecnología debe actualizarse aquí y tener su ADR correspondiente.
 
 ---

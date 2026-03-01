@@ -1,6 +1,35 @@
 # Historial de Versiones del Estándar de Documentación
 # Cada entrada registra una versión del estándar con sus cambios.
 
+- version: "1.2.0"
+  date: "2026-03-01"
+  summary: "Separación de estándar y documentos de proyecto"
+  changes:
+    - type: changed
+      description: >
+        Reestructuración mayor: separación del framework (standard/) de los
+        documentos del proyecto (project/). El estándar ahora es plano, sin
+        subdirectorios numéricos.
+    - type: added
+      description: >
+        Archivos guide_*.md y agent_*.md con frontmatter enriquecido
+        (scope, project_path, required_files, optional_files, sessions, reads).
+    - type: added
+      description: >
+        Directorio standard/templates/ con templates de referencia para agentes.
+        Los templates ya no viven en project/ sino que el agente los replica.
+    - type: added
+      description: >
+        Nuevos templates: domain_module.md (genérico), api_guidelines.md (condicional).
+    - type: removed
+      description: >
+        Eliminado ADR-0001 (0001-registrar-decisiones-de-arquitectura.md). Su
+        contenido se incorporó como referencia en guide_adrs.md.
+    - type: changed
+      description: >
+        Todas las referencias internas actualizadas para reflejar la nueva
+        estructura standard/ y project/.
+
 - version: "1.1.0"
   date: "2026-02-27"
   summary: "Integración de Domain-Driven Design (DDD) al estándar"

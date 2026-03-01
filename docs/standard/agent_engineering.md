@@ -1,7 +1,17 @@
+---
+type: agent_instructions
+scope: engineering
+version: 1.2
+last_updated: 2026-03-01
+sessions: ["03_engineering"]
+reads: "guide_engineering.md"
+project_path: "project/03_engineering/"
+---
+
 # Instrucciones para Agentes — Contexto de Ingeniería
 
-Este archivo contiene las reglas operativas específicas para trabajar dentro de `03_engineering/`.
-Antes de leer este archivo, asegúrate de haber leído el `AGENT.md` global en `docs/`.
+Este archivo contiene las reglas operativas específicas para trabajar dentro de `project/03_engineering/`.
+Antes de leer este archivo, asegúrate de haber leído el `AGENT.md` global en `standard/`.
 
 ---
 

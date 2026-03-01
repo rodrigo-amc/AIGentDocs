@@ -68,7 +68,7 @@ Usa esta estructura de tabla para reportar. Los datos a continuación son solo u
 
 | # | Severidad | Archivo | Hallazgo | Acción Sugerida |
 |---|---|---|---|---|
-| 1 | 🔴 Crítico | `01_product/domain_modules/clients.md` | Falta frontmatter YAML | Agregar bloque frontmatter según esquema en `01_product/domain_modules/README.md` |
+| 1 | 🔴 Crítico | `project/01_product/domain_modules/clients.md` | Falta frontmatter YAML | Agregar bloque frontmatter según esquema en `standard/guide_domain_modules.md` |
 | 2 | 🟡 Advertencia | `roadmap.md` | US-07 referencia módulo `stock.md` que no existe | Crear el módulo o corregir la referencia |
 | 3 | 🟢 Sugerencia | `01_product/domain_modules/clients.md` | El módulo incluye lógica detallada y ACs sobre 'Facturación y Pagos', mezclando responsabilidades. | Proponer extraer las funcionalidades de facturación a un nuevo módulo `invoices.md`. |
 | 4 | 🟡 Advertencia | `01_product/domain_modules/orders.md` | La US-04 tiene 8 ACs. | Solicitar al humano que decida si se divide la US o se mantiene por ser indivisible. |

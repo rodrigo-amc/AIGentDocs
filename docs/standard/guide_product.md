@@ -1,3 +1,13 @@
+---
+type: standard_guide
+scope: product
+version: 1.2
+last_updated: 2026-03-01
+project_path: "project/01_product/"
+required_files: [vision.md, roadmap.md, quality_attributes.md]
+optional_files: []
+---
+
 # 01_product — Contexto de Producto
 
 Este directorio contiene la inteligencia de negocio del proyecto. Es fundamental para que los agentes entiendan *para qué* están programando y eviten soluciones técnicamente válidas pero funcionalmente incorrectas.
@@ -16,7 +26,7 @@ Define el "por qué" del proyecto a nivel global. Es el **PRD de alto nivel** qu
 | Problema que Resuelve | **[OBLIGATORIO]** | Descripción del dolor o necesidad del usuario que motiva la existencia del proyecto. |
 | Usuarios Objetivo (Personas) | **[OBLIGATORIO]** | Perfiles de los usuarios del sistema: quiénes son, qué rol cumplen, qué nivel técnico tienen. |
 | Alcance del Proyecto | **[OBLIGATORIO]** | Qué está **dentro** y qué está **fuera** del alcance. Evita que el agente implemente funcionalidades no planificadas. |
-| Glosario del Dominio | **[OBLIGATORIO]** | Terminología unificada del negocio (Ubiquitous Language según DDD). Los términos se descubren durante el proceso de Knowledge Crunching definido en `AGENT.md`. |
+| Glosario del Dominio | **[OBLIGATORIO]** | Terminología unificada del negocio (Ubiquitous Language según DDD). Los términos se descubren durante el proceso de Knowledge Crunching definido en `agent_product.md`. |
 | Mapa de Entidades del Dominio | **[OBLIGATORIO]** | Entidades descubiertas mediante Knowledge Crunching (DDD). Cada entidad incluye: nombre canónico, descripción de 1-2 líneas y relaciones de alto nivel con otras entidades. Este mapa es la fuente para la creación de archivos en `domain_modules/`. No incluir atributos detallados ni reglas de negocio — esos viven en el módulo correspondiente. |
 | Modelo de Negocio | **[OPCIONAL]** | Cómo genera valor el producto. |
 | Restricciones de Negocio | **[OPCIONAL]** | Limitaciones legales, regulatorias o contractuales. |
@@ -107,4 +117,4 @@ state: pending       # pending | doing | done | deprecated
 
 Este es el nivel donde viven los **requerimientos funcionales detallados**. Cada archivo de módulo funciona como un "PRD Modular" y un "Backlog" de la entidad.
 
-Ver `domain_modules/README.md` para las instrucciones sobre cómo documentar **User Stories** y **Criterios de Aceptación (AC)** por módulo.
+Ver `guide_domain_modules.md` para las instrucciones sobre cómo documentar **User Stories** y **Criterios de Aceptación (AC)** por módulo.

@@ -1,7 +1,17 @@
+---
+type: agent_instructions
+scope: architecture
+version: 1.2
+last_updated: 2026-03-01
+sessions: ["02_architecture"]
+reads: "guide_architecture.md"
+project_path: "project/02_architecture/"
+---
+
 # Instrucciones para Agentes — Contexto de Arquitectura
 
-Este archivo contiene las reglas operativas específicas para trabajar dentro de `02_architecture/`.
-Antes de leer este archivo, asegúrate de haber leído el `AGENT.md` global en `docs/`.
+Este archivo contiene las reglas operativas específicas para trabajar dentro de `project/02_architecture/`.
+Antes de leer este archivo, asegúrate de haber leído el `AGENT.md` global en `standard/`.
 
 ---
 
