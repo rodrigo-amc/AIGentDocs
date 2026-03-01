@@ -23,13 +23,17 @@
         Descripción de vision.md en la estructura de directorios de docs/README.md
         actualizada para reflejar el nuevo alcance (Mapa de Entidades + DDD).
 
-- versions:
-  - version: "1.0"
-    date: "2026-02-23"
-    description: "Versión inicial del estándar de documentación."
-    changes:
-      - "Definición de estructura de directorios (01_product, 02_architecture, 03_engineering, 04_adrs)."
-      - "Creación de protocolos de lectura y mantenimiento."
-      - "Definición de convenciones de frontmatter YAML."
-      - "Creación de instrucciones operativas para agentes de IA (AGENT.md)."
-      - "Creación de prompt de auditoría (AGENT_REVIEW.md)."
+- version: "1.0"
+  date: "2026-02-23"
+  summary: "Versión inicial del estándar de documentación"
+  changes:
+    - type: added
+      description: "Definición de estructura de directorios (01_product, 02_architecture, 03_engineering, 04_adrs)."
+    - type: added
+      description: "Creación de protocolos de lectura y mantenimiento."
+    - type: added
+      description: "Definición de convenciones de frontmatter YAML."
+    - type: added
+      description: "Creación de instrucciones operativas para agentes de IA (AGENT.md)."
+    - type: added
+      description: "Creación de prompt de auditoría (AGENT_REVIEW.md)."

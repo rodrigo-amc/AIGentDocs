@@ -37,7 +37,20 @@ last_updated: 2026-02-23
 
 ## Glosario del Dominio
 
-<!-- [OBLIGATORIO] Terminología unificada del negocio (Ubiquitous Language). -->
+<!-- [OBLIGATORIO] Terminología unificada del negocio (Ubiquitous Language según DDD).
+     Los términos se descubren durante el proceso de Knowledge Crunching definido en AGENT.md. -->
 
 | Término | Definición |
 |---|---|
+
+---
+
+## Mapa de Entidades del Dominio
+
+<!-- [OBLIGATORIO] Entidades descubiertas mediante Knowledge Crunching (DDD).
+     Cada entidad incluye: nombre canónico, descripción y relaciones de alto nivel.
+     Este mapa es la fuente para la creación de archivos en domain_modules/.
+     No incluir atributos detallados ni reglas de negocio — esos viven en el módulo correspondiente. -->
+
+| Entidad | Descripción | Relaciones |
+|---|---|---|
