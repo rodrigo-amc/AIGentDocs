@@ -1,6 +1,7 @@
 ---
 type: domain_module
 module_name: ""
+entities: []
 version: 1.0
 last_updated: 2026-03-01
 state: pending
@@ -12,13 +13,13 @@ code_paths: []
 
 ## Descripción
 
-<!-- [OBLIGATORIO] Qué es esta entidad de negocio, qué rol cumple en el sistema y cómo interactúa con otras entidades. -->
+<!-- [OBLIGATORIO] Qué representa este módulo y las entidades que contiene, qué rol cumple en el sistema y cómo interactúa con otros agregados. -->
 
 ---
 
 ## Reglas de Negocio
 
-<!-- [OBLIGATORIO] Restricciones e invariantes que siempre deben cumplirse para esta entidad. -->
+<!-- [OBLIGATORIO] Restricciones e invariantes que siempre deben cumplirse para las entidades de este módulo. -->
 
 ---
 
@@ -39,9 +40,9 @@ code_paths: []
 
 ## Relaciones
 
-<!-- [OBLIGATORIO] Relaciones con otras entidades del dominio. -->
+<!-- [OBLIGATORIO] Relaciones con otros módulos/agregados del dominio. -->
 
-| Entidad Relacionada | Tipo de Relación | Descripción |
+| Módulo Relacionado | Tipo de Relación | Descripción |
 |---|---|---|
 
 ---

@@ -10,13 +10,13 @@ optional_files: []
 
 # domain_modules — Módulos de Dominio
 
-Este directorio contiene un archivo markdown por cada entidad de negocio del proyecto. Cada módulo es **independiente y autocontenido**.
+Este directorio contiene un archivo markdown por cada **Agregado o Módulo de Dominio** del proyecto. Cada módulo es **independiente y autocontenido**, y puede representar una sola **Entidad** o un grupo de Entidades fuertemente cohesivas que comparten reglas de negocio y ciclo de vida transaccional (ej: el módulo `inventory.md` agrupa las entidades `article` y `direct_sale`).
 
 ---
 
 ## Cómo crear un nuevo módulo de dominio
 
-1. Crear un nuevo archivo `.md` en este directorio con el nombre de la entidad en minúsculas (ej: `clients.md`, `invoices.md`, `orders.md`).
+1. Crear un nuevo archivo `.md` en este directorio con el nombre del módulo o entidad principal en minúsculas (ej: `clients.md`, `inventory.md`, `orders.md`).
 2. Escribir el contenido siguiendo la estructura definida en la sección **"Estructura de un Módulo de Dominio"** de este documento.
 3. Completar todas las secciones marcadas como **[OBLIGATORIO]**.
 4. Actualizar la Tabla de Contenidos en `standard/README.md`.
@@ -39,7 +39,8 @@ Todo archivo de módulo de dominio debe contener las siguientes secciones, en es
 ```yaml
 ---
 type: domain_module
-entity: ""           # Nombre canónico de la entidad (ej: clients, orders)
+module_name: ""      # Nombre del módulo o agregado (ej: inventory, sales)
+entities: []         # Lista de entidades contenidas (ej: ["article", "direct_sale"])
 version: 1.0
 last_updated: YYYY-MM-DD
 state: pending       # pending | doing | done | deprecated
@@ -55,18 +56,18 @@ code_paths: []       # Rutas a directorios/archivos de código (ej: ["/src/clien
 ```markdown
 # [Nombre del Módulo]
 
-> Propósito de esta entidad en una línea.
+> Propósito de este módulo o agregado en una línea.
 ```
 
 ### Secciones del Módulo
 
 | Sección | Tipo | Descripción |
 |---|---|---|
-| Descripción | **[OBLIGATORIO]** | Qué representa esta entidad en el contexto del negocio. |
+| Descripción | **[OBLIGATORIO]** | Qué representa este módulo y las entidades que contiene en el contexto del negocio. |
 | Atributos / Propiedades | **[OBLIGATORIO]** | Lista de campos con nombre, tipo de dato y descripción. |
 | User Stories (Historias de Usuario) | **[OBLIGATORIO]** | Requerimientos funcionales en formato: "Como [rol], quiero [acción], para [valor]". |
 | AC (Criterios de Aceptación) | **[OBLIGATORIO]** | Lista de condiciones verificables para cada User Story. |
-| Reglas de Negocio | **[OBLIGATORIO]** | Validaciones, restricciones e invariantes de esta entidad. |
+| Reglas de Negocio | **[OBLIGATORIO]** | Validaciones, restricciones e invariantes de las entidades contenidas. |
 | Ciclo de Vida | **[OPCIONAL]** | Estados posibles y transiciones (ej: Borrador → Activo). |
 | Relaciones | **[OBLIGATORIO]** | Conexiones con otros módulos y dependencias de negocio. |
 
@@ -85,7 +86,7 @@ Para procesos que involucran múltiples módulos (ej: una "Venta" que afecta a P
 
 ## Guía de Llenado (PRD Modular)
 
-1. **Definir la Entidad**: Identificar qué datos maneja.
+1. **Definir el Módulo y Entidades**: Identificar qué datos maneja el agregado.
 2. **Escribir las Historias**: Pensar en el valor para el usuario final. Evitar descripciones puramente técnicas como "el botón guarda datos".
 3. **Establecer Criterios de Éxito (AC)**: Deben ser tan claros que un desarrollador o una IA puedan escribir un test a partir de ellos.
     * *Mal AC*: "El proceso debe ser rápido".
@@ -98,12 +99,12 @@ Para procesos que involucran múltiples módulos (ej: una "Venta" que afecta a P
 Para evitar historias de usuario monolíticas o módulos inmanejables (lo cual perjudica el contexto de la IA y la agilidad del equipo human), aplica las siguientes heurísticas de "Límites Blandos". Si un Analista (humano o agente de IA) detecta que se superan estos límites, **debe detenerse y proponer la división del requerimiento**.
 
 ### Heurísticas para User Stories (US)
-* **Límite de Criterios de Aceptación (AC):** Si una US tiene **más de 6 ACs**, es probable que contenga flujos alternativos complejos que merezcan su propia US. Sin embargo, no es un límite estricto. Si un Agente de IA detecta una US con más de 6 ACs, debe **detenerse, advertir al desarrollador humano y ofrecerle estas opciones**:
+* **Límite de Criterios de Aceptación (AC):** Si una US tiene **más de 6 ACs**, es probable que contenga flujos alternativos complejos que merezcan su propia US. Sin embargo, no es un límite estricto. (Nota: Esto aplica al volumen de detalle de una funcionalidad sobre una Entidad específica, no al archivo entero). Si un Agente de IA detecta una US con más de 6 ACs, debe **detenerse, advertir al desarrollador humano y ofrecerle estas opciones**:
   1. Dividir la US en historias más pequeñas.
-  2. Extraer validaciones complejas a la sección de "Reglas de Negocio".
+  2. Extraer validaciones complejas a la sección de "Reglas de Negocio" de la entidad correspondiente.
   3. Aprobar explícitamente mantener la US tal como está, si el humano considera que es lógicamente indivisible.
 * **Límite de Propósito (SRP):** Una US debe representar un único objetivo de negocio continuo. Si la US incluye "Registro de usuario, validación de email y configuración inicial de perfil", divídela en tres historias separadas.
 * **Límite de Dependencias Concurrentes:** Si la implementación de una US requiere modificar la lógica de **más de 2 Módulos de Dominio concurrentemente**, divídela enfocándote en los entregables por módulo o rediseña la arquitectura del flujo.
 
-### Heurísticas para Módulos de Dominio
-* **Límite de Extensión Semántica:** No hay un límite numérico de líneas para un módulo, ya que su historial crecerá. En su lugar, el límite es **semántico y conceptual**. Un módulo de dominio no debe convertirse en un "God Object". Si notas que una User Story o el módulo en sí abarca lógicamente más de una responsabilidad o "funcionalidad core" distinta de su propósito original (ej: mezclar Facturación y Pagos enteros dentro de `clients.md`), debes detenerte, informar al usuario la falla de cohesión y proponer extraer esa funcionalidad a su propio módulo (ej: crear `invoices.md`).
+### Heurísticas para Módulos de Dominio (Agregados)
+* **Límite de Extensión Semántica:** No hay un límite numérico de líneas para un módulo, ya que su historial crecerá. En su lugar, el límite es **semántico y conceptual**. Un módulo de dominio no debe convertirse en un "God Object". Si notas que un módulo agrupa Entidades que no comparten reglas de negocio estrictas o ciclos de vida simultáneos (ej: mezclar Facturación en el módulo de Clientes en lugar de tener `invoices.md`), debes detenerte, informar al usuario la falla de cohesión (violación del concepto de Agregado) y proponer extraer esa Entidad a su propio Módulo de Dominio.

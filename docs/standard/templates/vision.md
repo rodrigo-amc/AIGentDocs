@@ -1,7 +1,8 @@
 ---
 type: vision
-version: 1.0
-last_updated: 2026-02-23
+version: # Versión del documento
+last_updated: # Fecha de la última actualización
+change_summary: # Resumen breve de los cambios en esta versión
 ---
 
 # Visión del Producto

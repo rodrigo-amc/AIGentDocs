@@ -38,6 +38,7 @@ Define el "por qué" del proyecto a nivel global. Es el **PRD de alto nivel** qu
 type: vision
 version: 1.0
 last_updated: YYYY-MM-DD
+change_summary: ""   # Resumen breve de los cambios en esta versión
 ---
 ```
 
