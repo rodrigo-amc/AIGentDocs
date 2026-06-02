@@ -31,7 +31,7 @@ Antes de actuar, identifica en qué modo estás trabajando según la indicación
 ### Modo Implementación (Código)
 
 - Aplica cuando se está escribiendo o modificando código fuente del proyecto.
-- La documentación en `project/` es tu **fuente de verdad**. Léela antes de generar código, pero no la modifiques salvo para actualizar estados (`state` en frontmatter, tablero en `roadmap.md`).
+- La documentación en `project/` es tu **fuente de verdad**. Léela antes de generar código, pero no la modifiques salvo para actualizar estados (`state` en frontmatter, tablero en `roadmap.md`)
 - Todo código que generes debe respetar las reglas definidas en `project/03_engineering/`.
 
 > Si no tienes claro en qué modo trabajar, pregunta al usuario antes de proceder.
@@ -52,11 +52,11 @@ Cuando inicies una nueva sesión o recibas una tarea, sigue este orden:
 
 ## Gestión de Sesiones
 
-La documentación de un proyecto no puede completarse en una única sesión de agente. Para evitar la saturación de la ventana de contexto y mantener la coherencia, el trabajo se organiza en **sesiones independientes y enfocadas**, cada una con un alcance de escritura definido.
+La documentación de un proyecto no puede completarse en una única sesión de agente. Para evitar la saturación de la ventana de contexto y mantener la coherencia, el trabajo se organiza en **sesiones**..
 
-> **Principio clave:** La sesión define tu **alcance de escritura**: qué archivos y directorios podés crear o modificar. **No limita tu capacidad de lectura** — el Protocolo de Lectura de `README.md` aplica en su totalidad, independientemente de la sesión activa.
+> **Principio clave:** La sesión define tu **alcance de escritura**: qué archivos y directorios podés crear o modificar. **No limita tu capacidad de lectura** — el Protocolo de Lectura de `README.md` siempre te autoriza a leer documentación necesaria para entender el contexto.
 
-Al iniciar una sesión, el usuario te indicará en qué parte de la documentación van a trabajar. Esa indicación define tu alcance. Si el usuario no especifica una sesión, presentale la **Tabla de Referencia Rápida** de esta sección y solicitale que elija una antes de proceder.
+Al iniciar una sesión, el usuario te indicará en qué parte de la documentación van a trabajar. Esa indicación define tu alcance. Si el usuario no especifica una sesión, presentale la **Tabla de Sesiones** abajo y preguntale en cuál desea trabajar.
 
 ### Regla de Guardia de Sesión
 
@@ -75,11 +75,11 @@ Al iniciar una sesión, el usuario te indicará en qué parte de la documentaci�
 
 #### Excepción: Propagación de ADR
 
-La sesión `04_adrs` es la única que permite modificar archivos fuera de su propio directorio. Si un ADR aceptado afecta un estándar técnico, el agente **debe** actualizar el archivo correspondiente en `project/03_engineering/` dentro de la misma sesión. Esta es una excepción intencional y necesaria para mantener la trazabilidad definida en las Reglas Globales.
+La sesión `04_adrs` es la única que permite modificar archivos fuera de su propio directorio. Si un ADR aceptado afecta un estándar técnico, el agente **debe** actualizar el archivo correspondiente en `project/03_engineering/` en la misma sesión o en una subsecuente.
 
 #### Excepción: Trazabilidad Global
 
-Para cumplir con las **Reglas Globales de Trazabilidad**, toda sesión tiene permiso concurrente de escritura para modificar metadatos de estado. Esto significa que el agente **debe** actualizar los estados de sus tareas en `project/01_product/roadmap.md` y el campo `state` en el frontmatter de los documentos de `project/01_product/domain_modules/` al completar un avance, sin importar el tipo de sesión activa.
+Para cumplir con las **Reglas Globales de Trazabilidad**, toda sesión tiene permiso concurrente de escritura para modificar metadatos de estado. Esto significa que el agente **debe** actualizar la tabla de tareas en `project/01_product/roadmap.md` y el campo `state` de los frontmatter de archivos afectados.
 
 ### Tipos de Sesión
 
@@ -109,11 +109,11 @@ Cada tipo de sesión tiene un **objetivo único**, un **alcance de escritura del
 |---|---|
 | Un archivo `[module_name].md` | `project/01_product/domain_modules/` |
 
-**Alcance de escritura:** Se trabaja exclusivamente en un solo módulo por sesión. Si el módulo tiene dependencias con otros módulos ya aprobados (campo `depends_on` del frontmatter), el agente debe leerlos como referencia, pero **no modificarlos**.
+**Alcance de escritura:** Se trabaja exclusivamente en un solo módulo por sesión. Si el módulo tiene dependencias con otros módulos ya aprobados (campo `depends_on` del frontmatter), el agente puede leerlos pero no modificarlos.
 
 **Frecuencia:** Una sesión por cada módulo del Roadmap.
 
-> **Importante:** Si durante la definición de un módulo se detectan nuevos NFRs o reglas de negocio que afectan a `quality_attributes.md` o a módulos ya aprobados, el agente debe **registrar la observación** y comunicarla al usuario, pero no debe modificar esos documentos en esta sesión.
+> **Importante:** Si durante la definición de un módulo se detectan nuevos NFRs o reglas de negocio que afectan a `quality_attributes.md` o a módulos ya aprobados, el agente debe **registrar la detección al usuario** y recomendar una sesión aparte de `01_product` para ajustarlos.
 
 ---
 
@@ -143,7 +143,7 @@ Cada tipo de sesión tiene un **objetivo único**, un **alcance de escritura del
 | `testing_strategy.md` | `project/03_engineering/` |
 | `api_guidelines.md` *(condicional)* | `project/03_engineering/` |
 
-**Alcance de escritura:** Solo documentos de ingeniería. Cada tecnología definida en `tech_stack.yaml` debe tener un ADR asociado; si no existe, el agente debe señalarlo pero **no crear el ADR en esta sesión** (corresponde a una sesión `04_adrs`).
+**Alcance de escritura:** Solo documentos de ingeniería. Cada tecnología definida en `tech_stack.yaml` debe tener un ADR asociado; si no existe, el agente debe señalarlo pero **no crear el ADR por iniciativa propia**.
 
 **Frecuencia:** Una vez, después de aprobar la arquitectura.
 
@@ -200,13 +200,13 @@ Cada tipo de sesión tiene un **objetivo único**, un **alcance de escritura del
 ### Código Fuente
 
 - **Antes de generar código**, lee `project/03_engineering/tech_stack.yaml`. No utilices tecnologías, versiones o librerías que no estén listadas allí.
-- **No instales ni propongas nuevas dependencias sin discutirlo con el desarrollador humano.** La incorporación de dependencias es una decisión estructural que impacta el diseño, la infraestructura de despliegue y las licencias del proyecto. El agente puede sugerir, pero la decisión y el registro del ADR correspondiente deben ser aprobados por el equipo humano.
+- **No instales ni propongas nuevas dependencias sin discutirlo con el desarrollador humano.** La incorporación de dependencias es una decisión estructural que impacta el diseño, la infraestructura y el costo. Debe registrarse como ADR.
 - Cuando trabajes en un módulo de dominio, consulta el campo `code_paths` de su frontmatter para saber qué archivos o directorios de código le corresponden.
 
 ### Trazabilidad
 
 - Cuando completes una User Story o tarea del `roadmap.md`, actualiza su estado en el tablero (muévela a `[Done]`).
-- **Sincronización de Estados**: Existe un estado global en el frontmatter de cada módulo de dominio (`state`). Cada vez que muevas una tarea en el Kanban de `project/01_product/roadmap.md` a `[In Progress]` o a `[Done]`, estás **OBLIGADO** a abrir el módulo de dominio afectado y actualizar su `state` para que refleje la realidad actual:
+- **Sincronización de Estados**: Existe un estado global en el frontmatter de cada módulo de dominio (`state`). Cada vez que muevas una tarea en el Kanban de `project/01_product/roadmap.md` a `[In Progress]` o `[Done]`, evalúa el `state` del módulo afectado:
   - Si al menos una US del módulo está en proceso → `state: doing`.
   - Si todas las US planificadas están completadas → `state: done`.
 
