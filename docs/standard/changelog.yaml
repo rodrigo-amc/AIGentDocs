@@ -1,6 +1,37 @@
 # Historial de Versiones del Estándar de Documentación
 # Cada entrada registra una versión del estándar con sus cambios.
 
+- version: "1.3.0"
+  date: "2026-03-21"
+  summary: "Optimización de instrucciones para agentes: Agent Profile, deduplicación y Foco de Sesión"
+  changes:
+    - type: added
+      description: >
+        Sección 'Agent Profile' en todos los agent_*.md. Define Role (Senior),
+        Expertise (conocimiento profesional autónomo), Goal y Produces para cada
+        contexto de trabajo.
+    - type: added
+      description: >
+        Subsección 'Foco de Sesión' en agent_product.md, agent_architecture.md
+        y agent_engineering.md. Instruye al agente a preguntar al usuario en qué
+        documento específico se va a trabajar, limitando cada sesión a un único
+        documento.
+    - type: changed
+      description: >
+        Eliminación de contenido duplicado en agent_*.md que replicaba
+        información ya presente en los guide_*.md correspondientes
+        (heurísticas de granularidad, reglas de inmutabilidad de ADRs,
+        formato de User Stories, descripciones de propósito de directorio).
+    - type: changed
+      description: >
+        Convenciones de diagramas Mermaid movidas de agent_architecture.md a
+        guide_architecture.md (contenido de especificación, no de comportamiento).
+    - type: changed
+      description: >
+        Campo 'reads' en frontmatter de agent_*.md normalizado a formato array.
+        agent_product.md ahora incluye guide_domain_modules.md en su lista de
+        lecturas requeridas.
+
 - version: "1.2.0"
   date: "2026-03-01"
   summary: "Separación de estándar y documentos de proyecto"
