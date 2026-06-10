@@ -70,14 +70,9 @@ git commit -m "docs: adopt docs-as-code framework"
 
 ### Option A: Manually (Design Mode)
 
-Go file by file following each template's structure. The HTML comments (`<!-- -->`) inside each file explain what to write in each section. The recommended order depends on the type of project:
+Go file by file following each template's structure. The HTML comments (`<!-- -->`) inside each file explain what to write in each section. The reference templates live in `standard/templates/`; the agent uses them as the blueprint for creating files in `project/`.
 
-- **New project** → `vision.md` → `domain_modules/` → `roadmap.md` → `architecture/` → `engineering/`
-- **Existing project** → `tech_stack.yaml` → `architecture/` → `vision.md` → `domain_modules/` → `roadmap.md`
-
-The reference templates live in `standard/templates/`. The agent uses them as the blueprint for creating files in `project/`.
-
-See the **Adoption Guide** section in `standard/README.md` for the full details.
+The recommended order depends on the type of project — see the **Adoption Guide** in `standard/README.md` (Greenfield, Brownfield, and Lite paths).
 
 ### Option B: With an AI agent (Onboarding Mode)
 
@@ -141,30 +136,7 @@ Once the documentation is complete, the workflow with an AI agent is:
 
 ## File structure
 
-### Instruction files (read-only, never filled out)
-
-| File | Purpose |
-|---|---|
-| `*/README.md` | *Now `standard/guide_*.md`* — Explain the structure and format of each area |
-| `*/AGENT.md` | *Now `standard/agent_*.md`* — Operating instructions for agents |
-| `AGENT_REVIEW.md` | Prompt for auditing the documentation on demand |
-| `QUICKSTART.md` | This guide |
-
-### Content files (filled out per project)
-
-| File | Purpose |
-|---|---|
-| `project/01_product/vision.md` | Product vision, users, scope |
-| `project/01_product/roadmap.md` | Kanban board with tasks |
-| `project/01_product/quality_attributes.md` | Non-functional requirements |
-| `project/01_product/domain_modules/*.md` | One file per domain entity |
-| `project/02_architecture/system_overview.md` | C4 diagram and patterns |
-| `project/02_architecture/data_flow.md` | Data flows and ER model |
-| `project/02_architecture/infrastructure.md` | Deployment, CI/CD, variables |
-| `project/03_engineering/tech_stack.yaml` | Exact technology stack |
-| `project/03_engineering/testing_strategy.md` | Testing strategy |
-| `project/03_engineering/api_guidelines.md` | API guidelines *(conditional)* |
-| `project/04_adrs/NNNN-title.md` | Architectural decisions |
+The complete tree — which files belong to the framework (`standard/`, read-only) and which are filled out per project (`project/`), with the purpose of each — is documented in the **Directory Structure** section of `standard/README.md`. Its Table of Contents is kept up to date as files are added or removed.
 
 ---
 
@@ -180,19 +152,12 @@ The agent will review: structure, frontmatter, required sections, consistency, a
 
 ---
 
-## Agent mode summary
+## Agent working modes
 
-| Mode | When | What it does |
-|---|---|---|
-| **Onboarding** | Empty docs + existing project | Analyzes code → generates doc drafts |
-| **Design** | Creating/editing documentation | Writes and structures docs, generates no code |
-| **Implementation** | Writing code | Reads docs as the source of truth, generates code |
+Agents operate in one of three modes — **Onboarding** (existing code, empty docs: analyze and draft), **Design** (write docs, no code), and **Implementation** (write code, with docs as the source of truth). The authoritative definitions and entry criteria are in `standard/AGENT.md` (Working Modes).
 
 ---
 
 ## Key conventions
 
-- **YAML frontmatter**: Every content `.md` file starts with a `---` block defining metadata (`type`, `version`, `last_updated`, `state`).
-- **States (`state`)**: `pending` → `doing` → `done` (or `deprecated`). They control what an agent may modify.
-- **Immutable ADRs**: Once accepted, ADRs are never modified. To change a decision, a new ADR is created.
-- **Docs as Code**: Docs are versioned with Git, reviewed in PRs, and maintained as part of the development workflow.
+Frontmatter fields and the `state` lifecycle are defined once in `standard/README.md` (Frontmatter Conventions). ADR rules — immutability, the supersede process — are in `standard/guide_adrs.md`. The synchronization duties that keep docs and code from drifting apart are in `standard/AGENT.md` (Anti-Drift Protocol).

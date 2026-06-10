@@ -13,12 +13,7 @@ Before acting, identify which mode you are working in, based on the user's instr
 
 - **Applies when you arrive at an existing project whose documentation is incomplete or empty** (the content files contain unfilled placeholders).
 - Your goal is to **analyze the project's source code and complete the documentation** as a draft for human review.
-- Follow the adoption order for **Existing Project (Brownfield)** defined in `README.md`:
-  1. Analyze the code → Fill out `project/03_engineering/tech_stack.yaml`.
-  2. Diagram the existing architecture → Complete `project/02_architecture/`.
-  3. Document the product → Complete `project/01_product/vision.md` and `domain_modules/`.
-  4. Plan ahead → Set up `project/01_product/roadmap.md` with the pending tasks.
-  5. Record decisions → Create retroactive ADRs in `project/04_adrs/`.
+- Follow the adoption order for **Existing Project (Brownfield)** defined in `README.md` (engineering → architecture → product → roadmap → retroactive ADRs).
 - **Present each completed document to the user for review** before marking it as final.
 - Once the documentation is complete and approved, the next session will start in Design Mode or Implementation Mode as appropriate.
 
@@ -192,11 +187,7 @@ Each session type has a **single objective**, a **bounded write scope**, and an 
 
 ### Documentation
 
-- **Do not create files outside the structure defined in `README.md`.**
-- **Do not modify the directory structure** without recording an ADR in `project/04_adrs/`.
-- Every new document must include the **YAML frontmatter** for its type, as defined in the corresponding area's `guide_*.md` in `standard/`.
-- Sections marked **[REQUIRED]** may not be removed or left empty.
-- When adding or removing documentation files, update the Table of Contents in `standard/README.md`.
+- **Follow the Maintenance Protocol in `README.md`.** It is the canonical source for documentation editing rules: file placement, structure changes (ADR required), per-type frontmatter, `[REQUIRED]` sections, and Table of Contents updates.
 
 ### Source Code
 
@@ -231,8 +222,7 @@ Documentation that drifts from the code stops being a source of truth. To preven
 ## Constraints
 
 - **Do not assume information that is not documented.** If you need a piece of information you cannot find in the project documentation (`project/`), ask the user before proceeding.
-- **Do not modify documents with `done` state** without explicit justification (an ADR or a direct instruction from the user).
-- **Do not modify documents with `doing` state** without prior coordination with the user.
+- **Respect the `state` implications** defined in the Frontmatter Conventions of `README.md`: modifying a `done` document requires explicit justification (an ADR or a direct user instruction); modifying a `doing` document requires prior coordination with the user.
 
 ---
 

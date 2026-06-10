@@ -268,6 +268,7 @@ Each `guide_*.md` file in `standard/` defines the complete frontmatter schema fo
 5. **Minimum Sufficient Context**: The documentation is structured so an AI agent can read only what it needs for a specific task without flooding its context.
 6. **Traceability**: Architectural decisions (ADRs) are reflected in engineering (`project/03_engineering/`) whenever they modify technical standards.
 7. **Docs as Code**: Documentation files live alongside the source code, are versioned with Git, and are maintained as part of the development workflow.
+8. **Single Canonical Source**: every rule or concept of the standard is specified in exactly one document; all other documents reference it instead of restating it. This keeps token cost low and prevents copies from drifting apart.
 
 ---
 
