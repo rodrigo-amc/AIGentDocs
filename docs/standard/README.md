@@ -165,6 +165,41 @@ If the project already has code, document it through **reverse engineering**. Th
 
 > **Tip:** An AI agent can dramatically speed up the brownfield path. It can analyze the source code and generate documentation drafts for human review. See `AGENT.md` for Onboarding Mode.
 
+### Lite Mode (Minimal Adoption)
+
+Full adoption is the right choice for products with several domain entities and a long life ahead. For small projects — prototypes, internal tools, single-purpose services — the full structure can be more ceremony than value. **Lite Mode** is the official minimal profile: three files that give an agent the minimum sufficient context to contribute safely.
+
+| File | Why it is part of the minimum |
+|---|---|
+| `project/01_product/vision.md` | What is being built, for whom, and what is in/out of scope — prevents functionally wrong contributions. |
+| `project/01_product/roadmap.md` | What to work on right now (Kanban board). |
+| `project/03_engineering/tech_stack.yaml` | Technical guardrail: which technologies and versions are allowed. |
+
+**Lite Mode rules:**
+
+1. **Do not create the remaining files.** Empty placeholder files would signal an incomplete adoption (and trigger Onboarding Mode); their absence signals a deliberate Lite profile.
+2. **User Stories and their ACs live directly on the roadmap board items**, since there are no `domain_modules/`.
+3. **ADRs are recommended but optional.** The `adr` fields in `tech_stack.yaml` may be left empty (`""`) until the project upgrades.
+4. **Declare the profile** in the Conventions table of this file (`Adoption profile: lite`), so agents and humans know the missing files are intentional.
+5. Everything else in the standard (frontmatter, `[REQUIRED]` sections of the three files, traceability on the board) applies as usual.
+
+**When to upgrade** — any of these signals means the project has outgrown Lite:
+
+- A board item accumulates long functional detail or a User Story needs more than ~6 ACs → extract `domain_modules/`.
+- A first cross-cutting process spans multiple entities → create `02_architecture/data_flow.md`.
+- Technology decisions start getting re-litigated → create ADRs in `04_adrs/`.
+- More than one developer or agent works concurrently → full structure with sessions.
+
+**Upgrade path (incremental — no big bang):**
+
+1. Run Knowledge Crunching (`agent_product.md`) to complete the Domain Entity Map in `vision.md`.
+2. Extract the User Stories from the roadmap into `domain_modules/` files (one module per session, per `AGENT.md`).
+3. Add `02_architecture/` and the remaining `03_engineering/` documents following the standard session order.
+4. Create retroactive ADRs for the decisions already reflected in `tech_stack.yaml`.
+5. Update the Conventions table (`Adoption profile: full`).
+
+Each step is independent: upgrade only what the project's complexity actually demands.
+
 ---
 
 ## Reading Protocol
@@ -242,6 +277,7 @@ Each `guide_*.md` file in `standard/` defines the complete frontmatter schema fo
 | Convention | Value |
 |---|---|
 | Documentation language | *To be defined by each project's team* |
+| Adoption profile | *`full` or `lite` (see Lite Mode in the Adoption Guide)* |
 | Date format | `YYYY-MM-DD` |
 | Writing style | Clear, outcome-oriented, readable by humans and AI agents |
 

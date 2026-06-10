@@ -98,6 +98,12 @@ The agent will:
 
 > **Important:** The agent generates, the human approves. No document is considered final without review.
 
+### Option C: Lite Mode (small projects)
+
+For prototypes, internal tools, or single-purpose services, you don't need the full structure. The **Lite** profile is just three files: `vision.md`, `roadmap.md`, and `tech_stack.yaml` — what an agent minimally needs to contribute safely. User Stories live directly on the roadmap board, ADRs are optional, and you upgrade incrementally only when the project's complexity demands it.
+
+See **Lite Mode** in the Adoption Guide of `standard/README.md` for the rules and the upgrade path.
+
 ---
 
 ## Day-to-day workflow

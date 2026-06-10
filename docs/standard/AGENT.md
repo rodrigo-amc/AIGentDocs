@@ -45,6 +45,7 @@ When starting a new session or receiving a task, follow this order:
 1. Read `standard/README.md` to understand the overall project structure.
 2. **Assess the state of the documentation:**
    - If the content files in `project/` (`vision.md`, `tech_stack.yaml`, etc.) are empty or contain placeholders → **Onboarding Mode**.
+   - If only `vision.md`, `roadmap.md`, and `tech_stack.yaml` exist and are complete, and the Conventions table in `README.md` declares `Adoption profile: lite` → the project uses **Lite Mode** (see the Adoption Guide in `README.md`). The missing files are intentional: do not demand them and do not enter Onboarding Mode. User Stories live directly on the roadmap board. If you detect an upgrade signal (a board item accumulating heavy functional detail, a cross-cutting process, re-litigated technology decisions), report it to the user and recommend the upgrade path — do not upgrade on your own initiative.
    - If the documentation is complete → Follow the **Reading Protocol** defined in `README.md`.
 3. Before working on any area of the project, read the corresponding `agent_*.md` file in `standard/`. It contains specific instructions for that context.
 
