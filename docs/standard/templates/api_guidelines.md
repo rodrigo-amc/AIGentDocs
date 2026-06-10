@@ -1,38 +1,38 @@
 ---
 type: api_guidelines
 version: 1.0
-last_updated: 2026-03-01
+last_updated: 2026-06-10
 state: pending
 ---
 
-# Guías de API
+# API Guidelines
 
-<!-- [CONDICIONAL] Este archivo solo es necesario si el proyecto expone endpoints (REST, GraphQL, gRPC, etc.). -->
+<!-- [CONDITIONAL] This file is only needed if the project exposes endpoints (REST, GraphQL, gRPC, etc.). -->
 
-## Convenciones de Nomenclatura
+## Naming Conventions
 
-<!-- [OBLIGATORIO si aplica] Naming de endpoints, recursos y verbos HTTP. -->
-
----
-
-## Autenticación y Autorización
-
-<!-- [OBLIGATORIO si aplica] Mecanismos de auth para las APIs. -->
+<!-- [REQUIRED if applicable] Naming of endpoints, resources, and HTTP verbs. -->
 
 ---
 
-## Formato de Respuestas
+## Authentication and Authorization
 
-<!-- [OBLIGATORIO si aplica] Estructura estándar de responses (envelope, errores, paginación). -->
-
----
-
-## Versionado de API
-
-<!-- [OBLIGATORIO si aplica] Estrategia de versionado (URL, headers, etc.). -->
+<!-- [REQUIRED if applicable] Auth mechanisms for the APIs. -->
 
 ---
 
-## Manejo de Errores
+## Response Format
 
-<!-- [OBLIGATORIO si aplica] Códigos de error, formato de mensajes, HTTP status codes. -->
+<!-- [REQUIRED if applicable] Standard response structure (envelope, errors, pagination). -->
+
+---
+
+## API Versioning
+
+<!-- [REQUIRED if applicable] Versioning strategy (URL, headers, etc.). -->
+
+---
+
+## Error Handling
+
+<!-- [REQUIRED if applicable] Error codes, message format, HTTP status codes. -->

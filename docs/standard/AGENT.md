@@ -1,231 +1,298 @@
-# Instrucciones Operativas para Agentes de IA
+# Operating Instructions for AI Agents
 
-Eres un agente de IA trabajando en un proyecto de software documentado bajo este estándar.
-Este archivo define tus reglas de comportamiento global. Debes seguirlas en todo momento.
-
----
-
-## Modo de Trabajo
-
-Antes de actuar, identifica en qué modo estás trabajando según la indicación del usuario o la naturaleza de la tarea:
-
-### Modo Onboarding (Documentación Inicial)
-
-- **Aplica cuando llegas a un proyecto existente cuya documentación está incompleta o vacía** (los archivos de contenido contienen placeholders sin llenar).
-- Tu objetivo es **analizar el código fuente del proyecto y completar la documentación** como borrador para revisión humana.
-- Sigue el orden de adopción para **Proyecto Existente (Brownfield)** definido en `README.md`:
-  1. Analizar el código → Llenar `project/03_engineering/tech_stack.yaml`.
-  2. Diagramar la arquitectura existente → Completar `project/02_architecture/`.
-  3. Documentar el producto → Completar `project/01_product/vision.md` y `domain_modules/`.
-  4. Planificar el futuro → Configurar `project/01_product/roadmap.md` con las tareas pendientes.
-  5. Registrar decisiones → Crear ADRs retroactivos en `project/04_adrs/`.
-- **Presenta cada documento completado al usuario para su revisión** antes de marcarlo como definitivo.
-- Una vez la documentación esté completa y aprobada, la próxima sesión comenzará en Modo Diseño o Modo Implementación según corresponda.
-
-### Modo Diseño (Documentación)
-
-- Aplica cuando se están creando o editando documentos en `project/`.
-- **No generes código fuente** en este modo. Tu foco es completar, corregir o estructurar la documentación del proyecto.
-- Asegúrate de que todo documento nuevo cumpla con el frontmatter y las secciones obligatorias definidas en el `guide_*.md` correspondiente en `standard/`.
-
-### Modo Implementación (Código)
-
-- Aplica cuando se está escribiendo o modificando código fuente del proyecto.
-- La documentación en `project/` es tu **fuente de verdad**. Léela antes de generar código, pero no la modifiques salvo para actualizar estados (`state` en frontmatter, tablero en `roadmap.md`)
-- Todo código que generes debe respetar las reglas definidas en `project/03_engineering/`.
-
-> Si no tienes claro en qué modo trabajar, pregunta al usuario antes de proceder.
+You are an AI agent working on a software project documented under this standard.
+This file defines your global behavioral rules. You must follow them at all times.
 
 ---
 
-## Protocolo de Entrada al Proyecto
+## Working Modes
 
-Cuando inicies una nueva sesión o recibas una tarea, sigue este orden:
+Before acting, identify which mode you are working in, based on the user's instruction or the nature of the task:
 
-1. Lee `standard/README.md` para entender la estructura general del proyecto.
-2. **Evalúa el estado de la documentación:**
-   - Si los archivos de contenido en `project/` (`vision.md`, `tech_stack.yaml`, etc.) están vacíos o con placeholders → **Modo Onboarding**.
-   - Si la documentación está completa → Sigue el **Protocolo de Lectura** definido en `README.md`.
-3. Antes de trabajar en cualquier área del proyecto, lee el archivo `agent_*.md` correspondiente en `standard/`. Contiene instrucciones específicas para ese contexto.
+### Onboarding Mode (Initial Documentation)
+
+- **Applies when you arrive at an existing project whose documentation is incomplete or empty** (the content files contain unfilled placeholders).
+- Your goal is to **analyze the project's source code and complete the documentation** as a draft for human review.
+- Follow the adoption order for **Existing Project (Brownfield)** defined in `README.md` (engineering → architecture → product → roadmap → retroactive ADRs).
+- **Present each completed document to the user for review** before marking it as final.
+- Once the documentation is complete and approved, the next session will start in Design Mode or Implementation Mode as appropriate.
+
+### Design Mode (Documentation)
+
+- Applies when creating or editing documents in `project/`.
+- **Do not generate source code** in this mode. Your focus is completing, correcting, or structuring the project documentation.
+- Make sure every new document complies with the frontmatter and required sections defined in the corresponding `guide_*.md` in `standard/`.
+
+### Implementation Mode (Code)
+
+- Applies when writing or modifying the project's source code.
+- The documentation in `project/` is your **source of truth**. Read it before generating code, but do not modify it except to update statuses (`state` in frontmatter, board in `roadmap.md`, `project_status.yaml`, `TODO.md`).
+- All code you generate must respect the rules defined in `project/03_engineering/`.
+- **Implementation profiles** define the protocols for this mode — read the one matching your task before starting: `agent_scaffold.md` (project bootstrap), `agent_module_developer.md` (module creation/maintenance), `agent_code_reviewer.md` (read-only review), `agent_integration_tester.md` (validation against the running system).
+- The **write scope** for module work is the target module's `code_paths` plus the status artifacts. Touching other modules' code follows the scope restriction in `agent_module_developer.md`.
+
+> If you are unsure which mode to work in, ask the user before proceeding.
 
 ---
 
-## Gestión de Sesiones
+## Project Entry Protocol
 
-La documentación de un proyecto no puede completarse en una única sesión de agente. Para evitar la saturación de la ventana de contexto y mantener la coherencia, el trabajo se organiza en **sesiones**..
+When starting a new session or receiving a task, follow this order:
 
-> **Principio clave:** La sesión define tu **alcance de escritura**: qué archivos y directorios podés crear o modificar. **No limita tu capacidad de lectura** — el Protocolo de Lectura de `README.md` siempre te autoriza a leer documentación necesaria para entender el contexto.
+1. Read `standard/README.md` to understand the overall project structure.
+2. **Assess the state of the documentation:**
+   - If the content files in `project/` (`vision.md`, `tech_stack.yaml`, etc.) are empty or contain placeholders → **Onboarding Mode**.
+   - If only `vision.md`, `roadmap.md`, and `tech_stack.yaml` exist and are complete, and the Conventions table in `README.md` declares `Adoption profile: lite` → the project uses **Lite Mode** (see the Adoption Guide in `README.md`). The missing files are intentional: do not demand them and do not enter Onboarding Mode. User Stories live directly on the roadmap board. If you detect an upgrade signal (a board item accumulating heavy functional detail, a cross-cutting process, re-litigated technology decisions), report it to the user and recommend the upgrade path — do not upgrade on your own initiative.
+   - If the documentation is complete → Follow the **Reading Protocol** defined in `README.md`.
+3. Before working on any area of the project, read the corresponding `agent_*.md` file in `standard/`. It contains specific instructions for that context.
 
-Al iniciar una sesión, el usuario te indicará en qué parte de la documentación van a trabajar. Esa indicación define tu alcance. Si el usuario no especifica una sesión, presentale la **Tabla de Sesiones** abajo y preguntale en cuál desea trabajar.
+---
 
-### Regla de Guardia de Sesión
+## Session Management
 
-**Si durante la sesión el usuario te solicita crear o modificar un documento que, según la tabla de sesiones, pertenece a otra sesión, debes:**
+A project's documentation cannot be completed in a single agent session. To avoid saturating the context window and to preserve coherence, work is organized into **sessions**.
 
-1. **Detenerte.** No inicies el trabajo solicitado.
-2. **Informar al usuario** que el trabajo solicitado corresponde a otra sesión según esta guía.
-3. **Recomendar** que se abra una nueva sesión enfocada en esa área.
-4. **Esperar instrucción explícita** del usuario antes de proceder. Si el usuario decide continuar de todas formas, respeta su decisión.
+> **Key principle:** The session defines your **write scope**: which files and directories you may create or modify. **It does not limit your ability to read** — the Reading Protocol in `README.md` always authorizes you to read whatever documentation you need to understand the context.
 
-**Si la instrucción del usuario es ambigua, contradictoria con esta guía, o no podés determinar a qué sesión corresponde el trabajo solicitado, debes:**
+At the start of a session, the user will tell you which part of the documentation you will work on. That instruction defines your scope. If the user does not specify a session, show them the **Session Table** below and ask which one they want to work in.
 
-1. **Detenerte.** No asumas una interpretación.
-2. **Explicar al usuario** cuál es la duda, ambigüedad o contradicción que detectás.
-3. **Esperar instrucción explícita** antes de continuar.
+### Session Guard Rule
 
-#### Excepción: Propagación de ADR
+**If during the session the user asks you to create or modify a document that, according to the session table, belongs to another session, you must:**
 
-La sesión `04_adrs` es la única que permite modificar archivos fuera de su propio directorio. Si un ADR aceptado afecta un estándar técnico, el agente **debe** actualizar el archivo correspondiente en `project/03_engineering/` en la misma sesión o en una subsecuente.
+1. **Stop.** Do not start the requested work.
+2. **Inform the user** that the requested work belongs to another session according to this guide.
+3. **Recommend** opening a new session focused on that area.
+4. **Wait for explicit instruction** from the user before proceeding. If the user decides to continue anyway, respect their decision.
 
-#### Excepción: Trazabilidad Global
+**If the user's instruction is ambiguous, contradicts this guide, or you cannot determine which session the requested work belongs to, you must:**
 
-Para cumplir con las **Reglas Globales de Trazabilidad**, toda sesión tiene permiso concurrente de escritura para modificar metadatos de estado. Esto significa que el agente **debe** actualizar la tabla de tareas en `project/01_product/roadmap.md` y el campo `state` de los frontmatter de archivos afectados.
+1. **Stop.** Do not assume an interpretation.
+2. **Explain to the user** what doubt, ambiguity, or contradiction you detected.
+3. **Wait for explicit instruction** before continuing.
 
-### Tipos de Sesión
+#### Exception: ADR Propagation
 
-Cada tipo de sesión tiene un **objetivo único**, un **alcance de escritura delimitado** y una **frecuencia** esperada.
+If an accepted ADR affects a technical standard, the `04_adrs` session **must** update the corresponding file in `project/03_engineering/` in the same session or a subsequent one.
 
-#### Sesión: `01_product`
+#### Exception: Approved Impact Map (Corrections)
 
-**Objetivo:** Establecer la identidad del producto, su alcance, la hoja de ruta inicial y los atributos de calidad base.
+The `05_corrections` session may modify documents that belong to other sessions, but **only** those listed in the approved Impact Map of its Correction Record (see `agent_corrections.md`). The map is the session's write scope; anything outside it requires amending and re-approving the record.
 
-| Entregable | Directorio |
+#### Exception: Global Traceability
+
+To comply with the **Global Traceability Rules**, every session has concurrent write permission for status metadata. This means the agent **must** update the task board in `project/01_product/roadmap.md` and the `state` field in the frontmatter of affected files.
+
+### Session Types
+
+Each session type has a **single objective**, a **bounded write scope**, and an expected **frequency**.
+
+#### Session: `01_product`
+
+**Objective:** Establish the product's identity, its scope, the initial roadmap, and the baseline quality attributes.
+
+| Deliverable | Directory |
 |---|---|
 | `vision.md` | `project/01_product/` |
 | `roadmap.md` | `project/01_product/` |
 | `quality_attributes.md` | `project/01_product/` |
 
-**Alcance de escritura:** Solo documentos estratégicos de producto. No se crean módulos de dominio, ni documentos de arquitectura, ni de ingeniería en esta sesión.
+**Write scope:** Strategic product documents only. No domain modules, architecture documents, or engineering documents are created in this session.
 
-**Frecuencia:** Una única vez al inicio del proyecto.
+**Frequency:** Once, at the start of the project.
 
 ---
 
-#### Sesión: `01_product_domain_modules`
+#### Session: `01_product_domain_modules`
 
-**Objetivo:** Definir las User Stories, Criterios de Aceptación y Reglas de Negocio de **un único módulo de dominio**.
+**Objective:** Define the User Stories, Acceptance Criteria, and Business Rules of **a single domain module**.
 
-| Entregable | Directorio |
+| Deliverable | Directory |
 |---|---|
-| Un archivo `[module_name].md` | `project/01_product/domain_modules/` |
+| One `[module_name].md` file | `project/01_product/domain_modules/` |
 
-**Alcance de escritura:** Se trabaja exclusivamente en un solo módulo por sesión. Si el módulo tiene dependencias con otros módulos ya aprobados (campo `depends_on` del frontmatter), el agente puede leerlos pero no modificarlos.
+**Write scope:** Work is limited to a single module per session. If the module depends on other already-approved modules (the `depends_on` frontmatter field), the agent may read them but not modify them.
 
-**Frecuencia:** Una sesión por cada módulo del Roadmap.
+**Frequency:** One session per module on the Roadmap.
 
-> **Importante:** Si durante la definición de un módulo se detectan nuevos NFRs o reglas de negocio que afectan a `quality_attributes.md` o a módulos ya aprobados, el agente debe **registrar la detección al usuario** y recomendar una sesión aparte de `01_product` para ajustarlos.
+> **Important:** If, while defining a module, new NFRs or business rules are detected that affect `quality_attributes.md` or already-approved modules, the agent must **report the finding to the user** and recommend a separate `01_product` session to adjust them.
 
 ---
 
-#### Sesión: `02_architecture`
+#### Session: `02_architecture`
 
-**Objetivo:** Diseñar la solución técnica que responde a los requerimientos funcionales ya definidos en los módulos de dominio.
+**Objective:** Design the technical solution that addresses the functional requirements already defined in the domain modules.
 
-| Entregable | Directorio |
+| Deliverable | Directory |
 |---|---|
 | `system_overview.md` | `project/02_architecture/` |
 | `data_flow.md` | `project/02_architecture/` |
 | `infrastructure.md` | `project/02_architecture/` |
 
-**Alcance de escritura:** Solo documentos de arquitectura. No se modifican módulos de dominio ni documentos de ingeniería.
+**Write scope:** Architecture documents only. Domain modules and engineering documents are not modified.
 
-**Frecuencia:** Una vez, después de aprobar todos los módulos de dominio de la fase actual del Roadmap.
+**Frequency:** Once, after all domain modules for the current Roadmap phase are approved.
 
 ---
 
-#### Sesión: `03_engineering`
+#### Session: `03_engineering`
 
-**Objetivo:** Definir las reglas técnicas concretas del proyecto: stack tecnológico, estrategia de testing y guías de API.
+**Objective:** Define the project's concrete technical rules: technology stack, testing strategy, and API guidelines.
 
-| Entregable | Directorio |
+| Deliverable | Directory |
 |---|---|
 | `tech_stack.yaml` | `project/03_engineering/` |
 | `testing_strategy.md` | `project/03_engineering/` |
-| `api_guidelines.md` *(condicional)* | `project/03_engineering/` |
+| `api_guidelines.md` *(conditional)* | `project/03_engineering/` |
 
-**Alcance de escritura:** Solo documentos de ingeniería. Cada tecnología definida en `tech_stack.yaml` debe tener un ADR asociado; si no existe, el agente debe señalarlo pero **no crear el ADR por iniciativa propia**.
+**Write scope:** Engineering documents only. Every technology defined in `tech_stack.yaml` must have an associated ADR; if one is missing, the agent must flag it but **must not create the ADR on its own initiative**.
 
-**Frecuencia:** Una vez, después de aprobar la arquitectura.
+**Frequency:** Once, after the architecture is approved.
 
 ---
 
-#### Sesión: `04_adrs`
+#### Session: `04_adrs`
 
-**Objetivo:** Registrar **una única decisión arquitectónica** significativa.
+**Objective:** Record **a single significant architectural decision**.
 
-| Entregable | Directorio |
+| Deliverable | Directory |
 |---|---|
-| Un archivo `[NNNN]-[titulo].md` | `project/04_adrs/` |
+| One `[NNNN]-[title].md` file | `project/04_adrs/` |
 
-**Alcance de escritura:** Crear el ADR y, si aplica la **Propagación de ADR**, actualizar el documento afectado en `project/03_engineering/`. No se modifican módulos de dominio ni documentos de arquitectura.
+**Write scope:** Create the ADR and, if **ADR Propagation** applies, update the affected document in `project/03_engineering/`. Domain modules and architecture documents are not modified.
 
-**Frecuencia:** Bajo demanda, cada vez que surja una decisión técnica relevante. Puede ejecutarse en cualquier momento del proyecto.
+**Frequency:** On demand, whenever a relevant technical decision arises. Can run at any point in the project.
 
-### Orden Recomendado de Ejecución
+---
+
+#### Session: `05_corrections`
+
+**Objective:** Correct a **cross-cutting design defect** — discovered late, typically by integration testing or code review — whose fix spans documents owned by different sessions.
+
+| Deliverable | Directory |
+|---|---|
+| One `[NNNN]-[title].md` Correction Record | `project/05_corrections/` |
+| The corrections its approved Impact Map authorizes | The documents listed in the map |
+
+**Write scope:** Dynamic — exactly the documents listed in the record's **approved Impact Map**, plus status artifacts (Global Traceability). See the protocol in `agent_corrections.md`.
+
+**Frequency:** On demand, when a defect report identifies a design flaw. A correction touching a single document does not need this session.
+
+### Recommended Execution Order
 
 ```text
 01_product
     ↓
-01_product_domain_modules × N (un módulo por sesión)
+01_product_domain_modules × N (one module per session)
     ↓
 02_architecture
     ↓
 03_engineering
 
-04_adrs → puede ejecutarse en cualquier momento, de forma independiente.
+04_adrs → can run at any time, independently.
+05_corrections → on demand, when a design defect is detected (usually after implementation begins).
 ```
 
-### Tabla de Referencia Rápida
+### Quick Reference Table
 
-| Sesión | ¿Qué se crea/modifica? | ¿Dónde? | ¿Cuándo? | ¿Cuántas veces? |
+| Session | What is created/modified? | Where? | When? | How many times? |
 |---|---|---|---|---|
-| `01_product` | `vision.md`, `roadmap.md`, `quality_attributes.md` | `project/01_product/` | Al inicio del proyecto | 1 |
-| `01_product_domain_modules` | Un `[module_name].md` | `project/01_product/domain_modules/` | Después de `01_product` | 1 por módulo |
-| `02_architecture` | `system_overview.md`, `data_flow.md`, `infrastructure.md` | `project/02_architecture/` | Después de aprobar módulos | 1 |
-| `03_engineering` | `tech_stack.yaml`, `testing_strategy.md`, `api_guidelines.md` | `project/03_engineering/` | Después de aprobar arquitectura | 1 |
-| `04_adrs` | Un `[NNNN]-[titulo].md` + Propagación | `project/04_adrs/` + `project/03_engineering/` | Cuando surja una decisión | Bajo demanda |
+| `01_product` | `vision.md`, `roadmap.md`, `quality_attributes.md` | `project/01_product/` | At project start | 1 |
+| `01_product_domain_modules` | One `[module_name].md` | `project/01_product/domain_modules/` | After `01_product` | 1 per module |
+| `02_architecture` | `system_overview.md`, `data_flow.md`, `infrastructure.md` | `project/02_architecture/` | After modules are approved | 1 |
+| `03_engineering` | `tech_stack.yaml`, `testing_strategy.md`, `api_guidelines.md` | `project/03_engineering/` | After architecture is approved | 1 |
+| `04_adrs` | One `[NNNN]-[title].md` + Propagation | `project/04_adrs/` + `project/03_engineering/` | When a decision arises | On demand |
+| `05_corrections` | One Correction Record + the corrections in its approved Impact Map | `project/05_corrections/` + mapped documents | When a design defect is reported | On demand |
 
 ---
 
-## Reglas Globales
+## Operational Patterns
 
-### Documentación
+Behavioral patterns that apply across all modes and sessions. They were validated in real projects before being incorporated into the standard.
 
-- **No crees archivos fuera de la estructura definida en `README.md`.**
-- **No modifiques la estructura de directorios** sin registrar un ADR en `project/04_adrs/`.
-- Todo documento nuevo debe incluir el **frontmatter YAML** correspondiente a su tipo, según el `guide_*.md` del área correspondiente en `standard/`.
-- Las secciones marcadas como **[OBLIGATORIO]** no pueden eliminarse ni dejarse vacías.
-- Al agregar o eliminar archivos de documentación, actualiza la Tabla de Contenidos en `standard/README.md`.
+### Documentation > Code
 
-### Código Fuente
+The documentation in `project/` is the source of truth. When code and documentation contradict each other, **the presumption is that the code is wrong** — the documentation is the product of deliberate design: domain discovery, architectural reasoning, and human review shaped it, while code is one (possibly drifted) attempt to realize it. The presumption is not a license to fix silently: follow the drift-handling procedure in the Anti-Drift Protocol (stop and report).
 
-- **Antes de generar código**, lee `project/03_engineering/tech_stack.yaml`. No utilices tecnologías, versiones o librerías que no estén listadas allí.
-- **No instales ni propongas nuevas dependencias sin discutirlo con el desarrollador humano.** La incorporación de dependencias es una decisión estructural que impacta el diseño, la infraestructura y el costo. Debe registrarse como ADR.
-- Cuando trabajes en un módulo de dominio, consulta el campo `code_paths` de su frontmatter para saber qué archivos o directorios de código le corresponden.
+### Sub-agents read, the main agent writes
 
-### Trazabilidad
+When a task requires reading extensive documentation, **delegate the reading to parallel, read-only sub-agents** and have them return summaries — this protects the main context window (Minimum Sufficient Context). All writing — code or documentation — is done by the **main agent**: a single writer guarantees coherence across the deliverable. Sub-agents never write.
 
-- Cuando completes una User Story o tarea del `roadmap.md`, actualiza su estado en el tablero (muévela a `[Done]`).
-- **Sincronización de Estados**: Existe un estado global en el frontmatter de cada módulo de dominio (`state`). Cada vez que muevas una tarea en el Kanban de `project/01_product/roadmap.md` a `[In Progress]` o `[Done]`, evalúa el `state` del módulo afectado:
-  - Si al menos una US del módulo está en proceso → `state: doing`.
-  - Si todas las US planificadas están completadas → `state: done`.
+### Main agent vs. delegated subagent
+
+Work under this standard has two execution shapes, and choosing the right one matters:
+
+- **Main agent of the session**: leads the conversation, can pause for user approval mid-protocol, and writes the deliverables. Required for any session of this standard (they all include validation steps with the user) and for any implementation work.
+- **Delegated subagent**: runs in an isolated context with no user interaction, and reports back when finished. Appropriate only for **self-contained, read-only tasks**: reading documents, analyzing code, researching a question.
+
+If a protocol includes "present to the user and wait for approval", it cannot run as a delegated subagent.
+
+### The triple distinction
+
+When you cannot resolve a question or requirement, never give a flat "I don't know" — and never fill the gap with general knowledge. State explicitly which case applies:
+
+1. **Not documented** → the topic appears nowhere in `project/`. Flag it and recommend documenting it before proceeding.
+2. **Documented but not implemented** → the specification exists but the code doesn't (or is incomplete). Point to the document and note that implementation is pending.
+3. **Out of scope** → the topic falls outside the scope defined in `vision.md`. Say so, referencing the scope section.
+
+### Stop on inconsistency
+
+If two documents contradict each other, or a document contradicts an accepted ADR, **stop and report** — do not pick a side silently, and do not proceed building on the contradiction. (For code-vs-documentation contradictions, see the Anti-Drift Protocol.)
 
 ---
 
-## Restricciones
+## Global Rules
 
-- **No asumas información que no esté documentada.** Si necesitas un dato que no encuentras en la documentación del proyecto (`project/`), pregunta al usuario antes de proceder.
-- **No modifiques documentos con estado `done`** sin una justificación explícita (ADR o indicación directa del usuario).
-- **No modifiques documentos con estado `doing`** sin coordinación previa con el usuario.
+### Documentation
+
+- **Follow the Maintenance Protocol in `README.md`.** It is the canonical source for documentation editing rules: file placement, structure changes (ADR required), per-type frontmatter, `[REQUIRED]` sections, and Table of Contents updates.
+
+### Source Code
+
+- **Before generating code**, read `project/03_engineering/tech_stack.yaml`. Do not use technologies, versions, or libraries that are not listed there.
+- **Do not install or propose new dependencies without discussing it with the human developer.** Adding a dependency is a structural decision that impacts design, infrastructure, and cost. It must be recorded as an ADR.
+- When working on a domain module, check the `code_paths` field in its frontmatter to know which code files or directories belong to it.
+
+### Traceability and Synchronization (Anti-Drift Protocol)
+
+Documentation that drifts from the code stops being a source of truth. To prevent this, the following events **require** updating the documentation **as part of the same change** (same session, same commit/PR) — never "later":
+
+| Triggering event | Required documentation update |
+|---|---|
+| You start working on a task/US | `roadmap.md`: move it to `[In Progress]`; affected module → `state: doing` in `project_status.yaml` **and** its frontmatter |
+| You complete a task/US | `roadmap.md`: move it to `[Done]`; if all of the module's planned US are complete → `state: done` in `project_status.yaml` **and** its frontmatter |
+| While working on one module you discover a pending change in another | Add an entry to `project/TODO.md`; remove the entries you resolve |
+| You create code files or directories for a module | The module's `code_paths` frontmatter field |
+| A new dependency or technology is adopted | Accepted ADR **plus** `tech_stack.yaml` entry — never code first |
+| An accepted ADR modifies a technical standard | The corresponding file in `project/03_engineering/` (ADR Propagation) |
+| A new container, component, or cross-module flow appears | `system_overview.md` and/or `data_flow.md`; an ADR if the decision is significant |
+| Deployment, environment, or environment variables change | `infrastructure.md` (including Variables and Secrets) |
+| API conventions change (auth, versioning, response format) | `api_guidelines.md` |
+| A requirement proves wrong or incomplete during implementation | **Stop.** The documentation is corrected first, then the code: a single affected document is fixed in its own session with user approval; a cross-cutting defect opens a `05_corrections` session (see `agent_corrections.md`) |
+
+**Module state rule:** a module's `state` reflects its User Stories on the board — at least one in progress → `doing`; all planned ones completed → `done`. The authoritative record is `project/project_status.yaml`; the module's frontmatter and the board are views that must never contradict it (see Project Status Artifacts in `README.md`).
+
+**Drift handling:** if at any point you detect that the documentation and the code contradict each other, **stop and report the discrepancy to the user**. Do not silently adjust either side.
+
+> This protocol is deliberately mechanical: each row is verifiable by inspecting a change against the documents it should have touched. Automated tooling (linter in pre-commit/CI) may enforce it.
 
 ---
 
-## Verificación antes de Finalizar
+## Constraints
 
-Antes de dar por terminada cualquier tarea, verifica:
+- **Do not assume information that is not documented.** If you need a piece of information you cannot find in the project documentation (`project/`), ask the user before proceeding.
+- **Respect the `state` implications** defined in the Frontmatter Conventions of `README.md`: modifying a `done` document requires explicit justification (an ADR or a direct user instruction); modifying a `doing` document requires prior coordination with the user.
 
-- [ ] ¿El código generado respeta `tech_stack.yaml`?
-- [ ] ¿Los documentos nuevos o modificados tienen frontmatter válido?
-- [ ] ¿El `roadmap.md` refleja el avance realizado?
-- [ ] ¿Las secciones `[OBLIGATORIO]` de los documentos tocados están completas?
-- [ ] ¿Los archivos o directorios nuevos de código están registrados en el `code_paths` del módulo de dominio correspondiente?
+---
+
+## Verification Before Finishing
+
+Before considering any task complete, verify:
+
+- [ ] Does the generated code respect `tech_stack.yaml`?
+- [ ] Do new or modified documents have valid frontmatter?
+- [ ] Does `roadmap.md` reflect the progress made?
+- [ ] Is `project_status.yaml` consistent with the frontmatter states and the board?
+- [ ] Did you record in `project/TODO.md` any cross-module pending item you discovered (and remove those you resolved)?
+- [ ] Are the `[REQUIRED]` sections of the touched documents complete?
+- [ ] Are new code files or directories registered in the `code_paths` of the corresponding domain module?

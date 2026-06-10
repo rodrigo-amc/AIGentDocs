@@ -1,34 +1,34 @@
 ---
 type: infrastructure
 version: 1.0
-last_updated: 2026-02-23
+last_updated: 2026-06-10
 state: pending
 environment: ""
 ---
 
-# Infraestructura y Despliegue
+# Infrastructure and Deployment
 
-## Entorno
+## Environment
 
-<!-- [OBLIGATORIO] Cloud, On-premise, Híbrido, etc. -->
+<!-- [REQUIRED] Cloud, on-premise, hybrid, etc. -->
 
 ---
 
-## Diagrama de Despliegue
+## Deployment Diagram
 
-<!-- [OBLIGATORIO] Topología de red y servidores. Usar diagrama Mermaid. -->
+<!-- [REQUIRED] Network and server topology. Use a Mermaid diagram. -->
 
 ---
 
 ## CI/CD
 
-<!-- [OBLIGATORIO] Pipeline de despliegue. -->
+<!-- [REQUIRED] Deployment pipeline. -->
 
 ---
 
-## Variables y Secretos
+## Variables and Secrets
 
-<!-- [OBLIGATORIO] Lista de variables de entorno y secretos necesarios. -->
+<!-- [REQUIRED] List of required environment variables and secrets. -->
 
-| Variable | Descripción | Tipo | Requerida |
+| Variable | Description | Type | Required |
 |---|---|---|---|

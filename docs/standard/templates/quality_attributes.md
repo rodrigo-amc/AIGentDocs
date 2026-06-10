@@ -1,18 +1,18 @@
 ---
 type: quality_attributes
 version: 1.0
-last_updated: 2026-02-23
+last_updated: 2026-06-10
 state: pending
 ---
 
-# Atributos de Calidad (Requerimientos No Funcionales)
+# Quality Attributes (Non-Functional Requirements)
 
-## Rendimiento
+## Performance
 
-<!-- [OBLIGATORIO] Tiempos de respuesta esperados, latencia y throughput bajo carga. -->
+<!-- [REQUIRED] Expected response times, latency, and throughput under load. -->
 
 ---
 
-## Seguridad
+## Security
 
-<!-- [OBLIGATORIO] Autenticación, autorización, encriptación, protección contra amenazas (OWASP). -->
+<!-- [REQUIRED] Authentication, authorization, encryption, threat protection (OWASP). -->

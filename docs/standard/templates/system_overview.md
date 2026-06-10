@@ -1,30 +1,30 @@
 ---
 type: system_overview
 version: 1.0
-last_updated: 2026-02-23
+last_updated: 2026-06-10
 state: pending
 ---
 
-# Vista General del Sistema
+# System Overview
 
-## Diagrama de Contexto (C4 Nivel 1)
+## Context Diagram (C4 Level 1)
 
-<!-- [OBLIGATORIO] El sistema ↔ actores externos. Usar diagrama Mermaid. -->
-
----
-
-## Diagrama de Contenedores (C4 Nivel 2)
-
-<!-- [OBLIGATORIO] Aplicaciones, bases de datos y servicios internos. Usar diagrama Mermaid. -->
+<!-- [REQUIRED] The system ↔ external actors. Use a Mermaid diagram. -->
 
 ---
 
-## Estructura de Carpetas
+## Container Diagram (C4 Level 2)
 
-<!-- [OBLIGATORIO] Explicar el propósito de las carpetas principales del código fuente. -->
+<!-- [REQUIRED] Applications, databases, and internal services. Use a Mermaid diagram. -->
 
 ---
 
-## Patrones Arquitectónicos
+## Folder Structure
 
-<!-- [OBLIGATORIO] Patrones utilizados: MVC, Clean Architecture, Event-Driven, etc. -->
+<!-- [REQUIRED] Explain the purpose of the source code's main folders. -->
+
+---
+
+## Architectural Patterns
+
+<!-- [REQUIRED] Patterns in use: MVC, Clean Architecture, Event-Driven, etc. -->

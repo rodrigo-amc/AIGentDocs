@@ -1,21 +1,21 @@
 ---
 type: roadmap
 version: 1.0
-last_updated: 2026-02-23
+last_updated: 2026-06-10
 current_phase: ""
 ---
 
-# Roadmap — Estado y Planificación
+# Roadmap — Status and Planning
 
-## Fase/Hito Actual
+## Current Phase/Milestone
 
-<!-- [OBLIGATORIO] Contexto macro del desarrollo actual. Ej: "MVP", "Sprint 2". -->
+<!-- [REQUIRED] Macro context of current development. E.g., "MVP", "Sprint 2". -->
 
 ---
 
-## Tablero de Tareas
+## Task Board
 
-<!-- [OBLIGATORIO] Lista accionable de User Stories o tareas técnicas. -->
+<!-- [REQUIRED] Actionable list of User Stories or technical tasks. -->
 
 ### [In Progress]
 

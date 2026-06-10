@@ -1,57 +1,57 @@
 ---
 type: vision
-version: # Versión del documento
-last_updated: # Fecha de la última actualización
-change_summary: # Resumen breve de los cambios en esta versión
+version: # Document version
+last_updated: # Date of last update
+change_summary: # Brief summary of the changes in this version
 ---
 
-# Visión del Producto
+# Product Vision
 
 ## Elevator Pitch
 
-<!-- [OBLIGATORIO] Qué es el producto en 2-3 líneas.
-     Debe responder: ¿Qué hace? ¿Para quién? ¿Qué problema resuelve? -->
+<!-- [REQUIRED] What the product is, in 2-3 lines.
+     Must answer: What does it do? Who is it for? What problem does it solve? -->
 
 ---
 
-## Problema que Resuelve
+## Problem It Solves
 
-<!-- [OBLIGATORIO] Describir el dolor o necesidad del usuario que motiva la existencia del proyecto. -->
-
----
-
-## Usuarios Objetivo (Personas)
-
-<!-- [OBLIGATORIO] Perfiles de los usuarios del sistema. -->
+<!-- [REQUIRED] Describe the user pain or need that motivates the project's existence. -->
 
 ---
 
-## Alcance del Proyecto
+## Target Users (Personas)
 
-<!-- [OBLIGATORIO] Qué está dentro y qué está fuera del alcance. -->
-
-### Dentro del Alcance
-
-### Fuera del Alcance
+<!-- [REQUIRED] Profiles of the system's users. -->
 
 ---
 
-## Glosario del Dominio
+## Project Scope
 
-<!-- [OBLIGATORIO] Terminología unificada del negocio (Ubiquitous Language según DDD).
-     Los términos se descubren durante el proceso de Knowledge Crunching definido en AGENT.md. -->
+<!-- [REQUIRED] What is in scope and what is out of scope. -->
 
-| Término | Definición |
+### In Scope
+
+### Out of Scope
+
+---
+
+## Domain Glossary
+
+<!-- [REQUIRED] Unified business terminology (Ubiquitous Language per DDD).
+     Terms are discovered during the Knowledge Crunching process defined in AGENT.md. -->
+
+| Term | Definition |
 |---|---|
 
 ---
 
-## Mapa de Entidades del Dominio
+## Domain Entity Map
 
-<!-- [OBLIGATORIO] Entidades descubiertas mediante Knowledge Crunching (DDD).
-     Cada entidad incluye: nombre canónico, descripción y relaciones de alto nivel.
-     Este mapa es la fuente para la creación de archivos en domain_modules/.
-     No incluir atributos detallados ni reglas de negocio — esos viven en el módulo correspondiente. -->
+<!-- [REQUIRED] Entities discovered through Knowledge Crunching (DDD).
+     Each entity includes: canonical name, description, and high-level relationships.
+     This map is the source for creating files in domain_modules/.
+     Do not include detailed attributes or business rules — those live in the corresponding module. -->
 
-| Entidad | Descripción | Relaciones |
+| Entity | Description | Relationships |
 |---|---|---|

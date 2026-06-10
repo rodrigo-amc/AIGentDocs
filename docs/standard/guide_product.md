@@ -1,102 +1,102 @@
 ---
 type: standard_guide
 scope: product
-version: 1.2
-last_updated: 2026-03-01
+version: 1.4
+last_updated: 2026-06-10
 project_path: "project/01_product/"
 required_files: [vision.md, roadmap.md, quality_attributes.md]
 optional_files: []
 ---
 
-# 01_product — Contexto de Producto
+# 01_product — Product Context
 
-Este directorio contiene la inteligencia de negocio del proyecto. Es fundamental para que los agentes entiendan *para qué* están programando y eviten soluciones técnicamente válidas pero funcionalmente incorrectas.
+This directory contains the project's business intelligence. It is essential for agents to understand *what* they are programming *for*, and to avoid solutions that are technically valid but functionally wrong.
 
 ---
 
-## Archivos de este directorio
+## Files in this directory
 
-### `vision.md` — Visión del Producto (PRD Estratégico)
+### `vision.md` — Product Vision (Strategic PRD)
 
-Define el "por qué" del proyecto a nivel global. Es el **PRD de alto nivel** que establece los objetivos estratégicos antes de entrar al detalle táctico de los módulos.
+Defines the project's "why" at a global level. It is the **high-level PRD** that establishes the strategic goals before getting into the tactical detail of the modules.
 
-| Sección | Tipo | Descripción |
+| Section | Type | Description |
 |---|---|---|
-| Elevator Pitch | **[OBLIGATORIO]** | Qué es el producto en 2-3 líneas. Debe responder: ¿Qué hace? ¿Para quién? ¿Qué problema resuelve? |
-| Problema que Resuelve | **[OBLIGATORIO]** | Descripción del dolor o necesidad del usuario que motiva la existencia del proyecto. |
-| Usuarios Objetivo (Personas) | **[OBLIGATORIO]** | Perfiles de los usuarios del sistema: quiénes son, qué rol cumplen, qué nivel técnico tienen. |
-| Alcance del Proyecto | **[OBLIGATORIO]** | Qué está **dentro** y qué está **fuera** del alcance. Evita que el agente implemente funcionalidades no planificadas. |
-| Glosario del Dominio | **[OBLIGATORIO]** | Terminología unificada del negocio (Ubiquitous Language según DDD). Los términos se descubren durante el proceso de Knowledge Crunching definido en `agent_product.md`. |
-| Mapa de Entidades del Dominio | **[OBLIGATORIO]** | Entidades descubiertas mediante Knowledge Crunching (DDD). Cada entidad incluye: nombre canónico, descripción de 1-2 líneas y relaciones de alto nivel con otras entidades. Este mapa es la fuente para la creación de archivos en `domain_modules/`. No incluir atributos detallados ni reglas de negocio — esos viven en el módulo correspondiente. |
-| Modelo de Negocio | **[OPCIONAL]** | Cómo genera valor el producto. |
-| Restricciones de Negocio | **[OPCIONAL]** | Limitaciones legales, regulatorias o contractuales. |
+| Elevator Pitch | **[REQUIRED]** | What the product is, in 2-3 lines. Must answer: What does it do? Who is it for? What problem does it solve? |
+| Problem It Solves | **[REQUIRED]** | Description of the user pain or need that motivates the project's existence. |
+| Target Users (Personas) | **[REQUIRED]** | Profiles of the system's users: who they are, what role they play, what their technical level is. |
+| Project Scope | **[REQUIRED]** | What is **in** scope and what is **out** of scope. Prevents the agent from implementing unplanned functionality. |
+| Domain Glossary | **[REQUIRED]** | Unified business terminology (Ubiquitous Language per DDD). Terms are discovered during the Knowledge Crunching process defined in `agent_product.md`. |
+| Domain Entity Map | **[REQUIRED]** | Entities discovered through Knowledge Crunching (DDD). Each entity includes: canonical name, 1-2 line description, and high-level relationships to other entities. This map is the source for creating files in `domain_modules/`. Do not include detailed attributes or business rules — those live in the corresponding module. |
+| Business Model | **[OPTIONAL]** | How the product generates value. |
+| Business Constraints | **[OPTIONAL]** | Legal, regulatory, or contractual limitations. |
 
-**Frontmatter esperado:**
+**Expected frontmatter:**
 
 ```yaml
 ---
 type: vision
 version: 1.0
 last_updated: YYYY-MM-DD
-change_summary: ""   # Resumen breve de los cambios en esta versión
+change_summary: ""   # Brief summary of the changes in this version
 ---
 ```
 
 ---
 
-### `roadmap.md` — Estado y Planificación
+### `roadmap.md` — Status and Planning
 
-Proporciona el contexto temporal y la priorización de las tareas. Funciona como un **Tablero Kanban** para que desarrolladores y agentes de IA sepan exactamente en qué trabajar, coordinándose con los estados de los `domain_modules/`.
+Provides temporal context and task prioritization. It works as a **Kanban board** so developers and AI agents know exactly what to work on, coordinating with the states of the `domain_modules/`.
 
-| Sección | Tipo | Descripción |
+| Section | Type | Description |
 |---|---|---|
-| Fase/Hito Actual | **[OBLIGATORIO]** | Contexto macro del desarrollo actual (Ej. "MVP", "Sprint 2"). |
-| Tablero de Tareas | **[OBLIGATORIO]** | Lista accionable de User Stories o tareas técnicas. |
-| Próximos Hitos | **[OPCIONAL]** | Visión a largo plazo de lo que vendrá después del hito actual. |
+| Current Phase/Milestone | **[REQUIRED]** | Macro context of current development (e.g., "MVP", "Sprint 2"). |
+| Task Board | **[REQUIRED]** | Actionable list of User Stories or technical tasks. |
+| Upcoming Milestones | **[OPTIONAL]** | Long-term view of what comes after the current milestone. |
 
-**Reglas del Tablero de Tareas (Kanban):**
-- **`[In Progress]`**: Tarea actual en desarrollo. Máximo 1 o 2 ítems. Es el foco absoluto.
-- **`[To Do / Next]`**: Backlog priorizado estrictamente de arriba hacia abajo. Si `In Progress` está vacío, se toma el ítem superior.
-- **`[Blocked / Review]`**: Tareas detenidas por bloqueos externos o pendientes de revisión.
-- **`[Done]`**: Tareas completadas del hito actual.
+**Task Board rules (Kanban):**
+- **`[In Progress]`**: The task currently in development. At most 1 or 2 items. This is the absolute focus.
+- **`[To Do / Next]`**: Backlog strictly prioritized top to bottom. If `In Progress` is empty, take the top item.
+- **`[Blocked / Review]`**: Tasks stopped by external blockers or awaiting review.
+- **`[Done]`**: Completed tasks for the current milestone.
 
-*Nota: El roadmap interactúa mediante referencias (ej. `[US-03] Implementar login (ver clients.md)`). Los detalles funcionales siempre viven en el módulo de dominio.*
+*Note: The roadmap interacts through references (e.g., `[US-03] Implement login (see clients.md)`). Functional details always live in the domain module.*
 
-**Frontmatter esperado:**
+**Expected frontmatter:**
 
 ```yaml
 ---
 type: roadmap
 version: 1.0
 last_updated: YYYY-MM-DD
-current_phase: ""    # Fase actual del proyecto (ej: "MVP", "Beta", "Producción")
+current_phase: ""    # Current project phase (e.g., "MVP", "Beta", "Production")
 ---
 ```
 
-### `quality_attributes.md` — Requerimientos No Funcionales
+### `quality_attributes.md` — Non-Functional Requirements
 
-Centraliza los Atributos de Calidad del sistema (rendimiento, seguridad, disponibilidad, etc.). Define el estándar de "Cómo" debe comportarse el sistema bajo ciertas condiciones (NFRs). Estos requisitos actúan como restricciones de negocio que moldean la Arquitectura.
+Centralizes the system's quality attributes (performance, security, availability, etc.). It defines the standard for "how" the system must behave under certain conditions (NFRs). These requirements act as business constraints that shape the architecture.
 
-| Sección | Tipo | Descripción |
+| Section | Type | Description |
 |---|---|---|
-| Rendimiento | **[OBLIGATORIO]** | Tiempos de respuesta esperados, latencia y throughput bajo carga. |
-| Seguridad | **[OBLIGATORIO]** | Autenticación, autorización, encriptación en tránsito/reposo, protección contra amenazas (OWASP). |
-| Usabilidad | **[OPCIONAL]** | Facilidad de uso, accesibilidad (WCAG) y curva de aprendizaje. |
-| Disponibilidad | **[OPCIONAL]** | Tiempo de actividad (SLAs), tolerancia a fallos y recuperación ante desastres. |
-| Escalabilidad | **[OPCIONAL]** | Capacidad de crecer ante el aumento de demanda. |
-| Mantenibilidad | **[OPCIONAL]** | Facilidad para modificar el sistema sin introducir errores. |
+| Performance | **[REQUIRED]** | Expected response times, latency, and throughput under load. |
+| Security | **[REQUIRED]** | Authentication, authorization, encryption in transit/at rest, threat protection (OWASP). |
+| Usability | **[OPTIONAL]** | Ease of use, accessibility (WCAG), and learning curve. |
+| Availability | **[OPTIONAL]** | Uptime (SLAs), fault tolerance, and disaster recovery. |
+| Scalability | **[OPTIONAL]** | Ability to grow as demand increases. |
+| Maintainability | **[OPTIONAL]** | Ease of modifying the system without introducing errors. |
 
-**Estructura de un Atributo de Calidad:**
+**Structure of a Quality Attribute:**
 
-Cada atributo debe documentarse usando el formato de **Escenario de Atributo de Calidad**:
+Each attribute must be documented using the **Quality Attribute Scenario** format:
 
-1. **Fuente del Estímulo**: Quién genera el evento (usuario, sistema, atacante).
-2. **Estímulo**: El evento en sí (solicitud de datos, ataque de fuerza bruta, falla de servidor).
-3. **Entorno**: Condiciones bajo las cuales ocurre (carga normal, pico de tráfico, modo mantenimiento).
-4. **Respuesta**: Qué debe hacer el sistema.
-5. **Medida de Respuesta**: La métrica verificable (ej: "en menos de 2 segundos", "bloquear IP tras 3 intentos").
+1. **Stimulus Source**: Who generates the event (user, system, attacker).
+2. **Stimulus**: The event itself (data request, brute-force attack, server failure).
+3. **Environment**: Conditions under which it occurs (normal load, traffic spike, maintenance mode).
+4. **Response**: What the system must do.
+5. **Response Measure**: The verifiable metric (e.g., "in under 2 seconds", "block the IP after 3 attempts").
 
-**Frontmatter esperado:**
+**Expected frontmatter:**
 
 ```yaml
 ---
@@ -107,15 +107,15 @@ state: pending       # pending | doing | done | deprecated
 ---
 ```
 
-**Guía de Llenado:**
-- **Proyecto nuevo:** Definir al menos los atributos de Rendimiento y Seguridad antes de implementar.
-- **Proyecto existente:** Los Atributos de Calidad deben revisarse cada vez que un ADR impacte de forma significativa el comportamiento del sistema.
-- **Validación:** Cada medida de respuesta debería estar vinculada a una prueba en `testing_strategy.md`.
+**Fill-out guide:**
+- **New project:** Define at least the Performance and Security attributes before implementing.
+- **Existing project:** Quality attributes must be reviewed whenever an ADR significantly impacts system behavior.
+- **Validation:** Each response measure should be linked to a test in `testing_strategy.md`.
 
 ---
 
-### `domain_modules/` — Módulos de Dominio (PRD Modular + Backlog)
+### `domain_modules/` — Domain Modules (Modular PRD + Backlog)
 
-Este es el nivel donde viven los **requerimientos funcionales detallados**. Cada archivo de módulo funciona como un "PRD Modular" y un "Backlog" de la entidad.
+This is the level where **detailed functional requirements** live. Each module file works as a "Modular PRD" and a "Backlog" for the entity.
 
-Ver `guide_domain_modules.md` para las instrucciones sobre cómo documentar **User Stories** y **Criterios de Aceptación (AC)** por módulo.
+See `guide_domain_modules.md` for instructions on documenting **User Stories** and **Acceptance Criteria (AC)** per module.

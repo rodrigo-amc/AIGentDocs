@@ -1,38 +1,51 @@
-# Estándar de Documentación para Ingeniería de Software Aumentada por IA
+# Documentation Standard for AI-Augmented Software Engineering
 
-Este repositorio contiene un **framework de documentación como código** diseñado para que agentes de IA puedan entender, documentar y desarrollar proyectos de software de forma eficiente. Se puede adoptar tanto en proyectos nuevos como en proyectos existentes.
+This repository contains a **docs-as-code framework** designed so that AI agents can understand, document, and develop software projects efficiently. It can be adopted in new projects as well as existing ones.
 
 ---
 
-## Tabla de Contenidos
+## Table of Contents
 
-<!-- [OBLIGATORIO] Índice completo con rutas relativas a cada archivo de /docs. Debe mantenerse actualizado. -->
+<!-- [REQUIRED] Complete index with relative paths to every file under /docs. Must be kept up to date. -->
 
-### Estándar (`standard/`)
+### Standard (`standard/`)
 
-- [README.md](./README.md) — Este archivo (punto de entrada)
-- [AGENT.md](./AGENT.md) — Instrucciones operativas globales para agentes de IA
-- [AGENT_REVIEW.md](./AGENT_REVIEW.md) — Prompt de auditoría de documentación
-- [QUICKSTART.md](./QUICKSTART.md) — Guía de uso del framework
-- [changelog.yaml](./changelog.yaml) — Historial de versiones del estándar
+- [README.md](./README.md) — This file (entry point)
+- [AGENT.md](./AGENT.md) — Global operating instructions for AI agents
+- [AGENT_REVIEW.md](./AGENT_REVIEW.md) — Documentation audit prompt
+- [QUICKSTART.md](./QUICKSTART.md) — Framework usage guide
+- [changelog.yaml](./changelog.yaml) — Version history of the standard
 
-#### Guías de Estructura y Formato
+#### Structure and Format Guides
 
-- [guide_product.md](./guide_product.md) — Instrucciones para los archivos de producto
-- [guide_domain_modules.md](./guide_domain_modules.md) — Instrucciones para módulos de dominio
-- [guide_architecture.md](./guide_architecture.md) — Instrucciones para los Design Docs
-- [guide_engineering.md](./guide_engineering.md) — Instrucciones para estándares de ingeniería
-- [guide_adrs.md](./guide_adrs.md) — Instrucciones para Architecture Decision Records
+- [guide_product.md](./guide_product.md) — Instructions for the product files
+- [guide_domain_modules.md](./guide_domain_modules.md) — Instructions for domain modules
+- [guide_architecture.md](./guide_architecture.md) — Instructions for the Design Docs
+- [guide_engineering.md](./guide_engineering.md) — Instructions for engineering standards
+- [guide_adrs.md](./guide_adrs.md) — Instructions for Architecture Decision Records
+- [guide_corrections.md](./guide_corrections.md) — Instructions for Design Correction Records
 
-#### Instrucciones para Agentes (por contexto)
+#### Agent Instructions (by context)
 
-- [agent_product.md](./agent_product.md) — Reglas operativas: producto (DDD, Onboarding)
-- [agent_architecture.md](./agent_architecture.md) — Reglas operativas: arquitectura
-- [agent_engineering.md](./agent_engineering.md) — Reglas operativas: ingeniería
-- [agent_adrs.md](./agent_adrs.md) — Reglas operativas: ADRs
+- [agent_product.md](./agent_product.md) — Operating rules: product (DDD, Onboarding)
+- [agent_architecture.md](./agent_architecture.md) — Operating rules: architecture
+- [agent_engineering.md](./agent_engineering.md) — Operating rules: engineering
+- [agent_adrs.md](./agent_adrs.md) — Operating rules: ADRs
+- [agent_corrections.md](./agent_corrections.md) — Operating rules: cross-cutting design corrections
 
-#### Templates de Referencia (`standard/templates/`)
+#### Agent Instructions (Implementation Mode profiles)
 
+- [agent_scaffold.md](./agent_scaffold.md) — Project bootstrap from the approved documentation
+- [agent_module_developer.md](./agent_module_developer.md) — Domain module implementation (Creation/Maintenance)
+- [agent_code_reviewer.md](./agent_code_reviewer.md) — Read-only compliance and quality review
+- [agent_integration_tester.md](./agent_integration_tester.md) — Validation of the running system against ACs and Business Rules
+
+#### Reference Templates (`standard/templates/`)
+
+- [AGENTS.md](./templates/AGENTS.md) — Agent entry-point stub for the repository root
+- [project_status.yaml](./templates/project_status.yaml)
+- [TODO.md](./templates/TODO.md)
+- [correction.md](./templates/correction.md)
 - [vision.md](./templates/vision.md)
 - [roadmap.md](./templates/roadmap.md)
 - [quality_attributes.md](./templates/quality_attributes.md)
@@ -44,48 +57,62 @@ Este repositorio contiene un **framework de documentación como código** diseñ
 - [testing_strategy.md](./templates/testing_strategy.md)
 - [api_guidelines.md](./templates/api_guidelines.md)
 
-### Documentos del Proyecto (`project/`)
+### Project Documents (`project/`)
 
+- `project/project_status.yaml` — Aggregate state of the project (single source of truth)
+- `project/TODO.md` — Cross-module pending items
 - `project/01_product/` — vision.md, roadmap.md, quality_attributes.md, domain_modules/
 - `project/02_architecture/` — system_overview.md, data_flow.md, infrastructure.md
 - `project/03_engineering/` — tech_stack.yaml, testing_strategy.md, api_guidelines.md
 - `project/04_adrs/` — [NNNN]-[title].md
+- `project/05_corrections/` — [NNNN]-[title].md (cross-cutting design corrections)
 
 ---
 
-## Filosofía del Estándar
+## Philosophy of the Standard
 
-Este estándar está **diseñado para ser consumido por agentes de IA** como audiencia principal. La estructura de directorios, la modularización de los documentos y los protocolos de lectura están optimizados para que un agente pueda entender el contexto de un proyecto de software de forma eficiente, minimizando el uso de ventana de contexto y tokens.
+This standard is **designed with AI agents as its primary audience**. The directory structure, the modularization of documents, and the reading protocols are optimized so that an agent can understand the context of a software project efficiently, minimizing context window and token usage.
 
-Todos los documentos deben mantener un **formato legible por humanos** — los humanos son quienes crean, revisan y aprueban el contenido. Sin embargo, las decisiones de diseño del estándar (qué documentar, dónde ubicarlo, cómo estructurarlo y cómo navegarlo) priorizan la interacción con agentes de IA.
+All documents must remain **human-readable** — humans are the ones who create, review, and approve the content. However, the design decisions of the standard (what to document, where to place it, how to structure it, and how to navigate it) prioritize interaction with AI agents.
 
-> **Nota sobre el idioma:** El idioma de la documentación queda a consideración del equipo de desarrollo de cada proyecto.
+> **Note on language:** The documentation language is up to each project's development team.
 
 ---
 
-## Estructura de Directorios
+## Directory Structure
 
 ```text
 /docs
-├── standard/                              # El framework (instrucciones, reglas, templates)
-│   ├── README.md                          # Este archivo (punto de entrada)
-│   ├── AGENT.md                           # Instrucciones operativas globales y gestión de sesiones
-│   ├── AGENT_REVIEW.md                    # Prompt de auditoría de documentación (bajo demanda)
-│   ├── QUICKSTART.md                      # Guía de uso del framework
-│   ├── changelog.yaml                     # Historial de versiones del estándar
+├── standard/                              # The framework (instructions, rules, templates)
+│   ├── README.md                          # This file (entry point)
+│   ├── AGENT.md                           # Global operating instructions and session management
+│   ├── AGENT_REVIEW.md                    # Documentation audit prompt (on demand)
+│   ├── QUICKSTART.md                      # Framework usage guide
+│   ├── changelog.yaml                     # Version history of the standard
 │   │
-│   ├── guide_product.md                   # Estructura y formato de 01_product
-│   ├── guide_domain_modules.md            # Estructura y formato de domain_modules
-│   ├── guide_architecture.md              # Estructura y formato de 02_architecture
-│   ├── guide_engineering.md               # Estructura y formato de 03_engineering
-│   ├── guide_adrs.md                      # Estructura y formato de 04_adrs
+│   ├── guide_product.md                   # Structure and format of 01_product
+│   ├── guide_domain_modules.md            # Structure and format of domain_modules
+│   ├── guide_architecture.md              # Structure and format of 02_architecture
+│   ├── guide_engineering.md               # Structure and format of 03_engineering
+│   ├── guide_adrs.md                      # Structure and format of 04_adrs
+│   ├── guide_corrections.md               # Structure and format of 05_corrections
 │   │
-│   ├── agent_product.md                   # Reglas operativas: producto (DDD, Onboarding)
-│   ├── agent_architecture.md              # Reglas operativas: arquitectura
-│   ├── agent_engineering.md               # Reglas operativas: ingeniería
-│   ├── agent_adrs.md                      # Reglas operativas: ADRs
+│   ├── agent_product.md                   # Operating rules: product (DDD, Onboarding)
+│   ├── agent_architecture.md              # Operating rules: architecture
+│   ├── agent_engineering.md               # Operating rules: engineering
+│   ├── agent_adrs.md                      # Operating rules: ADRs
+│   ├── agent_corrections.md               # Operating rules: design corrections
 │   │
-│   └── templates/                         # Templates de referencia para agentes
+│   ├── agent_scaffold.md                  # Implementation profile: project bootstrap
+│   ├── agent_module_developer.md          # Implementation profile: module creation/maintenance
+│   ├── agent_code_reviewer.md             # Implementation profile: compliance review (read-only)
+│   ├── agent_integration_tester.md        # Implementation profile: validate the running system
+│   │
+│   └── templates/                         # Reference templates for agents
+│       ├── AGENTS.md
+│       ├── project_status.yaml
+│       ├── TODO.md
+│       ├── correction.md
 │       ├── vision.md
 │       ├── roadmap.md
 │       ├── quality_attributes.md
@@ -97,154 +124,232 @@ Todos los documentos deben mantener un **formato legible por humanos** — los h
 │       ├── testing_strategy.md
 │       └── api_guidelines.md
 │
-└── project/                               # Documentos del proyecto (vacío por defecto)
+└── project/                               # Project documents (empty by default)
+    ├── project_status.yaml                # Aggregate state: module states, coverage, debt (source of truth)
+    ├── TODO.md                            # Cross-module pending items discovered during implementation
     ├── 01_product/
-    │   ├── vision.md                      # Visión del producto, Elevator Pitch, Alcance y Mapa de Entidades (DDD)
-    │   ├── roadmap.md                     # Estado actual del proyecto, hitos y futuro
-    │   ├── quality_attributes.md          # Requerimientos No Funcionales
-    │   └── domain_modules/                # Requerimientos modularizados por entidad de dominio
+    │   ├── vision.md                      # Product vision, elevator pitch, scope, and Domain Entity Map (DDD)
+    │   ├── roadmap.md                     # Current project status, milestones, and what's ahead
+    │   ├── quality_attributes.md          # Non-functional requirements
+    │   └── domain_modules/                # Requirements modularized by domain entity
     │       └── [module_name].md
     ├── 02_architecture/
-    │   ├── system_overview.md             # Diagramas C4, estructura de carpetas y patrones
-    │   ├── data_flow.md                   # Flujos de datos y modelo de datos
-    │   └── infrastructure.md              # Topología, despliegue y CI/CD
+    │   ├── system_overview.md             # C4 diagrams, folder structure, and patterns
+    │   ├── data_flow.md                   # Data flows and data model
+    │   └── infrastructure.md              # Topology, deployment, and CI/CD
     ├── 03_engineering/
-    │   ├── tech_stack.yaml                # Stack tecnológico exacto (YAML)
-    │   ├── testing_strategy.md            # Estrategia de pruebas y cobertura
-    │   └── api_guidelines.md              # [CONDICIONAL] Solo si se exponen endpoints
-    └── 04_adrs/
-        └── [NNNN]-[title].md              # Registros de decisiones individuales
+    │   ├── tech_stack.yaml                # Exact technology stack (YAML)
+    │   ├── testing_strategy.md            # Testing strategy and coverage
+    │   └── api_guidelines.md              # [CONDITIONAL] Only if endpoints are exposed
+    ├── 04_adrs/
+    │   └── [NNNN]-[title].md              # Individual decision records
+    └── 05_corrections/
+        └── [NNNN]-[title].md              # Cross-cutting design correction records
 ```
 
 ---
 
-## Secciones que debe contener este archivo en un proyecto
+## Sections this file must contain in a project
 
-| Sección | Tipo | Descripción |
+| Section | Type | Description |
 |---|---|---|
-| Nombre del Proyecto | **[OBLIGATORIO]** | Nombre oficial y descripción del proyecto en 1-2 líneas. |
-| Tabla de Contenidos | **[OBLIGATORIO]** | Índice completo con rutas relativas a cada archivo de `/docs`. Debe mantenerse actualizado ante cualquier cambio en la estructura. |
-| Protocolo de Lectura | **[OBLIGATORIO]** | Orden secuencial de lectura recomendado para entender el proyecto (ver guía abajo). |
-| Protocolo de Mantenimiento | **[OBLIGATORIO]** | Reglas para editar, crear o eliminar archivos de documentación (ver guía abajo). |
-| Convenciones | **[OBLIGATORIO]** | Idioma elegido, formato de fechas, estilo de escritura. |
-| Historial de Versiones | **[OBLIGATORIO]** | Registro estructurado de cambios del estándar en `changelog.yaml`. |
+| Project Name | **[REQUIRED]** | Official name and a 1-2 line description of the project. |
+| Table of Contents | **[REQUIRED]** | Complete index with relative paths to every file under `/docs`. Must be kept up to date whenever the structure changes. |
+| Reading Protocol | **[REQUIRED]** | Recommended sequential reading order to understand the project (see guide below). |
+| Maintenance Protocol | **[REQUIRED]** | Rules for editing, creating, or deleting documentation files (see guide below). |
+| Conventions | **[REQUIRED]** | Chosen language, date format, writing style. |
+| Version History | **[REQUIRED]** | Structured record of changes to the standard in `changelog.yaml`. |
 
-> **Nota:** Al adoptar el framework en un proyecto, el encabezado de este archivo debe reemplazarse con el nombre y descripción del proyecto concreto.
-
----
-
-## Guía de Adopción
-
-### Proyecto Nuevo (Greenfield)
-
-Si el proyecto aún no tiene código, llenar la documentación **antes de implementar**:
-
-1. Copiar `templates/vision.md` a `project/01_product/vision.md` → Definir qué se va a construir.
-2. Crear los `domain_modules/` necesarios a partir de `templates/domain_module.md`.
-3. Copiar `templates/roadmap.md` a `project/01_product/roadmap.md` → Priorizar las tareas.
-4. Copiar templates de arquitectura a `project/02_architecture/` → Diseñar system_overview, data_flow, infrastructure.
-5. Copiar `templates/tech_stack.yaml` a `project/03_engineering/` → Elegir tecnologías (con ADRs).
-6. Copiar `templates/testing_strategy.md` a `project/03_engineering/` → Estrategia de tests.
-7. Implementar el código siguiendo la documentación.
-
-### Proyecto Existente (Brownfield)
-
-Si el proyecto ya tiene código, documentar por **ingeniería inversa**. El orden es diferente — se parte de lo concreto (código) hacia lo abstracto (producto):
-
-1. **`project/03_engineering/tech_stack.yaml`** → Analizar el código y registrar las tecnologías reales.
-2. **`project/02_architecture/system_overview.md`** → Diagramar la arquitectura que ya existe.
-3. **`project/02_architecture/infrastructure.md`** → Documentar dónde y cómo corre.
-4. **`project/01_product/vision.md`** → Describir qué hace el producto y para quién.
-5. **`project/01_product/domain_modules/`** → Identificar entidades del código y crear módulos con User Stories documentadas como ya implementadas (`state: done`).
-6. **`project/01_product/roadmap.md`** → Usar el tablero para planificar lo que **falta**: nuevas features, refactors, bugs.
-7. **`project/04_adrs/`** → Crear ADRs retroactivos (`status: accepted`) para las decisiones técnicas ya tomadas.
-
-> **Tip:** Un agente de IA puede acelerar enormemente el paso de Brownfield. Puede analizar el código fuente y generar borradores de la documentación para revisión humana. Ver `AGENT.md` para el Modo Onboarding.
+> **Note:** When adopting the framework in a project, the header of this file must be replaced with the actual project's name and description.
 
 ---
 
-## Protocolo de Lectura
+## Adoption Guide
 
-Orden en que un agente nuevo debe consumir la documentación para orientarse contextualmente con el menor costo de tokens:
+### New Project (Greenfield)
 
-1. **`standard/AGENT.md`** → Entender las reglas operativas globales.
-2. **`project/01_product/roadmap.md`** → Identificar en qué hito/sprint estamos y tomar la tarea Activa (`[In Progress]`).
-3. **`project/01_product/domain_modules/[modulo_afectado].md`** → Leer **SOLO** el módulo (o módulos) directamente mencionado(s) en la tarea activa elegida.
-4. **`project/02_architecture/system_overview.md`** → Entender dónde ensambla ese módulo dentro del sistema general.
-5. **`project/03_engineering/tech_stack.yaml`** → Conocer el límite técnico antes de generar o modificar código.
-6. *(Opcional)* **`project/04_adrs/`** y **`project/01_product/vision.md`** → Consultar historial de decisiones o visión de producto solo ante bloqueos o dudas direccionales durante el desarrollo.
+If the project has no code yet, fill out the documentation **before implementing**:
 
----
+0. Copy `templates/AGENTS.md` to the repository root → Any AI agent that opens the repo finds its entry point on its own. (For tools that read `CLAUDE.md` or `GEMINI.md`, create a symlink or an identical copy.)
+1. Copy `templates/vision.md` to `project/01_product/vision.md` → Define what will be built.
+2. Create the necessary `domain_modules/` from `templates/domain_module.md`.
+3. Copy `templates/roadmap.md` to `project/01_product/roadmap.md` → Prioritize the tasks.
+4. Copy the architecture templates to `project/02_architecture/` → Design system_overview, data_flow, infrastructure.
+5. Copy `templates/tech_stack.yaml` to `project/03_engineering/` → Choose technologies (with ADRs).
+6. Copy `templates/testing_strategy.md` to `project/03_engineering/` → Testing strategy.
+7. Copy `templates/project_status.yaml` and `templates/TODO.md` to `project/` → Initialize the status artifacts (every module starts as `pending`).
+8. Implement the code following the documentation.
 
-## Protocolo de Mantenimiento
+### Existing Project (Brownfield)
 
-1. **No crear archivos fuera de la estructura definida.** Todo archivo nuevo debe ubicarse en el directorio correspondiente de `project/` según su naturaleza (producto, arquitectura, ingeniería o ADR).
-2. **No modificar la estructura de directorios** sin registrar un ADR que justifique el cambio.
-3. **Nuevos módulos de dominio** deben crearse a partir del template `standard/templates/domain_module.md`, siguiendo la estructura definida en `standard/guide_domain_modules.md`, completando todas las secciones obligatorias.
-4. **Todo ADR aceptado** que modifique un estándar técnico **debe** reflejarse actualizando el archivo correspondiente en `project/03_engineering/`.
-5. **Al agregar o eliminar archivos**, actualizar la Tabla de Contenidos de este archivo.
-6. **Las secciones marcadas como [OBLIGATORIO]** no pueden eliminarse ni dejarse vacías.
-7. **Todo documento nuevo** debe incluir el frontmatter YAML correspondiente a su tipo (ver sección siguiente).
+If the project already has code, document it through **reverse engineering**. The order is different — you start from the concrete (code) and move toward the abstract (product):
 
----
+0. Copy `templates/AGENTS.md` to the repository root → Any AI agent that opens the repo finds its entry point on its own.
+1. **`project/03_engineering/tech_stack.yaml`** → Analyze the code and record the actual technologies.
+2. **`project/02_architecture/system_overview.md`** → Diagram the architecture that already exists.
+3. **`project/02_architecture/infrastructure.md`** → Document where and how it runs.
+4. **`project/01_product/vision.md`** → Describe what the product does and who it's for.
+5. **`project/01_product/domain_modules/`** → Identify entities in the code and create modules with User Stories documented as already implemented (`state: done`).
+6. **`project/01_product/roadmap.md`** → Use the board to plan what's **missing**: new features, refactors, bugs.
+7. **`project/04_adrs/`** → Create retroactive ADRs (`status: accepted`) for the technical decisions already made.
+8. **`project/project_status.yaml` and `project/TODO.md`** → Record each module's real state (and known debt), and any cross-module pending items detected during the analysis.
 
-## Convenciones de Frontmatter
+> **Tip:** An AI agent can dramatically speed up the brownfield path. It can analyze the source code and generate documentation drafts for human review. See `AGENT.md` for Onboarding Mode.
 
-Todo documento markdown del estándar debe incluir un bloque de **YAML frontmatter** al inicio del archivo. El frontmatter permite a los agentes de IA obtener metadata clave de un documento sin necesidad de parsear su contenido completo.
+### Lite Mode (Minimal Adoption)
 
-### Campos comunes (todos los documentos)
+Full adoption is the right choice for products with several domain entities and a long life ahead. For small projects — prototypes, internal tools, single-purpose services — the full structure can be more ceremony than value. **Lite Mode** is the official minimal profile: three files that give an agent the minimum sufficient context to contribute safely.
 
-| Campo | Tipo | Descripción |
-|---|---|---|
-| `type` | **[OBLIGATORIO]** | Identificador del tipo de documento. |
-| `version` | **[OBLIGATORIO]** | Versión del documento (ej: `1.0`). |
-| `last_updated` | **[OBLIGATORIO]** | Fecha de última actualización en formato `YYYY-MM-DD`. |
-
-### Campo `state` (documentos de trabajo)
-
-Aplica a: `domain_modules`, documentos de `project/02_architecture/` y documentos de `project/03_engineering/`. **No aplica** a `vision.md`, `roadmap.md` ni a ADRs (que tienen su propio `status`).
-
-| Valor | Significado | Implicación para el agente |
-|---|---|---|
-| `pending` | Definido pero no implementado | Puede trabajar en este documento/implementación |
-| `doing` | Alguien está trabajando en esto | **No tocar** sin coordinación previa |
-| `done` | Completado y operativo | **No modificar** sin justificación (ADR o indicación explícita) |
-| `deprecated` | Ya no vigente | Ignorar para nuevas implementaciones |
-
-> **Importante:** Estos son los **únicos valores permitidos** para el campo `state`. No usar valores alternativos.
-
-### Esquemas específicos por tipo
-
-Cada archivo `guide_*.md` en `standard/` define el esquema de frontmatter completo para los archivos de proyecto que cubre, incluyendo los campos específicos que aplican a ese tipo de documento.
-
----
-
-## Principios del Estándar
-
-1. **Modularidad (PRD Modular)**: Los requerimientos funcionales no son una lista centralizada, sino que viven dentro de su módulo de dominio correspondiente (`domain_modules/`). Cada módulo es un mini-PRD.
-2. **Autodescripción**: Cada área del estándar tiene un `guide_*.md` que explica qué archivos contiene, cómo crearlos y cómo mantenerlos, y un `agent_*.md` con reglas operativas para agentes.
-3. **Escritura Orientada a Resultados**: Se evitan listas rígidas de "El sistema debe...". Se usan **User Stories** para el valor de negocio y **Criterios de Aceptación (AC)** para la validación.
-4. **Design Docs**: La carpeta `project/02_architecture/` actúa como el repositorio de Design Docs, donde se describe la solución técnica a los requerimientos definidos en el nivel de producto.
-5. **Contexto Mínimo Suficiente**: La documentación está estructurada para que un Agente de IA pueda leer solo lo necesario para realizar una tarea específica sin saturar su contexto.
-6. **Trazabilidad**: Las decisiones arquitectónicas (ADRs) se reflejan en la ingeniería (`project/03_engineering/`) cuando modifican estándares técnicos.
-7. **Documentación como Código**: Los archivos de documentación viven junto al código fuente, se versionan con Git y se mantienen como parte del flujo de desarrollo.
-
----
-
-## Convenciones
-
-<!-- [OBLIGATORIO] Idioma elegido, formato de fechas, estilo de escritura. -->
-
-| Convención | Valor |
+| File | Why it is part of the minimum |
 |---|---|
-| Idioma de documentación | *A definir por el equipo del proyecto* |
-| Formato de fechas | `YYYY-MM-DD` |
-| Estilo de escritura | Claro, orientado a resultados, legible por humanos y agentes de IA |
+| `project/01_product/vision.md` | What is being built, for whom, and what is in/out of scope — prevents functionally wrong contributions. |
+| `project/01_product/roadmap.md` | What to work on right now (Kanban board). |
+| `project/03_engineering/tech_stack.yaml` | Technical guardrail: which technologies and versions are allowed. |
+
+**Lite Mode rules:**
+
+1. **Do not create the remaining files.** Empty placeholder files would signal an incomplete adoption (and trigger Onboarding Mode); their absence signals a deliberate Lite profile.
+2. **User Stories and their ACs live directly on the roadmap board items**, since there are no `domain_modules/`.
+3. **ADRs are recommended but optional.** The `adr` fields in `tech_stack.yaml` may be left empty (`""`) until the project upgrades.
+4. **Declare the profile** in the Conventions table of this file (`Adoption profile: lite`), so agents and humans know the missing files are intentional.
+5. Everything else in the standard (frontmatter, `[REQUIRED]` sections of the three files, traceability on the board) applies as usual.
+
+**When to upgrade** — any of these signals means the project has outgrown Lite:
+
+- A board item accumulates long functional detail or a User Story needs more than ~6 ACs → extract `domain_modules/`.
+- A first cross-cutting process spans multiple entities → create `02_architecture/data_flow.md`.
+- Technology decisions start getting re-litigated → create ADRs in `04_adrs/`.
+- More than one developer or agent works concurrently → full structure with sessions.
+
+**Upgrade path (incremental — no big bang):**
+
+1. Run Knowledge Crunching (`agent_product.md`) to complete the Domain Entity Map in `vision.md`.
+2. Extract the User Stories from the roadmap into `domain_modules/` files (one module per session, per `AGENT.md`).
+3. Add `02_architecture/` and the remaining `03_engineering/` documents following the standard session order.
+4. Create retroactive ADRs for the decisions already reflected in `tech_stack.yaml`.
+5. Update the Conventions table (`Adoption profile: full`).
+
+Each step is independent: upgrade only what the project's complexity actually demands.
 
 ---
 
-## Historial de Versiones
+## Reading Protocol
 
-<!-- [OBLIGATORIO] Registro estructurado de cambios del estándar. -->
+Order in which a new agent should consume the documentation to get contextually oriented at the lowest token cost:
 
-Ver [changelog.yaml](./changelog.yaml) para el registro completo de versiones.
+1. **`standard/AGENT.md`** → Understand the global operating rules.
+2. **`project/project_status.yaml`** → Get the aggregate state of every module (and its known debt) at minimal token cost.
+3. **`project/01_product/roadmap.md`** → Identify the current milestone/sprint and pick up the active task (`[In Progress]`).
+4. **`project/01_product/domain_modules/[affected_module].md`** → Read **ONLY** the module (or modules) directly referenced by the chosen active task. Check `project/TODO.md` for pending items that affect them.
+5. **`project/02_architecture/system_overview.md`** → Understand where that module fits within the overall system.
+6. **`project/03_engineering/tech_stack.yaml`** → Know the technical boundaries before generating or modifying code.
+7. *(Optional)* **`project/04_adrs/`** and **`project/01_product/vision.md`** → Consult the decision history or product vision only when blocked or facing directional questions during development.
+
+---
+
+## Maintenance Protocol
+
+1. **Do not create files outside the defined structure.** Every new file must be placed in the corresponding `project/` directory according to its nature (product, architecture, engineering, or ADR).
+2. **Do not modify the directory structure** without recording an ADR that justifies the change.
+3. **New domain modules** must be created from the `standard/templates/domain_module.md` template, following the structure defined in `standard/guide_domain_modules.md`, completing all required sections.
+4. **Every accepted ADR** that modifies a technical standard **must** be reflected by updating the corresponding file in `project/03_engineering/`.
+5. **When adding or removing files**, update the Table of Contents in this file.
+6. **Sections marked [REQUIRED]** may not be removed or left empty.
+7. **Every new document** must include the YAML frontmatter corresponding to its type (see next section).
+8. **Code↔docs synchronization** is governed by the **Anti-Drift Protocol** in `AGENT.md` (Global Rules → Traceability and Synchronization): each triggering event (task started/completed, new dependency, accepted ADR, infrastructure change...) lists the documentation update required in the same change.
+
+---
+
+## Frontmatter Conventions
+
+Every markdown document in the standard must start with a **YAML frontmatter** block. Frontmatter lets AI agents obtain key metadata about a document without parsing its full content.
+
+### Common fields (all documents)
+
+| Field | Type | Description |
+|---|---|---|
+| `type` | **[REQUIRED]** | Document type identifier. |
+| `version` | **[REQUIRED]** | Document version (e.g., `1.0`). |
+| `last_updated` | **[REQUIRED]** | Date of last update in `YYYY-MM-DD` format. |
+
+### The `state` field (working documents)
+
+Applies to: `domain_modules`, documents in `project/02_architecture/`, and documents in `project/03_engineering/`. It does **not** apply to `vision.md`, `roadmap.md`, or ADRs (which have their own `status`).
+
+| Value | Meaning | Implication for the agent |
+|---|---|---|
+| `pending` | Defined but not implemented | Free to work on this document/implementation |
+| `doing` | Someone is working on this | **Hands off** without prior coordination |
+| `done` | Completed and operational | **Do not modify** without justification (an ADR or explicit instruction) |
+| `deprecated` | No longer current | Ignore for new implementations |
+
+> **Important:** These are the **only allowed values** for the `state` field. Do not use alternative values.
+
+### Type-specific schemas
+
+Each `guide_*.md` file in `standard/` defines the complete frontmatter schema for the project files it covers, including the specific fields that apply to that document type.
+
+---
+
+## Project Status Artifacts
+
+Two machine-readable artifacts at the root of `project/` centralize the project's operational state, so agents can know where the project stands without parsing full documents. They are part of the **full** adoption profile (Lite projects skip them).
+
+### `project_status.yaml` — Aggregate State
+
+The **single source of truth for module state**. It records, per module: its `state`, its test coverage, and its known technical debt.
+
+```yaml
+last_updated: YYYY-MM-DD
+
+modules:
+  clients:
+    state: done              # pending | doing | done | deprecated
+    coverage: 97             # [OPTIONAL] test coverage %
+    debt:                    # [OPTIONAL] known technical debt
+      - "Pagination missing on the list endpoint"
+  orders:
+    state: doing
+```
+
+**Authority rule:** for module state, this file is authoritative. The `state` field in each module's frontmatter and the Kanban board in `roadmap.md` are **views** that must never contradict it. Any state change updates all three in the same change (see the Anti-Drift Protocol in `AGENT.md`); automated tooling may verify their consistency. The current phase/milestone is **not** recorded here — `roadmap.md` owns it.
+
+### `TODO.md` — Cross-Module Pending Items
+
+A living list of **fine-grained tasks discovered while working on one module that affect another** (e.g., "when `orders` is implemented, add the reverse relation in `clients`"). This is **not the backlog**: planned work (User Stories, features, bugs) lives on the `roadmap.md` board. `TODO.md` holds the small, concrete stubs that would otherwise be lost in conversation.
+
+Lifecycle: add an entry when the pending item is discovered; remove it when resolved (git preserves the history). Before working on a module, check whether any entry affects it.
+
+---
+
+## Principles of the Standard
+
+1. **Modularity (Modular PRD)**: Functional requirements are not a centralized list; they live inside their corresponding domain module (`domain_modules/`). Each module is a mini-PRD.
+2. **Self-description**: Each area of the standard has a `guide_*.md` explaining what files it contains and how to create and maintain them, plus an `agent_*.md` with operating rules for agents.
+3. **Outcome-Oriented Writing**: Rigid "The system shall..." lists are avoided. **User Stories** capture business value and **Acceptance Criteria (AC)** drive validation.
+4. **Design Docs**: The `project/02_architecture/` folder acts as the Design Doc repository, describing the technical solution to the requirements defined at the product level.
+5. **Minimum Sufficient Context**: The documentation is structured so an AI agent can read only what it needs for a specific task without flooding its context.
+6. **Traceability**: Architectural decisions (ADRs) are reflected in engineering (`project/03_engineering/`) whenever they modify technical standards.
+7. **Docs as Code**: Documentation files live alongside the source code, are versioned with Git, and are maintained as part of the development workflow.
+8. **Single Canonical Source**: every rule or concept of the standard is specified in exactly one document; all other documents reference it instead of restating it. This keeps token cost low and prevents copies from drifting apart.
+
+---
+
+## Conventions
+
+<!-- [REQUIRED] Chosen language, date format, writing style. -->
+
+| Convention | Value |
+|---|---|
+| Documentation language | *To be defined by each project's team* |
+| Adoption profile | *`full` or `lite` (see Lite Mode in the Adoption Guide)* |
+| Date format | `YYYY-MM-DD` |
+| Writing style | Clear, outcome-oriented, readable by humans and AI agents |
+
+---
+
+## Version History
+
+<!-- [REQUIRED] Structured record of changes to the standard. -->
+
+See [changelog.yaml](./changelog.yaml) for the full version history.

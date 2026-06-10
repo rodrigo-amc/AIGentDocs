@@ -1,178 +1,163 @@
-# Guía de Uso — Framework de Documentación como Código
+# Usage Guide — Docs-as-Code Framework
 
-Esta guía explica cómo adoptar este framework en un proyecto de software, cómo trabajar con él, y cómo aprovecharlo para potenciar el desarrollo con agentes de IA.
+This guide explains how to adopt this framework in a software project, how to work with it, and how to leverage it to power AI-assisted development.
 
 ---
 
-## ¿Qué es este framework?
+## What is this framework?
 
-Es un **estándar de documentación como código** que estructura la documentación de un proyecto de software en 4 capas:
+It is a **docs-as-code standard** that structures a software project's documentation into 4 layers:
 
-| Capa | Directorio | Pregunta que responde |
+| Layer | Directory | Question it answers |
 |---|---|---|
-| **Producto** | `01_product/` | ¿**Por qué** existe este software? ¿Qué hace? |
-| **Arquitectura** | `02_architecture/` | ¿**Qué** se construyó? ¿Cómo se conecta todo? |
-| **Ingeniería** | `03_engineering/` | ¿**Cómo** se construye? ¿Qué reglas técnicas aplican? |
-| **Decisiones** | `04_adrs/` | ¿**Por qué** se tomaron estas decisiones? |
+| **Product** | `01_product/` | **Why** does this software exist? What does it do? |
+| **Architecture** | `02_architecture/` | **What** was built? How does it all connect? |
+| **Engineering** | `03_engineering/` | **How** is it built? What technical rules apply? |
+| **Decisions** | `04_adrs/` | **Why** were these decisions made? |
 
-Cada capa tiene un `README.md` (qué contiene y cómo llenarla) y un `AGENT.md` (instrucciones para agentes de IA).
+Each layer has a `README.md` (what it contains and how to fill it out) and an `AGENT.md` (instructions for AI agents).
 
 ---
 
-## Instalación
+## Installation
 
-### 1. Copiar la carpeta `docs/` al repositorio
+### 1. Copy the `docs/` folder into your repository
 
 ```bash
-# Desde la raíz de tu proyecto
-cp -r /ruta/al/framework/docs ./docs
+# From the root of your project
+cp -r /path/to/framework/docs ./docs
 ```
 
-O simplemente copia la carpeta `docs/` completa a la raíz de tu repositorio. La estructura incluye `docs/standard/` (el framework) y `docs/project/` (donde vivirá la documentación de tu proyecto).
+Or simply copy the entire `docs/` folder to the root of your repository. The structure includes `docs/standard/` (the framework) and `docs/project/` (where your project's documentation will live).
 
-### 2. Personalizar el README
-
-Abrir `docs/standard/README.md` y reemplazar:
-
-- El título `# Estándar de Documentación...` → `# [Nombre de tu proyecto]`
-- La descripción genérica → Una descripción de tu proyecto en 1-2 líneas
-
-### 3. Configurar las convenciones
-
-En la sección **Convenciones** de `docs/standard/README.md`, definir:
-
-- **Idioma de documentación**: español, inglés, etc.
-
-### 4. Commitear
+### 2. Copy the agent entry point to the repository root
 
 ```bash
-git add docs/
-git commit -m "docs: adoptar framework de documentación como código"
+cp docs/standard/templates/AGENTS.md ./AGENTS.md
+```
+
+`AGENTS.md` is the de facto standard entry file read natively by most AI coding tools (Codex, Cursor, Copilot, Gemini, and others). With it in place, any agent that opens your repo discovers the framework on its own — no one has to tell it where to start.
+
+For tools that read a different file name, link or copy it:
+
+```bash
+ln -s AGENTS.md CLAUDE.md   # Claude Code
+```
+
+### 3. Customize the README
+
+Open `docs/standard/README.md` and replace:
+
+- The title `# Documentation Standard...` → `# [Your project's name]`
+- The generic description → A 1-2 line description of your project
+
+### 4. Set the conventions
+
+In the **Conventions** section of `docs/standard/README.md`, define:
+
+- **Documentation language**: Spanish, English, etc.
+
+### 5. Commit
+
+```bash
+git add docs/ AGENTS.md
+git commit -m "docs: adopt docs-as-code framework"
 ```
 
 ---
 
-## Cómo llenar la documentación
+## How to fill out the documentation
 
-### Opción A: Manualmente (Modo Diseño)
+### Option A: Manually (Design Mode)
 
-Ir archivo por archivo siguiendo la estructura de cada template. Los comentarios HTML (`<!-- -->`) dentro de cada archivo explican qué escribir en cada sección. El orden recomendado depende del tipo de proyecto:
+Go file by file following each template's structure. The HTML comments (`<!-- -->`) inside each file explain what to write in each section. The reference templates live in `standard/templates/`; the agent uses them as the blueprint for creating files in `project/`.
 
-- **Proyecto nuevo** → `vision.md` → `domain_modules/` → `roadmap.md` → `architecture/` → `engineering/`
-- **Proyecto existente** → `tech_stack.yaml` → `architecture/` → `vision.md` → `domain_modules/` → `roadmap.md`
+The recommended order depends on the type of project — see the **Adoption Guide** in `standard/README.md` (Greenfield, Brownfield, and Lite paths).
 
-Los templates de referencia están en `standard/templates/`. El agente los usa como guía para crear archivos en `project/`.
+### Option B: With an AI agent (Onboarding Mode)
 
-Ver la sección **Guía de Adopción** en `standard/README.md` para el detalle completo.
-
-### Opción B: Con un agente de IA (Modo Onboarding)
-
-Este es el flujo diseñado para proyectos existentes. Indicarle al agente:
+This is the flow designed for existing projects. Tell the agent:
 
 ```
-Analiza el código de este proyecto y completa la documentación siguiendo
-el framework en docs/. Empieza por leer docs/standard/AGENT.md.
+Analyze this project's code and complete the documentation following
+the framework in docs/. Start by reading docs/standard/AGENT.md.
 ```
 
-El agente:
+The agent will:
 
-1. Leerá `AGENT.md` y detectará que los docs están vacíos (placeholders).
-2. Entrará automáticamente en **Modo Onboarding**.
-3. Analizará el código fuente.
-4. Generará borradores de cada documento para tu revisión.
-5. Vos aprobás o ajustás cada documento.
+1. Read `AGENT.md` and detect that the docs are empty (placeholders).
+2. Automatically enter **Onboarding Mode**.
+3. Analyze the source code.
+4. Generate drafts of each document for your review.
+5. You approve or adjust each document.
 
-> **Importante:** El agente genera, el humano aprueba. Nunca se da por definitivo un documento sin revisión.
+> **Important:** The agent generates, the human approves. No document is considered final without review.
+
+### Option C: Lite Mode (small projects)
+
+For prototypes, internal tools, or single-purpose services, you don't need the full structure. The **Lite** profile is just three files: `vision.md`, `roadmap.md`, and `tech_stack.yaml` — what an agent minimally needs to contribute safely. User Stories live directly on the roadmap board, ADRs are optional, and you upgrade incrementally only when the project's complexity demands it.
+
+See **Lite Mode** in the Adoption Guide of `standard/README.md` for the rules and the upgrade path.
 
 ---
 
-## Flujo de trabajo diario
+## Day-to-day workflow
 
-Una vez que la documentación está completa, el flujo de trabajo con un agente de IA es:
+Once the documentation is complete, the workflow with an AI agent is:
 
-### Agregar una nueva feature
-
-```
-1. El humano o el agente agrega la User Story al domain_module correspondiente.
-2. Se mueve la tarea a [In Progress] en roadmap.md.
-3. El agente lee los docs relevantes (Protocolo de Lectura) y genera código.
-4. Al terminar, se mueve la tarea a [Done] y se actualiza el state del módulo.
-```
-
-### Modificar la arquitectura
+### Adding a new feature
 
 ```
-1. Se crea un ADR en 04_adrs/ justificando el cambio.
-2. El humano aprueba el ADR (status: accepted).
-3. Se actualizan los documentos afectados en 02_architecture/ y 03_engineering/.
-4. Se implementa el cambio en el código.
+1. The human or the agent adds the User Story to the corresponding domain_module.
+2. The task is moved to [In Progress] in roadmap.md.
+3. The agent reads the relevant docs (Reading Protocol) and generates code.
+4. When done, the task is moved to [Done] and the module's state is updated.
 ```
 
-### Agregar una nueva dependencia
+### Changing the architecture
 
 ```
-1. Se discute con el desarrollador humano.
-2. Se crea un ADR justificando la incorporación.
-3. Se actualiza tech_stack.yaml con la nueva tecnología.
-4. Se usa en el código.
+1. An ADR is created in 04_adrs/ justifying the change.
+2. The human approves the ADR (status: accepted).
+3. The affected documents in 02_architecture/ and 03_engineering/ are updated.
+4. The change is implemented in code.
+```
+
+### Adding a new dependency
+
+```
+1. It is discussed with the human developer.
+2. An ADR is created justifying the addition.
+3. tech_stack.yaml is updated with the new technology.
+4. It is used in the code.
 ```
 
 ---
 
-## Estructura de archivos
+## File structure
 
-### Archivos de instrucciones (no se llenan, solo se leen)
-
-| Archivo | Propósito |
-|---|---|
-| `*/README.md` | *Ahora son `standard/guide_*.md`* — Explican estructura y formato de cada área |
-| `*/AGENT.md` | *Ahora son `standard/agent_*.md`* — Instrucciones operativas para agentes |
-| `AGENT_REVIEW.md` | Prompt para auditar la documentación bajo demanda |
-| `QUICKSTART.md` | Esta guía |
-
-### Archivos de contenido (se llenan por proyecto)
-
-| Archivo | Propósito |
-|---|---|
-| `project/01_product/vision.md` | Visión del producto, usuarios, alcance |
-| `project/01_product/roadmap.md` | Tablero Kanban con tareas |
-| `project/01_product/quality_attributes.md` | Requerimientos no funcionales |
-| `project/01_product/domain_modules/*.md` | Un archivo por entidad de dominio |
-| `project/02_architecture/system_overview.md` | Diagrama C4 y patrones |
-| `project/02_architecture/data_flow.md` | Flujos de datos y modelo ER |
-| `project/02_architecture/infrastructure.md` | Despliegue, CI/CD, variables |
-| `project/03_engineering/tech_stack.yaml` | Stack tecnológico exacto |
-| `project/03_engineering/testing_strategy.md` | Estrategia de testing |
-| `project/03_engineering/api_guidelines.md` | Guías de API *(condicional)* |
-| `project/04_adrs/NNNN-titulo.md` | Decisiones arquitectónicas |
+The complete tree — which files belong to the framework (`standard/`, read-only) and which are filled out per project (`project/`), with the purpose of each — is documented in the **Directory Structure** section of `standard/README.md`. Its Table of Contents is kept up to date as files are added or removed.
 
 ---
 
-## Auditoría
+## Auditing
 
-Para verificar que la documentación cumple con el estándar, usa el prompt de auditoría:
+To verify that the documentation complies with the standard, use the audit prompt:
 
 ```
-Ejecuta la auditoría de documentación siguiendo las instrucciones de docs/standard/AGENT_REVIEW.md.
+Run the documentation audit following the instructions in docs/standard/AGENT_REVIEW.md.
 ```
 
-El agente revisará: estructura, frontmatter, secciones obligatorias, consistencia y calidad. El resultado es un reporte con severidades (🔴 Crítico, 🟡 Advertencia, 🟢 Sugerencia).
+The agent will review: structure, frontmatter, required sections, consistency, and quality. The result is a report with severities (🔴 Critical, 🟡 Warning, 🟢 Suggestion).
 
 ---
 
-## Resumen de modos del agente
+## Agent working modes
 
-| Modo | Cuándo | Qué hace |
-|---|---|---|
-| **Onboarding** | Docs vacíos + proyecto existente | Analiza código → genera borradores de docs |
-| **Diseño** | Creando/editando documentación | Escribe y estructura docs, no genera código |
-| **Implementación** | Escribiendo código | Lee docs como fuente de verdad, genera código |
+Agents operate in one of three modes — **Onboarding** (existing code, empty docs: analyze and draft), **Design** (write docs, no code), and **Implementation** (write code, with docs as the source of truth). The authoritative definitions and entry criteria are in `standard/AGENT.md` (Working Modes).
 
 ---
 
-## Convenciones clave
+## Key conventions
 
-- **Frontmatter YAML**: Todo archivo `.md` de contenido empieza con un bloque `---` que define metadata (`type`, `version`, `last_updated`, `state`).
-- **Estados (`state`)**: `pending` → `doing` → `done` (o `deprecated`). Controlan qué puede modificar un agente.
-- **ADRs inmutables**: Una vez aceptados, los ADRs no se modifican. Para cambiar una decisión, se crea uno nuevo.
-- **Documentación como Código**: Los docs se versionan con Git, se revisan en PRs, y se mantienen como parte del flujo de desarrollo.
+Frontmatter fields and the `state` lifecycle are defined once in `standard/README.md` (Frontmatter Conventions). ADR rules — immutability, the supersede process — are in `standard/guide_adrs.md`. The synchronization duties that keep docs and code from drifting apart are in `standard/AGENT.md` (Anti-Drift Protocol).

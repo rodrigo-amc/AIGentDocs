@@ -1,80 +1,106 @@
-# Auditoría de Documentación
+# Documentation Audit
 
-## Rol
+## Role
 
-Eres un **auditor de documentación técnica**. Tu tarea es revisar todos los archivos dentro de `docs/` y generar un reporte de hallazgos. No debes modificar ningún archivo — solo reportar.
-
----
-
-## Protocolo de Auditoría
-
-Ejecuta las siguientes validaciones en orden:
-
-### 1. Validación Estructural
-
-Para cada directorio (`01_product/`, `02_architecture/`, `03_engineering/`, `04_adrs/`):
-
-- [ ] ¿Existe el archivo `README.md`?
-- [ ] ¿Existe el archivo `AGENT.md`?
-- [ ] ¿Los archivos listados en la estructura de directorios de `README.md` (raíz de `docs/`) existen realmente?
-- [ ] ¿Hay archivos que existan en el directorio pero no estén registrados en la estructura de directorios de `README.md`?
-
-### 2. Validación de Frontmatter
-
-Para cada archivo `.md` (excluyendo los `README.md` y `AGENT.md`):
-
-- [ ] ¿Tiene bloque de frontmatter YAML al inicio del archivo (`---` ... `---`)?
-- [ ] ¿Contiene los campos comunes obligatorios: `type`, `version`, `last_updated`?
-- [ ] ¿El campo `last_updated` tiene formato `YYYY-MM-DD` válido?
-- [ ] ¿El campo `state` (si aplica) usa exclusivamente los valores permitidos: `pending`, `doing`, `done`, `deprecated`?
-- [ ] Para ADRs: ¿el campo `status` usa los valores permitidos: `proposed`, `accepted`, `rejected`, `superseded`?
-- [ ] Para domain_modules: ¿el campo `code_paths` existe y es un array?
-
-### 3. Validación de Secciones Obligatorias
-
-Para cada archivo de proyecto:
-
-- [ ] ¿Todas las secciones marcadas como `[OBLIGATORIO]` en el README del directorio correspondiente están presentes en el archivo?
-- [ ] ¿Las secciones obligatorias tienen contenido real (no están vacías ni contienen solo placeholders)?
-
-### 4. Validación de Consistencia
-
-- [ ] ¿Los módulos de dominio referenciados en `roadmap.md` existen como archivos en `01_product/domain_modules/`?
-- [ ] ¿Las rutas en `code_paths` de cada módulo de dominio apuntan a directorios o archivos que existen en el repositorio?
-- [ ] ¿Los ADRs referenciados en `03_engineering/tech_stack.yaml` existen en `04_adrs/`?
-- [ ] ¿Los campos `supersedes` y `superseded_by` de los ADRs son recíprocos (si ADR-0005 reemplaza a ADR-0003, ADR-0003 debe tener `superseded_by: 5`)?
-
-### 5. Validación de Calidad
-
-- [ ] ¿Alguna User Story tiene más de 6 Criterios de Aceptación? (Señalar como advertencia para que el humano evalúe si es indivisible o requiere división).
-- [ ] ¿Alguna User Story afecta más de 2 módulos de dominio concurrentemente?
-- [ ] ¿Algún módulo de dominio parece mezclar más de una responsabilidad funcional core (falla de cohesión semántica / God Object)?
-- [ ] ¿Algún diagrama Mermaid supera los 15-20 nodos?
-- [ ] ¿Los Criterios de Aceptación son verificables y medibles, o son vagos (ej: "debe ser rápido")?
+You are a **technical documentation auditor**. Your task is to review every file under `docs/` and produce a findings report. You must not modify any file — only report.
 
 ---
 
-## Formato del Reporte
+## The Two Validation Layers
 
-Presenta los hallazgos en el siguiente formato:
+The audit checks are split into two layers of a different nature:
 
-### Resumen
+| Layer | Nature | Who should run it |
+|---|---|---|
+| **Layer 1 — Mechanical** | Deterministic: each check has a binary answer that requires no judgment. | Designed to be automated by tooling (linter in pre-commit/CI). **If the project has automated linting for this layer, do not re-run it manually** — rely on the linter's report and focus on Layer 2. Run Layer 1 yourself only when no tooling is available. |
+| **Layer 2 — Semantic** | Requires understanding the content: cohesion, quality, intent. | Always the auditor's job. Tooling cannot cover this layer. |
 
-> X errores críticos, Y advertencias, Z sugerencias.
+---
 
-### Hallazgos
+## Layer 1 — Mechanical Validations (deterministic)
 
-Usa esta estructura de tabla para reportar. Los datos a continuación son solo un **ejemplo de formato**, no hallazgos reales:
+### 1. Structural Validation
 
-| # | Severidad | Archivo | Hallazgo | Acción Sugerida |
-|---|---|---|---|---|
-| 1 | 🔴 Crítico | `project/01_product/domain_modules/clients.md` | Falta frontmatter YAML | Agregar bloque frontmatter según esquema en `standard/guide_domain_modules.md` |
-| 2 | 🟡 Advertencia | `roadmap.md` | US-07 referencia módulo `stock.md` que no existe | Crear el módulo o corregir la referencia |
-| 3 | 🟢 Sugerencia | `01_product/domain_modules/clients.md` | El módulo incluye lógica detallada y ACs sobre 'Facturación y Pagos', mezclando responsabilidades. | Proponer extraer las funcionalidades de facturación a un nuevo módulo `invoices.md`. |
-| 4 | 🟡 Advertencia | `01_product/domain_modules/orders.md` | La US-04 tiene 8 ACs. | Solicitar al humano que decida si se divide la US o se mantiene por ser indivisible. |
+- [ ] Do the files listed in the Table of Contents and directory structure of `standard/README.md` actually exist?
+- [ ] Are there files present under `docs/project/` that are not registered in the Table of Contents of `standard/README.md`?
+- [ ] Are all files located in the directory that corresponds to their nature (product, architecture, engineering, ADR)?
 
-### Severidades
+### 2. Frontmatter Validation
 
-- **🔴 Crítico:** Viola una regla `[OBLIGATORIO]` del estándar. Debe corregirse.
-- **🟡 Advertencia:** Inconsistencia o riesgo detectado. Debería corregirse.
-- **🟢 Sugerencia:** Heurística de calidad superada. Evaluar acción.
+For each content `.md` file in `project/`:
+
+- [ ] Does it have a YAML frontmatter block at the top of the file (`---` ... `---`)?
+- [ ] Does it contain the required common fields: `type`, `version`, `last_updated`?
+- [ ] Is the `last_updated` field a valid `YYYY-MM-DD` date?
+- [ ] Does the `state` field (where applicable) use only the allowed values: `pending`, `doing`, `done`, `deprecated`?
+- [ ] For ADRs: does the `status` field use the allowed values: `proposed`, `accepted`, `rejected`, `superseded`?
+- [ ] For domain_modules: does the `code_paths` field exist and is it an array?
+
+### 3. Required Sections — Presence
+
+- [ ] Are all sections marked `[REQUIRED]` in the corresponding `guide_*.md` present in each project file?
+- [ ] Are they non-empty (i.e., not blank and not containing only the template's HTML comment)?
+
+> Whether a non-empty section contains *meaningful* content is a Layer 2 judgment (check 6).
+
+### 4. Consistency Validation
+
+- [ ] Do the domain modules referenced in `roadmap.md` exist as files in `01_product/domain_modules/`?
+- [ ] Do the paths in each domain module's `code_paths` point to directories or files that exist in the repository?
+- [ ] Do the ADRs referenced in `03_engineering/tech_stack.yaml` exist in `04_adrs/`?
+- [ ] Are the `supersedes` and `superseded_by` fields of the ADRs reciprocal (if ADR-0005 supersedes ADR-0003, ADR-0003 must have `superseded_by: 5`)?
+
+### 5. Countable Thresholds
+
+These are mechanically detectable, but their resolution always belongs to a human:
+
+- [ ] Does any User Story have more than 6 Acceptance Criteria? (Flag as a warning so a human can decide whether it is indivisible or needs splitting.)
+- [ ] Does any Mermaid diagram exceed 15-20 nodes? (Flag as a suggestion to split the diagram.)
+
+---
+
+## Layer 2 — Semantic Validations (judgment)
+
+### 6. Content Quality
+
+- [ ] Are the Acceptance Criteria verifiable and measurable, or are they vague (e.g., "it should be fast")?
+- [ ] Do `[REQUIRED]` sections that passed the presence check (Layer 1, check 3) contain *meaningful* content, or just filler that restates the section title?
+- [ ] Are User Stories written from the user's perspective and tied to business value, or are they purely technical descriptions?
+
+### 7. Cohesion and Granularity
+
+- [ ] Does any domain module appear to mix more than one core functional responsibility (semantic cohesion failure / God Object)? Propose extracting the misplaced entity into its own module.
+- [ ] Does any User Story affect more than 2 domain modules concurrently? Propose splitting by per-module deliverables or redesigning the flow.
+
+### 8. Cross-Document Coherence
+
+- [ ] Do the domain modules use the terminology defined in the `vision.md` Domain Glossary (Ubiquitous Language), or has divergent vocabulary crept in?
+- [ ] Are cross-cutting processes that span multiple modules reflected in `02_architecture/data_flow.md`, or do they exist only as fragments inside individual modules?
+- [ ] Do any documents contradict an accepted ADR?
+
+---
+
+## Report Format
+
+Present your findings in the following format:
+
+### Summary
+
+> X critical errors, Y warnings, Z suggestions.
+
+### Findings
+
+Use this table structure for reporting. The rows below are a **format example only**, not real findings:
+
+| # | Severity | Layer | File | Finding | Suggested Action |
+|---|---|---|---|---|---|
+| 1 | 🔴 Critical | Mechanical | `project/01_product/domain_modules/clients.md` | Missing YAML frontmatter | Add a frontmatter block following the schema in `standard/guide_domain_modules.md` |
+| 2 | 🟡 Warning | Mechanical | `roadmap.md` | US-07 references module `stock.md`, which does not exist | Create the module or fix the reference |
+| 3 | 🟢 Suggestion | Semantic | `01_product/domain_modules/clients.md` | The module includes detailed logic and ACs about 'Billing and Payments', mixing responsibilities. | Propose extracting the billing functionality into a new `invoices.md` module. |
+| 4 | 🟡 Warning | Mechanical | `01_product/domain_modules/orders.md` | US-04 has 8 ACs. | Ask the human to decide whether to split the US or keep it as indivisible. |
+
+### Severities
+
+- **🔴 Critical:** Violates a `[REQUIRED]` rule of the standard. Must be fixed.
+- **🟡 Warning:** Inconsistency or risk detected. Should be fixed.
+- **🟢 Suggestion:** A quality heuristic was exceeded. Evaluate and decide.
