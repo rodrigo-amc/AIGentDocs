@@ -1,7 +1,7 @@
 ---
 type: agent_instructions
 scope: engineering
-version: 1.3
+version: 1.4
 last_updated: 2026-06-10
 sessions: ["03_engineering"]
 reads: ["guide_engineering.md"]

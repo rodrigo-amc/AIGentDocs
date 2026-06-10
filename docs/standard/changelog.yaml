@@ -1,6 +1,74 @@
 # Version History of the Documentation Standard
 # Each entry records a version of the standard and its changes.
 
+- version: "1.4.0"
+  date: "2026-06-10"
+  summary: "English as primary language, full implementation cycle, status artifacts, anti-drift enforcement basis, and cross-cutting corrections"
+  changes:
+    - type: changed
+      description: >
+        The standard's primary language is now English (US). Full one-shot
+        translation of standard/; [OBLIGATORIO]/[OPCIONAL]/[CONDICIONAL]
+        markers became [REQUIRED]/[OPTIONAL]/[CONDITIONAL]; tech_stack.yaml
+        schema keys translated (database, global_constraints, name, etc.).
+    - type: added
+      description: >
+        templates/AGENTS.md: entry-point stub for the adopting repository's
+        root, compatible with the de facto AGENTS.md standard. Removes the
+        dependency on a human telling the agent where to start.
+    - type: added
+      description: >
+        Lite Mode: official minimal adoption profile (vision.md + roadmap.md
+        + tech_stack.yaml), with explicit rules, upgrade signals, and an
+        incremental Lite-to-Full path. Declared via 'Adoption profile' in the
+        README Conventions table.
+    - type: changed
+      description: >
+        AGENT_REVIEW.md split into two layers: Mechanical (deterministic,
+        designed to be absorbed by lint tooling) and Semantic (judgment,
+        always the auditor's job). Stale pre-1.2 checks removed; new
+        cross-document coherence checks added.
+    - type: added
+      description: >
+        Anti-Drift Protocol in AGENT.md: explicit table mapping each
+        triggering event to the documentation update required in the same
+        change, plus drift-handling rules. Deliberately mechanical, as the
+        basis for future pre-commit/CI enforcement.
+    - type: changed
+      description: >
+        Deduplication across README/AGENT/QUICKSTART under the new principle
+        8, 'Single Canonical Source': each concept is specified in exactly
+        one document; the others point to it.
+    - type: added
+      description: >
+        Project Status Artifacts: project_status.yaml (single source of
+        truth for module state, coverage, and debt — frontmatter state and
+        the Kanban board are views that must not contradict it) and TODO.md
+        (cross-module pending items; explicitly not the backlog). Wired into
+        the Reading Protocol, the Anti-Drift Protocol, and both adoption
+        guides.
+    - type: added
+      description: >
+        Operational Patterns in AGENT.md: Documentation > Code (the code is
+        presumed wrong on contradiction), sub-agents read / the main agent
+        writes, main agent vs. delegated subagent criteria, the triple
+        distinction (not documented / documented but not implemented / out
+        of scope), and stop on inconsistency.
+    - type: added
+      description: >
+        Implementation Mode agent profiles, generalized from practice:
+        agent_scaffold.md, agent_module_developer.md (Creation/Maintenance
+        modes with scope restriction), agent_code_reviewer.md (read-only),
+        agent_integration_tester.md (discrepancies classified as
+        implementation bug / design flaw / undocumented behavior).
+    - type: added
+      description: >
+        05_corrections session and Correction Records: cross-cutting design
+        defects are corrected through an artifact with lifecycle (proposed,
+        approved, applied) whose approved Impact Map is the session's write
+        scope. Third Session Guard exception; new guide_corrections.md,
+        agent_corrections.md, and templates/correction.md.
+
 - version: "1.3.0"
   date: "2026-03-21"
   summary: "Agent instruction optimization: Agent Profile, deduplication, and Session Focus"

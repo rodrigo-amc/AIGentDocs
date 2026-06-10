@@ -1,7 +1,7 @@
 ---
 type: standard_guide
 scope: engineering
-version: 1.2
+version: 1.4
 last_updated: 2026-06-10
 project_path: "project/03_engineering/"
 required_files: [tech_stack.yaml, testing_strategy.md]

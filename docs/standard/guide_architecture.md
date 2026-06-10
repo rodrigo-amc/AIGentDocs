@@ -1,7 +1,7 @@
 ---
 type: standard_guide
 scope: architecture
-version: 1.2
+version: 1.4
 last_updated: 2026-06-10
 project_path: "project/02_architecture/"
 required_files: [system_overview.md, data_flow.md, infrastructure.md]

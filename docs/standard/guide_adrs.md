@@ -1,7 +1,7 @@
 ---
 type: standard_guide
 scope: adrs
-version: 1.2
+version: 1.4
 last_updated: 2026-06-10
 project_path: "project/04_adrs/"
 required_files: []

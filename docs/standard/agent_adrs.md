@@ -1,7 +1,7 @@
 ---
 type: agent_instructions
 scope: adrs
-version: 1.3
+version: 1.4
 last_updated: 2026-06-10
 sessions: ["04_adrs"]
 reads: ["guide_adrs.md"]

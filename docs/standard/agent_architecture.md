@@ -1,7 +1,7 @@
 ---
 type: agent_instructions
 scope: architecture
-version: 1.3
+version: 1.4
 last_updated: 2026-06-10
 sessions: ["02_architecture"]
 reads: ["guide_architecture.md"]

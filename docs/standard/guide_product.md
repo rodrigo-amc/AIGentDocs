@@ -1,7 +1,7 @@
 ---
 type: standard_guide
 scope: product
-version: 1.2
+version: 1.4
 last_updated: 2026-06-10
 project_path: "project/01_product/"
 required_files: [vision.md, roadmap.md, quality_attributes.md]

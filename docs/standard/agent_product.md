@@ -1,7 +1,7 @@
 ---
 type: agent_instructions
 scope: product
-version: 1.3
+version: 1.4
 last_updated: 2026-06-10
 sessions: ["01_product", "01_product_domain_modules"]
 reads: ["guide_product.md", "guide_domain_modules.md"]

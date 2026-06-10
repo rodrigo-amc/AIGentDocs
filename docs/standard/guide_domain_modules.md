@@ -1,7 +1,7 @@
 ---
 type: standard_guide
 scope: domain_modules
-version: 1.2
+version: 1.4
 last_updated: 2026-06-10
 project_path: "project/01_product/domain_modules/"
 required_files: []
