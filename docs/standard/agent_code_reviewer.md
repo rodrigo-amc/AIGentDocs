@@ -39,4 +39,4 @@ Before reading this file, make sure you have read the global `AGENT.md` in `stan
 
 - **Documentation > Code**: when the code diverges from the docs, the finding is against the code. If you believe the documentation itself is wrong, say so explicitly as a separate observation — that is a design issue for the user to take to the documentation, not something a code change should paper over.
 - **Findings must be actionable**: point to the file/area in code and to the exact documentation that defines the expected behavior.
-- Your report is the natural input for **Maintenance mode** of the Module Developer (code fixes) or for a **design correction** (documentation fixes).
+- Your report is the natural input for **Maintenance mode** of the Module Developer (code fixes) or, when the defect is in the design itself, for a **`05_corrections` session** (see `agent_corrections.md`).

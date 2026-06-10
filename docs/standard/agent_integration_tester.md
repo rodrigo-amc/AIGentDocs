@@ -34,7 +34,7 @@ Before reading this file, make sure you have read the global `AGENT.md` in `stan
 | Classification | Meaning | Where it goes |
 |---|---|---|
 | **Implementation bug** | The documentation is right; the code does not honor it. | Input for the Module Developer (Maintenance mode). |
-| **Design flaw** | The system does what the docs say, but the documented behavior is itself wrong, contradictory, or incomplete. | A **defect report** for the user: the documentation needs correcting before any code changes (Documentation > Code — but here the documentation itself is the defect). |
+| **Design flaw** | The system does what the docs say, but the documented behavior is itself wrong, contradictory, or incomplete. | A **defect report** for the user: it becomes the Defect Report section of a Correction Record, triggering a `05_corrections` session (see `agent_corrections.md`). The documentation is corrected before any code changes. |
 | **Undocumented behavior** | The system does something no document specifies. | Report under the triple distinction; the user decides whether to document or remove it. |
 
 ---

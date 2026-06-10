@@ -73,7 +73,11 @@ At the start of a session, the user will tell you which part of the documentatio
 
 #### Exception: ADR Propagation
 
-The `04_adrs` session is the only one allowed to modify files outside its own directory. If an accepted ADR affects a technical standard, the agent **must** update the corresponding file in `project/03_engineering/` in the same session or a subsequent one.
+If an accepted ADR affects a technical standard, the `04_adrs` session **must** update the corresponding file in `project/03_engineering/` in the same session or a subsequent one.
+
+#### Exception: Approved Impact Map (Corrections)
+
+The `05_corrections` session may modify documents that belong to other sessions, but **only** those listed in the approved Impact Map of its Correction Record (see `agent_corrections.md`). The map is the session's write scope; anything outside it requires amending and re-approving the record.
 
 #### Exception: Global Traceability
 
@@ -159,6 +163,21 @@ Each session type has a **single objective**, a **bounded write scope**, and an 
 
 **Frequency:** On demand, whenever a relevant technical decision arises. Can run at any point in the project.
 
+---
+
+#### Session: `05_corrections`
+
+**Objective:** Correct a **cross-cutting design defect** — discovered late, typically by integration testing or code review — whose fix spans documents owned by different sessions.
+
+| Deliverable | Directory |
+|---|---|
+| One `[NNNN]-[title].md` Correction Record | `project/05_corrections/` |
+| The corrections its approved Impact Map authorizes | The documents listed in the map |
+
+**Write scope:** Dynamic — exactly the documents listed in the record's **approved Impact Map**, plus status artifacts (Global Traceability). See the protocol in `agent_corrections.md`.
+
+**Frequency:** On demand, when a defect report identifies a design flaw. A correction touching a single document does not need this session.
+
 ### Recommended Execution Order
 
 ```text
@@ -171,6 +190,7 @@ Each session type has a **single objective**, a **bounded write scope**, and an 
 03_engineering
 
 04_adrs → can run at any time, independently.
+05_corrections → on demand, when a design defect is detected (usually after implementation begins).
 ```
 
 ### Quick Reference Table
@@ -182,6 +202,7 @@ Each session type has a **single objective**, a **bounded write scope**, and an 
 | `02_architecture` | `system_overview.md`, `data_flow.md`, `infrastructure.md` | `project/02_architecture/` | After modules are approved | 1 |
 | `03_engineering` | `tech_stack.yaml`, `testing_strategy.md`, `api_guidelines.md` | `project/03_engineering/` | After architecture is approved | 1 |
 | `04_adrs` | One `[NNNN]-[title].md` + Propagation | `project/04_adrs/` + `project/03_engineering/` | When a decision arises | On demand |
+| `05_corrections` | One Correction Record + the corrections in its approved Impact Map | `project/05_corrections/` + mapped documents | When a design defect is reported | On demand |
 
 ---
 
@@ -247,7 +268,7 @@ Documentation that drifts from the code stops being a source of truth. To preven
 | A new container, component, or cross-module flow appears | `system_overview.md` and/or `data_flow.md`; an ADR if the decision is significant |
 | Deployment, environment, or environment variables change | `infrastructure.md` (including Variables and Secrets) |
 | API conventions change (auth, versioning, response format) | `api_guidelines.md` |
-| A requirement proves wrong or incomplete during implementation | **Stop.** The domain module is corrected first (with the user's approval), then the code |
+| A requirement proves wrong or incomplete during implementation | **Stop.** The documentation is corrected first, then the code: a single affected document is fixed in its own session with user approval; a cross-cutting defect opens a `05_corrections` session (see `agent_corrections.md`) |
 
 **Module state rule:** a module's `state` reflects its User Stories on the board — at least one in progress → `doing`; all planned ones completed → `done`. The authoritative record is `project/project_status.yaml`; the module's frontmatter and the board are views that must never contradict it (see Project Status Artifacts in `README.md`).
 

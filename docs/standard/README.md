@@ -23,6 +23,7 @@ This repository contains a **docs-as-code framework** designed so that AI agents
 - [guide_architecture.md](./guide_architecture.md) — Instructions for the Design Docs
 - [guide_engineering.md](./guide_engineering.md) — Instructions for engineering standards
 - [guide_adrs.md](./guide_adrs.md) — Instructions for Architecture Decision Records
+- [guide_corrections.md](./guide_corrections.md) — Instructions for Design Correction Records
 
 #### Agent Instructions (by context)
 
@@ -30,6 +31,7 @@ This repository contains a **docs-as-code framework** designed so that AI agents
 - [agent_architecture.md](./agent_architecture.md) — Operating rules: architecture
 - [agent_engineering.md](./agent_engineering.md) — Operating rules: engineering
 - [agent_adrs.md](./agent_adrs.md) — Operating rules: ADRs
+- [agent_corrections.md](./agent_corrections.md) — Operating rules: cross-cutting design corrections
 
 #### Agent Instructions (Implementation Mode profiles)
 
@@ -43,6 +45,7 @@ This repository contains a **docs-as-code framework** designed so that AI agents
 - [AGENTS.md](./templates/AGENTS.md) — Agent entry-point stub for the repository root
 - [project_status.yaml](./templates/project_status.yaml)
 - [TODO.md](./templates/TODO.md)
+- [correction.md](./templates/correction.md)
 - [vision.md](./templates/vision.md)
 - [roadmap.md](./templates/roadmap.md)
 - [quality_attributes.md](./templates/quality_attributes.md)
@@ -62,6 +65,7 @@ This repository contains a **docs-as-code framework** designed so that AI agents
 - `project/02_architecture/` — system_overview.md, data_flow.md, infrastructure.md
 - `project/03_engineering/` — tech_stack.yaml, testing_strategy.md, api_guidelines.md
 - `project/04_adrs/` — [NNNN]-[title].md
+- `project/05_corrections/` — [NNNN]-[title].md (cross-cutting design corrections)
 
 ---
 
@@ -91,11 +95,13 @@ All documents must remain **human-readable** — humans are the ones who create,
 │   ├── guide_architecture.md              # Structure and format of 02_architecture
 │   ├── guide_engineering.md               # Structure and format of 03_engineering
 │   ├── guide_adrs.md                      # Structure and format of 04_adrs
+│   ├── guide_corrections.md               # Structure and format of 05_corrections
 │   │
 │   ├── agent_product.md                   # Operating rules: product (DDD, Onboarding)
 │   ├── agent_architecture.md              # Operating rules: architecture
 │   ├── agent_engineering.md               # Operating rules: engineering
 │   ├── agent_adrs.md                      # Operating rules: ADRs
+│   ├── agent_corrections.md               # Operating rules: design corrections
 │   │
 │   ├── agent_scaffold.md                  # Implementation profile: project bootstrap
 │   ├── agent_module_developer.md          # Implementation profile: module creation/maintenance
@@ -106,6 +112,7 @@ All documents must remain **human-readable** — humans are the ones who create,
 │       ├── AGENTS.md
 │       ├── project_status.yaml
 │       ├── TODO.md
+│       ├── correction.md
 │       ├── vision.md
 │       ├── roadmap.md
 │       ├── quality_attributes.md
@@ -134,8 +141,10 @@ All documents must remain **human-readable** — humans are the ones who create,
     │   ├── tech_stack.yaml                # Exact technology stack (YAML)
     │   ├── testing_strategy.md            # Testing strategy and coverage
     │   └── api_guidelines.md              # [CONDITIONAL] Only if endpoints are exposed
-    └── 04_adrs/
-        └── [NNNN]-[title].md              # Individual decision records
+    ├── 04_adrs/
+    │   └── [NNNN]-[title].md              # Individual decision records
+    └── 05_corrections/
+        └── [NNNN]-[title].md              # Cross-cutting design correction records
 ```
 
 ---
