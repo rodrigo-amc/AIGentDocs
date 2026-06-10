@@ -31,6 +31,13 @@ This repository contains a **docs-as-code framework** designed so that AI agents
 - [agent_engineering.md](./agent_engineering.md) — Operating rules: engineering
 - [agent_adrs.md](./agent_adrs.md) — Operating rules: ADRs
 
+#### Agent Instructions (Implementation Mode profiles)
+
+- [agent_scaffold.md](./agent_scaffold.md) — Project bootstrap from the approved documentation
+- [agent_module_developer.md](./agent_module_developer.md) — Domain module implementation (Creation/Maintenance)
+- [agent_code_reviewer.md](./agent_code_reviewer.md) — Read-only compliance and quality review
+- [agent_integration_tester.md](./agent_integration_tester.md) — Validation of the running system against ACs and Business Rules
+
 #### Reference Templates (`standard/templates/`)
 
 - [AGENTS.md](./templates/AGENTS.md) — Agent entry-point stub for the repository root
@@ -89,6 +96,11 @@ All documents must remain **human-readable** — humans are the ones who create,
 │   ├── agent_architecture.md              # Operating rules: architecture
 │   ├── agent_engineering.md               # Operating rules: engineering
 │   ├── agent_adrs.md                      # Operating rules: ADRs
+│   │
+│   ├── agent_scaffold.md                  # Implementation profile: project bootstrap
+│   ├── agent_module_developer.md          # Implementation profile: module creation/maintenance
+│   ├── agent_code_reviewer.md             # Implementation profile: compliance review (read-only)
+│   ├── agent_integration_tester.md        # Implementation profile: validate the running system
 │   │
 │   └── templates/                         # Reference templates for agents
 │       ├── AGENTS.md

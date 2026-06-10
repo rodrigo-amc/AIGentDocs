@@ -26,8 +26,10 @@ Before acting, identify which mode you are working in, based on the user's instr
 ### Implementation Mode (Code)
 
 - Applies when writing or modifying the project's source code.
-- The documentation in `project/` is your **source of truth**. Read it before generating code, but do not modify it except to update statuses (`state` in frontmatter, board in `roadmap.md`).
+- The documentation in `project/` is your **source of truth**. Read it before generating code, but do not modify it except to update statuses (`state` in frontmatter, board in `roadmap.md`, `project_status.yaml`, `TODO.md`).
 - All code you generate must respect the rules defined in `project/03_engineering/`.
+- **Implementation profiles** define the protocols for this mode — read the one matching your task before starting: `agent_scaffold.md` (project bootstrap), `agent_module_developer.md` (module creation/maintenance), `agent_code_reviewer.md` (read-only review), `agent_integration_tester.md` (validation against the running system).
+- The **write scope** for module work is the target module's `code_paths` plus the status artifacts. Touching other modules' code follows the scope restriction in `agent_module_developer.md`.
 
 > If you are unsure which mode to work in, ask the user before proceeding.
 
