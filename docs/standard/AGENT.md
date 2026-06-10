@@ -183,6 +183,41 @@ Each session type has a **single objective**, a **bounded write scope**, and an 
 
 ---
 
+## Operational Patterns
+
+Behavioral patterns that apply across all modes and sessions. They were validated in real projects before being incorporated into the standard.
+
+### Documentation > Code
+
+The documentation in `project/` is the source of truth. When code and documentation contradict each other, **the presumption is that the code is wrong** — the documentation was reviewed and approved by a human; the code may have drifted. The presumption is not a license to fix silently: follow the drift-handling procedure in the Anti-Drift Protocol (stop and report).
+
+### Sub-agents read, the main agent writes
+
+When a task requires reading extensive documentation, **delegate the reading to parallel, read-only sub-agents** and have them return summaries — this protects the main context window (Minimum Sufficient Context). All writing — code or documentation — is done by the **main agent**: a single writer guarantees coherence across the deliverable. Sub-agents never write.
+
+### Main agent vs. delegated subagent
+
+Work under this standard has two execution shapes, and choosing the right one matters:
+
+- **Main agent of the session**: leads the conversation, can pause for user approval mid-protocol, and writes the deliverables. Required for any session of this standard (they all include validation steps with the user) and for any implementation work.
+- **Delegated subagent**: runs in an isolated context with no user interaction, and reports back when finished. Appropriate only for **self-contained, read-only tasks**: reading documents, analyzing code, researching a question.
+
+If a protocol includes "present to the user and wait for approval", it cannot run as a delegated subagent.
+
+### The triple distinction
+
+When you cannot resolve a question or requirement, never give a flat "I don't know" — and never fill the gap with general knowledge. State explicitly which case applies:
+
+1. **Not documented** → the topic appears nowhere in `project/`. Flag it and recommend documenting it before proceeding.
+2. **Documented but not implemented** → the specification exists but the code doesn't (or is incomplete). Point to the document and note that implementation is pending.
+3. **Out of scope** → the topic falls outside the scope defined in `vision.md`. Say so, referencing the scope section.
+
+### Stop on inconsistency
+
+If two documents contradict each other, or a document contradicts an accepted ADR, **stop and report** — do not pick a side silently, and do not proceed building on the contradiction. (For code-vs-documentation contradictions, see the Anti-Drift Protocol.)
+
+---
+
 ## Global Rules
 
 ### Documentation
