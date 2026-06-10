@@ -33,6 +33,7 @@ This repository contains a **docs-as-code framework** designed so that AI agents
 
 #### Reference Templates (`standard/templates/`)
 
+- [AGENTS.md](./templates/AGENTS.md) — Agent entry-point stub for the repository root
 - [vision.md](./templates/vision.md)
 - [roadmap.md](./templates/roadmap.md)
 - [quality_attributes.md](./templates/quality_attributes.md)
@@ -86,6 +87,7 @@ All documents must remain **human-readable** — humans are the ones who create,
 │   ├── agent_adrs.md                      # Operating rules: ADRs
 │   │
 │   └── templates/                         # Reference templates for agents
+│       ├── AGENTS.md
 │       ├── vision.md
 │       ├── roadmap.md
 │       ├── quality_attributes.md
@@ -139,6 +141,7 @@ All documents must remain **human-readable** — humans are the ones who create,
 
 If the project has no code yet, fill out the documentation **before implementing**:
 
+0. Copy `templates/AGENTS.md` to the repository root → Any AI agent that opens the repo finds its entry point on its own. (For tools that read `CLAUDE.md` or `GEMINI.md`, create a symlink or an identical copy.)
 1. Copy `templates/vision.md` to `project/01_product/vision.md` → Define what will be built.
 2. Create the necessary `domain_modules/` from `templates/domain_module.md`.
 3. Copy `templates/roadmap.md` to `project/01_product/roadmap.md` → Prioritize the tasks.
@@ -151,6 +154,7 @@ If the project has no code yet, fill out the documentation **before implementing
 
 If the project already has code, document it through **reverse engineering**. The order is different — you start from the concrete (code) and move toward the abstract (product):
 
+0. Copy `templates/AGENTS.md` to the repository root → Any AI agent that opens the repo finds its entry point on its own.
 1. **`project/03_engineering/tech_stack.yaml`** → Analyze the code and record the actual technologies.
 2. **`project/02_architecture/system_overview.md`** → Diagram the architecture that already exists.
 3. **`project/02_architecture/infrastructure.md`** → Document where and how it runs.

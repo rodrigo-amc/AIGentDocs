@@ -30,23 +30,37 @@ cp -r /path/to/framework/docs ./docs
 
 Or simply copy the entire `docs/` folder to the root of your repository. The structure includes `docs/standard/` (the framework) and `docs/project/` (where your project's documentation will live).
 
-### 2. Customize the README
+### 2. Copy the agent entry point to the repository root
+
+```bash
+cp docs/standard/templates/AGENTS.md ./AGENTS.md
+```
+
+`AGENTS.md` is the de facto standard entry file read natively by most AI coding tools (Codex, Cursor, Copilot, Gemini, and others). With it in place, any agent that opens your repo discovers the framework on its own — no one has to tell it where to start.
+
+For tools that read a different file name, link or copy it:
+
+```bash
+ln -s AGENTS.md CLAUDE.md   # Claude Code
+```
+
+### 3. Customize the README
 
 Open `docs/standard/README.md` and replace:
 
 - The title `# Documentation Standard...` → `# [Your project's name]`
 - The generic description → A 1-2 line description of your project
 
-### 3. Set the conventions
+### 4. Set the conventions
 
 In the **Conventions** section of `docs/standard/README.md`, define:
 
 - **Documentation language**: Spanish, English, etc.
 
-### 4. Commit
+### 5. Commit
 
 ```bash
-git add docs/
+git add docs/ AGENTS.md
 git commit -m "docs: adopt docs-as-code framework"
 ```
 
