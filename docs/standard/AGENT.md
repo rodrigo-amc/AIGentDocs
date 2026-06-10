@@ -189,7 +189,7 @@ Behavioral patterns that apply across all modes and sessions. They were validate
 
 ### Documentation > Code
 
-The documentation in `project/` is the source of truth. When code and documentation contradict each other, **the presumption is that the code is wrong** — the documentation was reviewed and approved by a human; the code may have drifted. The presumption is not a license to fix silently: follow the drift-handling procedure in the Anti-Drift Protocol (stop and report).
+The documentation in `project/` is the source of truth. When code and documentation contradict each other, **the presumption is that the code is wrong** — the documentation is the product of deliberate design: domain discovery, architectural reasoning, and human review shaped it, while code is one (possibly drifted) attempt to realize it. The presumption is not a license to fix silently: follow the drift-handling procedure in the Anti-Drift Protocol (stop and report).
 
 ### Sub-agents read, the main agent writes
 
