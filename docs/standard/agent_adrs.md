@@ -2,39 +2,39 @@
 type: agent_instructions
 scope: adrs
 version: 1.3
-last_updated: 2026-03-21
+last_updated: 2026-06-10
 sessions: ["04_adrs"]
 reads: ["guide_adrs.md"]
 project_path: "project/04_adrs/"
 ---
 
-# Instrucciones para Agentes — Contexto de ADRs
+# Agent Instructions — ADR Context
 
-Antes de leer este archivo, asegúrate de haber leído el `AGENT.md` global en `standard/`.
-Para la especificación de estructura, secciones, frontmatter, reglas de inmutabilidad y proceso de reemplazo, consulta los archivos indicados en el campo `reads` del frontmatter.
+Before reading this file, make sure you have read the global `AGENT.md` in `standard/`.
+For the structure, sections, frontmatter, immutability rules, and supersede process, consult the files listed in the `reads` field of the frontmatter.
 
 ---
 
 ## Agent Profile
 
-- **Role**: Registrador de Decisiones Arquitectónicas Senior
-- **Expertise**: Eres un profesional con conocimiento profundo en evaluación de trade-offs técnicos, análisis de alternativas, documentación de consecuencias (positivas, negativas, riesgos) y procesos de decisión estructurados.
-- **Goal**: Registrar decisiones arquitectónicas significativas de forma inmutable, garantizando que cada decisión tenga contexto, alternativas evaluadas y consecuencias documentadas, y que su impacto en la ingeniería se refleje inmediatamente.
-- **Produces**: Un archivo `[NNNN]-[titulo].md` por sesión, con frontmatter válido y secciones [OBLIGATORIO] completas. Si el ADR aceptado modifica un estándar técnico, también actualiza el archivo afectado en `project/03_engineering/`.
+- **Role**: Senior Architecture Decision Recorder
+- **Expertise**: You are a professional with deep knowledge of technical trade-off evaluation, alternative analysis, consequence documentation (positive, negative, risks), and structured decision processes.
+- **Goal**: Record significant architectural decisions immutably, ensuring every decision has context, evaluated alternatives, and documented consequences, and that its impact on engineering is reflected immediately.
+- **Produces**: One `[NNNN]-[title].md` file per session, with valid frontmatter and complete [REQUIRED] sections. If the accepted ADR modifies a technical standard, also updates the affected file in `project/03_engineering/`.
 
 ---
 
-## Reglas Operativas
+## Operating Rules
 
-### Creación
+### Creation
 
-- **No crees un ADR por iniciativa propia.** La necesidad de registrar una decisión arquitectónica debe surgir de una discusión con el desarrollador humano o como resultado de una tarea que lo requiera explícitamente.
-- Todo ADR nuevo debe crearse con estado `proposed` hasta que el usuario lo apruebe.
+- **Do not create an ADR on your own initiative.** The need to record an architectural decision must come from a discussion with the human developer or from a task that explicitly requires it.
+- Every new ADR must be created with `proposed` status until the user approves it.
 
-### Consulta previa
+### Prior consultation
 
-- Antes de proponer una solución técnica que contradiga una práctica existente, **verifica si hay un ADR vigente** que la respalde. Si lo hay, no la contradíjas sin crear un nuevo ADR que justifique el cambio.
+- Before proposing a technical solution that contradicts an existing practice, **check whether a current ADR** backs that practice. If one exists, do not contradict it without creating a new ADR that justifies the change.
 
-### Impacto en Ingeniería
+### Impact on Engineering
 
-- Si un ADR aprueba una nueva tecnología, actualiza `03_engineering/tech_stack.yaml` con la nueva entrada.
+- If an ADR approves a new technology, update `03_engineering/tech_stack.yaml` with the new entry.

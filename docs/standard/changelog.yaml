@@ -1,99 +1,99 @@
-# Historial de Versiones del Estándar de Documentación
-# Cada entrada registra una versión del estándar con sus cambios.
+# Version History of the Documentation Standard
+# Each entry records a version of the standard and its changes.
 
 - version: "1.3.0"
   date: "2026-03-21"
-  summary: "Optimización de instrucciones para agentes: Agent Profile, deduplicación y Foco de Sesión"
+  summary: "Agent instruction optimization: Agent Profile, deduplication, and Session Focus"
   changes:
     - type: added
       description: >
-        Sección 'Agent Profile' en todos los agent_*.md. Define Role (Senior),
-        Expertise (conocimiento profesional autónomo), Goal y Produces para cada
-        contexto de trabajo.
+        'Agent Profile' section in every agent_*.md. Defines Role (Senior),
+        Expertise (autonomous professional knowledge), Goal, and Produces for
+        each working context.
     - type: added
       description: >
-        Subsección 'Foco de Sesión' en agent_product.md, agent_architecture.md
-        y agent_engineering.md. Instruye al agente a preguntar al usuario en qué
-        documento específico se va a trabajar, limitando cada sesión a un único
-        documento.
+        'Session Focus' subsection in agent_product.md, agent_architecture.md,
+        and agent_engineering.md. Instructs the agent to ask the user which
+        specific document will be worked on, limiting each session to a single
+        document.
     - type: changed
       description: >
-        Eliminación de contenido duplicado en agent_*.md que replicaba
-        información ya presente en los guide_*.md correspondientes
-        (heurísticas de granularidad, reglas de inmutabilidad de ADRs,
-        formato de User Stories, descripciones de propósito de directorio).
+        Removed duplicated content in agent_*.md that replicated information
+        already present in the corresponding guide_*.md files (granularity
+        heuristics, ADR immutability rules, User Story format, directory
+        purpose descriptions).
     - type: changed
       description: >
-        Convenciones de diagramas Mermaid movidas de agent_architecture.md a
-        guide_architecture.md (contenido de especificación, no de comportamiento).
+        Mermaid diagram conventions moved from agent_architecture.md to
+        guide_architecture.md (specification content, not behavior).
     - type: changed
       description: >
-        Campo 'reads' en frontmatter de agent_*.md normalizado a formato array.
-        agent_product.md ahora incluye guide_domain_modules.md en su lista de
-        lecturas requeridas.
+        'reads' field in agent_*.md frontmatter normalized to array format.
+        agent_product.md now includes guide_domain_modules.md in its list of
+        required readings.
 
 - version: "1.2.0"
   date: "2026-03-01"
-  summary: "Separación de estándar y documentos de proyecto"
+  summary: "Separation of the standard from project documents"
   changes:
     - type: changed
       description: >
-        Reestructuración mayor: separación del framework (standard/) de los
-        documentos del proyecto (project/). El estándar ahora es plano, sin
-        subdirectorios numéricos.
+        Major restructuring: separation of the framework (standard/) from the
+        project documents (project/). The standard is now flat, with no
+        numbered subdirectories.
     - type: added
       description: >
-        Archivos guide_*.md y agent_*.md con frontmatter enriquecido
+        guide_*.md and agent_*.md files with enriched frontmatter
         (scope, project_path, required_files, optional_files, sessions, reads).
     - type: added
       description: >
-        Directorio standard/templates/ con templates de referencia para agentes.
-        Los templates ya no viven en project/ sino que el agente los replica.
+        standard/templates/ directory with reference templates for agents.
+        Templates no longer live in project/; the agent replicates them.
     - type: added
       description: >
-        Nuevos templates: domain_module.md (genérico), api_guidelines.md (condicional).
+        New templates: domain_module.md (generic), api_guidelines.md (conditional).
     - type: removed
       description: >
-        Eliminado ADR-0001 (0001-registrar-decisiones-de-arquitectura.md). Su
-        contenido se incorporó como referencia en guide_adrs.md.
+        Removed ADR-0001 (0001-record-architecture-decisions.md). Its content
+        was incorporated as a reference into guide_adrs.md.
     - type: changed
       description: >
-        Todas las referencias internas actualizadas para reflejar la nueva
-        estructura standard/ y project/.
+        All internal references updated to reflect the new standard/ and
+        project/ structure.
 
 - version: "1.1.0"
   date: "2026-02-27"
-  summary: "Integración de Domain-Driven Design (DDD) al estándar"
+  summary: "Integration of Domain-Driven Design (DDD) into the standard"
   changes:
     - type: added
       description: >
-        Sección 'Descubrimiento de Dominio (Knowledge Crunching — DDD)' en 01_product/AGENT.md.
-        Define el proceso obligatorio de 4 pasos para descubrir entidades, reglas de negocio y
-        Ubiquitous Language antes de crear módulos de dominio.
+        'Domain Discovery (Knowledge Crunching — DDD)' section in 01_product/AGENT.md.
+        Defines the required 4-step process for discovering entities, business rules, and
+        the Ubiquitous Language before creating domain modules.
     - type: added
       description: >
-        Nueva sección obligatoria 'Mapa de Entidades del Dominio' para vision.md,
-        definida en 01_product/README.md. Actúa como puente entre vision.md y domain_modules/.
+        New required 'Domain Entity Map' section for vision.md,
+        defined in 01_product/README.md. Acts as the bridge between vision.md and domain_modules/.
     - type: changed
       description: >
-        Descripción del Glosario del Dominio en 01_product/README.md enriquecida para
-        referenciar DDD y Knowledge Crunching.
+        Domain Glossary description in 01_product/README.md enriched to
+        reference DDD and Knowledge Crunching.
     - type: changed
       description: >
-        Descripción de vision.md en la estructura de directorios de docs/README.md
-        actualizada para reflejar el nuevo alcance (Mapa de Entidades + DDD).
+        Description of vision.md in the docs/README.md directory structure
+        updated to reflect the new scope (Entity Map + DDD).
 
 - version: "1.0"
   date: "2026-02-23"
-  summary: "Versión inicial del estándar de documentación"
+  summary: "Initial version of the documentation standard"
   changes:
     - type: added
-      description: "Definición de estructura de directorios (01_product, 02_architecture, 03_engineering, 04_adrs)."
+      description: "Directory structure definition (01_product, 02_architecture, 03_engineering, 04_adrs)."
     - type: added
-      description: "Creación de protocolos de lectura y mantenimiento."
+      description: "Creation of reading and maintenance protocols."
     - type: added
-      description: "Definición de convenciones de frontmatter YAML."
+      description: "Definition of YAML frontmatter conventions."
     - type: added
-      description: "Creación de instrucciones operativas para agentes de IA (AGENT.md)."
+      description: "Creation of operating instructions for AI agents (AGENT.md)."
     - type: added
-      description: "Creación de prompt de auditoría (AGENT_REVIEW.md)."
+      description: "Creation of the audit prompt (AGENT_REVIEW.md)."

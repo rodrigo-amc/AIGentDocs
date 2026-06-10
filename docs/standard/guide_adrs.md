@@ -2,7 +2,7 @@
 type: standard_guide
 scope: adrs
 version: 1.2
-last_updated: 2026-03-01
+last_updated: 2026-06-10
 project_path: "project/04_adrs/"
 required_files: []
 optional_files: []
@@ -10,98 +10,98 @@ optional_files: []
 
 # 04_adrs — Architecture Decision Records
 
-Este directorio contiene el registro inmutable de decisiones arquitectónicas significativas del proyecto. Sigue el estándar de la industria (AWS/Google) para explicar el **Contexto**, la **Decisión** tomada y sus **Consecuencias**.
+This directory contains the immutable record of the project's significant architectural decisions. It follows the industry standard (AWS/Google) of explaining the **Context**, the **Decision** made, and its **Consequences**.
 
-Los ADRs evitan que se re-discutan decisiones pasadas y explican el "por qué" de la evolución del proyecto.
-
----
-
-## Reglas de Uso
-
-1. El **contenido (Markdown)** de los ADRs es inmutable: una vez aceptados o rechazados, no se modifican.
-2. El **frontmatter (YAML)** de un ADR **sí puede actualizarse** exclusivamente para reflejar cambios de estado (`status: superseded`) y trazabilidad (`superseded_by: [ID]`).
-3. Para cambiar una decisión, se crea un **nuevo ADR** con estado `Reemplazado` que referencia al anterior en su contexto, y se actualiza el frontmatter del ADR viejo.
-4. La numeración es **secuencial**: 0001, 0002, 0003...
-5. Todo ADR con estado **Aceptado** que modifique un estándar técnico **debe** reflejarse actualizando el archivo correspondiente en `project/03_engineering/`.
+ADRs prevent past decisions from being re-litigated and explain the "why" behind the project's evolution.
 
 ---
 
-## Cómo crear un nuevo ADR
+## Usage Rules
 
-1. Crear un nuevo archivo `.md` en este directorio con el formato de nombre: `NNNN-titulo-en-minusculas.md` (ej: `0002-usar-postgresql-como-base-de-datos.md`).
-2. Escribir el contenido siguiendo la estructura definida en la sección **"Estructura de un ADR"** de este documento.
-3. Completar todas las secciones **[OBLIGATORIO]**.
-4. Establecer el estado como `Propuesto` hasta que sea revisado y aprobado.
-5. Actualizar la Tabla de Contenidos en `standard/README.md`.
-
-## Cómo registrar el reemplazo de una decisión
-
-1. Crear un nuevo ADR siguiendo los pasos anteriores.
-2. En el nuevo ADR, referenciar al ADR que se está reemplazando en la sección de Contexto y en el campo `supersedes` del frontmatter.
-3. Abrir el ADR viejo y **actualizar su frontmatter**: cambiar `status: superseded` y completar `superseded_by: [ID del nuevo ADR]`.
-4. **No modificar bajo ningún concepto el contenido (Markdown)** del ADR original.
-5. Si la decisión afecta un estándar técnico, actualizar el archivo correspondiente en `project/03_engineering/`.
+1. The **content (Markdown)** of ADRs is immutable: once accepted or rejected, they are not modified.
+2. The **frontmatter (YAML)** of an ADR **may be updated**, exclusively to reflect status changes (`status: superseded`) and traceability (`superseded_by: [ID]`).
+3. To change a decision, a **new ADR** is created that references the previous one in its context, and the old ADR's frontmatter is updated.
+4. Numbering is **sequential**: 0001, 0002, 0003...
+5. Every ADR with **Accepted** status that modifies a technical standard **must** be reflected by updating the corresponding file in `project/03_engineering/`.
 
 ---
 
-## Estructura de un ADR
+## How to create a new ADR
 
-Todo archivo ADR debe contener las siguientes secciones, en este orden:
+1. Create a new `.md` file in this directory using the naming format: `NNNN-title-in-lowercase.md` (e.g., `0002-use-postgresql-as-database.md`).
+2. Write the content following the structure defined in the **"Structure of an ADR"** section of this document.
+3. Complete every **[REQUIRED]** section.
+4. Set the status to `proposed` until it is reviewed and approved.
+5. Update the Table of Contents in `standard/README.md`.
+
+## How to record the replacement of a decision
+
+1. Create a new ADR following the steps above.
+2. In the new ADR, reference the ADR being replaced in the Context section and in the `supersedes` frontmatter field.
+3. Open the old ADR and **update its frontmatter**: set `status: superseded` and fill in `superseded_by: [ID of the new ADR]`.
+4. **Under no circumstances modify the content (Markdown)** of the original ADR.
+5. If the decision affects a technical standard, update the corresponding file in `project/03_engineering/`.
+
+---
+
+## Structure of an ADR
+
+Every ADR file must contain the following sections, in this order:
 
 ### Frontmatter
 
 ```yaml
 ---
 type: adr
-id: 0                    # Número secuencial del ADR
+id: 0                    # Sequential ADR number
 version: 1.0
 last_updated: YYYY-MM-DD
 status: proposed         # proposed | accepted | rejected | superseded
-date: YYYY-MM-DD         # Fecha de la decisión
-decision_makers: []      # Lista de decisores (ej: [Juan, María])
-supersedes: null         # ID del ADR que reemplaza (si aplica)
-superseded_by: null      # ID del ADR que lo reemplazó (si aplica)
+date: YYYY-MM-DD         # Date of the decision
+decision_makers: []      # List of decision makers (e.g., [Juan, María])
+supersedes: null         # ID of the ADR it replaces (if applicable)
+superseded_by: null      # ID of the ADR that replaced it (if applicable)
 ---
 ```
 
-### Encabezado
+### Header
 
 ```markdown
-# [NNNN] - [Título Corto en Presente Indicativo]
+# [NNNN] - [Short Title in Present Tense]
 ```
 
-### Secciones del ADR
+### ADR Sections
 
-| Sección | Tipo | Descripción |
+| Section | Type | Description |
 |---|---|---|
-| Contexto y Problema | **[OBLIGATORIO]** | Qué problema, restricción o necesidad nos obliga a tomar una decisión. Incluir alternativas consideradas. |
-| Decisión | **[OBLIGATORIO]** | Qué se decidió y por qué. Ser específico tecnológicamente. |
-| Consecuencias | **[OBLIGATORIO]** | Positivas, negativas y riesgos derivados de la decisión. |
-| Cumplimiento | **[OPCIONAL]** | Cómo se verifica que la decisión se respeta (ej: tests automáticos, code review, linter rules). |
+| Context and Problem | **[REQUIRED]** | What problem, constraint, or need forces a decision. Include the alternatives considered. |
+| Decision | **[REQUIRED]** | What was decided and why. Be technologically specific. |
+| Consequences | **[REQUIRED]** | Positive, negative, and risks arising from the decision. |
+| Compliance | **[OPTIONAL]** | How adherence to the decision is verified (e.g., automated tests, code review, linter rules). |
 
-### Formato de Consecuencias
+### Consequences Format
 
-Las consecuencias deben organizarse en tres categorías:
+Consequences must be organized into three categories:
 
 ```markdown
-## Consecuencias
+## Consequences
 
-### Positivas
-- [consecuencia positiva]
+### Positive
+- [positive consequence]
 
-### Negativas
-- [consecuencia negativa]
+### Negative
+- [negative consequence]
 
-### Riesgos
-- [riesgo identificado]
+### Risks
+- [identified risk]
 ```
 
 ---
 
-## ADR Inicial: `0001-record-architecture-decisions.md`
+## Initial ADR: `0001-record-architecture-decisions.md`
 
-Es el primer ADR de todo proyecto. Documenta la decisión de adoptar ADRs. Su contenido base es:
+This is the first ADR of every project. It documents the decision to adopt ADRs. Its baseline content is:
 
-- **Contexto:** "Necesitamos un mecanismo formal para registrar decisiones arquitectónicas significativas y sus razones, de modo que cualquier miembro del equipo (humano o agente de IA) pueda entender la evolución del proyecto."
-- **Decisión:** "Usaremos Architecture Decision Records (ADRs) almacenados en `project/04_adrs/`, siguiendo la estructura definida en `guide_adrs.md`."
-- **Consecuencias:** "Todas las decisiones arquitectónicas serán trazables. Se requiere disciplina para crear un ADR ante cada decisión significativa."
+- **Context:** "We need a formal mechanism to record significant architectural decisions and their rationale, so that any team member (human or AI agent) can understand the project's evolution."
+- **Decision:** "We will use Architecture Decision Records (ADRs) stored in `project/04_adrs/`, following the structure defined in `guide_adrs.md`."
+- **Consequences:** "All architectural decisions will be traceable. Discipline is required to create an ADR for every significant decision."

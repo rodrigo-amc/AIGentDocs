@@ -1,30 +1,30 @@
 ---
 type: testing_strategy
 version: 1.0
-last_updated: 2026-02-23
+last_updated: 2026-06-10
 state: pending
 ---
 
-# Estrategia de Testing
+# Testing Strategy
 
-## Tipos de Test Requeridos
+## Required Test Types
 
-<!-- [OBLIGATORIO] Qué tipos de test se utilizan: unitarios, integración, E2E, etc. -->
-
----
-
-## Herramientas de Testing
-
-<!-- [OBLIGATORIO] Frameworks y runners: pytest, Jest, Playwright, etc. -->
+<!-- [REQUIRED] Which test types are used: unit, integration, E2E, etc. -->
 
 ---
 
-## Cobertura Mínima Esperada
+## Testing Tools
 
-<!-- [OBLIGATORIO] Porcentaje de cobertura objetivo y criterios de aceptación. -->
+<!-- [REQUIRED] Frameworks and runners: pytest, Jest, Playwright, etc. -->
 
 ---
 
-## Estructura de Archivos de Test
+## Minimum Expected Coverage
 
-<!-- [OBLIGATORIO] Dónde colocar los tests, naming de archivos y carpetas. -->
+<!-- [REQUIRED] Target coverage percentage and acceptance criteria. -->
+
+---
+
+## Test File Structure
+
+<!-- [REQUIRED] Where to place tests, file and folder naming. -->

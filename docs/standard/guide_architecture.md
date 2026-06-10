@@ -2,40 +2,40 @@
 type: standard_guide
 scope: architecture
 version: 1.2
-last_updated: 2026-03-01
+last_updated: 2026-06-10
 project_path: "project/02_architecture/"
 required_files: [system_overview.md, data_flow.md, infrastructure.md]
 optional_files: []
 ---
 
-# 02_architecture — Arquitectura del Sistema (Design Docs)
+# 02_architecture — System Architecture (Design Docs)
 
-Este directorio actúa como el repositorio de **Design Docs** técnicos del proyecto. Su función es describir el **"Cómo"** (la solución técnica) que responde a los requerimientos definidos en los PRD modulares de `project/01_product/`.
-
----
-
-## El Rol del Design Doc en el Metaframework
-
-1. **Solución Técnica**: El contenido aquí no repite las User Stories, sino que diseña la arquitectura, el modelo de datos y la infraestructura necesaria para implementarlas.
-2. **Visión Global**: Cuando un proceso funcional involucra múltiples módulos (Responsabilidad Modularizada), este directorio proporciona la conexión mediante diagramas de secuencia Mermaid.
-3. **Legibilidad IA**: Se priorizan los diagramas Mermaid sobre largos párrafos de texto técnico.
+This directory acts as the repository of the project's technical **Design Docs**. Its job is to describe the **"how"** (the technical solution) that addresses the requirements defined in the modular PRDs of `project/01_product/`.
 
 ---
 
-## Archivos de este directorio
+## The Role of the Design Doc in the Metaframework
 
-### `system_overview.md` — Vista General del Sistema
+1. **Technical Solution**: The content here does not repeat the User Stories; it designs the architecture, the data model, and the infrastructure needed to implement them.
+2. **Global View**: When a functional process spans multiple modules (Modularized Responsibility), this directory provides the connective tissue through Mermaid sequence diagrams.
+3. **AI Readability**: Mermaid diagrams are preferred over long paragraphs of technical prose.
 
-Mapa de alto nivel de la arquitectura.
+---
 
-| Sección | Tipo | Descripción |
+## Files in this directory
+
+### `system_overview.md` — System Overview
+
+High-level map of the architecture.
+
+| Section | Type | Description |
 |---|---|---|
-| Diagrama de Contexto (C4 Nivel 1) | **[OBLIGATORIO]** | El sistema ↔ actores externos. |
-| Diagrama de Contenedores (C4 Nivel 2) | **[OBLIGATORIO]** | Aplicaciones, bases de datos y servicios. |
-| Estructura de Carpetas | **[OBLIGATORIO]** | Explicación del propósito de las carpetas del código. |
-| Patrones Arquitectónicos | **[OBLIGATORIO]** | MVC, Clean Architecture, etc. |
+| Context Diagram (C4 Level 1) | **[REQUIRED]** | The system ↔ external actors. |
+| Container Diagram (C4 Level 2) | **[REQUIRED]** | Applications, databases, and services. |
+| Folder Structure | **[REQUIRED]** | Explanation of the purpose of the code's folders. |
+| Architectural Patterns | **[REQUIRED]** | MVC, Clean Architecture, etc. |
 
-**Frontmatter esperado:**
+**Expected frontmatter:**
 
 ```yaml
 ---
@@ -48,17 +48,17 @@ state: pending       # pending | doing | done | deprecated
 
 ---
 
-### `data_flow.md` — Flujos de Datos y Visión Global
+### `data_flow.md` — Data Flows and Global View
 
-Documenta el movimiento de información y la orquestación entre módulos.
+Documents the movement of information and the orchestration between modules.
 
-| Sección | Tipo | Descripción |
+| Section | Type | Description |
 |---|---|---|
-| Visión Global de Procesos | **[OBLIGATORIO]** | Diagramas Mermaid que unen User Stories de múltiples módulos. |
-| Modelo de Datos | **[OBLIGATORIO]** | Entidades y relaciones (Mermaid erDiagram). |
-| Mensajería/Eventos | **[OPCIONAL]** | Colas, Pub/Sub, Webhooks. |
+| Global Process View | **[REQUIRED]** | Mermaid diagrams that tie together User Stories from multiple modules. |
+| Data Model | **[REQUIRED]** | Entities and relationships (Mermaid erDiagram). |
+| Messaging/Events | **[OPTIONAL]** | Queues, Pub/Sub, Webhooks. |
 
-**Frontmatter esperado:**
+**Expected frontmatter:**
 
 ```yaml
 ---
@@ -66,24 +66,24 @@ type: data_flow
 version: 1.0
 last_updated: YYYY-MM-DD
 state: pending       # pending | doing | done | deprecated
-modules_covered: []  # Módulos que involucra (ej: [orders, clients, stock])
+modules_covered: []  # Modules involved (e.g., [orders, clients, stock])
 ---
 ```
 
 ---
 
-### `infrastructure.md` — Infraestructura y Despliegue
+### `infrastructure.md` — Infrastructure and Deployment
 
-Documenta el entorno donde corre el sistema.
+Documents the environment where the system runs.
 
-| Sección | Tipo | Descripción |
+| Section | Type | Description |
 |---|---|---|
-| Entorno | **[OBLIGATORIO]** | Cloud, On-premise, etc. |
-| Diagrama de Despliegue | **[OBLIGATORIO]** | Topología de red y servidores. |
-| CI/CD | **[OBLIGATORIO]** | Pipeline de despliegue. |
-| Variables y Secretos | **[OBLIGATORIO]** | Lista de variables necesarias. |
+| Environment | **[REQUIRED]** | Cloud, on-premise, etc. |
+| Deployment Diagram | **[REQUIRED]** | Network and server topology. |
+| CI/CD | **[REQUIRED]** | Deployment pipeline. |
+| Variables and Secrets | **[REQUIRED]** | List of required variables. |
 
-**Frontmatter esperado:**
+**Expected frontmatter:**
 
 ```yaml
 ---

@@ -1,19 +1,19 @@
 ---
 type: data_flow
 version: 1.0
-last_updated: 2026-02-23
+last_updated: 2026-06-10
 state: pending
 modules_covered: []
 ---
 
-# Flujos de Datos
+# Data Flows
 
-## Visión Global de Procesos
+## Global Process View
 
-<!-- [OBLIGATORIO] Diagramas Mermaid (sequenceDiagram) que unen User Stories de múltiples módulos. -->
+<!-- [REQUIRED] Mermaid diagrams (sequenceDiagram) that tie together User Stories from multiple modules. -->
 
 ---
 
-## Modelo de Datos
+## Data Model
 
-<!-- [OBLIGATORIO] Entidades y relaciones (Mermaid erDiagram). -->
+<!-- [REQUIRED] Entities and relationships (Mermaid erDiagram). -->

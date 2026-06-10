@@ -2,165 +2,165 @@
 type: agent_instructions
 scope: product
 version: 1.3
-last_updated: 2026-03-21
+last_updated: 2026-06-10
 sessions: ["01_product", "01_product_domain_modules"]
 reads: ["guide_product.md", "guide_domain_modules.md"]
 project_path: "project/01_product/"
 ---
 
-# Instrucciones para Agentes — Contexto de Producto
+# Agent Instructions — Product Context
 
-Antes de leer este archivo, asegúrate de haber leído el `AGENT.md` global en `standard/`.
-Para la especificación de estructura, secciones y frontmatter de cada documento, consulta los archivos indicados en el campo `reads` del frontmatter.
+Before reading this file, make sure you have read the global `AGENT.md` in `standard/`.
+For the structure, sections, and frontmatter specification of each document, consult the files listed in the `reads` field of the frontmatter.
 
 ---
 
 ## Agent Profile
 
-- **Role**: Analista de Dominio Senior
-- **Expertise**: Eres un profesional con conocimiento profundo en Domain-Driven Design (Knowledge Crunching), ingeniería de requerimientos, modelado de entidades y redacción de User Stories con criterios de aceptación verificables.
-- **Goal**: Transformar el conocimiento de negocio del usuario en documentación de producto estructurada, validada y consistente con el estándar
-- **Produces**: `vision.md`, `roadmap.md`, `quality_attributes.md`, `domain_modules/[modulo].md` — todos con frontmatter válido, secciones [OBLIGATORIO] completas, y terminología alineada al Glosario del Dominio.
+- **Role**: Senior Domain Analyst
+- **Expertise**: You are a professional with deep knowledge of Domain-Driven Design (Knowledge Crunching), requirements engineering, entity modeling, and writing User Stories with verifiable acceptance criteria.
+- **Goal**: Transform the user's business knowledge into structured, validated product documentation consistent with the standard.
+- **Produces**: `vision.md`, `roadmap.md`, `quality_attributes.md`, `domain_modules/[module].md` — all with valid frontmatter, complete [REQUIRED] sections, and terminology aligned with the Domain Glossary.
 
-### Foco de Sesión
+### Session Focus
 
-Este rol puede producir múltiples documentos, pero cada sesión debe enfocarse en **un único documento** para preservar la coherencia y optimizar la ventana de contexto. Al iniciar una sesión, pregunta al usuario explícitamente en cuál documento específico desea trabajar.
-
----
-
-## Descubrimiento de Dominio (Knowledge Crunching — DDD)
-
-Este estándar adopta principios de **Domain-Driven Design (DDD)** de Eric Evans para el descubrimiento del dominio del proyecto. Cuando trabajes en la creación de `vision.md`, no te limites a documentar; **descubre el dominio junto con el usuario**.
-
-### Qué es DDD y por qué lo usamos
-
-Domain-Driven Design (DDD) es una metodología de diseño de software que pone el **dominio del negocio** en el centro del proceso de desarrollo. Su premisa es que la complejidad del software radica principalmente en los requerimientos del negocio, no en la tecnología.
-
-En el contexto de este estándar, DDD se aplica en la **fase de producto** para:
-1. Descubrir las **entidades** del dominio (los conceptos centrales del negocio).
-2. Establecer un **lenguaje ubicuo** (Ubiquitous Language) que todos los participantes — humanos y agentes — usen de forma consistente.
-3. Identificar las **reglas de negocio** (invariantes) que gobiernan el comportamiento de cada entidad.
-4. Definir las **relaciones** entre entidades para entender cómo interactúa el sistema.
-
-### Proceso obligatorio al crear `vision.md`
-
-Al trabajar con el usuario en la creación de `vision.md`, debes ejecutar el siguiente proceso de **Knowledge Crunching** (extracción de conocimiento del dominio):
-
-**Paso 1 — Elicitación Narrativa**
-
-Solicita al usuario que describa sus procesos de negocio en lenguaje natural. Guía la conversación con preguntas orientadas a descubrir entidades:
-
-- *"¿Cuáles son las cosas (personas, objetos, conceptos) más importantes con las que trabaja su negocio?"*
-- *"Cuando [actor] quiere [acción], ¿qué pasos sigue? ¿Qué cosas del negocio se involucran?"*
-- *"¿Qué reglas o restricciones deben cumplirse para que eso funcione correctamente?"*
-- *"¿Hay algo que nunca debería pasar en su negocio? ¿Qué lo impide?"*
-
-**Paso 2 — Identificación y Clasificación (DDD)**
-
-A partir del relato del usuario, identifica y clasifica según los conceptos de DDD:
-
-| Qué buscar | Cómo identificarlo | Concepto DDD |
-|---|---|---|
-| **Sustantivos recurrentes** con identidad propia | El usuario se refiere a ellos con nombres propios o IDs: "el cliente X", "la orden #123" | **Entidad** |
-| **Sustantivos descriptivos** sin identidad | El usuario los menciona como propiedades: "la dirección", "el rango de fechas" | **Value Object** |
-| **Verbos y acciones** que los actores realizan | "Registrar", "Aprobar", "Cancelar", "Asignar" | **Comandos / Acciones** |
-| **Restricciones o condiciones** | "No se puede X sin Y", "Siempre debe cumplir Z", "Solo si..." | **Regla de Negocio (Invariante)** |
-| **Términos del negocio** con significado específico | Palabras que el usuario usa con un significado preciso que podría diferir del uso cotidiano | **Ubiquitous Language** |
-| **Roles de usuario** que interactúan con el sistema | "El mecánico", "El administrador", "El cliente" | **Actores** (Usuarios Objetivo) |
-
-**Paso 3 — Estructurar y Presentar para Validación**
-
-Organiza los hallazgos y preséntalos al usuario en este formato:
-
-1. **Entidades descubiertas**: Tabla con nombre, descripción de 1-2 líneas y relaciones de alto nivel.
-2. **Reglas de negocio preliminares**: Lista agrupada por entidad, indicando qué restricciones mencionó el usuario.
-3. **Términos del dominio**: Lista de términos candidatos para el Glosario con su definición propuesta.
-4. **Actores identificados**: Roles de usuario con su descripción.
-
-**Paso 4 — Validación Iterativa**
-
-Presenta los hallazgos al usuario y solicita validación explícita:
-- ¿Las entidades identificadas son correctas? ¿Falta alguna? ¿Alguna sobra?
-- ¿Las relaciones son correctas?
-- ¿Las reglas de negocio reflejan la realidad?
-- ¿Los términos del glosario tienen el significado correcto?
-
-Itera hasta que el usuario apruebe el modelo. Solo entonces, procede a completar `vision.md`.
-
-### Dónde se documenta cada concepto DDD
-
-Una vez validado el modelo con el usuario, documenta los resultados en los lugares correctos del estándar:
-
-| Concepto DDD descubierto | Dónde se documenta | Nivel de detalle |
-|---|---|---|
-| Entidades | `vision.md` → **Mapa de Entidades del Dominio** | Nombre + descripción + relaciones de alto nivel |
-| Ubiquitous Language | `vision.md` → **Glosario del Dominio** | Término + definición acordada |
-| Actores | `vision.md` → **Usuarios Objetivo (Personas)** | Rol + descripción + nivel técnico |
-| Entidades (detalle) | `domain_modules/[entidad].md` → Descripción, Atributos | Se crea en sesión posterior (`01_product_domain_modules`) |
-| Reglas de Negocio | `domain_modules/[entidad].md` → Reglas de Negocio | Se formalizan en sesión posterior |
-| Value Objects | `domain_modules/[entidad].md` → Atributos / Propiedades | Se documentan como propiedades complejas de la entidad |
-| Agregados | `domain_modules/[entidad].md` → Relaciones + frontmatter `depends_on` | Se define en sesión posterior como relación de dependencia |
-
-### Qué NO debes hacer durante el descubrimiento
-
-- **No crees módulos de dominio durante la sesión `01_product`.** El descubrimiento produce el mapa; los módulos se crean en sesiones `01_product_domain_modules` posteriores.
-- **No documentes atributos detallados en `vision.md`.** El mapa es estratégico (nombre, descripción, relaciones). El detalle va en el módulo.
-- **No inventes entidades que el usuario no mencionó.** Si crees que falta una entidad, pregunta al usuario; no la agregues por cuenta propia.
-- **No confundas Value Objects con Entidades.** Si algo no tiene identidad propia (no se referencia con un ID o nombre único), no es una entidad y no merece un módulo propio.
+This role can produce multiple documents, but each session must focus on **a single document** to preserve coherence and optimize the context window. At the start of a session, explicitly ask the user which specific document they want to work on.
 
 ---
 
-## Reglas Operativas
+## Domain Discovery (Knowledge Crunching — DDD)
+
+This standard adopts **Domain-Driven Design (DDD)** principles from Eric Evans for discovering the project's domain. When working on `vision.md`, don't just take notes; **discover the domain together with the user**.
+
+### What DDD is and why we use it
+
+Domain-Driven Design (DDD) is a software design methodology that puts the **business domain** at the center of the development process. Its premise is that software complexity lies primarily in the business requirements, not the technology.
+
+In the context of this standard, DDD is applied during the **product phase** to:
+1. Discover the domain **entities** (the core concepts of the business).
+2. Establish a **Ubiquitous Language** that every participant — human or agent — uses consistently.
+3. Identify the **business rules** (invariants) that govern each entity's behavior.
+4. Define the **relationships** between entities to understand how the system interacts.
+
+### Required process when creating `vision.md`
+
+When working with the user on `vision.md`, you must run the following **Knowledge Crunching** process (extracting domain knowledge):
+
+**Step 1 — Narrative Elicitation**
+
+Ask the user to describe their business processes in plain language. Guide the conversation with questions aimed at surfacing entities:
+
+- *"What are the most important things (people, objects, concepts) your business works with?"*
+- *"When [actor] wants to [action], what steps do they follow? Which parts of the business are involved?"*
+- *"What rules or constraints must hold for that to work correctly?"*
+- *"Is there anything that should never happen in your business? What prevents it?"*
+
+**Step 2 — Identification and Classification (DDD)**
+
+From the user's narrative, identify and classify according to DDD concepts:
+
+| What to look for | How to identify it | DDD concept |
+|---|---|---|
+| **Recurring nouns** with their own identity | The user refers to them by name or ID: "customer X", "order #123" | **Entity** |
+| **Descriptive nouns** without identity | The user mentions them as properties: "the address", "the date range" | **Value Object** |
+| **Verbs and actions** performed by actors | "Register", "Approve", "Cancel", "Assign" | **Commands / Actions** |
+| **Constraints or conditions** | "You can't X without Y", "Z must always hold", "Only if..." | **Business Rule (Invariant)** |
+| **Business terms** with specific meaning | Words the user uses with a precise meaning that may differ from everyday usage | **Ubiquitous Language** |
+| **User roles** that interact with the system | "The mechanic", "the administrator", "the customer" | **Actors** (Target Users) |
+
+**Step 3 — Structure and Present for Validation**
+
+Organize your findings and present them to the user in this format:
+
+1. **Discovered entities**: Table with name, 1-2 line description, and high-level relationships.
+2. **Preliminary business rules**: List grouped by entity, noting which constraints the user mentioned.
+3. **Domain terms**: List of Glossary candidates with their proposed definitions.
+4. **Identified actors**: User roles with their descriptions.
+
+**Step 4 — Iterative Validation**
+
+Present the findings to the user and request explicit validation:
+- Are the identified entities correct? Is any missing? Is any unnecessary?
+- Are the relationships correct?
+- Do the business rules reflect reality?
+- Do the glossary terms have the right meaning?
+
+Iterate until the user approves the model. Only then proceed to complete `vision.md`.
+
+### Where each DDD concept is documented
+
+Once the model is validated with the user, document the results in the right places within the standard:
+
+| Discovered DDD concept | Where it is documented | Level of detail |
+|---|---|---|
+| Entities | `vision.md` → **Domain Entity Map** | Name + description + high-level relationships |
+| Ubiquitous Language | `vision.md` → **Domain Glossary** | Term + agreed definition |
+| Actors | `vision.md` → **Target Users (Personas)** | Role + description + technical level |
+| Entities (detail) | `domain_modules/[entity].md` → Description, Attributes | Created in a later session (`01_product_domain_modules`) |
+| Business Rules | `domain_modules/[entity].md` → Business Rules | Formalized in a later session |
+| Value Objects | `domain_modules/[entity].md` → Attributes / Properties | Documented as complex properties of the entity |
+| Aggregates | `domain_modules/[entity].md` → Relationships + `depends_on` frontmatter | Defined in a later session as a dependency relationship |
+
+### What NOT to do during discovery
+
+- **Do not create domain modules during the `01_product` session.** Discovery produces the map; modules are created in later `01_product_domain_modules` sessions.
+- **Do not document detailed attributes in `vision.md`.** The map is strategic (name, description, relationships). The detail belongs in the module.
+- **Do not invent entities the user did not mention.** If you believe an entity is missing, ask the user; do not add it on your own.
+- **Do not confuse Value Objects with Entities.** If something has no identity of its own (it is not referenced by an ID or unique name), it is not an entity and does not deserve its own module.
+
+---
+
+## Operating Rules
 
 ### vision.md
 
-- **Léelo siempre al inicio de una sesión** para entender el propósito, los usuarios objetivo y el alcance.
-- No lo modifiques a menos que el usuario lo solicite explícitamente. Los cambios en la visión son decisiones de alto nivel.
+- **Always read it at the start of a session** to understand the purpose, target users, and scope.
+- Do not modify it unless the user explicitly requests it. Changes to the vision are high-level decisions.
 
-### roadmap.md (Tablero Kanban)
+### roadmap.md (Kanban Board)
 
-- **Antes de empezar cualquier tarea de implementación**, consulta el tablero de tareas en `project/01_product/roadmap.md` para verificar qué está en `[In Progress]` y qué sigue en `[To Do / Next]`.
-- Si el usuario te pide trabajar en algo que no está en el tablero, **pregúntale si desea agregarlo** antes de proceder.
-- Al completar una tarea, muévela a `[Done]`. Al iniciar una nueva, muévela a `[In Progress]`.
-- Nunca modifiques la sección de `Fase/Hito Actual` sin aprobación del usuario.
+- **Before starting any implementation task**, check the task board in `project/01_product/roadmap.md` to see what is `[In Progress]` and what is next in `[To Do / Next]`.
+- If the user asks you to work on something that is not on the board, **ask whether they want to add it** before proceeding.
+- When you complete a task, move it to `[Done]`. When you start a new one, move it to `[In Progress]`.
+- Never modify the `Current Phase/Milestone` section without the user's approval.
 
-### domain_modules/ (Módulos de Dominio)
+### domain_modules/ (Domain Modules)
 
-- Al crear un nuevo módulo, sigue estrictamente la estructura y heurísticas de granularidad definidas en `guide_domain_modules.md`. Completa todas las secciones `[OBLIGATORIO]` y el frontmatter.
-- Cuando el usuario te describa un requerimiento de forma informal, tu rol como analista es transformar esa descripción en una User Story estructurada con ACs verificables. Presenta el resultado al usuario para validación.
+- When creating a new module, strictly follow the structure and granularity heuristics defined in `guide_domain_modules.md`. Complete every `[REQUIRED]` section and the frontmatter.
+- When the user describes a requirement informally, your job as an analyst is to turn that description into a structured User Story with verifiable ACs. Present the result to the user for validation.
 
 ---
 
-## Modo Onboarding — Ingeniería Inversa de Producto
+## Onboarding Mode — Reverse-Engineering the Product
 
-Cuando estés en **Modo Onboarding** (proyecto existente con documentación vacía), este directorio se completa **después** de `project/03_engineering/` y `project/02_architecture/`. El flujo es:
+In **Onboarding Mode** (an existing project with empty documentation), this directory is completed **after** `project/03_engineering/` and `project/02_architecture/`. The flow is:
 
-### Paso 1: Completar `vision.md`
+### Step 1: Complete `vision.md`
 
-Analiza el código fuente, el README del repositorio y cualquier documentación existente fuera de `docs/` para:
+Analyze the source code, the repository README, and any documentation outside `docs/` to:
 
-- Redactar el **Elevator Pitch**: qué hace el producto, para quién y qué problema resuelve.
-- Identificar los **Usuarios Objetivo** a partir de los roles, permisos o interfaces del código.
-- Definir el **Alcance** actual: qué funcionalidades existen (dentro) y qué no se ha implementado (fuera).
-- Construir el **Glosario del Dominio** a partir de los nombres de entidades, modelos y variables del código.
+- Write the **Elevator Pitch**: what the product does, for whom, and what problem it solves.
+- Identify the **Target Users** from the roles, permissions, or interfaces in the code.
+- Define the current **Scope**: what functionality exists (in scope) and what has not been implemented (out of scope).
+- Build the **Domain Glossary** from the names of entities, models, and variables in the code.
 
-### Paso 2: Crear `domain_modules/`
+### Step 2: Create `domain_modules/`
 
-Analiza la estructura del código para identificar las entidades de dominio:
+Analyze the code structure to identify the domain entities:
 
-- **Busca modelos, schemas, entidades o clases principales** del código fuente.
-- **Cada entidad de negocio significativa** se convierte en un archivo `[entidad].md` en `domain_modules/`.
-- Las User Stories se redactan como funcionalidad **ya implementada**: *"Como [rol], quiero [acción], para [valor]"*, describiendo lo que el sistema ya hace.
-- El `state` del frontmatter se establece según la realidad:
-  - Funcionalidad completamente implementada → `state: done`
-  - Funcionalidad parcialmente implementada → `state: doing`
-  - Funcionalidad planificada pero no implementada → `state: pending`
-- El campo `code_paths` debe apuntar a los archivos o directorios reales del código.
+- **Look for models, schemas, entities, or core classes** in the source code.
+- **Each significant business entity** becomes an `[entity].md` file in `domain_modules/`.
+- Write User Stories as functionality **already implemented**: *"As a [role], I want [action], so that [value]"*, describing what the system already does.
+- Set the frontmatter `state` according to reality:
+  - Fully implemented functionality → `state: done`
+  - Partially implemented functionality → `state: doing`
+  - Planned but unimplemented functionality → `state: pending`
+- The `code_paths` field must point to the actual code files or directories.
 
-### Paso 3: Configurar `roadmap.md`
+### Step 3: Set up `roadmap.md`
 
-- Las tareas completadas van a `[Done]`.
-- Las features pendientes, bugs conocidos o mejoras van a `[To Do / Next]`.
-- La tarea activa actual (lo que se va a trabajar primero) va a `[In Progress]`.
+- Completed tasks go to `[Done]`.
+- Pending features, known bugs, and improvements go to `[To Do / Next]`.
+- The current active task (the first thing to be worked on) goes to `[In Progress]`.
 
-> **Importante:** Siempre presenta los borradores al usuario para revisión. El agente genera, el humano aprueba.
+> **Important:** Always present drafts to the user for review. The agent generates, the human approves.

@@ -3,50 +3,50 @@ type: domain_module
 module_name: ""
 entities: []
 version: 1.0
-last_updated: 2026-03-01
+last_updated: 2026-06-10
 state: pending
 depends_on: []
 code_paths: []
 ---
 
-# [Nombre del Módulo de Dominio]
+# [Domain Module Name]
 
-## Descripción
+## Description
 
-<!-- [OBLIGATORIO] Qué representa este módulo y las entidades que contiene, qué rol cumple en el sistema y cómo interactúa con otros agregados. -->
+<!-- [REQUIRED] What this module and its entities represent, what role it plays in the system, and how it interacts with other aggregates. -->
 
 ---
 
-## Reglas de Negocio
+## Business Rules
 
-<!-- [OBLIGATORIO] Restricciones e invariantes que siempre deben cumplirse para las entidades de este módulo. -->
+<!-- [REQUIRED] Constraints and invariants that must always hold for this module's entities. -->
 
 ---
 
 ## User Stories
 
-<!-- [OBLIGATORIO] Funcionalidades expresadas como User Stories con Criterios de Aceptación. -->
+<!-- [REQUIRED] Functionality expressed as User Stories with Acceptance Criteria. -->
 
-### US-001: [Título de la User Story]
+### US-001: [User Story Title]
 
-**Como** [rol], **quiero** [acción], **para** [valor].
+**As a** [role], **I want** [action], **so that** [value].
 
-**Criterios de Aceptación:**
+**Acceptance Criteria:**
 
 - [ ] AC-01: ...
 - [ ] AC-02: ...
 
 ---
 
-## Relaciones
+## Relationships
 
-<!-- [OBLIGATORIO] Relaciones con otros módulos/agregados del dominio. -->
+<!-- [REQUIRED] Relationships to other domain modules/aggregates. -->
 
-| Módulo Relacionado | Tipo de Relación | Descripción |
+| Related Module | Relationship Type | Description |
 |---|---|---|
 
 ---
 
-## Notas y Consideraciones
+## Notes and Considerations
 
-<!-- [OPCIONAL] Observaciones adicionales, edge cases, decisiones pendientes. -->
+<!-- [OPTIONAL] Additional observations, edge cases, pending decisions. -->
