@@ -34,6 +34,8 @@ This repository contains a **docs-as-code framework** designed so that AI agents
 #### Reference Templates (`standard/templates/`)
 
 - [AGENTS.md](./templates/AGENTS.md) — Agent entry-point stub for the repository root
+- [project_status.yaml](./templates/project_status.yaml)
+- [TODO.md](./templates/TODO.md)
 - [vision.md](./templates/vision.md)
 - [roadmap.md](./templates/roadmap.md)
 - [quality_attributes.md](./templates/quality_attributes.md)
@@ -47,6 +49,8 @@ This repository contains a **docs-as-code framework** designed so that AI agents
 
 ### Project Documents (`project/`)
 
+- `project/project_status.yaml` — Aggregate state of the project (single source of truth)
+- `project/TODO.md` — Cross-module pending items
 - `project/01_product/` — vision.md, roadmap.md, quality_attributes.md, domain_modules/
 - `project/02_architecture/` — system_overview.md, data_flow.md, infrastructure.md
 - `project/03_engineering/` — tech_stack.yaml, testing_strategy.md, api_guidelines.md
@@ -88,6 +92,8 @@ All documents must remain **human-readable** — humans are the ones who create,
 │   │
 │   └── templates/                         # Reference templates for agents
 │       ├── AGENTS.md
+│       ├── project_status.yaml
+│       ├── TODO.md
 │       ├── vision.md
 │       ├── roadmap.md
 │       ├── quality_attributes.md
@@ -100,6 +106,8 @@ All documents must remain **human-readable** — humans are the ones who create,
 │       └── api_guidelines.md
 │
 └── project/                               # Project documents (empty by default)
+    ├── project_status.yaml                # Aggregate state: module states, coverage, debt (source of truth)
+    ├── TODO.md                            # Cross-module pending items discovered during implementation
     ├── 01_product/
     │   ├── vision.md                      # Product vision, elevator pitch, scope, and Domain Entity Map (DDD)
     │   ├── roadmap.md                     # Current project status, milestones, and what's ahead
@@ -148,7 +156,8 @@ If the project has no code yet, fill out the documentation **before implementing
 4. Copy the architecture templates to `project/02_architecture/` → Design system_overview, data_flow, infrastructure.
 5. Copy `templates/tech_stack.yaml` to `project/03_engineering/` → Choose technologies (with ADRs).
 6. Copy `templates/testing_strategy.md` to `project/03_engineering/` → Testing strategy.
-7. Implement the code following the documentation.
+7. Copy `templates/project_status.yaml` and `templates/TODO.md` to `project/` → Initialize the status artifacts (every module starts as `pending`).
+8. Implement the code following the documentation.
 
 ### Existing Project (Brownfield)
 
@@ -162,6 +171,7 @@ If the project already has code, document it through **reverse engineering**. Th
 5. **`project/01_product/domain_modules/`** → Identify entities in the code and create modules with User Stories documented as already implemented (`state: done`).
 6. **`project/01_product/roadmap.md`** → Use the board to plan what's **missing**: new features, refactors, bugs.
 7. **`project/04_adrs/`** → Create retroactive ADRs (`status: accepted`) for the technical decisions already made.
+8. **`project/project_status.yaml` and `project/TODO.md`** → Record each module's real state (and known debt), and any cross-module pending items detected during the analysis.
 
 > **Tip:** An AI agent can dramatically speed up the brownfield path. It can analyze the source code and generate documentation drafts for human review. See `AGENT.md` for Onboarding Mode.
 
@@ -207,11 +217,12 @@ Each step is independent: upgrade only what the project's complexity actually de
 Order in which a new agent should consume the documentation to get contextually oriented at the lowest token cost:
 
 1. **`standard/AGENT.md`** → Understand the global operating rules.
-2. **`project/01_product/roadmap.md`** → Identify the current milestone/sprint and pick up the active task (`[In Progress]`).
-3. **`project/01_product/domain_modules/[affected_module].md`** → Read **ONLY** the module (or modules) directly referenced by the chosen active task.
-4. **`project/02_architecture/system_overview.md`** → Understand where that module fits within the overall system.
-5. **`project/03_engineering/tech_stack.yaml`** → Know the technical boundaries before generating or modifying code.
-6. *(Optional)* **`project/04_adrs/`** and **`project/01_product/vision.md`** → Consult the decision history or product vision only when blocked or facing directional questions during development.
+2. **`project/project_status.yaml`** → Get the aggregate state of every module (and its known debt) at minimal token cost.
+3. **`project/01_product/roadmap.md`** → Identify the current milestone/sprint and pick up the active task (`[In Progress]`).
+4. **`project/01_product/domain_modules/[affected_module].md`** → Read **ONLY** the module (or modules) directly referenced by the chosen active task. Check `project/TODO.md` for pending items that affect them.
+5. **`project/02_architecture/system_overview.md`** → Understand where that module fits within the overall system.
+6. **`project/03_engineering/tech_stack.yaml`** → Know the technical boundaries before generating or modifying code.
+7. *(Optional)* **`project/04_adrs/`** and **`project/01_product/vision.md`** → Consult the decision history or product vision only when blocked or facing directional questions during development.
 
 ---
 
@@ -256,6 +267,37 @@ Applies to: `domain_modules`, documents in `project/02_architecture/`, and docum
 ### Type-specific schemas
 
 Each `guide_*.md` file in `standard/` defines the complete frontmatter schema for the project files it covers, including the specific fields that apply to that document type.
+
+---
+
+## Project Status Artifacts
+
+Two machine-readable artifacts at the root of `project/` centralize the project's operational state, so agents can know where the project stands without parsing full documents. They are part of the **full** adoption profile (Lite projects skip them).
+
+### `project_status.yaml` — Aggregate State
+
+The **single source of truth for module state**. It records, per module: its `state`, its test coverage, and its known technical debt.
+
+```yaml
+last_updated: YYYY-MM-DD
+
+modules:
+  clients:
+    state: done              # pending | doing | done | deprecated
+    coverage: 97             # [OPTIONAL] test coverage %
+    debt:                    # [OPTIONAL] known technical debt
+      - "Pagination missing on the list endpoint"
+  orders:
+    state: doing
+```
+
+**Authority rule:** for module state, this file is authoritative. The `state` field in each module's frontmatter and the Kanban board in `roadmap.md` are **views** that must never contradict it. Any state change updates all three in the same change (see the Anti-Drift Protocol in `AGENT.md`); automated tooling may verify their consistency. The current phase/milestone is **not** recorded here — `roadmap.md` owns it.
+
+### `TODO.md` — Cross-Module Pending Items
+
+A living list of **fine-grained tasks discovered while working on one module that affect another** (e.g., "when `orders` is implemented, add the reverse relation in `clients`"). This is **not the backlog**: planned work (User Stories, features, bugs) lives on the `roadmap.md` board. `TODO.md` holds the small, concrete stubs that would otherwise be lost in conversation.
+
+Lifecycle: add an entry when the pending item is discovered; remove it when resolved (git preserves the history). Before working on a module, check whether any entry affects it.
 
 ---
 

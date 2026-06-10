@@ -1,0 +1,12 @@
+# Aggregate project state — single source of truth for module states.
+# Agents read this file early (Reading Protocol step 2) to know where
+# the project stands at minimal token cost.
+# See "Project Status Artifacts" in standard/README.md for the authority rule.
+
+last_updated: YYYY-MM-DD
+
+modules: {}
+  # module_name:
+  #   state: pending         # pending | doing | done | deprecated
+  #   coverage: 0            # [OPTIONAL] test coverage %
+  #   debt: []               # [OPTIONAL] known technical debt items

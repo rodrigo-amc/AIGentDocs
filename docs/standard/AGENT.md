@@ -201,8 +201,9 @@ Documentation that drifts from the code stops being a source of truth. To preven
 
 | Triggering event | Required documentation update |
 |---|---|
-| You start working on a task/US | `roadmap.md`: move it to `[In Progress]`; affected module → `state: doing` |
-| You complete a task/US | `roadmap.md`: move it to `[Done]`; if all of the module's planned US are complete → `state: done` |
+| You start working on a task/US | `roadmap.md`: move it to `[In Progress]`; affected module → `state: doing` in `project_status.yaml` **and** its frontmatter |
+| You complete a task/US | `roadmap.md`: move it to `[Done]`; if all of the module's planned US are complete → `state: done` in `project_status.yaml` **and** its frontmatter |
+| While working on one module you discover a pending change in another | Add an entry to `project/TODO.md`; remove the entries you resolve |
 | You create code files or directories for a module | The module's `code_paths` frontmatter field |
 | A new dependency or technology is adopted | Accepted ADR **plus** `tech_stack.yaml` entry — never code first |
 | An accepted ADR modifies a technical standard | The corresponding file in `project/03_engineering/` (ADR Propagation) |
@@ -211,7 +212,7 @@ Documentation that drifts from the code stops being a source of truth. To preven
 | API conventions change (auth, versioning, response format) | `api_guidelines.md` |
 | A requirement proves wrong or incomplete during implementation | **Stop.** The domain module is corrected first (with the user's approval), then the code |
 
-**Module state rule:** a module's `state` reflects its User Stories on the board — at least one in progress → `doing`; all planned ones completed → `done`.
+**Module state rule:** a module's `state` reflects its User Stories on the board — at least one in progress → `doing`; all planned ones completed → `done`. The authoritative record is `project/project_status.yaml`; the module's frontmatter and the board are views that must never contradict it (see Project Status Artifacts in `README.md`).
 
 **Drift handling:** if at any point you detect that the documentation and the code contradict each other, **stop and report the discrepancy to the user**. Do not silently adjust either side.
 
@@ -233,5 +234,7 @@ Before considering any task complete, verify:
 - [ ] Does the generated code respect `tech_stack.yaml`?
 - [ ] Do new or modified documents have valid frontmatter?
 - [ ] Does `roadmap.md` reflect the progress made?
+- [ ] Is `project_status.yaml` consistent with the frontmatter states and the board?
+- [ ] Did you record in `project/TODO.md` any cross-module pending item you discovered (and remove those you resolved)?
 - [ ] Are the `[REQUIRED]` sections of the touched documents complete?
 - [ ] Are new code files or directories registered in the `code_paths` of the corresponding domain module?
