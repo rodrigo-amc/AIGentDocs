@@ -224,6 +224,7 @@ Order in which a new agent should consume the documentation to get contextually 
 5. **When adding or removing files**, update the Table of Contents in this file.
 6. **Sections marked [REQUIRED]** may not be removed or left empty.
 7. **Every new document** must include the YAML frontmatter corresponding to its type (see next section).
+8. **Code↔docs synchronization** is governed by the **Anti-Drift Protocol** in `AGENT.md` (Global Rules → Traceability and Synchronization): each triggering event (task started/completed, new dependency, accepted ADR, infrastructure change...) lists the documentation update required in the same change.
 
 ---
 

@@ -204,12 +204,27 @@ Each session type has a **single objective**, a **bounded write scope**, and an 
 - **Do not install or propose new dependencies without discussing it with the human developer.** Adding a dependency is a structural decision that impacts design, infrastructure, and cost. It must be recorded as an ADR.
 - When working on a domain module, check the `code_paths` field in its frontmatter to know which code files or directories belong to it.
 
-### Traceability
+### Traceability and Synchronization (Anti-Drift Protocol)
 
-- When you complete a User Story or task from `roadmap.md`, update its status on the board (move it to `[Done]`).
-- **State Synchronization**: Each domain module has a global state in its frontmatter (`state`). Whenever you move a task on the `project/01_product/roadmap.md` Kanban board to `[In Progress]` or `[Done]`, reassess the affected module's `state`:
-  - If at least one of the module's User Stories is in progress → `state: doing`.
-  - If all planned User Stories are completed → `state: done`.
+Documentation that drifts from the code stops being a source of truth. To prevent this, the following events **require** updating the documentation **as part of the same change** (same session, same commit/PR) — never "later":
+
+| Triggering event | Required documentation update |
+|---|---|
+| You start working on a task/US | `roadmap.md`: move it to `[In Progress]`; affected module → `state: doing` |
+| You complete a task/US | `roadmap.md`: move it to `[Done]`; if all of the module's planned US are complete → `state: done` |
+| You create code files or directories for a module | The module's `code_paths` frontmatter field |
+| A new dependency or technology is adopted | Accepted ADR **plus** `tech_stack.yaml` entry — never code first |
+| An accepted ADR modifies a technical standard | The corresponding file in `project/03_engineering/` (ADR Propagation) |
+| A new container, component, or cross-module flow appears | `system_overview.md` and/or `data_flow.md`; an ADR if the decision is significant |
+| Deployment, environment, or environment variables change | `infrastructure.md` (including Variables and Secrets) |
+| API conventions change (auth, versioning, response format) | `api_guidelines.md` |
+| A requirement proves wrong or incomplete during implementation | **Stop.** The domain module is corrected first (with the user's approval), then the code |
+
+**Module state rule:** a module's `state` reflects its User Stories on the board — at least one in progress → `doing`; all planned ones completed → `done`.
+
+**Drift handling:** if at any point you detect that the documentation and the code contradict each other, **stop and report the discrepancy to the user**. Do not silently adjust either side.
+
+> This protocol is deliberately mechanical: each row is verifiable by inspecting a change against the documents it should have touched. Automated tooling (linter in pre-commit/CI) may enforce it.
 
 ---
 
