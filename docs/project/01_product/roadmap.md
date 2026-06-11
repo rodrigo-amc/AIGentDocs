@@ -18,7 +18,6 @@ current_phase: "Phase 2 — CLI v0.1"
 ### [In Progress]
 
 ### [To Do / Next]
-- [T-09] npm publish (`npx aigenticdocs`) — requires reserving the package name first.
 
 ### [Blocked / Review]
 
@@ -33,4 +32,5 @@ current_phase: "Phase 2 — CLI v0.1"
 - [T-07] Enforcement, inform-don't-block: `hooks install` writes the pre-commit hook (only criticals block; failure message shows the conscious `--no-verify` bypass; refuses to overwrite an existing hook); reusable composite Action (`action.yml`) with `fail-on: critical | never` and CLI version pinning (works once T-09 publishes to npm); repo CI runs tests + self-lint on every PR.
 - [T-08] `adapt`: registry-driven thin pointers to AGENTS.md (single canonical source) for claude (`CLAUDE.md` with `@AGENTS.md` import), cursor (`.cursor/rules`), copilot (`copilot-instructions.md`), antigravity (`GEMINI.md` as the override layer — Antigravity reads AGENTS.md natively since v1.20.3). Generation marker: adapt only overwrites files it generated; hand-edited files are never touched.
 - [T-10] No-CLI tarball/zip release per standard version: CI on `standard-v*` tags assembles the bundle by running our own `init` (dogfooding) after verifying tag = changelog = package version (`scripts/check-standard-version.mjs`).
+- [T-09] Published to npm (2026-06-11): `@aigenticdocs/standard@1.4.3`, `@aigenticdocs/core@0.1.0`, `aigenticdocs@0.1.0` under the `aigenticdocs` org. Verified from a clean directory via `npx aigenticdocs@latest` (init + lint) and the `agd` bin alias. Publishing used the maintainer's WebAuthn 2FA; an Automation token will be needed when releases move to CI.
 - [T-11] `update [--check]`: zero-config version detection (the adopter's own changelog.yaml copy declares the installed version — no `standard_version` field needed, a simplification over the original design); the changelog entries between versions are the migration notes; a customized README.md is preserved with the incoming one written to README.md.new for manual merge; `--check` reports without touching (exit 1 if outdated, CI-friendly); 'ahead' state tells the adopter to upgrade the CLI instead.
