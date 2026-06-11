@@ -19,7 +19,7 @@ current_phase: "Phase 2 — CLI v0.1"
 
 ### [To Do / Next]
 - [T-06] `init`: scaffold docs/ + `AGENTS.md` stub; `--lite`, `--lang` flags.
-- [T-07] Pre-commit hook template + reusable GitHub Action running `lint`.
+- [T-07] Pre-commit hook template + reusable GitHub Action running `lint`. Design constraint: the tool informs, the human decides — only critical findings fail; the hook's failure message must explicitly show the conscious bypass (`git commit --no-verify`); the Action takes a `fail-on: critical | never` input, and merge-blocking is the adopter's branch-protection choice, never the tool's.
 - [T-08] `adapt`: generate `CLAUDE.md`, `.cursor/rules`, `copilot-instructions.md`, `GEMINI.md` from the standard.
 - [T-09] npm publish (`npx aigenticdocs`) — requires reserving the package name first.
 - [T-10] No-CLI tarball release per standard version (CI on tag).
