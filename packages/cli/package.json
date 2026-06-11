@@ -14,6 +14,7 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@aigenticdocs/core": "0.1.0"
+    "@aigenticdocs/core": "0.1.0",
+    "@aigenticdocs/standard": "^1.4.3"
   }
 }

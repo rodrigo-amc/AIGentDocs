@@ -1,6 +1,7 @@
 import { createRequire } from "node:module";
+import path from "node:path";
 
-import { lintProject, type Finding } from "@aigenticdocs/core";
+import { initProject, lintProject, type Finding, type InitProfile } from "@aigenticdocs/core";
 
 const require = createRequire(import.meta.url);
 const { version } = require("../../package.json") as { version: string };
@@ -10,16 +11,23 @@ const HELP = `aigenticdocs ${version} — tooling for the AIGenticDocs docs-as-c
 Usage: aigenticdocs <command>   (or its short alias: agd <command>)
 
 Commands:
-  lint [path]   Validate documentation compliance (path defaults to the
-                current directory; exits 1 on critical findings)
-  init          Scaffold docs/ into a repository       (planned: T-06)
-  adapt         Generate per-tool adapter files        (planned: T-08)
-  update        Upgrade docs/standard to a new version (planned: T-11)
+  init [path] [--lite]   Scaffold docs/ into a repository (path defaults to
+                         the current directory; --lite for the minimal profile)
+  lint [path]            Validate documentation compliance (exits 1 on
+                         critical findings)
+  adapt                  Generate per-tool adapter files        (planned: T-08)
+  update                 Upgrade docs/standard to a new version (planned: T-11)
 
 Options:
   -h, --help     Show this help
   -v, --version  Show the CLI version
 `;
+
+/** Locate the packaged standard (ADR-0004). */
+function standardDir(): string {
+  const pkgJson = require.resolve("@aigenticdocs/standard/package.json");
+  return path.join(path.dirname(pkgJson), "standard");
+}
 
 export interface Io {
   out: (text: string) => void;
@@ -80,6 +88,39 @@ export async function main(argv: string[], io: Io): Promise<number> {
 
   if (command === "lint") {
     return runLint(argv[1] ?? process.cwd(), io);
+  }
+
+  if (command === "init") {
+    const rest = argv.slice(1);
+    const profile: InitProfile = rest.includes("--lite") ? "lite" : "full";
+    const positional = rest.filter((arg) => !arg.startsWith("--"));
+    const unknownFlags = rest.filter((arg) => arg.startsWith("--") && arg !== "--lite");
+    if (unknownFlags.length > 0) {
+      io.err(`aigenticdocs: unknown init option '${unknownFlags[0]}'\n`);
+      return 2;
+    }
+    const target = positional[0] ?? process.cwd();
+    try {
+      const result = await initProject(target, standardDir(), profile);
+      io.out(`Initialized AIGenticDocs (${result.profile} profile) in ${target}:\n`);
+      for (const entry of result.created) {
+        io.out(`  + ${entry}\n`);
+      }
+      io.out(
+        "\nNext steps:\n" +
+          "  1. Customize docs/standard/README.md (project name, conventions" +
+          (result.profile === "lite" ? ", set 'Adoption profile: lite'" : "") +
+          ").\n" +
+          "  2. Read docs/standard/QUICKSTART.md for the workflow.\n" +
+          (result.profile === "lite"
+            ? "  3. Run 'aigenticdocs lint' — the empty [REQUIRED] sections it reports are your documentation to-do list.\n"
+            : "  3. Start a 01_product session to create vision.md and roadmap.md from the templates.\n"),
+      );
+      return 0;
+    } catch (error) {
+      io.err(`aigenticdocs: ${error instanceof Error ? error.message : String(error)}\n`);
+      return 2;
+    }
   }
 
   io.err(`aigenticdocs: unknown or not yet implemented command '${command}'. See 'aigenticdocs help'.\n`);

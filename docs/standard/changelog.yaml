@@ -1,6 +1,18 @@
 # Version History of the Documentation Standard
 # Each entry records a version of the standard and its changes.
 
+- version: "1.4.3"
+  date: "2026-06-11"
+  summary: "Uniform date placeholders in templates"
+  changes:
+    - type: changed
+      description: >
+        All template frontmatter now uses the literal 'YYYY-MM-DD'
+        placeholder for last_updated (some templates carried concrete
+        dates, and vision.md used comment-style placeholders). Enables
+        'aigenticdocs init' to stamp the current date uniformly when
+        copying templates.
+
 - version: "1.4.2"
   date: "2026-06-11"
   summary: "Guide/template reconciliation found by dogfooding the linter"

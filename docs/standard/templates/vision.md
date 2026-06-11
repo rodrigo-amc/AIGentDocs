@@ -1,8 +1,8 @@
 ---
 type: vision
-version: # Document version
-last_updated: # Date of last update
-change_summary: # Brief summary of the changes in this version
+version: 1.0
+last_updated: YYYY-MM-DD
+change_summary: ""   # Brief summary of the changes in this version
 ---
 
 # Product Vision

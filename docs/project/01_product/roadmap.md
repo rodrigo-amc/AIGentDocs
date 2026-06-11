@@ -18,7 +18,6 @@ current_phase: "Phase 2 — CLI v0.1"
 ### [In Progress]
 
 ### [To Do / Next]
-- [T-06] `init`: scaffold docs/ + `AGENTS.md` stub; `--lite`, `--lang` flags.
 - [T-07] Pre-commit hook template + reusable GitHub Action running `lint`. Design constraint: the tool informs, the human decides — only critical findings fail; the hook's failure message must explicitly show the conscious bypass (`git commit --no-verify`); the Action takes a `fail-on: critical | never` input, and merge-blocking is the adopter's branch-protection choice, never the tool's.
 - [T-08] `adapt`: generate `CLAUDE.md`, `.cursor/rules`, `copilot-instructions.md`, `GEMINI.md` from the standard.
 - [T-09] npm publish (`npx aigenticdocs`) — requires reserving the package name first.
@@ -34,3 +33,4 @@ current_phase: "Phase 2 — CLI v0.1"
 - [T-03] `lint` v0: frontmatter validation (presence, required fields, allowed `state`/`status` values, date format, array fields). Depends on ADR-0003 (`yaml` package, accepted).
 - [T-04] `lint` v1: reference consistency (tech_stack↔ADRs, `supersedes` reciprocity, `code_paths`, roadmap see-references, project_status authority rule). ToC sync deferred: the ToC contract for project files needs design first.
 - [T-05] `lint` v2: [REQUIRED] section presence and non-emptiness per document type, US without ACs (critical) and US > 6 ACs (warning), applied Corrections need a Resolution, oversized Mermaid diagrams (suggestion). English canonical headings only for now — per-language catalogs are future work.
+- [T-06] `init`: full profile (structure + dated status artifacts + AGENTS.md, no placeholder content docs) and `--lite` (the three Lite files; a fresh lint then lists the empty sections as the to-do list). Standard ships as `@aigenticdocs/standard`, synced at build from docs/standard (ADR-0004, proposed). `--lang` deferred until a frozen Spanish translation exists.

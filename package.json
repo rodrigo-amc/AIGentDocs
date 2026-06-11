@@ -11,7 +11,8 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "tsc -b",
+    "sync-standard": "node scripts/sync-standard.mjs",
+    "build": "npm run sync-standard && tsc -b",
     "test": "npm run build && node --test packages/core/dist/test/ packages/cli/dist/test/",
     "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo"
   },

@@ -1,7 +1,7 @@
 ---
 type: api_guidelines
 version: 1.0
-last_updated: 2026-06-11
+last_updated: YYYY-MM-DD
 state: pending
 api_type: ""         # REST | GraphQL | gRPC
 ---

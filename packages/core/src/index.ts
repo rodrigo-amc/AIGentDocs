@@ -40,3 +40,4 @@ export { extractFrontmatter, parseYaml, type FrontmatterResult } from "./frontma
 export { lintMarkdown, lintProject, type LintProjectResult } from "./lint.js";
 export { loadProject, type ProjectDocument, type ProjectModel, type YamlArtifact } from "./project.js";
 export { checkConsistency } from "./consistency.js";
+export { initProject, type InitProfile, type InitResult } from "./scaffold.js";
