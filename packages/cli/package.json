@@ -5,7 +5,8 @@
   "license": "MIT",
   "type": "module",
   "bin": {
-    "aigenticdocs": "dist/src/index.js"
+    "aigenticdocs": "dist/src/index.js",
+    "agd": "dist/src/index.js"
   },
   "main": "dist/src/main.js",
   "types": "dist/src/main.d.ts",

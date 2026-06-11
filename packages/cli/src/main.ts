@@ -5,7 +5,7 @@ const { version } = require("../../package.json") as { version: string };
 
 const HELP = `aigenticdocs ${version} — tooling for the AIGenticDocs docs-as-code standard
 
-Usage: aigenticdocs <command>
+Usage: aigenticdocs <command>   (or its short alias: agd <command>)
 
 Commands:
   init    Scaffold docs/ into a repository       (planned: T-06)
