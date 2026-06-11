@@ -1,7 +1,7 @@
 import { createRequire } from "node:module";
 import path from "node:path";
 
-import { initProject, lintProject, type Finding, type InitProfile } from "@aigenticdocs/core";
+import { adaptProject, initProject, lintProject, type Finding, type InitProfile } from "@aigenticdocs/core";
 
 import { installPreCommitHook } from "./hooks.js";
 
@@ -19,7 +19,10 @@ Commands:
                          critical findings)
   hooks install [path]   Install the pre-commit hook that runs lint (only
                          critical findings block; bypass: --no-verify)
-  adapt                  Generate per-tool adapter files        (planned: T-08)
+  adapt [path] [--tool x]  Generate per-tool adapter files pointing to
+                         AGENTS.md (tools: claude, cursor, copilot,
+                         antigravity; default: all). Never overwrites
+                         hand-edited files.
   update                 Upgrade docs/standard to a new version (planned: T-11)
 
 Options:
@@ -120,6 +123,42 @@ export async function main(argv: string[], io: Io): Promise<number> {
             ? "  3. Run 'aigenticdocs lint' — the empty [REQUIRED] sections it reports are your documentation to-do list.\n"
             : "  3. Start a 01_product session to create vision.md and roadmap.md from the templates.\n"),
       );
+      return 0;
+    } catch (error) {
+      io.err(`aigenticdocs: ${error instanceof Error ? error.message : String(error)}\n`);
+      return 2;
+    }
+  }
+
+  if (command === "adapt") {
+    const rest = argv.slice(1);
+    const tools: string[] = [];
+    const positional: string[] = [];
+    for (let i = 0; i < rest.length; i++) {
+      const arg = rest[i] ?? "";
+      if (arg === "--tool") {
+        const value = rest[++i];
+        if (value === undefined) {
+          io.err("aigenticdocs: --tool requires a value\n");
+          return 2;
+        }
+        tools.push(...value.split(","));
+      } else if (arg.startsWith("--")) {
+        io.err(`aigenticdocs: unknown adapt option '${arg}'\n`);
+        return 2;
+      } else {
+        positional.push(arg);
+      }
+    }
+    try {
+      const result = await adaptProject(positional[0] ?? process.cwd(), tools);
+      for (const entry of result.written) {
+        io.out(`  + ${entry.file}  (${entry.description})\n`);
+      }
+      for (const skip of result.skipped) {
+        io.out(`  ! ${skip.file}  (${skip.reason})\n`);
+      }
+      io.out(`\n${result.written.length} adapter(s) written, ${result.skipped.length} skipped. Adapters point to AGENTS.md — edit that file, then re-run adapt.\n`);
       return 0;
     } catch (error) {
       io.err(`aigenticdocs: ${error instanceof Error ? error.message : String(error)}\n`);

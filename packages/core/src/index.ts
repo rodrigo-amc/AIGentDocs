@@ -41,3 +41,4 @@ export { lintMarkdown, lintProject, type LintProjectResult } from "./lint.js";
 export { loadProject, type ProjectDocument, type ProjectModel, type YamlArtifact } from "./project.js";
 export { checkConsistency } from "./consistency.js";
 export { initProject, type InitProfile, type InitResult } from "./scaffold.js";
+export { adaptProject, ADAPTER_TARGETS, GENERATION_MARKER, type AdaptResult, type AdapterTarget } from "./adapt.js";
