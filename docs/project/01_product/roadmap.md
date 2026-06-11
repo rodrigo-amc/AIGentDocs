@@ -17,11 +17,8 @@ current_phase: "Phase 2 — CLI v0.1"
 
 ### [In Progress]
 
-- [T-01] Bootstrap the tooling docs (vision, roadmap, tech stack, runtime ADR) — this work.
-
 ### [To Do / Next]
 
-- [T-02] Monorepo skeleton: `packages/core` + `packages/cli`, TypeScript config, test runner (per ADR-0002).
 - [T-03] `lint` v0: frontmatter validation (presence, required fields, allowed `state`/`status` values, date format).
 - [T-04] `lint` v1: reference consistency (roadmap↔modules, tech_stack↔ADRs, `code_paths`, `supersedes` reciprocity, ToC sync, status-artifact consistency).
 - [T-05] `lint` v2: [REQUIRED] section presence + countable thresholds (US > 6 ACs, oversized diagrams).
@@ -35,3 +32,6 @@ current_phase: "Phase 2 — CLI v0.1"
 ### [Blocked / Review]
 
 ### [Done]
+
+- [T-01] Bootstrap the tooling docs (vision, roadmap, tech stack, runtime ADR).
+- [T-02] Monorepo skeleton: `packages/core` + `packages/cli`, TypeScript project references, `node:test` runner (per ADR-0002).
