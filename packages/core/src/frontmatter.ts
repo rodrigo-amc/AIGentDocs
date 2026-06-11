@@ -16,6 +16,11 @@ export interface FrontmatterResult {
 
 const FENCE = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/;
 
+/** Parse a full YAML document. Throws on invalid YAML (caller decides severity). */
+export function parseYaml(text: string): unknown {
+  return parse(text);
+}
+
 export function extractFrontmatter(markdown: string): FrontmatterResult {
   const match = FENCE.exec(markdown);
   if (!match) {

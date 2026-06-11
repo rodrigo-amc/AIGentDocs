@@ -3,7 +3,7 @@ type: adr
 id: 3
 version: 1.0
 last_updated: 2026-06-11
-status: proposed
+status: accepted
 date: 2026-06-11
 decision_makers: [rodrigo-amc]
 supersedes: null

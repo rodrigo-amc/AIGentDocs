@@ -1,7 +1,3 @@
-import { readdir, readFile } from "node:fs/promises";
-import { access } from "node:fs/promises";
-import path from "node:path";
-
 import {
   ADR_STATUSES,
   CORRECTION_STATUSES,
@@ -10,6 +6,8 @@ import {
   type Finding,
 } from "./index.js";
 import { extractFrontmatter } from "./frontmatter.js";
+import { checkConsistency } from "./consistency.js";
+import { loadProject } from "./project.js";
 
 /**
  * Lint v0 — the frontmatter slice of the Mechanical layer of AGENT_REVIEW.md:
@@ -131,25 +129,20 @@ export interface LintProjectResult {
 }
 
 /**
- * Lint every markdown document under `<repoRoot>/docs/project/`.
+ * Lint everything under `<repoRoot>/docs/project/`: per-document frontmatter
+ * rules (v0) plus cross-document consistency rules (v1).
  * Throws if the directory does not exist (not an AIGenticDocs repository).
  */
 export async function lintProject(repoRoot: string): Promise<LintProjectResult> {
-  const projectDir = path.join(repoRoot, "docs", "project");
-  await access(projectDir).catch(() => {
-    throw new Error(`'${projectDir}' not found — is this an AIGenticDocs repository?`);
-  });
-
-  const entries = await readdir(projectDir, { recursive: true, withFileTypes: true });
-  const files = entries
-    .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
-    .map((entry) => path.join(entry.parentPath, entry.name))
-    .sort();
+  const model = await loadProject(repoRoot);
 
   const findings: Finding[] = [];
-  for (const file of files) {
-    const content = await readFile(file, "utf8");
-    findings.push(...lintMarkdown(path.relative(repoRoot, file), content));
+  for (const doc of model.documents) {
+    findings.push(...lintMarkdown(doc.relPath, doc.content));
   }
-  return { findings, filesChecked: files.length };
+  findings.push(...(await checkConsistency(model)));
+
+  const filesChecked =
+    model.documents.length + (model.techStack === undefined ? 0 : 1) + (model.projectStatus === undefined ? 0 : 1);
+  return { findings, filesChecked };
 }

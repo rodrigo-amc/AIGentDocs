@@ -18,6 +18,11 @@ backend:
     version: ">=10"
     adr: "0002-typescript-on-node-as-runtime.md"
     note: "npm workspaces for the monorepo (packages/core, packages/cli, later packages/mcp)."
+  yaml_parser:
+    name: yaml (npm package)
+    version: "^2.9"
+    adr: "0003-yaml-package-for-parsing.md"
+    note: "The only runtime dependency. Imported exclusively through core's frontmatter.ts wrapper."
 
 global_constraints:
   - "Do not install or propose new dependencies without discussing it with the human developer and recording the corresponding ADR."
