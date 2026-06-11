@@ -1,0 +1,31 @@
+# Technology Stack — AIGenticDocs tooling (CLI + MCP server)
+# Every AI agent must read this before generating code.
+# Profile: lite — ADR fields are filled where the decision is recorded;
+# remaining decisions (e.g., CLI argument parser) require their own ADR
+# before introducing the dependency.
+
+backend:
+  language:
+    name: TypeScript
+    version: "5.x (strict mode)"
+    adr: "0002-typescript-on-node-as-runtime.md"
+  runtime:
+    name: Node.js
+    version: ">=20 (LTS)"
+    adr: "0002-typescript-on-node-as-runtime.md"
+  dependency_manager:
+    name: npm
+    version: ">=10"
+    adr: "0002-typescript-on-node-as-runtime.md"
+    note: "npm workspaces for the monorepo (packages/core, packages/cli, later packages/mcp)."
+  yaml_parser:
+    name: yaml (npm package)
+    version: "^2.9"
+    adr: "0003-yaml-package-for-parsing.md"
+    note: "The only runtime dependency. Imported exclusively through core's frontmatter.ts wrapper."
+
+global_constraints:
+  - "Do not install or propose new dependencies without discussing it with the human developer and recording the corresponding ADR."
+  - "Runtime dependencies must be minimal: prefer the Node standard library; every runtime dependency needs an ADR."
+  - "docs/standard/ is the product: the tooling reads it as an asset and never mutates it at runtime."
+  - "lint must be fully deterministic: no network access, no LLM calls."

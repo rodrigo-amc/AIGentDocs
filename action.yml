@@ -1,0 +1,47 @@
+name: "AIGenticDocs Lint"
+description: >
+  Validate AIGenticDocs documentation compliance (deterministic, no LLM).
+  The tool informs, the human decides: only critical findings fail, the
+  fail-on input can disable failing entirely, and whether a failed check
+  blocks merging is the repository's branch-protection choice — never
+  this action's.
+author: "AIGenticDocs"
+branding:
+  icon: "book-open"
+  color: "blue"
+
+inputs:
+  path:
+    description: "Path of the repository to lint (must contain docs/project/)."
+    required: false
+    default: "."
+  fail-on:
+    description: "'critical' fails the step on critical findings; 'never' always reports without failing."
+    required: false
+    default: "critical"
+  version:
+    description: "Version of the aigenticdocs CLI to run (npm dist-tag or semver)."
+    required: false
+    default: "latest"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+    - name: Run aigenticdocs lint
+      shell: bash
+      run: |
+        set +e
+        npx --yes "aigenticdocs@${{ inputs.version }}" lint "${{ inputs.path }}"
+        status=$?
+        set -e
+        if [ "${{ inputs.fail-on }}" = "never" ]; then
+          if [ $status -ne 0 ]; then
+            echo "::warning::aigenticdocs lint reported findings (fail-on: never, so this step does not fail)."
+          fi
+          exit 0
+        fi
+        exit $status

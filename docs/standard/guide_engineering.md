@@ -29,8 +29,8 @@ Defines the project's exact technologies in a **declarative YAML format**, optim
 | Section | Type | Description |
 |---|---|---|
 | `backend` | **[REQUIRED]** | Language, version, framework, ORM, and dependency manager. |
-| `frontend` | **[REQUIRED]** | Framework/library, version, bundler, and package manager. |
-| `database` | **[REQUIRED]** | Engine, version, and driver/connector in use. |
+| `frontend` | **[CONDITIONAL]** | Framework/library, version, bundler, and package manager. Only if the project has a frontend; omit the section otherwise. |
+| `database` | **[CONDITIONAL]** | Engine, version, and driver/connector in use. Only if the project uses a database; omit the section otherwise. |
 | `infrastructure` | **[OPTIONAL]** | Application server, containers, cloud provider. |
 | `dev_tools` | **[OPTIONAL]** | Linters, formatters, pre-commit hooks. |
 | `global_constraints` | **[REQUIRED]** | Explicitly forbidden technologies or practices. |
@@ -78,7 +78,7 @@ global_constraints:
 ```
 
 **Fill-out guide:**
-- **New project:** Define at least `backend`, `database`, and `global_constraints` before writing code. Every technology must have its ADR created in `project/04_adrs/`.
+- **New project:** Define at least `backend` and `global_constraints` (plus `database` if one is used) before writing code. Every technology must have its ADR created in `project/04_adrs/`.
 - **Existing project:** Verify that the file reflects the reality of the repository. Every technology addition or change must be updated here and have its corresponding ADR.
 
 ---

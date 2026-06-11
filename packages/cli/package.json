@@ -1,0 +1,33 @@
+{
+  "name": "aigenticdocs",
+  "version": "0.1.0",
+  "description": "CLI for the AIGenticDocs docs-as-code standard: scaffold, validate, and maintain AI-agent-ready project documentation. Deterministic — no LLM involved.",
+  "license": "MIT",
+  "homepage": "https://github.com/rodrigo-amc/AIGentDocs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigo-amc/AIGentDocs.git",
+    "directory": "packages/cli"
+  },
+  "keywords": ["documentation", "docs-as-code", "ai-agents", "agents-md", "cli", "lint", "scaffold"],
+  "type": "module",
+  "bin": {
+    "aigenticdocs": "dist/src/index.js",
+    "agd": "dist/src/index.js"
+  },
+  "main": "dist/src/main.js",
+  "types": "dist/src/main.d.ts",
+  "files": [
+    "dist/src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@aigenticdocs/core": "0.1.0",
+    "@aigenticdocs/standard": "^1.4.3"
+  }
+}

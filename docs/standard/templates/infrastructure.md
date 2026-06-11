@@ -1,7 +1,7 @@
 ---
 type: infrastructure
 version: 1.0
-last_updated: 2026-06-10
+last_updated: YYYY-MM-DD
 state: pending
 environment: ""
 ---

@@ -3,7 +3,7 @@ type: domain_module
 module_name: ""
 entities: []
 version: 1.0
-last_updated: 2026-06-10
+last_updated: YYYY-MM-DD
 state: pending
 depends_on: []
 code_paths: []
@@ -14,6 +14,15 @@ code_paths: []
 ## Description
 
 <!-- [REQUIRED] What this module and its entities represent, what role it plays in the system, and how it interacts with other aggregates. -->
+
+---
+
+## Attributes / Properties
+
+<!-- [REQUIRED] Fields of the contained entities: name, data type, and description. Value Objects are documented here as complex properties. -->
+
+| Attribute | Type | Description |
+|---|---|---|
 
 ---
 
