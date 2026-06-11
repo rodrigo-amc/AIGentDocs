@@ -3,6 +3,8 @@ import path from "node:path";
 
 import { initProject, lintProject, type Finding, type InitProfile } from "@aigenticdocs/core";
 
+import { installPreCommitHook } from "./hooks.js";
+
 const require = createRequire(import.meta.url);
 const { version } = require("../../package.json") as { version: string };
 
@@ -15,6 +17,8 @@ Commands:
                          the current directory; --lite for the minimal profile)
   lint [path]            Validate documentation compliance (exits 1 on
                          critical findings)
+  hooks install [path]   Install the pre-commit hook that runs lint (only
+                         critical findings block; bypass: --no-verify)
   adapt                  Generate per-tool adapter files        (planned: T-08)
   update                 Upgrade docs/standard to a new version (planned: T-11)
 
@@ -116,6 +120,23 @@ export async function main(argv: string[], io: Io): Promise<number> {
             ? "  3. Run 'aigenticdocs lint' — the empty [REQUIRED] sections it reports are your documentation to-do list.\n"
             : "  3. Start a 01_product session to create vision.md and roadmap.md from the templates.\n"),
       );
+      return 0;
+    } catch (error) {
+      io.err(`aigenticdocs: ${error instanceof Error ? error.message : String(error)}\n`);
+      return 2;
+    }
+  }
+
+  if (command === "hooks") {
+    if (argv[1] !== "install") {
+      io.err(`aigenticdocs: unknown hooks subcommand '${argv[1] ?? ""}'. Did you mean 'hooks install'?\n`);
+      return 2;
+    }
+    try {
+      const hookPath = await installPreCommitHook(argv[2] ?? process.cwd());
+      io.out(`Installed pre-commit hook: ${hookPath}\n`);
+      io.out("It runs 'aigenticdocs lint' before each commit. Only critical findings block;\n");
+      io.out("to consciously bypass it: git commit --no-verify\n");
       return 0;
     } catch (error) {
       io.err(`aigenticdocs: ${error instanceof Error ? error.message : String(error)}\n`);
