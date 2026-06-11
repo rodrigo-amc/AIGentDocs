@@ -35,3 +35,6 @@ export type CorrectionStatus = (typeof CORRECTION_STATUSES)[number];
 
 /** Frontmatter fields required on every content document of the standard. */
 export const REQUIRED_COMMON_FIELDS = ["type", "version", "last_updated"] as const;
+
+export { extractFrontmatter, type FrontmatterResult } from "./frontmatter.js";
+export { lintMarkdown, lintProject, type LintProjectResult } from "./lint.js";

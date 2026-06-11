@@ -8,5 +8,8 @@
   "types": "dist/src/index.d.ts",
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "yaml": "^2.9.0"
   }
 }
