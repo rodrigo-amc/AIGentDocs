@@ -7,6 +7,7 @@ import {
 } from "./index.js";
 import { extractFrontmatter } from "./frontmatter.js";
 import { checkConsistency } from "./consistency.js";
+import { checkSections } from "./sections.js";
 import { loadProject } from "./project.js";
 
 /**
@@ -79,6 +80,8 @@ export function lintMarkdown(file: string, content: string): Finding[] {
     add("frontmatter/unknown-type", "warning", `unknown document type '${type}'`);
     return findings;
   }
+
+  findings.push(...checkSections(file, type, content, data));
 
   if (STATE_BEARING_TYPES.has(type)) {
     const state = data["state"];

@@ -1,38 +1,45 @@
 ---
 type: api_guidelines
 version: 1.0
-last_updated: 2026-06-10
+last_updated: 2026-06-11
 state: pending
+api_type: ""         # REST | GraphQL | gRPC
 ---
 
 # API Guidelines
 
 <!-- [CONDITIONAL] This file is only needed if the project exposes endpoints (REST, GraphQL, gRPC, etc.). -->
 
-## Naming Conventions
+## API Standard
 
-<!-- [REQUIRED if applicable] Naming of endpoints, resources, and HTTP verbs. -->
+<!-- [REQUIRED if applicable] API type: REST, GraphQL, gRPC, or other. -->
+
+---
+
+## Endpoint Conventions
+
+<!-- [REQUIRED if applicable] Naming, versioning, and URL structure (e.g., /api/v1/resource). -->
+
+---
+
+## Request/Response Format
+
+<!-- [REQUIRED if applicable] Standard JSON structure, response envelopes, HTTP status codes, error format. -->
 
 ---
 
 ## Authentication and Authorization
 
-<!-- [REQUIRED if applicable] Auth mechanisms for the APIs. -->
+<!-- [REQUIRED if applicable] Mechanism in use: JWT, OAuth 2.0, API keys, etc. -->
 
 ---
 
-## Response Format
+## API Documentation
 
-<!-- [REQUIRED if applicable] Standard response structure (envelope, errors, pagination). -->
-
----
-
-## API Versioning
-
-<!-- [REQUIRED if applicable] Versioning strategy (URL, headers, etc.). -->
+<!-- [OPTIONAL] If OpenAPI/Swagger is used: where it is generated and how it is maintained. -->
 
 ---
 
-## Error Handling
+## Rate Limiting and Pagination
 
-<!-- [REQUIRED if applicable] Error codes, message format, HTTP status codes. -->
+<!-- [OPTIONAL] Throttling policies, request limits, and pagination strategy. -->

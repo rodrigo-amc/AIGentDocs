@@ -17,6 +17,15 @@ code_paths: []
 
 ---
 
+## Attributes / Properties
+
+<!-- [REQUIRED] Fields of the contained entities: name, data type, and description. Value Objects are documented here as complex properties. -->
+
+| Attribute | Type | Description |
+|---|---|---|
+
+---
+
 ## Business Rules
 
 <!-- [REQUIRED] Constraints and invariants that must always hold for this module's entities. -->

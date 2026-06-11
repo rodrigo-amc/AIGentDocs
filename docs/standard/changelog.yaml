@@ -1,6 +1,23 @@
 # Version History of the Documentation Standard
 # Each entry records a version of the standard and its changes.
 
+- version: "1.4.2"
+  date: "2026-06-11"
+  summary: "Guide/template reconciliation found by dogfooding the linter"
+  changes:
+    - type: changed
+      description: >
+        templates/domain_module.md now includes the 'Attributes /
+        Properties' [REQUIRED] section that guide_domain_modules.md always
+        mandated but the template omitted.
+    - type: changed
+      description: >
+        templates/api_guidelines.md headings reconciled with the section
+        table of guide_engineering.md (API Standard, Endpoint Conventions,
+        Request/Response Format, Authentication and Authorization, plus the
+        two optional sections). Both mismatches surfaced while implementing
+        the mechanical section checks of the linter.
+
 - version: "1.4.1"
   date: "2026-06-11"
   summary: "tech_stack.yaml schema fix found by dogfooding"

@@ -17,7 +17,8 @@ async function makeRepo(files: Record<string, string>): Promise<string> {
   return root;
 }
 
-const fm = (body: string): string => `---\n${body}\n---\n\n# Doc\n`;
+const ADR_BODY = "\n## Context and Problem\n\nx\n\n## Decision\n\nx\n\n## Consequences\n\nx\n";
+const fm = (body: string, docBody = "\n# Doc\n"): string => `---\n${body}\n---\n${docBody}`;
 const COMMON = "version: 1.0\nlast_updated: 2026-06-11";
 
 async function rulesOf(files: Record<string, string>): Promise<string[]> {
@@ -47,8 +48,8 @@ test("ADR supersedes/superseded_by reciprocity is enforced", async () => {
   assert.ok(broken.includes("adr/supersedes-reciprocity"));
 
   const fixed = await rulesOf({
-    "docs/project/04_adrs/0001-a.md": fm(`type: adr\n${COMMON}\nid: 1\nstatus: superseded\ndate: 2026-06-11\nsuperseded_by: 2`),
-    "docs/project/04_adrs/0002-b.md": fm(`type: adr\n${COMMON}\nid: 2\nstatus: accepted\ndate: 2026-06-11\nsupersedes: 1`),
+    "docs/project/04_adrs/0001-a.md": fm(`type: adr\n${COMMON}\nid: 1\nstatus: superseded\ndate: 2026-06-11\nsuperseded_by: 2`, ADR_BODY),
+    "docs/project/04_adrs/0002-b.md": fm(`type: adr\n${COMMON}\nid: 2\nstatus: accepted\ndate: 2026-06-11\nsupersedes: 1`, ADR_BODY),
   });
   assert.deepEqual(fixed, []);
 });

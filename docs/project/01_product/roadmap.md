@@ -18,7 +18,6 @@ current_phase: "Phase 2 — CLI v0.1"
 ### [In Progress]
 
 ### [To Do / Next]
-- [T-05] `lint` v2: [REQUIRED] section presence + countable thresholds (US > 6 ACs, oversized diagrams).
 - [T-06] `init`: scaffold docs/ + `AGENTS.md` stub; `--lite`, `--lang` flags.
 - [T-07] Pre-commit hook template + reusable GitHub Action running `lint`.
 - [T-08] `adapt`: generate `CLAUDE.md`, `.cursor/rules`, `copilot-instructions.md`, `GEMINI.md` from the standard.
@@ -33,4 +32,5 @@ current_phase: "Phase 2 — CLI v0.1"
 - [T-01] Bootstrap the tooling docs (vision, roadmap, tech stack, runtime ADR).
 - [T-02] Monorepo skeleton: `packages/core` + `packages/cli`, TypeScript project references, `node:test` runner (per ADR-0002).
 - [T-03] `lint` v0: frontmatter validation (presence, required fields, allowed `state`/`status` values, date format, array fields). Depends on ADR-0003 (`yaml` package, accepted).
-- [T-04] `lint` v1: reference consistency (tech_stack↔ADRs, `supersedes` reciprocity, `code_paths`, roadmap `(see X.md)` references, project_status authority rule). ToC sync deferred: the ToC contract for project files needs design first.
+- [T-04] `lint` v1: reference consistency (tech_stack↔ADRs, `supersedes` reciprocity, `code_paths`, roadmap see-references, project_status authority rule). ToC sync deferred: the ToC contract for project files needs design first.
+- [T-05] `lint` v2: [REQUIRED] section presence and non-emptiness per document type, US without ACs (critical) and US > 6 ACs (warning), applied Corrections need a Resolution, oversized Mermaid diagrams (suggestion). English canonical headings only for now — per-language catalogs are future work.
