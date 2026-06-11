@@ -42,3 +42,4 @@ export { loadProject, type ProjectDocument, type ProjectModel, type YamlArtifact
 export { checkConsistency } from "./consistency.js";
 export { initProject, type InitProfile, type InitResult } from "./scaffold.js";
 export { adaptProject, ADAPTER_TARGETS, GENERATION_MARKER, type AdaptResult, type AdapterTarget } from "./adapt.js";
+export { compareVersions, updateStandard, type ChangelogEntry, type UpdateResult } from "./update.js";

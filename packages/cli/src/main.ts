@@ -1,7 +1,7 @@
 import { createRequire } from "node:module";
 import path from "node:path";
 
-import { adaptProject, initProject, lintProject, type Finding, type InitProfile } from "@aigenticdocs/core";
+import { adaptProject, initProject, lintProject, updateStandard, type Finding, type InitProfile } from "@aigenticdocs/core";
 
 import { installPreCommitHook } from "./hooks.js";
 
@@ -23,7 +23,8 @@ Commands:
                          AGENTS.md (tools: claude, cursor, copilot,
                          antigravity; default: all). Never overwrites
                          hand-edited files.
-  update                 Upgrade docs/standard to a new version (planned: T-11)
+  update [path] [--check]  Upgrade docs/standard to this CLI's bundled
+                         version (--check only reports; exits 1 if outdated)
 
 Options:
   -h, --help     Show this help
@@ -160,6 +161,50 @@ export async function main(argv: string[], io: Io): Promise<number> {
       }
       io.out(`\n${result.written.length} adapter(s) written, ${result.skipped.length} skipped. Adapters point to AGENTS.md — edit that file, then re-run adapt.\n`);
       return 0;
+    } catch (error) {
+      io.err(`aigenticdocs: ${error instanceof Error ? error.message : String(error)}\n`);
+      return 2;
+    }
+  }
+
+  if (command === "update") {
+    const rest = argv.slice(1);
+    const check = rest.includes("--check");
+    const positional = rest.filter((arg) => !arg.startsWith("--"));
+    const unknownFlags = rest.filter((arg) => arg.startsWith("--") && arg !== "--check");
+    if (unknownFlags.length > 0) {
+      io.err(`aigenticdocs: unknown update option '${unknownFlags[0]}'\n`);
+      return 2;
+    }
+    try {
+      const result = await updateStandard(positional[0] ?? process.cwd(), standardDir(), { check });
+      switch (result.status) {
+        case "up-to-date":
+          io.out(`Standard is up to date (${result.from}).\n`);
+          return 0;
+        case "ahead":
+          io.err(
+            `aigenticdocs: the installed standard (${result.from}) is newer than this CLI's (${result.to}).\n` +
+              "Update the CLI instead: npm install -D aigenticdocs@latest\n",
+          );
+          return 2;
+        case "would-update":
+        case "updated": {
+          const verb = result.status === "updated" ? "Updated" : "Update available:";
+          io.out(`${verb} ${result.from} -> ${result.to}\n\nChanges that need your attention:\n`);
+          for (const note of result.notes) {
+            io.out(`  ${note.version} (${note.date ?? "?"}): ${note.summary ?? ""}\n`);
+          }
+          io.out("\nDetails: docs/standard/changelog.yaml\n");
+          if (result.readmeNeedsMerge) {
+            io.out(
+              "\nYour customized docs/standard/README.md was preserved. The new version\n" +
+                "was written to docs/standard/README.md.new — merge it manually and delete it.\n",
+            );
+          }
+          return result.status === "would-update" ? 1 : 0;
+        }
+      }
     } catch (error) {
       io.err(`aigenticdocs: ${error instanceof Error ? error.message : String(error)}\n`);
       return 2;
