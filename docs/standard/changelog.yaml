@@ -1,6 +1,17 @@
 # Version History of the Documentation Standard
 # Each entry records a version of the standard and its changes.
 
+- version: "1.4.1"
+  date: "2026-06-11"
+  summary: "tech_stack.yaml schema fix found by dogfooding"
+  changes:
+    - type: changed
+      description: >
+        The 'frontend' and 'database' sections of tech_stack.yaml are now
+        [CONDITIONAL] instead of [REQUIRED]: projects without a frontend or
+        a database (CLIs, libraries, services) omit them. Found while
+        documenting the AIGenticDocs tooling itself with the standard.
+
 - version: "1.4.0"
   date: "2026-06-10"
   summary: "English as primary language, full implementation cycle, status artifacts, anti-drift enforcement basis, and cross-cutting corrections"

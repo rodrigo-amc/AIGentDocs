@@ -16,6 +16,7 @@ backend:
     version: ""
     adr: ""
 
+# [CONDITIONAL] Remove this section if the project has no frontend.
 frontend:
   framework:
     name: ""
@@ -26,6 +27,7 @@ frontend:
     version: ""
     adr: ""
 
+# [CONDITIONAL] Remove this section if the project uses no database.
 database:
   engine:
     name: ""
