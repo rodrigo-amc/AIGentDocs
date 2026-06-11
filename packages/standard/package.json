@@ -1,9 +1,22 @@
 {
   "name": "@aigenticdocs/standard",
   "version": "1.4.3",
-  "description": "The AIGenticDocs docs-as-code standard, packaged for distribution. Source of truth: docs/standard/ in the AIGenticDocs repository; this package is a build-time copy. Its version mirrors the standard's changelog.yaml.",
+  "description": "The AIGenticDocs docs-as-code standard: living domain documentation for AI coding agents. This package is a build-time copy of docs/standard/ in the AIGenticDocs repository; its version mirrors the standard's changelog.yaml.",
   "license": "MIT",
+  "homepage": "https://github.com/rodrigo-amc/AIGentDocs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigo-amc/AIGentDocs.git",
+    "directory": "packages/standard"
+  },
+  "keywords": ["documentation", "docs-as-code", "ai-agents", "agents-md", "ddd", "spec-driven-development"],
   "files": [
     "standard"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prepack": "node ../../scripts/sync-standard.mjs"
+  }
 }
