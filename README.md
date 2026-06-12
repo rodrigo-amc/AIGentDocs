@@ -70,6 +70,20 @@ CI enforcement via the reusable Action:
     fail-on: critical   # or 'never' to report without failing
 ```
 
+## How it compares
+
+Spec-driven development has excellent tools — pick the one whose philosophy fits your project:
+
+| If you want... | Consider |
+|---|---|
+| Per-feature specs with a huge community and 30+ agent integrations | [GitHub Spec Kit](https://github.com/github/spec-kit) |
+| An integrated IDE taking you requirements → design → tasks | AWS Kiro |
+| A full agile method with role-playing agents (analyst, architect, QA) | [BMAD-Method](https://github.com/bmadcode/BMAD-METHOD) |
+| Lightweight change proposals as the unit of work | OpenSpec |
+| **Durable domain documentation as the source of truth** — DDD-driven discovery, a first-class brownfield path, deterministic enforcement, and one context that works across every tool | **AIGenticDocs** |
+
+The honest difference: those tools mostly center the **spec of the next change**; AIGenticDocs centers the **living documentation of the whole system**, with change management (corrections, ADRs) built around it. If your project is a quick prototype, our Lite Mode is the fair comparison — and Spec Kit may still serve you better.
+
 ## Dogfooding
 
 This repository documents itself with its own standard (see [`docs/project/`](docs/project/) and [`AGENTS.md`](AGENTS.md)), lints itself in CI, and the standard's last four releases were driven by defects that dogfooding surfaced. The release bundle is assembled by running our own `init`.
