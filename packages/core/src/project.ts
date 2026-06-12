@@ -43,12 +43,12 @@ async function loadYamlArtifact(repoRoot: string, relPath: string): Promise<Yaml
 
 /**
  * Load every documentation artifact under `<repoRoot>/docs/project/`.
- * Throws if the directory does not exist (not an AIGenticDocs repository).
+ * Throws if the directory does not exist (not an AIGentDocs repository).
  */
 export async function loadProject(repoRoot: string): Promise<ProjectModel> {
   const projectDir = path.join(repoRoot, "docs", "project");
   await access(projectDir).catch(() => {
-    throw new Error(`'${projectDir}' not found — is this an AIGenticDocs repository?`);
+    throw new Error(`'${projectDir}' not found — is this an AIGentDocs repository?`);
   });
 
   const entries = await readdir(projectDir, { recursive: true, withFileTypes: true });

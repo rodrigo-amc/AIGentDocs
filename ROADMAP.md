@@ -6,7 +6,7 @@ The day-to-day task board lives in [`docs/project/01_product/roadmap.md`](docs/p
 
 - **Phase 0 — Foundational decisions**: English as the primary language, MIT license, the layered architecture for tool-agnosticism (markdown core → AGENTS.md entry → deterministic enforcement → MCP tooling → thin per-tool adapters).
 - **Phase 1 — Standard v1.4**: AGENTS.md entry point, Lite Mode, the Anti-Drift Protocol, status artifacts (`project_status.yaml`, `TODO.md`), operational patterns, Implementation Mode agent profiles, and the `05_corrections` session (cross-cutting design fixes with an approved impact map as the write scope).
-- **Phase 2 — Tooling**: the `aigenticdocs` CLI (`init`, `lint`, `hooks install`, `adapt`, `update`), a reusable GitHub Action, the no-CLI release bundle, and the first publication to npm (`aigenticdocs`, `@aigenticdocs/core`, `@aigenticdocs/standard`).
+- **Phase 2 — Tooling**: the `aigentdocs` CLI (`init`, `lint`, `hooks install`, `adapt`, `update`), a reusable GitHub Action, the no-CLI release bundle, and the first publication to npm (`aigentdocs`, `@aigentdocs/core`, `@aigentdocs/standard`).
 
 ## Next
 

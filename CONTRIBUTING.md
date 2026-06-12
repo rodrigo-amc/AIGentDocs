@@ -1,4 +1,4 @@
-# Contributing to AIGenticDocs
+# Contributing to AIGentDocs
 
 Thanks for your interest! This repository holds three different things, and contributions flow differently through each:
 

@@ -1,4 +1,4 @@
-# Technology Stack — AIGenticDocs tooling (CLI + MCP server)
+# Technology Stack — AIGentDocs tooling (CLI + MCP server)
 # Every AI agent must read this before generating code.
 # Profile: lite — ADR fields are filled where the decision is recorded;
 # remaining decisions (e.g., CLI argument parser) require their own ADR

@@ -2,20 +2,20 @@
 type: vision
 version: 1.0
 last_updated: 2026-06-11
-change_summary: "Initial vision for the AIGenticDocs tooling (CLI + MCP server)"
+change_summary: "Initial vision for the AIGentDocs tooling (CLI + MCP server)"
 ---
 
-# Product Vision — AIGenticDocs Tooling
+# Product Vision — AIGentDocs Tooling
 
 ## Elevator Pitch
 
-A minimal command-line tool (and, later, an MCP server) that turns the AIGenticDocs standard from passive markdown into an enforced practice: it scaffolds the documentation structure into any repository, deterministically validates it without an LLM, generates per-tool adapter files, and keeps adopters up to date across versions of the standard.
+A minimal command-line tool (and, later, an MCP server) that turns the AIGentDocs standard from passive markdown into an enforced practice: it scaffolds the documentation structure into any repository, deterministically validates it without an LLM, generates per-tool adapter files, and keeps adopters up to date across versions of the standard.
 
 ---
 
 ## Problem It Solves
 
-The AIGenticDocs standard works today by copying markdown files and trusting agents (and humans) to follow the rules. That leaves three gaps: adoption friction (manual copying and setup), compliance as a promise (no mechanical check catches drift between documentation and reality), and upgrade fragmentation (each new version of the standard must be synced by hand into every adopting project). The tooling closes those gaps without ever becoming a requirement — the markdown standard must keep working on its own.
+The AIGentDocs standard works today by copying markdown files and trusting agents (and humans) to follow the rules. That leaves three gaps: adoption friction (manual copying and setup), compliance as a promise (no mechanical check catches drift between documentation and reality), and upgrade fragmentation (each new version of the standard must be synced by hand into every adopting project). The tooling closes those gaps without ever becoming a requirement — the markdown standard must keep working on its own.
 
 ---
 
@@ -23,7 +23,7 @@ The AIGenticDocs standard works today by copying markdown files and trusting age
 
 | Persona | Description | Technical level |
 |---|---|---|
-| Adopting developer | Sets up AIGenticDocs in a new or existing repository and wants it working in minutes (`npx aigenticdocs init`). | Professional developer; any stack. |
+| Adopting developer | Sets up AIGentDocs in a new or existing repository and wants it working in minutes (`npx aigentdocs init`). | Professional developer; any stack. |
 | Maintaining team / CI | Needs documentation compliance enforced automatically on every commit and PR (`lint` in pre-commit and CI). | Mixed; interacts mostly through CI results. |
 | AI coding agent | Operates on an adopting repository and needs deterministic feedback about documentation state (via `lint` output and, later, MCP tools). | Agent (Claude Code, Codex, Antigravity, etc.). |
 

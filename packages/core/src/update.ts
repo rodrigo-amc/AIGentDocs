@@ -67,7 +67,7 @@ export async function updateStandard(
 ): Promise<UpdateResult> {
   const installedDir = path.join(targetDir, "docs", "standard");
   await access(installedDir).catch(() => {
-    throw new Error(`'${installedDir}' not found — is this an AIGenticDocs repository?`);
+    throw new Error(`'${installedDir}' not found — is this an AIGentDocs repository?`);
   });
 
   const from = (await readChangelog(installedDir))[0]?.version ?? "0.0.0";

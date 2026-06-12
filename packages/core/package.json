@@ -1,7 +1,7 @@
 {
-  "name": "@aigenticdocs/core",
+  "name": "@aigentdocs/core",
   "version": "0.1.0",
-  "description": "Shared domain model and validation logic for the AIGenticDocs tooling (frontmatter parsing, deterministic lint rules, scaffolding, adapters, standard updates).",
+  "description": "Shared domain model and validation logic for the AIGentDocs tooling (frontmatter parsing, deterministic lint rules, scaffolding, adapters, standard updates).",
   "license": "MIT",
   "homepage": "https://github.com/rodrigo-amc/AIGentDocs#readme",
   "repository": {

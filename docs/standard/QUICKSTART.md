@@ -26,11 +26,11 @@ Each area of the standard has a `guide_*.md` (structure and format) and an `agen
 ```bash
 # Scaffold everything: docs/standard/, the docs/project/ tree,
 # the status artifacts, and the AGENTS.md entry point at the root.
-npx aigenticdocs init          # or: npx aigenticdocs init --lite
+npx aigentdocs init          # or: npx aigentdocs init --lite
 
 # Optional but recommended:
-npx aigenticdocs hooks install   # pre-commit compliance check (bypass: --no-verify)
-npx aigenticdocs adapt           # entry files for tools that don't read AGENTS.md
+npx aigentdocs hooks install   # pre-commit compliance check (bypass: --no-verify)
+npx aigentdocs adapt           # entry files for tools that don't read AGENTS.md
 ```
 
 `AGENTS.md` is the de facto standard entry file read natively by most AI coding tools (Codex, Cursor, Copilot, the Antigravity ecosystem, and others). With it in place, any agent that opens your repo discovers the framework on its own — no one has to tell it where to start.
@@ -97,7 +97,7 @@ The agent will:
 
 For prototypes, internal tools, or single-purpose services, you don't need the full structure. The **Lite** profile is just three files: `vision.md`, `roadmap.md`, and `tech_stack.yaml` — what an agent minimally needs to contribute safely. User Stories live directly on the roadmap board, ADRs are optional, and you upgrade incrementally only when the project's complexity demands it.
 
-`npx aigenticdocs init --lite` scaffolds the three files from the templates; running `npx aigenticdocs lint` right after lists their empty [REQUIRED] sections — that report is your documentation to-do list.
+`npx aigentdocs init --lite` scaffolds the three files from the templates; running `npx aigentdocs lint` right after lists their empty [REQUIRED] sections — that report is your documentation to-do list.
 
 See **Lite Mode** in the Adoption Guide of `standard/README.md` for the rules and the upgrade path.
 
@@ -149,10 +149,10 @@ Auditing has two layers (see `AGENT_REVIEW.md`):
 **Mechanical layer — deterministic, no LLM.** Run the linter:
 
 ```bash
-npx aigenticdocs lint
+npx aigentdocs lint
 ```
 
-It checks structure, frontmatter, reference consistency, [REQUIRED] sections, and countable thresholds. Wire it into every commit and PR with `npx aigenticdocs hooks install` and the reusable GitHub Action (`uses: rodrigo-amc/AIGentDocs@main`). Only critical findings block — and the bypass (`git commit --no-verify`) is always available, consciously.
+It checks structure, frontmatter, reference consistency, [REQUIRED] sections, and countable thresholds. Wire it into every commit and PR with `npx aigentdocs hooks install` and the reusable GitHub Action (`uses: rodrigo-amc/AIGentDocs@main`). Only critical findings block — and the bypass (`git commit --no-verify`) is always available, consciously.
 
 **Semantic layer — judgment, an agent's job.** Use the audit prompt:
 
@@ -169,8 +169,8 @@ The agent reviews content quality, cohesion, and cross-document coherence. Both 
 Your copy of the standard declares its version (top entry of `docs/standard/changelog.yaml`). To check for and apply newer versions:
 
 ```bash
-npx aigenticdocs update --check   # report only (CI-friendly: exit 1 if outdated)
-npx aigenticdocs update           # apply, showing the migration notes
+npx aigentdocs update --check   # report only (CI-friendly: exit 1 if outdated)
+npx aigentdocs update           # apply, showing the migration notes
 ```
 
 A customized `docs/standard/README.md` is preserved; the incoming version lands in `README.md.new` for manual merging.

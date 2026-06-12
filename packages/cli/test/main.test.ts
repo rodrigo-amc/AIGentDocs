@@ -18,7 +18,7 @@ function capture(): { io: Io; out: () => string; err: () => string } {
 test("no arguments prints help and exits 0", async () => {
   const c = capture();
   assert.equal(await main([], c.io), 0);
-  assert.match(c.out(), /Usage: aigenticdocs <command>/);
+  assert.match(c.out(), /Usage: aigentdocs <command>/);
 });
 
 test("--version prints a semver-looking version and exits 0", async () => {
@@ -44,5 +44,5 @@ test("lint on this repository exits 0 and reports files checked", async () => {
 test("lint outside a documented repository exits 2 with a clear error", async () => {
   const c = capture();
   assert.equal(await main(["lint", "/tmp"], c.io), 2);
-  assert.match(c.err(), /not found — is this an AIGenticDocs repository\?/);
+  assert.match(c.err(), /not found — is this an AIGentDocs repository\?/);
 });

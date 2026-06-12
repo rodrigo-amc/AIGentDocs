@@ -14,7 +14,7 @@ superseded_by: null
 
 ## Context and Problem
 
-The AIGenticDocs tooling (CLI and MCP server) is a software project in its own right, developed inside the same repository as the standard it serves. We need a formal mechanism to record its significant technical decisions so that any team member — human or AI agent — can understand the project's evolution. Using the standard's own ADR process is also a deliberate act of dogfooding.
+The AIGentDocs tooling (CLI and MCP server) is a software project in its own right, developed inside the same repository as the standard it serves. We need a formal mechanism to record its significant technical decisions so that any team member — human or AI agent — can understand the project's evolution. Using the standard's own ADR process is also a deliberate act of dogfooding.
 
 ## Decision
 

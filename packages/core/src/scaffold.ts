@@ -2,7 +2,7 @@ import { access, cp, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 /**
- * `init` — scaffold the AIGenticDocs structure into a repository.
+ * `init` — scaffold the AIGentDocs structure into a repository.
  *
  * - full: docs/standard/ + empty docs/project/ tree + status artifacts
  *   (project_status.yaml, TODO.md, stamped with today's date) + AGENTS.md.

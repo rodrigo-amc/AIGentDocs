@@ -49,7 +49,7 @@ test("adapt regenerates its own files but never touches hand-edited ones", async
 test("adapt with a tool subset only generates those files", async () => {
   await inRepo(async (dir) => {
     const result = await adaptProject(dir, ["cursor", "antigravity"]);
-    assert.deepEqual(result.written.map((w) => w.file).sort(), [".cursor/rules/aigenticdocs.mdc", "GEMINI.md"]);
+    assert.deepEqual(result.written.map((w) => w.file).sort(), [".cursor/rules/aigentdocs.mdc", "GEMINI.md"]);
   });
 });
 

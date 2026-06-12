@@ -1,7 +1,7 @@
 name: Release standard bundle
 
 # The no-CLI adoption path (Layer 0): on every standard version tag,
-# publish a tarball/zip containing exactly what `aigenticdocs init`
+# publish a tarball/zip containing exactly what `aigentdocs init`
 # scaffolds — docs/standard/, the empty docs/project/ tree, the status
 # artifacts, and the AGENTS.md stub. Unpack at the repository root.
 
@@ -30,8 +30,8 @@ jobs:
           VERSION="${GITHUB_REF_NAME#standard-v}"
           mkdir -p /tmp/bundle
           node packages/cli/dist/src/index.js init /tmp/bundle
-          tar -czf "aigenticdocs-standard-${VERSION}.tar.gz" -C /tmp/bundle .
-          (cd /tmp/bundle && zip -qr "$GITHUB_WORKSPACE/aigenticdocs-standard-${VERSION}.zip" .)
+          tar -czf "aigentdocs-standard-${VERSION}.tar.gz" -C /tmp/bundle .
+          (cd /tmp/bundle && zip -qr "$GITHUB_WORKSPACE/aigentdocs-standard-${VERSION}.zip" .)
       - name: Create the GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -39,6 +39,6 @@ jobs:
           VERSION="${GITHUB_REF_NAME#standard-v}"
           gh release create "$GITHUB_REF_NAME" \
             --title "Standard v${VERSION}" \
-            --notes "AIGenticDocs standard v${VERSION}. The attached bundle is the no-CLI adoption path: unpack it at your repository root and customize docs/standard/README.md. Changes: see docs/standard/changelog.yaml." \
-            "aigenticdocs-standard-${VERSION}.tar.gz" \
-            "aigenticdocs-standard-${VERSION}.zip"
+            --notes "AIGentDocs standard v${VERSION}. The attached bundle is the no-CLI adoption path: unpack it at your repository root and customize docs/standard/README.md. Changes: see docs/standard/changelog.yaml." \
+            "aigentdocs-standard-${VERSION}.tar.gz" \
+            "aigentdocs-standard-${VERSION}.zip"
