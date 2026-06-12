@@ -1,5 +1,5 @@
 /**
- * @aigenticdocs/core — shared domain model for the AIGenticDocs tooling.
+ * @aigentdocs/core — shared domain model for the AIGentDocs tooling.
  *
  * The values here mirror the standard (docs/standard/): if the standard
  * changes its allowed values, this module is the single place to update.

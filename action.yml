@@ -1,11 +1,11 @@
-name: "AIGenticDocs Lint"
+name: "AIGentDocs Lint"
 description: >
-  Validate AIGenticDocs documentation compliance (deterministic, no LLM).
+  Validate AIGentDocs documentation compliance (deterministic, no LLM).
   The tool informs, the human decides: only critical findings fail, the
   fail-on input can disable failing entirely, and whether a failed check
   blocks merging is the repository's branch-protection choice — never
   this action's.
-author: "AIGenticDocs"
+author: "AIGentDocs"
 branding:
   icon: "book-open"
   color: "blue"
@@ -20,7 +20,7 @@ inputs:
     required: false
     default: "critical"
   version:
-    description: "Version of the aigenticdocs CLI to run (npm dist-tag or semver)."
+    description: "Version of the aigentdocs CLI to run (npm dist-tag or semver)."
     required: false
     default: "latest"
 
@@ -31,16 +31,16 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: "20"
-    - name: Run aigenticdocs lint
+    - name: Run aigentdocs lint
       shell: bash
       run: |
         set +e
-        npx --yes "aigenticdocs@${{ inputs.version }}" lint "${{ inputs.path }}"
+        npx --yes "aigentdocs@${{ inputs.version }}" lint "${{ inputs.path }}"
         status=$?
         set -e
         if [ "${{ inputs.fail-on }}" = "never" ]; then
           if [ $status -ne 0 ]; then
-            echo "::warning::aigenticdocs lint reported findings (fail-on: never, so this step does not fail)."
+            echo "::warning::aigentdocs lint reported findings (fail-on: never, so this step does not fail)."
           fi
           exit 0
         fi

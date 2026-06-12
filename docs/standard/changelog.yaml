@@ -1,13 +1,25 @@
 # Version History of the Documentation Standard
 # Each entry records a version of the standard and its changes.
 
+- version: "1.4.5"
+  date: "2026-06-12"
+  summary: "Project renamed to AIGentDocs"
+  changes:
+    - type: changed
+      description: >
+        The project's correct name is AIGentDocs (matching the repository),
+        not AIGenticDocs. Every mention in the standard, templates, and
+        tooling was updated; the npm packages were republished as
+        aigentdocs, @aigentdocs/core, and @aigentdocs/standard, and the
+        misnamed ones unpublished. The short bin alias remains agd.
+
 - version: "1.4.4"
   date: "2026-06-12"
   summary: "QUICKSTART updated for the tooling era"
   changes:
     - type: changed
       description: >
-        Installation now leads with the CLI (npx aigenticdocs init, hooks
+        Installation now leads with the CLI (npx aigentdocs init, hooks
         install, adapt) and keeps the no-tooling path as a first-class
         alternative (release bundle or manual copy). Lite Mode mentions
         init --lite and the lint-as-todo-list flow.
@@ -19,7 +31,7 @@
     - type: added
       description: >
         'Keeping the standard up to date' section documenting
-        aigenticdocs update / update --check.
+        aigentdocs update / update --check.
     - type: changed
       description: >
         Removed a stale pre-1.2 reference claiming each layer has its own
@@ -34,7 +46,7 @@
         All template frontmatter now uses the literal 'YYYY-MM-DD'
         placeholder for last_updated (some templates carried concrete
         dates, and vision.md used comment-style placeholders). Enables
-        'aigenticdocs init' to stamp the current date uniformly when
+        'aigentdocs init' to stamp the current date uniformly when
         copying templates.
 
 - version: "1.4.2"
@@ -63,7 +75,7 @@
         The 'frontend' and 'database' sections of tech_stack.yaml are now
         [CONDITIONAL] instead of [REQUIRED]: projects without a frontend or
         a database (CLIs, libraries, services) omit them. Found while
-        documenting the AIGenticDocs tooling itself with the standard.
+        documenting the AIGentDocs tooling itself with the standard.
 
 - version: "1.4.0"
   date: "2026-06-10"

@@ -19,6 +19,6 @@ labels: bug
 
 ## Environment
 
-- `aigenticdocs` version (`npx aigenticdocs --version`):
+- `aigentdocs` version (`npx aigentdocs --version`):
 - Standard version (top entry of your `docs/standard/changelog.yaml`):
 - Node version:

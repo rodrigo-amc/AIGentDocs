@@ -1,16 +1,16 @@
 import { createRequire } from "node:module";
 import path from "node:path";
 
-import { adaptProject, initProject, lintProject, updateStandard, type Finding, type InitProfile } from "@aigenticdocs/core";
+import { adaptProject, initProject, lintProject, updateStandard, type Finding, type InitProfile } from "@aigentdocs/core";
 
 import { installPreCommitHook } from "./hooks.js";
 
 const require = createRequire(import.meta.url);
 const { version } = require("../../package.json") as { version: string };
 
-const HELP = `aigenticdocs ${version} — tooling for the AIGenticDocs docs-as-code standard
+const HELP = `aigentdocs ${version} — tooling for the AIGentDocs docs-as-code standard
 
-Usage: aigenticdocs <command>   (or its short alias: agd <command>)
+Usage: aigentdocs <command>   (or its short alias: agd <command>)
 
 Commands:
   init [path] [--lite]   Scaffold docs/ into a repository (path defaults to
@@ -33,7 +33,7 @@ Options:
 
 /** Locate the packaged standard (ADR-0004). */
 function standardDir(): string {
-  const pkgJson = require.resolve("@aigenticdocs/standard/package.json");
+  const pkgJson = require.resolve("@aigentdocs/standard/package.json");
   return path.join(path.dirname(pkgJson), "standard");
 }
 
@@ -54,7 +54,7 @@ async function runLint(root: string, io: Io): Promise<number> {
   try {
     ({ findings, filesChecked } = await lintProject(root));
   } catch (error) {
-    io.err(`aigenticdocs: ${error instanceof Error ? error.message : String(error)}\n`);
+    io.err(`aigentdocs: ${error instanceof Error ? error.message : String(error)}\n`);
     return 2;
   }
 
@@ -104,13 +104,13 @@ export async function main(argv: string[], io: Io): Promise<number> {
     const positional = rest.filter((arg) => !arg.startsWith("--"));
     const unknownFlags = rest.filter((arg) => arg.startsWith("--") && arg !== "--lite");
     if (unknownFlags.length > 0) {
-      io.err(`aigenticdocs: unknown init option '${unknownFlags[0]}'\n`);
+      io.err(`aigentdocs: unknown init option '${unknownFlags[0]}'\n`);
       return 2;
     }
     const target = positional[0] ?? process.cwd();
     try {
       const result = await initProject(target, standardDir(), profile);
-      io.out(`Initialized AIGenticDocs (${result.profile} profile) in ${target}:\n`);
+      io.out(`Initialized AIGentDocs (${result.profile} profile) in ${target}:\n`);
       for (const entry of result.created) {
         io.out(`  + ${entry}\n`);
       }
@@ -121,12 +121,12 @@ export async function main(argv: string[], io: Io): Promise<number> {
           ").\n" +
           "  2. Read docs/standard/QUICKSTART.md for the workflow.\n" +
           (result.profile === "lite"
-            ? "  3. Run 'aigenticdocs lint' — the empty [REQUIRED] sections it reports are your documentation to-do list.\n"
+            ? "  3. Run 'aigentdocs lint' — the empty [REQUIRED] sections it reports are your documentation to-do list.\n"
             : "  3. Start a 01_product session to create vision.md and roadmap.md from the templates.\n"),
       );
       return 0;
     } catch (error) {
-      io.err(`aigenticdocs: ${error instanceof Error ? error.message : String(error)}\n`);
+      io.err(`aigentdocs: ${error instanceof Error ? error.message : String(error)}\n`);
       return 2;
     }
   }
@@ -140,12 +140,12 @@ export async function main(argv: string[], io: Io): Promise<number> {
       if (arg === "--tool") {
         const value = rest[++i];
         if (value === undefined) {
-          io.err("aigenticdocs: --tool requires a value\n");
+          io.err("aigentdocs: --tool requires a value\n");
           return 2;
         }
         tools.push(...value.split(","));
       } else if (arg.startsWith("--")) {
-        io.err(`aigenticdocs: unknown adapt option '${arg}'\n`);
+        io.err(`aigentdocs: unknown adapt option '${arg}'\n`);
         return 2;
       } else {
         positional.push(arg);
@@ -162,7 +162,7 @@ export async function main(argv: string[], io: Io): Promise<number> {
       io.out(`\n${result.written.length} adapter(s) written, ${result.skipped.length} skipped. Adapters point to AGENTS.md — edit that file, then re-run adapt.\n`);
       return 0;
     } catch (error) {
-      io.err(`aigenticdocs: ${error instanceof Error ? error.message : String(error)}\n`);
+      io.err(`aigentdocs: ${error instanceof Error ? error.message : String(error)}\n`);
       return 2;
     }
   }
@@ -173,7 +173,7 @@ export async function main(argv: string[], io: Io): Promise<number> {
     const positional = rest.filter((arg) => !arg.startsWith("--"));
     const unknownFlags = rest.filter((arg) => arg.startsWith("--") && arg !== "--check");
     if (unknownFlags.length > 0) {
-      io.err(`aigenticdocs: unknown update option '${unknownFlags[0]}'\n`);
+      io.err(`aigentdocs: unknown update option '${unknownFlags[0]}'\n`);
       return 2;
     }
     try {
@@ -184,8 +184,8 @@ export async function main(argv: string[], io: Io): Promise<number> {
           return 0;
         case "ahead":
           io.err(
-            `aigenticdocs: the installed standard (${result.from}) is newer than this CLI's (${result.to}).\n` +
-              "Update the CLI instead: npm install -D aigenticdocs@latest\n",
+            `aigentdocs: the installed standard (${result.from}) is newer than this CLI's (${result.to}).\n` +
+              "Update the CLI instead: npm install -D aigentdocs@latest\n",
           );
           return 2;
         case "would-update":
@@ -206,28 +206,28 @@ export async function main(argv: string[], io: Io): Promise<number> {
         }
       }
     } catch (error) {
-      io.err(`aigenticdocs: ${error instanceof Error ? error.message : String(error)}\n`);
+      io.err(`aigentdocs: ${error instanceof Error ? error.message : String(error)}\n`);
       return 2;
     }
   }
 
   if (command === "hooks") {
     if (argv[1] !== "install") {
-      io.err(`aigenticdocs: unknown hooks subcommand '${argv[1] ?? ""}'. Did you mean 'hooks install'?\n`);
+      io.err(`aigentdocs: unknown hooks subcommand '${argv[1] ?? ""}'. Did you mean 'hooks install'?\n`);
       return 2;
     }
     try {
       const hookPath = await installPreCommitHook(argv[2] ?? process.cwd());
       io.out(`Installed pre-commit hook: ${hookPath}\n`);
-      io.out("It runs 'aigenticdocs lint' before each commit. Only critical findings block;\n");
+      io.out("It runs 'aigentdocs lint' before each commit. Only critical findings block;\n");
       io.out("to consciously bypass it: git commit --no-verify\n");
       return 0;
     } catch (error) {
-      io.err(`aigenticdocs: ${error instanceof Error ? error.message : String(error)}\n`);
+      io.err(`aigentdocs: ${error instanceof Error ? error.message : String(error)}\n`);
       return 2;
     }
   }
 
-  io.err(`aigenticdocs: unknown or not yet implemented command '${command}'. See 'aigenticdocs help'.\n`);
+  io.err(`aigentdocs: unknown or not yet implemented command '${command}'. See 'aigentdocs help'.\n`);
   return 1;
 }

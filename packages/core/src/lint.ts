@@ -134,7 +134,7 @@ export interface LintProjectResult {
 /**
  * Lint everything under `<repoRoot>/docs/project/`: per-document frontmatter
  * rules (v0) plus cross-document consistency rules (v1).
- * Throws if the directory does not exist (not an AIGenticDocs repository).
+ * Throws if the directory does not exist (not an AIGentDocs repository).
  */
 export async function lintProject(repoRoot: string): Promise<LintProjectResult> {
   const model = await loadProject(repoRoot);

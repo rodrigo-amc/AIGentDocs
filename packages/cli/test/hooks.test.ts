@@ -33,7 +33,7 @@ test("hooks install writes an executable pre-commit hook with the conscious bypa
     const hookPath = path.join(dir, ".git", "hooks", "pre-commit");
     const content = await readFile(hookPath, "utf8");
     assert.match(content, /^#!\/bin\/sh/);
-    assert.match(content, /aigenticdocs lint/);
+    assert.match(content, /aigentdocs lint/);
     assert.match(content, /git commit --no-verify/);
     const mode = (await stat(hookPath)).mode & 0o777;
     assert.ok(mode & 0o100, "hook must be executable");

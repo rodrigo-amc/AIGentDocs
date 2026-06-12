@@ -24,7 +24,7 @@ Alternatives considered:
 
 ## Decision
 
-Add `yaml` (^2) as the single runtime dependency of `@aigenticdocs/core`, parsing with the default YAML 1.2 core schema.
+Add `yaml` (^2) as the single runtime dependency of `@aigentdocs/core`, parsing with the default YAML 1.2 core schema.
 
 ## Consequences
 
@@ -40,4 +40,4 @@ Add `yaml` (^2) as the single runtime dependency of `@aigenticdocs/core`, parsin
 
 ## Compliance
 
-`package-lock.json` pins it; only `@aigenticdocs/core` may import `yaml` (CLI and future MCP go through core).
+`package-lock.json` pins it; only `@aigentdocs/core` may import `yaml` (CLI and future MCP go through core).

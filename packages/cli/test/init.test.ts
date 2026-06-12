@@ -5,7 +5,7 @@ import { createRequire } from "node:module";
 import os from "node:os";
 import path from "node:path";
 
-import { parseYaml } from "@aigenticdocs/core";
+import { parseYaml } from "@aigentdocs/core";
 
 import { main, type Io } from "../src/main.js";
 
@@ -22,8 +22,8 @@ function capture(): { io: Io; out: () => string; err: () => string } {
 }
 
 test("the standard package version mirrors changelog.yaml (ADR-0004 compliance)", async () => {
-  const pkgPath = require.resolve("@aigenticdocs/standard/package.json");
-  const pkg = require("@aigenticdocs/standard/package.json") as { version: string };
+  const pkgPath = require.resolve("@aigentdocs/standard/package.json");
+  const pkg = require("@aigentdocs/standard/package.json") as { version: string };
   const changelog = parseYaml(await readFile(path.join(path.dirname(pkgPath), "standard", "changelog.yaml"), "utf8")) as Array<{ version: string }>;
   assert.equal(pkg.version, changelog[0]?.version);
 });
@@ -33,7 +33,7 @@ test("init + lint end to end: full profile scaffolds and lints clean", async () 
   try {
     const c = capture();
     assert.equal(await main(["init", dir], c.io), 0);
-    assert.match(c.out(), /Initialized AIGenticDocs \(full profile\)/);
+    assert.match(c.out(), /Initialized AIGentDocs \(full profile\)/);
     assert.match(c.out(), /\+ docs\/standard\//);
 
     const lint = capture();

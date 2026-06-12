@@ -1,10 +1,10 @@
 # AI Agent Instructions
 
-<!-- AIGenticDocs stub — copy this file to the root of the adopting repository.
+<!-- AIGentDocs stub — copy this file to the root of the adopting repository.
      Tools that read CLAUDE.md (Claude Code) or GEMINI.md instead of AGENTS.md:
      create a symlink (ln -s AGENTS.md CLAUDE.md) or an identical copy. -->
 
-This project is documented under the **AIGenticDocs** docs-as-code standard. The documentation in `docs/project/` is the **source of truth** for what this software is, how it is designed, and which technical rules apply.
+This project is documented under the **AIGentDocs** docs-as-code standard. The documentation in `docs/project/` is the **source of truth** for what this software is, how it is designed, and which technical rules apply.
 
 ## Entry point
 

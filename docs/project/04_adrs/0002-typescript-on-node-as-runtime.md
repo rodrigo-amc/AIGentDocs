@@ -14,7 +14,7 @@ superseded_by: null
 
 ## Context and Problem
 
-The `aigenticdocs` CLI (Phase 2) and the MCP server (Phase 3) need a language and runtime. Requirements: frictionless execution for adopters (`npx aigenticdocs init` with no prior install), a single codebase shared between CLI and MCP server, strong typing for the lint rule engine, and a healthy ecosystem for YAML/markdown parsing.
+The `aigentdocs` CLI (Phase 2) and the MCP server (Phase 3) need a language and runtime. Requirements: frictionless execution for adopters (`npx aigentdocs init` with no prior install), a single codebase shared between CLI and MCP server, strong typing for the lint rule engine, and a healthy ecosystem for YAML/markdown parsing.
 
 Alternatives considered:
 
@@ -29,7 +29,7 @@ TypeScript (5.x, strict mode) on Node.js (>=20 LTS), distributed through npm and
 ## Consequences
 
 ### Positive
-- Zero-install adoption path (`npx aigenticdocs init`).
+- Zero-install adoption path (`npx aigentdocs init`).
 - One typed codebase for CLI and MCP server; lint rules written once.
 - Direct reuse of the TypeScript-first MCP SDK in Phase 3.
 

@@ -1,24 +1,24 @@
-# aigenticdocs
+# aigentdocs
 
-CLI for the [AIGenticDocs](https://github.com/rodrigo-amc/AIGentDocs) docs-as-code standard: living domain documentation designed for AI coding agents. Deterministic — no LLM involved.
+CLI for the [AIGentDocs](https://github.com/rodrigo-amc/AIGentDocs) docs-as-code standard: living domain documentation designed for AI coding agents. Deterministic — no LLM involved.
 
 ```bash
 # Scaffold the structure into your repository (or --lite for the minimal profile)
-npx aigenticdocs init
+npx aigentdocs init
 
 # Validate documentation compliance (exit 1 on critical findings)
-npx aigenticdocs lint
+npx aigentdocs lint
 
 # Install the pre-commit hook (only critical findings block; bypass: --no-verify)
-npx aigenticdocs hooks install
+npx aigentdocs hooks install
 
 # Generate per-tool adapter files pointing to AGENTS.md
-npx aigenticdocs adapt
+npx aigentdocs adapt
 
 # Upgrade docs/standard/ to this CLI's bundled standard version
-npx aigenticdocs update
+npx aigentdocs update
 ```
 
-Once installed (`npm i -D aigenticdocs`), the short alias `agd` works too.
+Once installed (`npm i -D aigentdocs`), the short alias `agd` works too.
 
-Full documentation: see the [AIGenticDocs repository](https://github.com/rodrigo-amc/AIGentDocs).
+Full documentation: see the [AIGentDocs repository](https://github.com/rodrigo-amc/AIGentDocs).

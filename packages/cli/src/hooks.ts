@@ -8,13 +8,13 @@ import path from "node:path";
  */
 
 const HOOK = `#!/bin/sh
-# AIGenticDocs pre-commit hook — validates documentation compliance.
-# Installed by 'aigenticdocs hooks install'. Deterministic; no LLM involved.
+# AIGentDocs pre-commit hook — validates documentation compliance.
+# Installed by 'aigentdocs hooks install'. Deterministic; no LLM involved.
 #
 # The tool informs, the human decides: only critical findings block,
 # and you can always consciously bypass this check.
 
-npx --no-install aigenticdocs lint
+npx --no-install aigentdocs lint
 status=$?
 if [ $status -ne 0 ]; then
   echo ""
@@ -38,7 +38,7 @@ export async function installPreCommitHook(targetDir: string): Promise<string> {
   const hookPath = path.join(gitDir, "hooks", "pre-commit");
   if (await exists(hookPath)) {
     throw new Error(
-      `'${hookPath}' already exists — refusing to overwrite. Append the 'aigenticdocs lint' call to your existing hook manually.`,
+      `'${hookPath}' already exists — refusing to overwrite. Append the 'aigentdocs lint' call to your existing hook manually.`,
     );
   }
   await mkdir(path.dirname(hookPath), { recursive: true });

@@ -1,14 +1,14 @@
-# AIGenticDocs
+# AIGentDocs
 
 > Living domain documentation for AI coding agents — not throwaway specs.
 
-AIGenticDocs is a **docs-as-code standard** plus a small **deterministic CLI**. It structures a software project's documentation so that AI coding agents — any of them — can understand the project deeply, contribute code that fits the design, and never outrun what was actually decided.
+AIGentDocs is a **docs-as-code standard** plus a small **deterministic CLI**. It structures a software project's documentation so that AI coding agents — any of them — can understand the project deeply, contribute code that fits the design, and never outrun what was actually decided.
 
 ## The problem
 
 AI coding agents are only as good as the context they're given. Without structure, every session re-explains the project; with throwaway per-feature specs, the context ages the moment the feature ships. And documentation that nothing enforces always drifts away from the code.
 
-AIGenticDocs answers with three moves:
+AIGentDocs answers with three moves:
 
 1. **Durable documentation, structured for agents**: four layers (product, architecture, engineering, decisions) with reading protocols that load the minimum context a task needs.
 2. **Discovered, not dumped**: Domain-Driven Design (Knowledge Crunching) drives what gets documented; humans approve every document.
@@ -17,8 +17,8 @@ AIGenticDocs answers with three moves:
 ## Quick start
 
 ```bash
-npx aigenticdocs init          # scaffold docs/ + the AGENTS.md entry point
-npx aigenticdocs hooks install # compliance check on every commit (bypassable, consciously)
+npx aigentdocs init          # scaffold docs/ + the AGENTS.md entry point
+npx aigentdocs hooks install # compliance check on every commit (bypassable, consciously)
 ```
 
 Then open your repository with your AI tool of choice and say:
@@ -38,7 +38,7 @@ The agent enters **Onboarding Mode**, reverse-engineers your code into documenta
 | `adapt` | Generate entry files for tools that don't read `AGENTS.md` |
 | `update [--check]` | Upgrade your copy of the standard, with migration notes |
 
-Once installed (`npm i -D aigenticdocs`), the short alias **`agd`** works everywhere.
+Once installed (`npm i -D aigentdocs`), the short alias **`agd`** works everywhere.
 
 **No tooling?** The standard is plain markdown. Grab the bundle from [Releases](https://github.com/rodrigo-amc/AIGentDocs/releases) and unpack it at your repository root — everything works manually.
 
@@ -59,7 +59,7 @@ Work happens in **sessions** with bounded write scopes, agents operate under exp
 
 ## Tool compatibility
 
-The core is markdown — it works with **any** agent, IDE, or model. `AGENTS.md` is read natively by OpenAI Codex, Cursor, GitHub Copilot, the Antigravity ecosystem, and 30+ other tools. For the rest, `aigenticdocs adapt` generates thin pointer files (`CLAUDE.md`, `.cursor/rules`, `copilot-instructions.md`, `GEMINI.md`) — single source of truth, never hand-maintained.
+The core is markdown — it works with **any** agent, IDE, or model. `AGENTS.md` is read natively by OpenAI Codex, Cursor, GitHub Copilot, the Antigravity ecosystem, and 30+ other tools. For the rest, `aigentdocs adapt` generates thin pointer files (`CLAUDE.md`, `.cursor/rules`, `copilot-instructions.md`, `GEMINI.md`) — single source of truth, never hand-maintained.
 
 CI enforcement via the reusable Action:
 
@@ -80,9 +80,9 @@ Spec-driven development has excellent tools — pick the one whose philosophy fi
 | An integrated IDE taking you requirements → design → tasks | AWS Kiro |
 | A full agile method with role-playing agents (analyst, architect, QA) | [BMAD-Method](https://github.com/bmadcode/BMAD-METHOD) |
 | Lightweight change proposals as the unit of work | OpenSpec |
-| **Durable domain documentation as the source of truth** — DDD-driven discovery, a first-class brownfield path, deterministic enforcement, and one context that works across every tool | **AIGenticDocs** |
+| **Durable domain documentation as the source of truth** — DDD-driven discovery, a first-class brownfield path, deterministic enforcement, and one context that works across every tool | **AIGentDocs** |
 
-The honest difference: those tools mostly center the **spec of the next change**; AIGenticDocs centers the **living documentation of the whole system**, with change management (corrections, ADRs) built around it. If your project is a quick prototype, our Lite Mode is the fair comparison — and Spec Kit may still serve you better.
+The honest difference: those tools mostly center the **spec of the next change**; AIGentDocs centers the **living documentation of the whole system**, with change management (corrections, ADRs) built around it. If your project is a quick prototype, our Lite Mode is the fair comparison — and Spec Kit may still serve you better.
 
 ## Dogfooding
 
