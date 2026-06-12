@@ -36,10 +36,11 @@ export type CorrectionStatus = (typeof CORRECTION_STATUSES)[number];
 /** Frontmatter fields required on every content document of the standard. */
 export const REQUIRED_COMMON_FIELDS = ["type", "version", "last_updated"] as const;
 
-export { extractFrontmatter, parseYaml, type FrontmatterResult } from "./frontmatter.js";
+export { extractFrontmatter, parseYaml, setYamlKey, type FrontmatterResult } from "./frontmatter.js";
 export { lintMarkdown, lintProject, type LintProjectResult } from "./lint.js";
 export { loadProject, type ProjectDocument, type ProjectModel, type YamlArtifact } from "./project.js";
 export { checkConsistency } from "./consistency.js";
 export { initProject, type InitProfile, type InitResult } from "./scaffold.js";
 export { adaptProject, ADAPTER_TARGETS, GENERATION_MARKER, type AdaptResult, type AdapterTarget } from "./adapt.js";
 export { compareVersions, updateStandard, type ChangelogEntry, type UpdateResult } from "./update.js";
+export { parseTaskBoard, updateModuleState, type BoardSection, type UpdateModuleStateResult } from "./board.js";

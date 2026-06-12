@@ -1,4 +1,4 @@
-import { parse } from "yaml";
+import { parse, parseDocument } from "yaml";
 
 /**
  * Result of looking for a YAML frontmatter block at the top of a markdown file.
@@ -19,6 +19,19 @@ const FENCE = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/;
 /** Parse a full YAML document. Throws on invalid YAML (caller decides severity). */
 export function parseYaml(text: string): unknown {
   return parse(text);
+}
+
+/**
+ * Set a value at a key path inside a YAML document, preserving the
+ * document's comments and formatting. Throws on invalid YAML.
+ */
+export function setYamlKey(text: string, path: Array<string | number>, value: unknown): string {
+  const doc = parseDocument(text);
+  if (doc.errors.length > 0) {
+    throw new Error(doc.errors[0]?.message ?? "invalid YAML");
+  }
+  doc.setIn(path, value);
+  return doc.toString();
 }
 
 export function extractFrontmatter(markdown: string): FrontmatterResult {

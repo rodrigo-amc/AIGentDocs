@@ -1,15 +1,15 @@
 ---
 type: roadmap
-version: 1.0
-last_updated: 2026-06-11
-current_phase: "Phase 2 — CLI v0.1"
+version: 1.1
+last_updated: 2026-06-12
+current_phase: "Phase 3 — Multi-agent tooling"
 ---
 
 # Roadmap — Status and Planning
 
 ## Current Phase/Milestone
 
-**Phase 2 — CLI v0.1**: turn the standard's mechanical rules into deterministic tooling. Scope and rationale live in the evolution roadmap (Phase 2); this board tracks the work.
+**Phase 3 — Multi-agent tooling**: give every MCP-capable agent uniform tooling over the standard, and ship the first native adapter (Claude Code plugin). This board tracks the work.
 
 ---
 
@@ -17,12 +17,17 @@ current_phase: "Phase 2 — CLI v0.1"
 
 ### [In Progress]
 
+- [T-13] Claude Code plugin: commands from the session protocols, subagents from the agent profiles, lint feedback hook.
+
 ### [To Do / Next]
+
+- [T-14] Publish `@aigentdocs/mcp` + CLI 0.1.1 (EPIPE fix).
 
 ### [Blocked / Review]
 
 ### [Done]
 
+- [T-12] MCP server (`@aigentdocs/mcp`): seven tools over core (status, active task, module, sessions with write scopes, corrections with status-aware scope, state sync, lint). ADR-0005 (MCP SDK) accepted. Real client/server tests in memory.
 - [T-01] Bootstrap the tooling docs (vision, roadmap, tech stack, runtime ADR).
 - [T-02] Monorepo skeleton: `packages/core` + `packages/cli`, TypeScript project references, `node:test` runner (per ADR-0002).
 - [T-03] `lint` v0: frontmatter validation (presence, required fields, allowed `state`/`status` values, date format, array fields). Depends on ADR-0003 (`yaml` package, accepted).
