@@ -15,49 +15,49 @@ It is a **docs-as-code standard** that structures a software project's documenta
 | **Engineering** | `03_engineering/` | **How** is it built? What technical rules apply? |
 | **Decisions** | `04_adrs/` | **Why** were these decisions made? |
 
-Each layer has a `README.md` (what it contains and how to fill it out) and an `AGENT.md` (instructions for AI agents).
+Each area of the standard has a `guide_*.md` (structure and format) and an `agent_*.md` (operating rules for AI agents).
 
 ---
 
 ## Installation
 
-### 1. Copy the `docs/` folder into your repository
+### Option 1 — With the CLI (recommended)
 
 ```bash
-# From the root of your project
-cp -r /path/to/framework/docs ./docs
+# Scaffold everything: docs/standard/, the docs/project/ tree,
+# the status artifacts, and the AGENTS.md entry point at the root.
+npx aigenticdocs init          # or: npx aigenticdocs init --lite
+
+# Optional but recommended:
+npx aigenticdocs hooks install   # pre-commit compliance check (bypass: --no-verify)
+npx aigenticdocs adapt           # entry files for tools that don't read AGENTS.md
 ```
 
-Or simply copy the entire `docs/` folder to the root of your repository. The structure includes `docs/standard/` (the framework) and `docs/project/` (where your project's documentation will live).
+`AGENTS.md` is the de facto standard entry file read natively by most AI coding tools (Codex, Cursor, Copilot, the Antigravity ecosystem, and others). With it in place, any agent that opens your repo discovers the framework on its own — no one has to tell it where to start.
 
-### 2. Copy the agent entry point to the repository root
+### Option 2 — Without tooling
 
-```bash
-cp docs/standard/templates/AGENTS.md ./AGENTS.md
-```
+The standard is plain markdown and works with no CLI at all:
 
-`AGENTS.md` is the de facto standard entry file read natively by most AI coding tools (Codex, Cursor, Copilot, Gemini, and others). With it in place, any agent that opens your repo discovers the framework on its own — no one has to tell it where to start.
+- Download the bundle attached to any [standard release](https://github.com/rodrigo-amc/AIGentDocs/releases) and unpack it at your repository root, **or**
+- Copy the `docs/` folder from the repository manually, then copy `docs/standard/templates/AGENTS.md` to your repository root. For tools that read a different file name: `ln -s AGENTS.md CLAUDE.md`.
 
-For tools that read a different file name, link or copy it:
+### Then, for either option:
 
-```bash
-ln -s AGENTS.md CLAUDE.md   # Claude Code
-```
-
-### 3. Customize the README
+#### 1. Customize the README
 
 Open `docs/standard/README.md` and replace:
 
 - The title `# Documentation Standard...` → `# [Your project's name]`
 - The generic description → A 1-2 line description of your project
 
-### 4. Set the conventions
+#### 2. Set the conventions
 
 In the **Conventions** section of `docs/standard/README.md`, define:
 
 - **Documentation language**: Spanish, English, etc.
 
-### 5. Commit
+#### 3. Commit
 
 ```bash
 git add docs/ AGENTS.md
@@ -96,6 +96,8 @@ The agent will:
 ### Option C: Lite Mode (small projects)
 
 For prototypes, internal tools, or single-purpose services, you don't need the full structure. The **Lite** profile is just three files: `vision.md`, `roadmap.md`, and `tech_stack.yaml` — what an agent minimally needs to contribute safely. User Stories live directly on the roadmap board, ADRs are optional, and you upgrade incrementally only when the project's complexity demands it.
+
+`npx aigenticdocs init --lite` scaffolds the three files from the templates; running `npx aigenticdocs lint` right after lists their empty [REQUIRED] sections — that report is your documentation to-do list.
 
 See **Lite Mode** in the Adoption Guide of `standard/README.md` for the rules and the upgrade path.
 
@@ -142,13 +144,36 @@ The complete tree — which files belong to the framework (`standard/`, read-onl
 
 ## Auditing
 
-To verify that the documentation complies with the standard, use the audit prompt:
+Auditing has two layers (see `AGENT_REVIEW.md`):
+
+**Mechanical layer — deterministic, no LLM.** Run the linter:
+
+```bash
+npx aigenticdocs lint
+```
+
+It checks structure, frontmatter, reference consistency, [REQUIRED] sections, and countable thresholds. Wire it into every commit and PR with `npx aigenticdocs hooks install` and the reusable GitHub Action (`uses: rodrigo-amc/AIGentDocs@main`). Only critical findings block — and the bypass (`git commit --no-verify`) is always available, consciously.
+
+**Semantic layer — judgment, an agent's job.** Use the audit prompt:
 
 ```
 Run the documentation audit following the instructions in docs/standard/AGENT_REVIEW.md.
 ```
 
-The agent will review: structure, frontmatter, required sections, consistency, and quality. The result is a report with severities (🔴 Critical, 🟡 Warning, 🟢 Suggestion).
+The agent reviews content quality, cohesion, and cross-document coherence. Both layers report with the same severities (🔴 Critical, 🟡 Warning, 🟢 Suggestion).
+
+---
+
+## Keeping the standard up to date
+
+Your copy of the standard declares its version (top entry of `docs/standard/changelog.yaml`). To check for and apply newer versions:
+
+```bash
+npx aigenticdocs update --check   # report only (CI-friendly: exit 1 if outdated)
+npx aigenticdocs update           # apply, showing the migration notes
+```
+
+A customized `docs/standard/README.md` is preserved; the incoming version lands in `README.md.new` for manual merging.
 
 ---
 

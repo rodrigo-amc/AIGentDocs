@@ -1,6 +1,30 @@
 # Version History of the Documentation Standard
 # Each entry records a version of the standard and its changes.
 
+- version: "1.4.4"
+  date: "2026-06-12"
+  summary: "QUICKSTART updated for the tooling era"
+  changes:
+    - type: changed
+      description: >
+        Installation now leads with the CLI (npx aigenticdocs init, hooks
+        install, adapt) and keeps the no-tooling path as a first-class
+        alternative (release bundle or manual copy). Lite Mode mentions
+        init --lite and the lint-as-todo-list flow.
+    - type: changed
+      description: >
+        Auditing reflects the two layers of AGENT_REVIEW.md: the mechanical
+        layer is the deterministic linter (pre-commit hook + GitHub Action);
+        the semantic layer remains the agent audit prompt.
+    - type: added
+      description: >
+        'Keeping the standard up to date' section documenting
+        aigenticdocs update / update --check.
+    - type: changed
+      description: >
+        Removed a stale pre-1.2 reference claiming each layer has its own
+        README.md/AGENT.md pair (superseded by guide_*/agent_* files).
+
 - version: "1.4.3"
   date: "2026-06-11"
   summary: "Uniform date placeholders in templates"

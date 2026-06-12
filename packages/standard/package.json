@@ -1,6 +1,6 @@
 {
   "name": "@aigenticdocs/standard",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "The AIGenticDocs docs-as-code standard: living domain documentation for AI coding agents. This package is a build-time copy of docs/standard/ in the AIGenticDocs repository; its version mirrors the standard's changelog.yaml.",
   "license": "MIT",
   "homepage": "https://github.com/rodrigo-amc/AIGentDocs#readme",
