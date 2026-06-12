@@ -13,7 +13,7 @@
   "scripts": {
     "sync-standard": "node scripts/sync-standard.mjs",
     "build": "npm run sync-standard && tsc -b",
-    "test": "npm run build && node --test packages/core/dist/test/ packages/cli/dist/test/",
+    "test": "npm run build && node --test packages/core/dist/test/ packages/cli/dist/test/ packages/mcp/dist/test/",
     "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo"
   },
   "devDependencies": {

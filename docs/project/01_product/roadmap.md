@@ -1,15 +1,15 @@
 ---
 type: roadmap
-version: 1.0
-last_updated: 2026-06-11
-current_phase: "Phase 2 — CLI v0.1"
+version: 1.1
+last_updated: 2026-06-12
+current_phase: "Phase 3 — Multi-agent tooling"
 ---
 
 # Roadmap — Status and Planning
 
 ## Current Phase/Milestone
 
-**Phase 2 — CLI v0.1**: turn the standard's mechanical rules into deterministic tooling. Scope and rationale live in the evolution roadmap (Phase 2); this board tracks the work.
+**Phase 3 — Multi-agent tooling**: give every MCP-capable agent uniform tooling over the standard, and ship the first native adapter (Claude Code plugin). This board tracks the work.
 
 ---
 
@@ -17,7 +17,12 @@ current_phase: "Phase 2 — CLI v0.1"
 
 ### [In Progress]
 
+- [T-12] MCP server (`@aigentdocs/mcp`): seven tools over core (status, active task, module, sessions, corrections, state sync, lint). Implemented, pending review; ADR-0005 (MCP SDK) accepted.
+
 ### [To Do / Next]
+
+- [T-13] Claude Code plugin: skills from the session protocols, subagents from the agent profiles, optional Session Guard hook.
+- [T-14] Publish `@aigentdocs/mcp` + CLI 0.1.1 (EPIPE fix).
 
 ### [Blocked / Review]
 
