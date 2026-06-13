@@ -1,6 +1,43 @@
 # Version History of the Documentation Standard
 # Each entry records a version of the standard and its changes.
 
+- version: "1.4.6"
+  date: "2026-06-12"
+  summary: "Documentation restructure: the standard is the product, project content lives outside it (see ADR-0006 in the tooling repo)"
+  changes:
+    - type: removed
+      description: >
+        QUICKSTART.md was removed. Human-facing usage (the nature of the
+        framework, the two CLI modes, and the agent-first filling flow) is
+        consolidated in the adopting repository's front door — the root
+        README — which both humans and agents read. The standard no longer
+        ships a separate usage guide; what remains in docs/standard/ is the
+        normative reference (README spec, guides, agent profiles, AGENT.md).
+    - type: changed
+      description: >
+        docs/standard/README.md was pruned to the standard's specification
+        only. Removed its double identity as a project front page: the
+        "Sections this file must contain in a project" table, the "replace
+        the header with your project name" note, and the Conventions table.
+        The file is now self-contained and replaceable wholesale on update.
+    - type: changed
+      description: >
+        Project conventions (documentation language, adoption profile,
+        date format, writing style) now live in the adopting repository's
+        root AGENTS.md, not in docs/standard/. The AGENTS.md template gained
+        a "Project conventions" section; Lite Mode and AGENT.md's mode
+        detection now read the profile from AGENTS.md. Rationale: docs/
+        standard/ is the product and is replaced wholesale by `update`, so
+        nothing project-specific may live there.
+    - type: changed
+      description: >
+        The usage model is framed as two CLI modes — Bootstrap (npx
+        aigentdocs init, no install) and Adopt (npm i -D aigentdocs) — and
+        the documentation is filled agent-first via two entry points: a new
+        project from design (Design Mode, the greenfield flow the framework
+        was born from) or an existing project (Onboarding Mode). The manual
+        fill-the-templates-by-hand path was dropped.
+
 - version: "1.4.5"
   date: "2026-06-12"
   summary: "Project renamed to AIGentDocs"

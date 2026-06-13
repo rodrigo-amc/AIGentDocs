@@ -1,4 +1,4 @@
-import { access, cp, readFile, rm, writeFile } from "node:fs/promises";
+import { access, cp, readFile, rm } from "node:fs/promises";
 import path from "node:path";
 
 import { parseYaml } from "./frontmatter.js";
@@ -12,10 +12,11 @@ import { parseYaml } from "./frontmatter.js";
  * packaged standard declares the available one. The entries between the
  * two ARE the migration notes.
  *
- * README.md is the adopter's customization point (title, conventions), so
- * a customized README is preserved and the incoming one is written next to
- * it as README.md.new for manual merging. An uncustomized README (still
- * carrying the generic title) is simply replaced.
+ * docs/standard/ is the standard itself — nothing project-specific lives
+ * there (project identity and conventions live in the repository root:
+ * its own README and AGENTS.md, which this command never touches). So the
+ * update simply replaces docs/standard/ wholesale; there is nothing to
+ * merge.
  */
 
 export interface ChangelogEntry {
@@ -32,11 +33,7 @@ export interface UpdateResult {
   to: string;
   /** Changelog entries newer than `from` — the migration notes. */
   notes: ChangelogEntry[];
-  /** True when README.md was preserved and README.md.new needs a manual merge. */
-  readmeNeedsMerge: boolean;
 }
-
-const GENERIC_README_TITLE = "# Documentation Standard for AI-Augmented Software Engineering";
 
 /** Compare dotted numeric versions ("1.4.3" vs "1.4"): -1 | 0 | 1. */
 export function compareVersions(a: string, b: string): number {
@@ -74,7 +71,7 @@ export async function updateStandard(
   const packaged = await readChangelog(packagedStandardDir);
   const to = packaged[0]?.version ?? "0.0.0";
 
-  const base: UpdateResult = { status: "up-to-date", from, to, notes: [], readmeNeedsMerge: false };
+  const base: UpdateResult = { status: "up-to-date", from, to, notes: [] };
   const cmp = compareVersions(from, to);
   if (cmp === 0) {
     return base;
@@ -88,20 +85,9 @@ export async function updateStandard(
     return { ...base, status: "would-update", notes };
   }
 
-  const theirReadme = await readFile(path.join(installedDir, "README.md"), "utf8").catch(() => undefined);
+  // docs/standard/ carries nothing project-specific — replace it wholesale.
   await rm(installedDir, { recursive: true, force: true });
   await cp(packagedStandardDir, installedDir, { recursive: true });
 
-  let readmeNeedsMerge = false;
-  const customized = theirReadme !== undefined && !theirReadme.startsWith(GENERIC_README_TITLE);
-  if (customized) {
-    const incoming = await readFile(path.join(installedDir, "README.md"), "utf8");
-    if (incoming !== theirReadme) {
-      await writeFile(path.join(installedDir, "README.md"), theirReadme);
-      await writeFile(path.join(installedDir, "README.md.new"), incoming);
-      readmeNeedsMerge = true;
-    }
-  }
-
-  return { ...base, status: "updated", notes, readmeNeedsMerge };
+  return { ...base, status: "updated", notes };
 }
