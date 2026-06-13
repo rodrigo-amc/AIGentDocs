@@ -1,0 +1,12 @@
+{
+  "name": "aigentdocs",
+  "version": "0.1.0",
+  "description": "Operate the AIGentDocs docs-as-code standard from Claude Code. Commands compile the standard's session protocols; subagents compile its implementation profiles; everything reads the adopting project's own docs/standard/ (version-correct, single source of truth).",
+  "author": {
+    "name": "AIGentDocs",
+    "url": "https://github.com/rodrigo-amc/AIGentDocs"
+  },
+  "homepage": "https://github.com/rodrigo-amc/AIGentDocs",
+  "license": "MIT",
+  "keywords": ["documentation", "docs-as-code", "ddd", "ai-agents"]
+}

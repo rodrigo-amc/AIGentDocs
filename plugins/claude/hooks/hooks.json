@@ -1,0 +1,15 @@
+{
+  "description": "AIGentDocs lint feedback on Stop: when the session touched docs/project/, run the deterministic lint and surface critical findings before finishing. Inform-don't-block: disable with AIGENTDOCS_STOP_LINT=off.",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/stop-lint.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
