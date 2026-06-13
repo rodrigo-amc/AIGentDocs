@@ -10,6 +10,17 @@ This project is documented under the **AIGentDocs** docs-as-code standard. The d
 
 Before doing any work, read **`docs/standard/AGENT.md`** — it defines your operating rules, working modes (Onboarding, Design, Implementation), and session management. Then follow the **Reading Protocol** in `docs/standard/README.md` to load project context at the lowest token cost.
 
+## Project conventions
+
+These belong to this project and are not overwritten when the standard is updated (`docs/standard/` is replaced wholesale; this file is not).
+
+| Convention | Value |
+|---|---|
+| Documentation language | *e.g. English, Spanish* |
+| Adoption profile | `full` *or* `lite` (see Lite Mode in `docs/standard/README.md`) |
+| Date format | `YYYY-MM-DD` |
+| Writing style | Clear, outcome-oriented, readable by humans and AI agents |
+
 ## Non-negotiable rules (summary — `AGENT.md` is authoritative)
 
 1. **Do not generate code** without first reading `docs/project/03_engineering/tech_stack.yaml`. Use only the technologies, versions, and libraries listed there.

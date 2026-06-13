@@ -45,7 +45,6 @@ test("an outdated standard is updated with migration notes; uncustomized README 
     assert.equal(result.status, "updated");
     assert.equal(result.from, "1.3.0");
     assert.ok(result.notes.length >= 4, "expected the 1.4.x entries as migration notes");
-    assert.equal(result.readmeNeedsMerge, false);
     assert.equal(await exists(path.join(dir, "docs/standard/README.md.new")), false);
     // The changelog is the new one again.
     const changelog = await readFile(path.join(dir, "docs/standard/changelog.yaml"), "utf8");
@@ -53,16 +52,16 @@ test("an outdated standard is updated with migration notes; uncustomized README 
   });
 });
 
-test("a customized README is preserved and the incoming one lands in README.md.new", async () => {
+test("docs/standard is replaced wholesale — local edits to it do not survive", async () => {
   await withAdopter(async (dir) => {
     await writeFile(path.join(dir, "docs/standard/changelog.yaml"), OLD_CHANGELOG);
-    const custom = "# MyProject\n\nOur conventions.\n";
-    await writeFile(path.join(dir, "docs/standard/README.md"), custom);
+    await writeFile(path.join(dir, "docs/standard/README.md"), "# edited in place\n");
     const result = await updateStandard(dir, STANDARD_DIR);
     assert.equal(result.status, "updated");
-    assert.equal(result.readmeNeedsMerge, true);
-    assert.equal(await readFile(path.join(dir, "docs/standard/README.md"), "utf8"), custom);
-    assert.ok(await exists(path.join(dir, "docs/standard/README.md.new")));
+    // The standard's own README is restored; the local edit is gone, no .new file.
+    const readme = await readFile(path.join(dir, "docs/standard/README.md"), "utf8");
+    assert.doesNotMatch(readme, /edited in place/);
+    assert.equal(await exists(path.join(dir, "docs/standard/README.md.new")), false);
   });
 });
 

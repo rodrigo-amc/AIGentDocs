@@ -1,8 +1,8 @@
 ---
 type: vision
-version: 1.0
-last_updated: 2026-06-11
-change_summary: "Initial vision for the AIGentDocs tooling (CLI + MCP server)"
+version: 1.1
+last_updated: 2026-06-12
+change_summary: "MCP server and native adapters (Claude Code plugin) now in scope as implemented"
 ---
 
 # Product Vision — AIGentDocs Tooling
@@ -38,7 +38,8 @@ The AIGentDocs standard works today by copying markdown files and trusting agent
 - `adapt`: generation of per-tool adapter files (`CLAUDE.md`, `.cursor/rules`, `copilot-instructions.md`, etc.) from the single source of truth.
 - `update`: upgrade an adopter's `docs/standard/` to a newer version of the standard, reporting changes that need human attention.
 - Distribution: npm package (npx-runnable), a pre-commit hook template, a reusable GitHub Action, and a no-CLI tarball per release.
-- (Later phase) MCP server exposing the standard's operations to any MCP-capable agent, sharing this codebase.
+- MCP server (`@aigentdocs/mcp`) exposing the standard's operations as tools for any MCP-capable agent, sharing this codebase.
+- Native adapters that compile the standard to a specific tool — the first is the Claude Code plugin (commands, subagents, lint hook).
 
 ### Out of Scope
 

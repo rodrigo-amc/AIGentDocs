@@ -116,10 +116,10 @@ export async function main(argv: string[], io: Io): Promise<number> {
       }
       io.out(
         "\nNext steps:\n" +
-          "  1. Customize docs/standard/README.md (project name, conventions" +
-          (result.profile === "lite" ? ", set 'Adoption profile: lite'" : "") +
-          ").\n" +
-          "  2. Read docs/standard/QUICKSTART.md for the workflow.\n" +
+          "  1. Fill in the Project conventions in AGENTS.md" +
+          (result.profile === "lite" ? " (set 'Adoption profile: lite')" : "") +
+          ".\n" +
+          "  2. Read docs/standard/AGENT.md for the workflow and your operating rules.\n" +
           (result.profile === "lite"
             ? "  3. Run 'aigentdocs lint' — the empty [REQUIRED] sections it reports are your documentation to-do list.\n"
             : "  3. Start a 01_product session to create vision.md and roadmap.md from the templates.\n"),
@@ -196,12 +196,6 @@ export async function main(argv: string[], io: Io): Promise<number> {
             io.out(`  ${note.version} (${note.date ?? "?"}): ${note.summary ?? ""}\n`);
           }
           io.out("\nDetails: docs/standard/changelog.yaml\n");
-          if (result.readmeNeedsMerge) {
-            io.out(
-              "\nYour customized docs/standard/README.md was preserved. The new version\n" +
-                "was written to docs/standard/README.md.new — merge it manually and delete it.\n",
-            );
-          }
           return result.status === "would-update" ? 1 : 0;
         }
       }

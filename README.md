@@ -16,31 +16,46 @@ AIGentDocs answers with three moves:
 
 ## Quick start
 
+Scaffold the structure into your repository — no install needed:
+
 ```bash
-npx aigentdocs init          # scaffold docs/ + the AGENTS.md entry point
-npx aigentdocs hooks install # compliance check on every commit (bypassable, consciously)
+npx aigentdocs init          # docs/ + the AGENTS.md entry point
 ```
 
-Then open your repository with your AI tool of choice and say:
+From there you build the documentation **in dialogue with your AI agent of choice**: the agent drafts, you review and approve — nothing is final without review. Two entry points, depending on whether code already exists:
+
+**A new project — design first.** No code yet, so you capture the design as documentation and let it guide the implementation. This is where the framework was born. Start with `vision.md`: tell the agent what you're building, and through Knowledge Crunching (DDD) it discovers the domain, glossary, and scope with you, then drafts the document. Approve it and continue — domain modules → roadmap → architecture → engineering — one document at a time.
+
+**An existing project — onboarding.** Already have code? Point the agent at the framework and it reverse-engineers your codebase into drafts, from the concrete to the abstract:
 
 ```
 Analyze this project's code and complete the documentation following
 the framework in docs/. Start by reading docs/standard/AGENT.md.
 ```
 
-The agent enters **Onboarding Mode**, reverse-engineers your code into documentation drafts, and you approve each one. From then on, every agent that opens the repo finds its operating rules on its own — `AGENTS.md` is read natively by most AI coding tools.
+Either way, once the docs exist every agent that later opens the repo finds its operating rules on its own — `AGENTS.md` is read natively by most AI coding tools.
+
+## Two ways to use it
+
+The CLI works in two modes — most projects use both, in this order:
+
+**1. Bootstrap — `npx aigentdocs init` (no install).** Run once to scaffold `docs/` and the `AGENTS.md` entry point into your repo. `npx` fetches and runs the CLI on the spot — it adds no npm dependency to your project. From here you build the documentation with an agent (see Quick start above).
+
+**2. Adopt — `npm i -D aigentdocs` (dev dependency).** When the standard becomes part of how the project is built, install the CLI. Now `agd`/`aigentdocs` resolve locally — pinned to one version your whole team and CI share — the pre-commit hook works (it looks for the local install), and `lint`/`update` become part of the everyday workflow.
+
+> **Example.** Maya spins up a new service and runs `npx aigentdocs init` to lay down the docs — she won't add a dependency just to create files. A week later the team commits to the standard for real, so she runs `npm i -D aigentdocs` and `agd hooks install`: from then on every commit is checked locally and CI validates each PR.
+
+## Commands
+
+Run a command as `agd <command>` (once installed) or `npx aigentdocs <command>` (ad-hoc); `agd` is the short alias for `aigentdocs`. The one-shot commands — `init`, `lint`, `adapt`, `update` — work either way. `hooks install` needs the installed mode: the hook it writes looks for the local CLI on every commit.
 
 | Command | What it does |
 |---|---|
-| `init [--lite]` | Scaffold the structure (`--lite`: minimal 3-file profile) |
-| `lint` | Validate documentation compliance — deterministic, exit 1 on critical findings |
-| `hooks install` | Pre-commit check; only criticals block, `--no-verify` always available |
-| `adapt` | Generate entry files for tools that don't read `AGENTS.md` |
-| `update [--check]` | Upgrade your copy of the standard, with migration notes |
-
-Once installed (`npm i -D aigentdocs`), the short alias **`agd`** works everywhere.
-
-**No tooling?** The standard is plain markdown. Grab the bundle from [Releases](https://github.com/rodrigo-amc/AIGentDocs/releases) and unpack it at your repository root — everything works manually.
+| `agd init [--lite]` | Scaffold the structure (`--lite`: minimal 3-file profile) |
+| `agd lint` | Validate documentation compliance — deterministic, exit 1 on critical findings |
+| `agd hooks install` | Install the pre-commit check (requires the package installed locally; only criticals block, `--no-verify` always available) |
+| `agd adapt` | Generate entry files for tools that don't read `AGENTS.md` |
+| `agd update [--check]` | Upgrade your copy of the standard, with migration notes |
 
 ## How it's organized
 
@@ -53,8 +68,8 @@ Once installed (`npm i -D aigentdocs`), the short alias **`agd`** works everywhe
 
 Work happens in **sessions** with bounded write scopes, agents operate under explicit rules (`docs/standard/AGENT.md`), and the **Anti-Drift Protocol** ties every code change to the documentation it must update. When reality proves the design wrong, a **Correction Record** fixes the documentation first — with an approved impact map as the audit trail — and the code follows.
 
-- **Usage guide**: [`docs/standard/QUICKSTART.md`](docs/standard/QUICKSTART.md)
-- **The standard itself**: [`docs/standard/README.md`](docs/standard/README.md)
+- **The standard itself**: [`docs/standard/README.md`](docs/standard/README.md) — structure, protocols, and conventions
+- **Agent operating rules**: [`docs/standard/AGENT.md`](docs/standard/AGENT.md)
 - **Changelog**: [`docs/standard/changelog.yaml`](docs/standard/changelog.yaml)
 
 ## Tool compatibility
@@ -69,20 +84,6 @@ CI enforcement via the reusable Action:
   with:
     fail-on: critical   # or 'never' to report without failing
 ```
-
-## How it compares
-
-Spec-driven development has excellent tools — pick the one whose philosophy fits your project:
-
-| If you want... | Consider |
-|---|---|
-| Per-feature specs with a huge community and 30+ agent integrations | [GitHub Spec Kit](https://github.com/github/spec-kit) |
-| An integrated IDE taking you requirements → design → tasks | AWS Kiro |
-| A full agile method with role-playing agents (analyst, architect, QA) | [BMAD-Method](https://github.com/bmadcode/BMAD-METHOD) |
-| Lightweight change proposals as the unit of work | OpenSpec |
-| **Durable domain documentation as the source of truth** — DDD-driven discovery, a first-class brownfield path, deterministic enforcement, and one context that works across every tool | **AIGentDocs** |
-
-The honest difference: those tools mostly center the **spec of the next change**; AIGentDocs centers the **living documentation of the whole system**, with change management (corrections, ADRs) built around it. If your project is a quick prototype, our Lite Mode is the fair comparison — and Spec Kit may still serve you better.
 
 ## Dogfooding
 

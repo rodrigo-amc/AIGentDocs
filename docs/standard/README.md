@@ -13,7 +13,6 @@ This repository contains a **docs-as-code framework** designed so that AI agents
 - [README.md](./README.md) — This file (entry point)
 - [AGENT.md](./AGENT.md) — Global operating instructions for AI agents
 - [AGENT_REVIEW.md](./AGENT_REVIEW.md) — Documentation audit prompt
-- [QUICKSTART.md](./QUICKSTART.md) — Framework usage guide
 - [changelog.yaml](./changelog.yaml) — Version history of the standard
 
 #### Structure and Format Guides
@@ -87,7 +86,6 @@ All documents must remain **human-readable** — humans are the ones who create,
 │   ├── README.md                          # This file (entry point)
 │   ├── AGENT.md                           # Global operating instructions and session management
 │   ├── AGENT_REVIEW.md                    # Documentation audit prompt (on demand)
-│   ├── QUICKSTART.md                      # Framework usage guide
 │   ├── changelog.yaml                     # Version history of the standard
 │   │
 │   ├── guide_product.md                   # Structure and format of 01_product
@@ -149,21 +147,6 @@ All documents must remain **human-readable** — humans are the ones who create,
 
 ---
 
-## Sections this file must contain in a project
-
-| Section | Type | Description |
-|---|---|---|
-| Project Name | **[REQUIRED]** | Official name and a 1-2 line description of the project. |
-| Table of Contents | **[REQUIRED]** | Complete index with relative paths to every file under `/docs`. Must be kept up to date whenever the structure changes. |
-| Reading Protocol | **[REQUIRED]** | Recommended sequential reading order to understand the project (see guide below). |
-| Maintenance Protocol | **[REQUIRED]** | Rules for editing, creating, or deleting documentation files (see guide below). |
-| Conventions | **[REQUIRED]** | Chosen language, date format, writing style. |
-| Version History | **[REQUIRED]** | Structured record of changes to the standard in `changelog.yaml`. |
-
-> **Note:** When adopting the framework in a project, the header of this file must be replaced with the actual project's name and description.
-
----
-
 ## Adoption Guide
 
 ### New Project (Greenfield)
@@ -211,7 +194,7 @@ Full adoption is the right choice for products with several domain entities and 
 1. **Do not create the remaining files.** Empty placeholder files would signal an incomplete adoption (and trigger Onboarding Mode); their absence signals a deliberate Lite profile.
 2. **User Stories and their ACs live directly on the roadmap board items**, since there are no `domain_modules/`.
 3. **ADRs are recommended but optional.** The `adr` fields in `tech_stack.yaml` may be left empty (`""`) until the project upgrades.
-4. **Declare the profile** in the Conventions table of this file (`Adoption profile: lite`), so agents and humans know the missing files are intentional.
+4. **Declare the profile** in `AGENTS.md` (`Adoption profile: lite`), so agents and humans know the missing files are intentional.
 5. Everything else in the standard (frontmatter, `[REQUIRED]` sections of the three files, traceability on the board) applies as usual.
 
 **When to upgrade** — any of these signals means the project has outgrown Lite:
@@ -227,7 +210,7 @@ Full adoption is the right choice for products with several domain entities and 
 2. Extract the User Stories from the roadmap into `domain_modules/` files (one module per session, per `AGENT.md`).
 3. Add `02_architecture/` and the remaining `03_engineering/` documents following the standard session order.
 4. Create retroactive ADRs for the decisions already reflected in `tech_stack.yaml`.
-5. Update the Conventions table (`Adoption profile: full`).
+5. Update `AGENTS.md` (`Adoption profile: full`).
 
 Each step is independent: upgrade only what the project's complexity actually demands.
 
@@ -335,16 +318,9 @@ Lifecycle: add an entry when the pending item is discovered; remove it when reso
 
 ---
 
-## Conventions
+## Project Conventions
 
-<!-- [REQUIRED] Chosen language, date format, writing style. -->
-
-| Convention | Value |
-|---|---|
-| Documentation language | *To be defined by each project's team* |
-| Adoption profile | *`full` or `lite` (see Lite Mode in the Adoption Guide)* |
-| Date format | `YYYY-MM-DD` |
-| Writing style | Clear, outcome-oriented, readable by humans and AI agents |
+A project's own conventions — documentation language, adoption profile (`full`/`lite`), and any date-format or writing-style choices — live in the adopting repository's root `AGENTS.md`, not here. This file is the standard itself: it is replaced wholesale when the standard is updated, so nothing project-specific belongs in it. Date format defaults to `YYYY-MM-DD`.
 
 ---
 

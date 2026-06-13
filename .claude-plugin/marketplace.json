@@ -1,0 +1,14 @@
+{
+  "name": "aigentdocs",
+  "owner": {
+    "name": "AIGentDocs",
+    "url": "https://github.com/rodrigo-amc/AIGentDocs"
+  },
+  "plugins": [
+    {
+      "name": "aigentdocs",
+      "source": "./plugins/claude",
+      "description": "Operate the AIGentDocs docs-as-code standard from Claude Code: documentation sessions with write scopes, brownfield onboarding, implementation subagents, and lint feedback."
+    }
+  ]
+}
