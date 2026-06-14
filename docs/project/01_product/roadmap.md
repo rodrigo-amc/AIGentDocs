@@ -1,15 +1,15 @@
 ---
 type: roadmap
-version: 1.2
-last_updated: 2026-06-12
-current_phase: "Phase 3 — Multi-agent tooling"
+version: 1.3
+last_updated: 2026-06-14
+current_phase: "Phase 4 — Open source & community"
 ---
 
 # Roadmap — Status and Planning
 
 ## Current Phase/Milestone
 
-**Phase 3 — Multi-agent tooling**: give every MCP-capable agent uniform tooling over the standard, and ship the first native adapter (Claude Code plugin). This board tracks the work.
+**Phase 4 — Open source & community**: with the standard, the CLI, the MCP server, and the Claude Code plugin all built and published to npm, the remaining work is opening the project up. (The repository stays private until the phase work is ready.) Phases 1-3 are complete.
 
 ---
 
@@ -19,12 +19,13 @@ current_phase: "Phase 3 — Multi-agent tooling"
 
 ### [To Do / Next]
 
-- [T-14] Publish `@aigentdocs/mcp` + CLI 0.1.1 (EPIPE fix) + `@aigentdocs/standard@1.4.6`.
+- [T-16] Open-source prep: decide what's needed before making the repo public (showcase, announcement, automation token for CI publishing).
 
 ### [Blocked / Review]
 
 ### [Done]
 
+- [T-14] Published to npm (2026-06-14): `@aigentdocs/standard@1.4.6`, `@aigentdocs/core@0.1.1`, `@aigentdocs/mcp@0.1.0` (first release), `aigentdocs@0.1.1` (EPIPE fix). Verified from a clean directory: `npx aigentdocs@latest` scaffolds the 1.4.6 standard; the MCP package resolves `core@0.1.1`.
 - [T-15] Documentation restructure: the root README is the single human-facing guide (QUICKSTART removed); `docs/standard/README.md` pruned to the spec; project conventions moved to `AGENTS.md`; `update` replaces `docs/standard/` wholesale. Recorded as ADR-0006; standard v1.4.6.
 - [T-13] Claude Code plugin (first native Layer 4 adapter): six commands from the session protocols, four subagents from the implementation profiles, a Stop hook running the lint. Structure tests.
 - [T-12] MCP server (`@aigentdocs/mcp`): seven tools over core (status, active task, module, sessions with write scopes, corrections with status-aware scope, state sync, lint). ADR-0005 (MCP SDK) accepted. Real client/server tests in memory.
