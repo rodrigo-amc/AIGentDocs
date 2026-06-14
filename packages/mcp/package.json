@@ -9,7 +9,13 @@
     "url": "git+https://github.com/rodrigo-amc/AIGentDocs.git",
     "directory": "packages/mcp"
   },
-  "keywords": ["mcp", "model-context-protocol", "documentation", "docs-as-code", "ai-agents"],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "documentation",
+    "docs-as-code",
+    "ai-agents"
+  ],
   "type": "module",
   "bin": {
     "aigentdocs-mcp": "dist/src/index.js"
@@ -26,7 +32,7 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@aigentdocs/core": "0.1.0",
+    "@aigentdocs/core": "0.1.1",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "zod": "^3.25.0"
   }

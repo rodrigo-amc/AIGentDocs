@@ -1,6 +1,6 @@
 {
   "name": "@aigentdocs/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Shared domain model and validation logic for the AIGentDocs tooling (frontmatter parsing, deterministic lint rules, scaffolding, adapters, standard updates).",
   "license": "MIT",
   "homepage": "https://github.com/rodrigo-amc/AIGentDocs#readme",
@@ -9,7 +9,12 @@
     "url": "git+https://github.com/rodrigo-amc/AIGentDocs.git",
     "directory": "packages/core"
   },
-  "keywords": ["documentation", "docs-as-code", "ai-agents", "lint"],
+  "keywords": [
+    "documentation",
+    "docs-as-code",
+    "ai-agents",
+    "lint"
+  ],
   "type": "module",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
