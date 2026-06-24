@@ -1,97 +1,78 @@
 # AIGentDocs
 
-> Living domain documentation for AI coding agents — not throwaway specs.
+> Docs as Code for AI-augmented software engineering: living documentation that agents design, build from, and keep in sync with the code.
 
-AIGentDocs is a **docs-as-code standard** plus a small **deterministic CLI**. It structures a software project's documentation so that AI coding agents — any of them — can understand the project deeply, contribute code that fits the design, and never outrun what was actually decided.
+AIGentDocs is a **framework** for AI-augmented software engineering, built on a **docs-as-code standard** and the tooling that makes it enforceable. It treats a project's documentation the way you treat source code — versioned in the repo, reviewed in pull requests, validated in CI — so it becomes a **living, trustworthy source of truth** that AI coding agents can rely on to understand a project, design it, and implement it.
 
-## The problem
+## The idea: documentation as code
 
-AI coding agents are only as good as the context they're given. Without structure, every session re-explains the project; with throwaway per-feature specs, the context ages the moment the feature ships. And documentation that nothing enforces always drifts away from the code.
+An AI agent is only as good as the context it's given, and context that isn't versioned or enforced drifts from reality — a stale spec is worse than none. AIGentDocs' foundational bet is to make documentation a first-class, code-grade artifact:
 
-AIGentDocs answers with three moves:
+- **Durable and structured** — four layers (product, architecture, engineering, decisions) with reading protocols that load only the context a task needs.
+- **Discovered, not dumped** — Domain-Driven Design (Knowledge Crunching) draws the domain out in dialogue with you; a human approves every document.
+- **Enforced, not promised** — a deterministic linter checks structure, consistency, and completeness on every commit and PR. You lint the docs the way you lint the code.
 
-1. **Durable documentation, structured for agents**: four layers (product, architecture, engineering, decisions) with reading protocols that load the minimum context a task needs.
-2. **Discovered, not dumped**: Domain-Driven Design (Knowledge Crunching) drives what gets documented; humans approve every document.
-3. **Enforced, not promised**: a deterministic linter — no LLM involved — validates structure, consistency, and completeness on every commit and PR.
+Everything else in the project orbits this single idea: some pieces **produce and protect** the living documentation, others **consume** it to build the software.
 
-## Quick start
+## What it covers — design to implementation
 
-Scaffold the structure into your repository — no install needed:
+The documentation isn't an afterthought to the code; it's the source the code is built from. AIGentDocs spans the whole lifecycle with a cast of role-specialized **agent profiles**:
 
-```bash
-npx aigentdocs init          # docs/ + the AGENTS.md entry point
-```
+**Design — agents that _produce_ the documentation**
+- **Product**, via DDD — vision, domain modules, roadmap (the "why").
+- **Architecture** — C4 diagrams, data flows, infrastructure (the "what").
+- **Engineering** — tech stack, testing strategy, API guidelines (the "how").
+- **Decisions** — Architecture Decision Records (ADRs): immutable and traceable.
 
-From there you build the documentation **in dialogue with your AI agent of choice**: the agent drafts, you review and approve — nothing is final without review. Two entry points, depending on whether code already exists:
+**Implementation — agents that _consume_ the documentation**
+- **scaffold** — bootstraps the project structure from the approved docs.
+- **module-developer** — builds a domain module (code + tests) exactly as specified.
+- **code-reviewer** — checks the code against the docs, not against vibes.
+- **integration-tester** — turns acceptance criteria into tests against the running system.
 
-**A new project — design first.** No code yet, so you capture the design as documentation and let it guide the implementation. This is where the framework was born. Start with `vision.md`: tell the agent what you're building, and through Knowledge Crunching (DDD) it discovers the domain, glossary, and scope with you, then drafts the document. Approve it and continue — domain modules → roadmap → architecture → engineering — one document at a time.
-
-**An existing project — onboarding.** Already have code? Point the agent at the framework and it reverse-engineers your codebase into drafts, from the concrete to the abstract:
-
-```
-Analyze this project's code and complete the documentation following
-the framework in docs/. Start by reading docs/standard/AGENT.md.
-```
-
-Either way, once the docs exist every agent that later opens the repo finds its operating rules on its own — `AGENTS.md` is read natively by most AI coding tools.
-
-## Two ways to use it
-
-The CLI works in two modes — most projects use both, in this order:
-
-**1. Bootstrap — `npx aigentdocs init` (no install).** Run once to scaffold `docs/` and the `AGENTS.md` entry point into your repo. `npx` fetches and runs the CLI on the spot — it adds no npm dependency to your project. From here you build the documentation with an agent (see Quick start above).
-
-**2. Adopt — `npm i -D aigentdocs` (dev dependency).** When the standard becomes part of how the project is built, install the CLI. Now `agd`/`aigentdocs` resolve locally — pinned to one version your whole team and CI share — the pre-commit hook works (it looks for the local install), and `lint`/`update` become part of the everyday workflow.
-
-> **Example.** Maya spins up a new service and runs `npx aigentdocs init` to lay down the docs — she won't add a dependency just to create files. A week later the team commits to the standard for real, so she runs `npm i -D aigentdocs` and `agd hooks install`: from then on every commit is checked locally and CI validates each PR.
-
-## Commands
-
-Run a command as `agd <command>` (once installed) or `npx aigentdocs <command>` (ad-hoc); `agd` is the short alias for `aigentdocs`. The one-shot commands — `init`, `lint`, `adapt`, `update` — work either way. `hooks install` needs the installed mode: the hook it writes looks for the local CLI on every commit.
-
-| Command | What it does |
-|---|---|
-| `agd init [--lite]` | Scaffold the structure (`--lite`: minimal 3-file profile) |
-| `agd lint` | Validate documentation compliance — deterministic, exit 1 on critical findings |
-| `agd hooks install` | Install the pre-commit check (requires the package installed locally; only criticals block, `--no-verify` always available) |
-| `agd adapt` | Generate entry files for tools that don't read `AGENTS.md` |
-| `agd update [--check]` | Upgrade your copy of the standard, with migration notes |
+In both phases the contract is the same: **the agent proposes, a human approves; the documentation is the source of truth, and when code and docs disagree, the code is what's wrong.**
 
 ## How it's organized
 
-| Layer | Directory | Question it answers |
-|---|---|---|
-| Product | `docs/project/01_product/` | Why does this exist? What does it do? |
-| Architecture | `docs/project/02_architecture/` | What was built? How does it connect? |
-| Engineering | `docs/project/03_engineering/` | What technical rules apply? |
-| Decisions | `docs/project/04_adrs/` | Why were these choices made? |
+Work happens in **sessions** with bounded write scopes — one area, one document at a time. The **Anti-Drift Protocol** ties every code change to the documentation it must update, in the same change. When reality proves a design wrong, a **Correction Record** fixes the documentation first — with an approved impact map as the audit trail — and the code follows. Four layers under `docs/project/`:
 
-Work happens in **sessions** with bounded write scopes, agents operate under explicit rules (`docs/standard/AGENT.md`), and the **Anti-Drift Protocol** ties every code change to the documentation it must update. When reality proves the design wrong, a **Correction Record** fixes the documentation first — with an approved impact map as the audit trail — and the code follows.
+| Layer | Question it answers |
+|---|---|
+| Product (`01_product/`) | Why does this exist? What does it do? |
+| Architecture (`02_architecture/`) | What was built? How does it connect? |
+| Engineering (`03_engineering/`) | What technical rules apply? |
+| Decisions (`04_adrs/`) | Why were these choices made? |
 
-- **The standard itself**: [`docs/standard/README.md`](docs/standard/README.md) — structure, protocols, and conventions
-- **Agent operating rules**: [`docs/standard/AGENT.md`](docs/standard/AGENT.md)
-- **Changelog**: [`docs/standard/changelog.yaml`](docs/standard/changelog.yaml)
+## The tooling
+
+The standard is plain markdown and works on its own; the tooling is what makes "docs as code" enforceable and portable across every agent:
+
+- **CLI** (`aigentdocs` / `agd`, on npm): `init` scaffolds, `lint` validates (deterministic, no LLM), `adapt` generates per-tool entry files, `update` keeps the standard current. Install it as a dev dependency (`npm i -D aigentdocs`) for the `agd` alias, the pre-commit hook, and CI.
+- **Enforcement** — a pre-commit hook and a reusable GitHub Action run `lint`; only critical findings block, and the bypass is always a conscious choice.
+- **MCP server** (`@aigentdocs/mcp`) — exposes the standard's operations as tools for any MCP-capable agent.
+- **Claude Code plugin** — the session protocols as commands, the agent profiles as subagents.
+
+## Quick start
+
+```bash
+npx aigentdocs init     # scaffold docs/ + the AGENTS.md entry point
+```
+
+Then open the repo with your AI agent and point it at `docs/standard/AGENT.md`: for a new project it drafts `vision.md` with you (design first); for existing code it reverse-engineers the docs (onboarding). The agent drafts, you approve.
+
+The full workflow, commands, and operating rules live in **`docs/standard/AGENT.md`** and the area guides (`docs/standard/guide_*.md`).
 
 ## Tool compatibility
 
-The core is markdown — it works with **any** agent, IDE, or model. `AGENTS.md` is read natively by OpenAI Codex, Cursor, GitHub Copilot, the Antigravity ecosystem, and 30+ other tools. For the rest, `aigentdocs adapt` generates thin pointer files (`CLAUDE.md`, `.cursor/rules`, `copilot-instructions.md`, `GEMINI.md`) — single source of truth, never hand-maintained.
-
-CI enforcement via the reusable Action:
-
-```yaml
-- uses: actions/checkout@v4
-- uses: rodrigo-amc/AIGentDocs@main
-  with:
-    fail-on: critical   # or 'never' to report without failing
-```
+The markdown core works with any agent, IDE, or model. `AGENTS.md` is read natively by most AI coding tools (Codex, Cursor, Copilot, the Antigravity ecosystem, and others); for the rest, `aigentdocs adapt` generates thin pointer files. Single source of truth, never hand-maintained.
 
 ## Dogfooding
 
-This repository documents itself with its own standard (see [`docs/project/`](docs/project/) and [`AGENTS.md`](AGENTS.md)), lints itself in CI, and the standard's last four releases were driven by defects that dogfooding surfaced. The release bundle is assembled by running our own `init`.
+This repository documents itself with its own standard (see `docs/project/`), lints itself in CI, and several releases were driven by defects that dogfooding surfaced. The release bundle is even assembled by running our own `init`.
 
 ## Status
 
-Early and moving fast. The standard is at v1.4.x (see the [changelog](docs/standard/changelog.yaml)); the CLI is `0.1.x`. Things may change between minor versions until 1.0.
+Early and moving fast — the standard is at v1.4.x, the CLI at 0.1.x. Things may change between minor versions until 1.0.
 
 ## License
 

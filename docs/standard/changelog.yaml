@@ -1,6 +1,29 @@
 # Version History of the Documentation Standard
 # Each entry records a version of the standard and its changes.
 
+- version: "1.4.7"
+  date: "2026-06-24"
+  summary: "Entry docs surface the full design→implementation scope (docs-as-code as the axis)"
+  changes:
+    - type: changed
+      description: >
+        README.md (the standard's spec) now opens by framing the full
+        scope: docs-as-code as a living source of truth, with agent
+        profiles covering both design (product/DDD, architecture,
+        engineering, decisions) and implementation (scaffold, build,
+        review, test from the docs). It previously read as
+        documentation-only, which undersold the framework.
+    - type: changed
+      description: >
+        AGENT.md's intro frames the agent's work as docs-as-code spanning
+        design and implementation, for consistency with that scope.
+    - type: changed
+      description: >
+        Terminology made consistent: "framework" names the whole of
+        AIGentDocs (standard + tooling + agent profiles); "standard" names
+        the specification at its core (docs/standard/). The two are no
+        longer used interchangeably.
+
 - version: "1.4.6"
   date: "2026-06-12"
   summary: "Documentation restructure: the standard is the product, project content lives outside it (see ADR-0006 in the tooling repo)"
