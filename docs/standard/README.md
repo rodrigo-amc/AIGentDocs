@@ -1,6 +1,8 @@
 # Documentation Standard for AI-Augmented Software Engineering
 
-This repository contains a **docs-as-code framework** designed so that AI agents can understand, document, and develop software projects efficiently. It can be adopted in new projects as well as existing ones.
+A **docs-as-code standard**: it treats a project's documentation as code — versioned, reviewed, and validated like source — so it becomes a living source of truth that AI agents use across the whole lifecycle. Agent profiles cover both **design** (product via DDD, architecture, engineering, decisions) and **implementation** (scaffolding, building, reviewing, and testing code from those docs). Adoptable in new and existing projects.
+
+This document is the standard's **specification** — its structure, protocols, and conventions.
 
 ---
 
@@ -82,7 +84,7 @@ All documents must remain **human-readable** — humans are the ones who create,
 
 ```text
 /docs
-├── standard/                              # The framework (instructions, rules, templates)
+├── standard/                              # The standard itself (instructions, rules, templates)
 │   ├── README.md                          # This file (entry point)
 │   ├── AGENT.md                           # Global operating instructions and session management
 │   ├── AGENT_REVIEW.md                    # Documentation audit prompt (on demand)

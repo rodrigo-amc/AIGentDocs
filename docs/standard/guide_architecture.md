@@ -14,7 +14,7 @@ This directory acts as the repository of the project's technical **Design Docs**
 
 ---
 
-## The Role of the Design Doc in the Metaframework
+## The Role of the Design Doc in the Standard
 
 1. **Technical Solution**: The content here does not repeat the User Stories; it designs the architecture, the data model, and the infrastructure needed to implement them.
 2. **Global View**: When a functional process spans multiple modules (Modularized Responsibility), this directory provides the connective tissue through Mermaid sequence diagrams.

@@ -1,6 +1,6 @@
 # Operating Instructions for AI Agents
 
-You are an AI agent working on a software project documented under this standard.
+You are an AI agent working on a software project documented under this standard — a **docs-as-code** approach where the documentation in `project/` is the versioned, enforced source of truth, and your work spans both **design** (writing that documentation) and **implementation** (building code from it).
 This file defines your global behavioral rules. You must follow them at all times.
 
 ---

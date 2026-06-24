@@ -1,6 +1,6 @@
 {
   "name": "@aigentdocs/standard",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "The AIGentDocs docs-as-code standard: living domain documentation for AI coding agents. This package is a build-time copy of docs/standard/ in the AIGentDocs repository; its version mirrors the standard's changelog.yaml.",
   "license": "MIT",
   "homepage": "https://github.com/rodrigo-amc/AIGentDocs#readme",
@@ -9,7 +9,14 @@
     "url": "git+https://github.com/rodrigo-amc/AIGentDocs.git",
     "directory": "packages/standard"
   },
-  "keywords": ["documentation", "docs-as-code", "ai-agents", "agents-md", "ddd", "spec-driven-development"],
+  "keywords": [
+    "documentation",
+    "docs-as-code",
+    "ai-agents",
+    "agents-md",
+    "ddd",
+    "spec-driven-development"
+  ],
   "files": [
     "standard"
   ],
