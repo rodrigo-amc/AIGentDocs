@@ -37,8 +37,8 @@ export async function initProject(targetDir: string, standardDir: string, profil
   if (await exists(docsDir)) {
     throw new Error(`'${docsDir}' already exists — refusing to overwrite. Remove it or run init in a clean repository.`);
   }
-  if (!(await exists(path.join(standardDir, "AGENT.md")))) {
-    throw new Error(`'${standardDir}' does not look like the standard (AGENT.md not found)`);
+  if (!(await exists(path.join(standardDir, "PROTOCOL.md")))) {
+    throw new Error(`'${standardDir}' does not look like the standard (PROTOCOL.md not found)`);
   }
 
   const created: string[] = [];

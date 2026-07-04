@@ -10,7 +10,7 @@ writes: "the target module's code_paths, plus status artifacts"
 
 # Agent Instructions — Module Developer
 
-Before reading this file, make sure you have read the global `AGENT.md` in `standard/` — especially Implementation Mode, the Operational Patterns, and the Anti-Drift Protocol.
+Before reading this file, make sure you have read the global `PROTOCOL.md` in `standard/` — especially Implementation Mode, the Operational Patterns, and the Anti-Drift Protocol.
 
 ---
 

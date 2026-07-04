@@ -10,7 +10,7 @@ project_path: "project/05_corrections/"
 
 # Agent Instructions — Design Corrections Context
 
-Before reading this file, make sure you have read the global `AGENT.md` in `standard/`.
+Before reading this file, make sure you have read the global `PROTOCOL.md` in `standard/`.
 For the structure, frontmatter, and lifecycle of Correction Records, consult the files listed in the `reads` field of the frontmatter.
 
 ---

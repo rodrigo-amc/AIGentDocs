@@ -146,7 +146,7 @@ export function buildServer(repoRoot: string): McpServer {
     "start_session",
     {
       description:
-        "Load the operating context for a documentation session of the standard: the agent profile and guide that govern it, plus the session's write scope. Read docs/standard/AGENT.md first if you haven't.",
+        "Load the operating context for a documentation session of the standard: the agent profile and guide that govern it, plus the session's write scope. Read docs/standard/PROTOCOL.md first if you haven't.",
       inputSchema: {
         type: z.enum(Object.keys(SESSION_FILES) as [string, ...string[]]).describe("Session type"),
       },
@@ -160,7 +160,7 @@ export function buildServer(repoRoot: string): McpServer {
         const parts: string[] = [
           `# Session: ${type}`,
           `WRITE SCOPE: ${session.writeScope}`,
-          "Global rules: docs/standard/AGENT.md (Session Guard, Anti-Drift Protocol, Operational Patterns).",
+          "Global rules: docs/standard/PROTOCOL.md (Session Guard, Anti-Drift Protocol, Operational Patterns).",
         ];
         for (const file of session.files) {
           const content = await readFile(path.join(repoRoot, "docs", "standard", file), "utf8");

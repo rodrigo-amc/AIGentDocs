@@ -10,7 +10,7 @@ writes: "nothing — read-only; produces a report"
 
 # Agent Instructions — Code Reviewer
 
-Before reading this file, make sure you have read the global `AGENT.md` in `standard/` — especially the Operational Patterns and the Anti-Drift Protocol.
+Before reading this file, make sure you have read the global `PROTOCOL.md` in `standard/` — especially the Operational Patterns and the Anti-Drift Protocol.
 
 ---
 

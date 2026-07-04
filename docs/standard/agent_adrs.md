@@ -10,7 +10,7 @@ project_path: "project/04_adrs/"
 
 # Agent Instructions — ADR Context
 
-Before reading this file, make sure you have read the global `AGENT.md` in `standard/`.
+Before reading this file, make sure you have read the global `PROTOCOL.md` in `standard/`.
 For the structure, sections, frontmatter, immutability rules, and supersede process, consult the files listed in the `reads` field of the frontmatter.
 
 ---

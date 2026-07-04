@@ -7,7 +7,7 @@ This repository is **AIGentDocs itself** — a docs-as-code **framework** (the *
 
 ## Entry point
 
-Read **`docs/standard/AGENT.md`** for the operating rules, then follow the Reading Protocol in `docs/standard/README.md` scoped to `docs/project/`.
+Read **`docs/standard/PROTOCOL.md`** for the operating rules, then follow the Reading Protocol in `docs/standard/README.md` scoped to `docs/project/`.
 
 ## Conventions for this repository
 
@@ -17,7 +17,7 @@ Read **`docs/standard/AGENT.md`** for the operating rules, then follow the Readi
 | Adoption profile | `lite` (see Lite Mode in `docs/standard/README.md`) |
 | Note | `docs/standard/README.md` is the product and is NOT customized for this repo; the conventions above replace that customization. |
 
-## Non-negotiable rules (summary — `AGENT.md` is authoritative)
+## Non-negotiable rules (summary — `PROTOCOL.md` is authoritative)
 
 1. **Do not generate code** without first reading `docs/project/03_engineering/tech_stack.yaml`.
 2. **Do not install or propose dependencies** without discussing it with the human developer and recording an ADR.

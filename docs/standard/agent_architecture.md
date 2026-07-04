@@ -10,7 +10,7 @@ project_path: "project/02_architecture/"
 
 # Agent Instructions — Architecture Context
 
-Before reading this file, make sure you have read the global `AGENT.md` in `standard/`.
+Before reading this file, make sure you have read the global `PROTOCOL.md` in `standard/`.
 For the structure, sections, frontmatter, and Mermaid diagram conventions, consult the files listed in the `reads` field of the frontmatter.
 
 ---

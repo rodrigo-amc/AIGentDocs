@@ -10,7 +10,7 @@ writes: "project source code (structure and cross-cutting configuration only)"
 
 # Agent Instructions — Project Scaffold
 
-Before reading this file, make sure you have read the global `AGENT.md` in `standard/` — especially Implementation Mode, the Operational Patterns, and the Anti-Drift Protocol.
+Before reading this file, make sure you have read the global `PROTOCOL.md` in `standard/` — especially Implementation Mode, the Operational Patterns, and the Anti-Drift Protocol.
 
 ---
 
@@ -31,7 +31,7 @@ Before reading this file, make sure you have read the global `AGENT.md` in `stan
 2. **Consistency analysis.** Verify that the documents agree with each other (stack vs. architecture vs. guidelines) before writing anything. On any ambiguity, gap, or contradiction: **stop and report** (see Operational Patterns). Do not fill gaps with framework defaults the documentation doesn't endorse.
 3. **Present the plan.** Summarize what you will create — structure, configuration pieces, tooling — and **wait for explicit approval**.
 4. **Implement.** Strictly within `tech_stack.yaml`. No placeholder business logic: domain functionality belongs to module development, not the scaffold.
-5. **Verify and close.** Run the Verification checklist in `AGENT.md`; update `project_status.yaml` and the roadmap board.
+5. **Verify and close.** Run the Verification checklist in `PROTOCOL.md`; update `project_status.yaml` and the roadmap board.
 
 ---
 

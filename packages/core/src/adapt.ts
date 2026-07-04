@@ -46,7 +46,7 @@ ${marker("<!--", "-->")}
 
 Follow the AI agent instructions in \`AGENTS.md\` at the repository root.
 The project documentation under \`docs/project/\` is the source of truth;
-start from \`docs/standard/AGENT.md\`.
+start from \`docs/standard/PROTOCOL.md\`.
 `,
   },
   copilot: {
@@ -56,7 +56,7 @@ start from \`docs/standard/AGENT.md\`.
 
 Follow the AI agent instructions in \`AGENTS.md\` at the repository root.
 The project documentation under \`docs/project/\` is the source of truth;
-start from \`docs/standard/AGENT.md\`.
+start from \`docs/standard/PROTOCOL.md\`.
 `,
   },
   antigravity: {

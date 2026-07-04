@@ -4,10 +4,13 @@
 
 AIGentDocs is a **framework** for AI-augmented software engineering, built on a **docs-as-code standard** and the tooling that makes it enforceable. It treats a project's documentation the way you treat source code — versioned in the repo, reviewed in pull requests, validated in CI — so it becomes a **living, trustworthy source of truth** that AI coding agents can rely on to understand a project, design it, and implement it.
 
+> **AI agent reading this repository?** Start at [`AGENTS.md`](AGENTS.md) — the entry point that leads to the operating rules in `docs/standard/PROTOCOL.md`.
+
 ## The idea: documentation as code
 
 An AI agent is only as good as the context it's given, and context that isn't versioned or enforced drifts from reality — a stale spec is worse than none. AIGentDocs' foundational bet is to make documentation a first-class, code-grade artifact:
 
+- **Permanent, not per-feature** — the documentation is the durable state of the whole project, maintained as part of the development flow; not disposable specs written for one feature that age out once it ships.
 - **Durable and structured** — four layers (product, architecture, engineering, decisions) with reading protocols that load only the context a task needs.
 - **Discovered, not dumped** — Domain-Driven Design (Knowledge Crunching) draws the domain out in dialogue with you; a human approves every document.
 - **Enforced, not promised** — a deterministic linter checks structure, consistency, and completeness on every commit and PR. You lint the docs the way you lint the code.
@@ -58,13 +61,39 @@ The standard is plain markdown and works on its own; the tooling is what makes "
 npx aigentdocs init     # scaffold docs/ + the AGENTS.md entry point
 ```
 
-Then open the repo with your AI agent and point it at `docs/standard/AGENT.md`: for a new project it drafts `vision.md` with you (design first); for existing code it reverse-engineers the docs (onboarding). The agent drafts, you approve.
+Prefer no tooling at all? Every release of the standard also ships as a downloadable bundle (tar.gz/zip with `docs/standard/` and the `AGENTS.md` entry point already assembled) on [GitHub Releases](../../releases) — or just copy `docs/standard/` into your repo by hand. The CLI is the convenient path, not the only one.
 
-The full workflow, commands, and operating rules live in **`docs/standard/AGENT.md`** and the area guides (`docs/standard/guide_*.md`).
+Then open the repo with your AI agent and point it at `docs/standard/PROTOCOL.md`: for a new project it drafts `vision.md` with you (design first); for existing code it reverse-engineers the docs (onboarding). The agent drafts, you approve.
+
+The full workflow, commands, and operating rules live in **`docs/standard/PROTOCOL.md`** and the area guides (`docs/standard/guide_*.md`).
 
 ## Tool compatibility
 
-The markdown core works with any agent, IDE, or model. `AGENTS.md` is read natively by most AI coding tools (Codex, Cursor, Copilot, the Antigravity ecosystem, and others); for the rest, `aigentdocs adapt` generates thin pointer files. Single source of truth, never hand-maintained.
+Tool-agnosticism is a foundational requirement, solved with an architecture of adaptation layers where **each layer works without the next**:
+
+```text
+Layer 0 — Core:        docs/standard/ (plain markdown)  → works with ANY agent, IDE, or LLM
+Layer 1 — Entry:       AGENTS.md at the repo root       → read natively by 30+ AI coding tools
+Layer 2 — Enforcement: lint + pre-commit + CI           → git and CI don't depend on the agent
+Layer 3 — Tooling:     MCP server                       → one implementation, every MCP-capable agent
+Layer 4 — Adapters:    per-tool files from `adapt`      → CLAUDE.md, .cursor/rules, ...
+                       + native plugins (Claude Code)
+```
+
+A project can adopt Layers 0-1 alone — plain markdown plus an entry file — and already operate from any tool, with nothing installed. The critical enforcement lives in the agnostic layers: native agent hooks are an experience upgrade, never the only line of defense. `AGENTS.md` is read natively by most AI coding tools; for the rest, `aigentdocs adapt` generates thin pointer files. Single source of truth, never hand-maintained.
+
+## What's in this repository
+
+| Path | What it is |
+|---|---|
+| `docs/standard/` | **The product**: the source of truth of the standard that adopters receive — operating rules (`PROTOCOL.md`), agent profiles, area guides, templates, changelog. |
+| `docs/project/` | This repo's own documentation, following the standard like any adopting project (see Dogfooding). |
+| `packages/core` | `@aigentdocs/core` — all the logic (lint, scaffold, adapt, update) implemented once. |
+| `packages/cli` | `aigentdocs` (alias `agd`) — the CLI, a thin wrapper over core. |
+| `packages/mcp` | `@aigentdocs/mcp` — MCP server exposing the standard's operations to any MCP-capable agent. |
+| `packages/standard` | `@aigentdocs/standard` — the standard as an npm package, synced from `docs/standard/` at build time. |
+| `plugins/claude` | The Claude Code plugin: session commands, implementation subagents, lint feedback on Stop. |
+| `action.yml` | The reusable GitHub Action that runs the lint in adopters' CI. |
 
 ## Dogfooding
 
@@ -72,7 +101,7 @@ This repository documents itself with its own standard (see `docs/project/`), li
 
 ## Status
 
-Early and moving fast — the standard is at v1.4.x, the CLI at 0.1.x. Things may change between minor versions until 1.0.
+Early and moving fast — the standard is at v1.5.x, the CLI at 0.1.x. Things may change between minor versions until 1.0.
 
 ## License
 

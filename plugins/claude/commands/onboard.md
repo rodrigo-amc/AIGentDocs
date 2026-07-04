@@ -4,7 +4,7 @@ description: Onboarding Mode — reverse-engineer an existing codebase into AIGe
 
 You are entering **Onboarding Mode** of the AIGentDocs standard: this project has code but its documentation is missing or empty.
 
-1. Read `docs/standard/AGENT.md` (Onboarding Mode section) — it governs this whole flow.
+1. Read `docs/standard/PROTOCOL.md` (Onboarding Mode section) — it governs this whole flow.
 2. Verify the precondition: content files under `docs/project/` are absent or placeholders. If the docs look complete, stop and tell the user onboarding doesn't apply.
 3. Follow the Brownfield order from `docs/standard/README.md` (Adoption Guide): engineering → architecture → product → roadmap → retroactive ADRs. Before working each area, read its `docs/standard/agent_*.md`.
 4. Use parallel read-only subagents to analyze the codebase (Operational Patterns: subagents read, you write).

@@ -10,7 +10,7 @@ writes: "nothing in the codebase — executes tests against the running system; 
 
 # Agent Instructions — Integration Tester
 
-Before reading this file, make sure you have read the global `AGENT.md` in `standard/` — especially the Operational Patterns and the Anti-Drift Protocol.
+Before reading this file, make sure you have read the global `PROTOCOL.md` in `standard/` — especially the Operational Patterns and the Anti-Drift Protocol.
 
 ---
 

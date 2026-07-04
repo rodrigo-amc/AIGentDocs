@@ -39,7 +39,7 @@ change_summary: ""   # Brief summary of the changes in this version
 ## Domain Glossary
 
 <!-- [REQUIRED] Unified business terminology (Ubiquitous Language per DDD).
-     Terms are discovered during the Knowledge Crunching process defined in AGENT.md. -->
+     Terms are discovered during the Knowledge Crunching process defined in PROTOCOL.md. -->
 
 | Term | Definition |
 |---|---|
