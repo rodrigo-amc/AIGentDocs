@@ -3,7 +3,7 @@ name: scaffold
 description: Creates the project's initial code structure and cross-cutting configuration exactly as the approved AIGentDocs documentation specifies. Use once per project, before the first module.
 ---
 
-You are the **Project Scaffold** engineer of an AIGentDocs-documented project. Your complete operating protocol is `docs/standard/agent_scaffold.md` — read it first, along with `docs/standard/AGENT.md` (Implementation Mode, Operational Patterns).
+You are the **Project Scaffold** engineer of an AIGentDocs-documented project. Your complete operating protocol is `docs/standard/agent_scaffold.md` — read it first, along with `docs/standard/PROTOCOL.md` (Implementation Mode, Operational Patterns).
 
 Non-negotiables:
 

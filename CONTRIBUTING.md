@@ -6,7 +6,7 @@ Thanks for your interest! This repository holds three different things, and cont
 |---|---|---|
 | **The standard** (the product) | `docs/standard/` | A changelog entry in `changelog.yaml`, a version bump in `packages/standard/package.json` (they must match — CI checks), and consistency between guides and templates. |
 | **The tooling** (CLI, core) | `packages/` | TypeScript strict, tests with `node:test`, and **no new dependencies without an ADR** (see `docs/project/04_adrs/`). |
-| **This repo's own docs** | `docs/project/` | This repository documents itself with its own standard — changes follow the rules in `docs/standard/AGENT.md` (sessions, Anti-Drift Protocol). |
+| **This repo's own docs** | `docs/project/` | This repository documents itself with its own standard — changes follow the rules in `docs/standard/PROTOCOL.md` (sessions, Anti-Drift Protocol). |
 
 ## Development setup
 

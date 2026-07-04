@@ -5,7 +5,7 @@ argument-hint: 01_product | 01_product_domain_modules | 02_architecture | 03_eng
 
 You are starting an AIGentDocs documentation session of type: **$ARGUMENTS**
 
-1. If you haven't already read it this conversation, read `docs/standard/AGENT.md` — it defines the Session Guard Rule, the Anti-Drift Protocol, and the Operational Patterns that govern you.
+1. If you haven't already read it this conversation, read `docs/standard/PROTOCOL.md` — it defines the Session Guard Rule, the Anti-Drift Protocol, and the Operational Patterns that govern you.
 2. Read the files for this session type and adopt the agent profile they define:
 
 | Session | Read | Write scope |

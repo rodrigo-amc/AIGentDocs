@@ -26,7 +26,7 @@ test("full init scaffolds the structure, status artifacts, and AGENTS.md", async
     const result = await initProject(dir, STANDARD_DIR, "full");
     assert.equal(result.profile, "full");
     for (const expected of [
-      "docs/standard/AGENT.md",
+      "docs/standard/PROTOCOL.md",
       "docs/project/01_product/domain_modules",
       "docs/project/05_corrections",
       "docs/project/project_status.yaml",

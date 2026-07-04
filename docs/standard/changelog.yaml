@@ -1,6 +1,23 @@
 # Version History of the Documentation Standard
 # Each entry records a version of the standard and its changes.
 
+- version: "1.5.0"
+  date: "2026-07-03"
+  summary: "AGENT.md renamed to PROTOCOL.md, ending the name collision with AGENTS.md"
+  changes:
+    - type: changed
+      description: >
+        AGENT.md is now PROTOCOL.md. The old name differed from AGENTS.md
+        (the ecosystem's entry-point convention at the repository root) by
+        a single letter, and the collision confused humans and agents
+        alike: one file is the entry pointer, the other is the operating
+        rules. All references across the standard, the templates, the
+        tooling's generated files, and the Claude Code plugin now point to
+        PROTOCOL.md. Migration: 'aigentdocs update' replaces docs/standard/
+        wholesale, so the old AGENT.md disappears on upgrade; adopters only
+        need to fix hand-written references of their own (e.g. a customized
+        AGENTS.md).
+
 - version: "1.4.7"
   date: "2026-06-24"
   summary: "Entry docs surface the full design→implementation scope (docs-as-code as the axis)"

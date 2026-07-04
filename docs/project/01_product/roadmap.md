@@ -1,7 +1,7 @@
 ---
 type: roadmap
-version: 1.3
-last_updated: 2026-06-14
+version: 1.4
+last_updated: 2026-07-03
 current_phase: "Phase 4 — Open source & community"
 ---
 
@@ -25,6 +25,7 @@ current_phase: "Phase 4 — Open source & community"
 
 ### [Done]
 
+- [T-17] Standard v1.5.0: `AGENT.md` renamed to `PROTOCOL.md` — the one-letter collision with the `AGENTS.md` entry-point convention confused humans and agents (surfaced by an external AI review of the README). References propagated across the standard, templates, CLI/MCP generated output, and the Claude Code plugin; historical changelog entries left untouched. README improved for comprehension: early "start here" pointer, repository map table, adaptation-layers diagram, no-CLI adoption path, "permanent, not per-feature" positioning (no direct tool comparisons by choice).
 - [T-14] Published to npm (2026-06-14): `@aigentdocs/standard@1.4.6`, `@aigentdocs/core@0.1.1`, `@aigentdocs/mcp@0.1.0` (first release), `aigentdocs@0.1.1` (EPIPE fix). Verified from a clean directory: `npx aigentdocs@latest` scaffolds the 1.4.6 standard; the MCP package resolves `core@0.1.1`.
 - [T-15] Documentation restructure: the root README is the single human-facing guide (QUICKSTART removed); `docs/standard/README.md` pruned to the spec; project conventions moved to `AGENTS.md`; `update` replaces `docs/standard/` wholesale. Recorded as ADR-0006; standard v1.4.6.
 - [T-13] Claude Code plugin (first native Layer 4 adapter): six commands from the session protocols, four subagents from the implementation profiles, a Stop hook running the lint. Structure tests.

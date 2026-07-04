@@ -13,7 +13,7 @@ This document is the standard's **specification** — its structure, protocols, 
 ### Standard (`standard/`)
 
 - [README.md](./README.md) — This file (entry point)
-- [AGENT.md](./AGENT.md) — Global operating instructions for AI agents
+- [PROTOCOL.md](./PROTOCOL.md) — Global operating instructions for AI agents
 - [AGENT_REVIEW.md](./AGENT_REVIEW.md) — Documentation audit prompt
 - [changelog.yaml](./changelog.yaml) — Version history of the standard
 
@@ -86,7 +86,7 @@ All documents must remain **human-readable** — humans are the ones who create,
 /docs
 ├── standard/                              # The standard itself (instructions, rules, templates)
 │   ├── README.md                          # This file (entry point)
-│   ├── AGENT.md                           # Global operating instructions and session management
+│   ├── PROTOCOL.md                           # Global operating instructions and session management
 │   ├── AGENT_REVIEW.md                    # Documentation audit prompt (on demand)
 │   ├── changelog.yaml                     # Version history of the standard
 │   │
@@ -179,7 +179,7 @@ If the project already has code, document it through **reverse engineering**. Th
 7. **`project/04_adrs/`** → Create retroactive ADRs (`status: accepted`) for the technical decisions already made.
 8. **`project/project_status.yaml` and `project/TODO.md`** → Record each module's real state (and known debt), and any cross-module pending items detected during the analysis.
 
-> **Tip:** An AI agent can dramatically speed up the brownfield path. It can analyze the source code and generate documentation drafts for human review. See `AGENT.md` for Onboarding Mode.
+> **Tip:** An AI agent can dramatically speed up the brownfield path. It can analyze the source code and generate documentation drafts for human review. See `PROTOCOL.md` for Onboarding Mode.
 
 ### Lite Mode (Minimal Adoption)
 
@@ -209,7 +209,7 @@ Full adoption is the right choice for products with several domain entities and 
 **Upgrade path (incremental — no big bang):**
 
 1. Run Knowledge Crunching (`agent_product.md`) to complete the Domain Entity Map in `vision.md`.
-2. Extract the User Stories from the roadmap into `domain_modules/` files (one module per session, per `AGENT.md`).
+2. Extract the User Stories from the roadmap into `domain_modules/` files (one module per session, per `PROTOCOL.md`).
 3. Add `02_architecture/` and the remaining `03_engineering/` documents following the standard session order.
 4. Create retroactive ADRs for the decisions already reflected in `tech_stack.yaml`.
 5. Update `AGENTS.md` (`Adoption profile: full`).
@@ -222,7 +222,7 @@ Each step is independent: upgrade only what the project's complexity actually de
 
 Order in which a new agent should consume the documentation to get contextually oriented at the lowest token cost:
 
-1. **`standard/AGENT.md`** → Understand the global operating rules.
+1. **`standard/PROTOCOL.md`** → Understand the global operating rules.
 2. **`project/project_status.yaml`** → Get the aggregate state of every module (and its known debt) at minimal token cost.
 3. **`project/01_product/roadmap.md`** → Identify the current milestone/sprint and pick up the active task (`[In Progress]`).
 4. **`project/01_product/domain_modules/[affected_module].md`** → Read **ONLY** the module (or modules) directly referenced by the chosen active task. Check `project/TODO.md` for pending items that affect them.
@@ -241,7 +241,7 @@ Order in which a new agent should consume the documentation to get contextually 
 5. **When adding or removing files**, update the Table of Contents in this file.
 6. **Sections marked [REQUIRED]** may not be removed or left empty.
 7. **Every new document** must include the YAML frontmatter corresponding to its type (see next section).
-8. **Code↔docs synchronization** is governed by the **Anti-Drift Protocol** in `AGENT.md` (Global Rules → Traceability and Synchronization): each triggering event (task started/completed, new dependency, accepted ADR, infrastructure change...) lists the documentation update required in the same change.
+8. **Code↔docs synchronization** is governed by the **Anti-Drift Protocol** in `PROTOCOL.md` (Global Rules → Traceability and Synchronization): each triggering event (task started/completed, new dependency, accepted ADR, infrastructure change...) lists the documentation update required in the same change.
 
 ---
 
@@ -297,7 +297,7 @@ modules:
     state: doing
 ```
 
-**Authority rule:** for module state, this file is authoritative. The `state` field in each module's frontmatter and the Kanban board in `roadmap.md` are **views** that must never contradict it. Any state change updates all three in the same change (see the Anti-Drift Protocol in `AGENT.md`); automated tooling may verify their consistency. The current phase/milestone is **not** recorded here — `roadmap.md` owns it.
+**Authority rule:** for module state, this file is authoritative. The `state` field in each module's frontmatter and the Kanban board in `roadmap.md` are **views** that must never contradict it. Any state change updates all three in the same change (see the Anti-Drift Protocol in `PROTOCOL.md`); automated tooling may verify their consistency. The current phase/milestone is **not** recorded here — `roadmap.md` owns it.
 
 ### `TODO.md` — Cross-Module Pending Items
 

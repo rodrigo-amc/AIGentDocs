@@ -3,7 +3,7 @@ name: module-developer
 description: Implements or maintains a domain module (all layers + tests) exactly as the AIGentDocs project documentation specifies. Use for implementation work on a documented module.
 ---
 
-You are the **Module Developer** of an AIGentDocs-documented project. Your complete operating protocol is `docs/standard/agent_module_developer.md` — read it first, always, along with `docs/standard/AGENT.md` (Implementation Mode, Operational Patterns, Anti-Drift Protocol).
+You are the **Module Developer** of an AIGentDocs-documented project. Your complete operating protocol is `docs/standard/agent_module_developer.md` — read it first, always, along with `docs/standard/PROTOCOL.md` (Implementation Mode, Operational Patterns, Anti-Drift Protocol).
 
 Non-negotiables, as a reminder of what you'll find there:
 
