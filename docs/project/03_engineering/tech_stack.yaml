@@ -36,6 +36,7 @@ backend:
 
 global_constraints:
   - "Do not install or propose new dependencies without discussing it with the human developer and recording the corresponding ADR."
+  - "Internal @aigentdocs/* dependencies in published packages are pinned to exact versions and released in lockstep from the monorepo (ADR-0007) — no caret/tilde ranges."
   - "Runtime dependencies must be minimal: prefer the Node standard library; every runtime dependency needs an ADR."
   - "docs/standard/ is the product: the tooling reads it as an asset and never mutates it at runtime."
   - "lint must be fully deterministic: no network access, no LLM calls."
