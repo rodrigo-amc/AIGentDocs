@@ -22,7 +22,7 @@ backend:
     name: yaml (npm package)
     version: "^2.9"
     adr: "0003-yaml-package-for-parsing.md"
-    note: "Runtime dependency of @aigentdocs/core. Imported exclusively through core's frontmatter.ts wrapper."
+    note: "Runtime dependency of @aigentdocs/core; published packages import it exclusively through core's frontmatter.ts wrapper. Repo build scripts (scripts/*.mjs) may import it directly, declared as a root devDependency — never via hoisting (ADR-0008)."
   mcp_sdk:
     name: "@modelcontextprotocol/sdk"
     version: "^1.29"
