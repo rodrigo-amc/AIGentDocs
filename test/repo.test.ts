@@ -4,13 +4,9 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-/**
- * Repo-level configuration guards (2026-07-04 review round). They live here
- * with the other REPO_ROOT-coupled tests for now; T-18 will decide the final
- * home for repo-level tests.
- */
+/** Repo-level configuration guards (2026-07-04 review round). */
 
-const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 
 test("root package.json enforces the npm >=10 floor that tech_stack.yaml declares", async () => {
   const pkg = JSON.parse(await readFile(path.join(REPO_ROOT, "package.json"), "utf8")) as {

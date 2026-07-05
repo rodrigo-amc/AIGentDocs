@@ -226,5 +226,5 @@ export async function main(argv: string[], io: Io): Promise<number> {
   }
 
   io.err(`aigentdocs: unknown or not yet implemented command '${command}'. See 'aigentdocs help'.\n`);
-  return 1;
+  return 2;
 }

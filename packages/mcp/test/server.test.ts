@@ -120,6 +120,37 @@ test("start_session loads the agent profile, the guide, and the write scope", as
   });
 });
 
+test("every session type's SESSION_FILES exist in docs/standard/", async () => {
+  // SESSION_FILES duplicates the standard's session table inside the server,
+  // and file names were only checked at call time — a rename in a standard
+  // release would break sessions undetected (2026-07-04 MCP review, finding 3).
+  // The session types are read back from the tool's own schema (generated
+  // from SESSION_FILES) so a new entry is covered automatically.
+  const server = buildServer(REPO_ROOT);
+  const client = new Client({ name: "t", version: "0" });
+  const [ct, st] = InMemoryTransport.createLinkedPair();
+  await Promise.all([server.connect(st), client.connect(ct)]);
+  try {
+    const { tools } = await client.listTools();
+    const schema = tools.find((t) => t.name === "start_session")?.inputSchema as
+      | { properties?: { type?: { enum?: string[] } } }
+      | undefined;
+    const sessionTypes = schema?.properties?.type?.enum ?? [];
+    assert.deepEqual(
+      [...sessionTypes].sort(),
+      ["01_product", "01_product_domain_modules", "02_architecture", "03_engineering", "04_adrs", "05_corrections"],
+      "the offered session types must match the standard's session table",
+    );
+    for (const type of sessionTypes) {
+      const result = (await client.callTool({ name: "start_session", arguments: { type } })) as ToolResult;
+      assert.notEqual(result.isError, true, `start_session('${type}') must find every file it references under docs/standard/`);
+    }
+  } finally {
+    await client.close();
+    await server.close();
+  }
+});
+
 test("the handshake advertises the package.json version, not a hardcoded one", async () => {
   const server = buildServer(REPO_ROOT);
   const client = new Client({ name: "t", version: "0" });

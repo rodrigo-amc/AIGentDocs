@@ -4,7 +4,7 @@ import { access, readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const PLUGIN_ROOT = path.join(REPO_ROOT, "plugins", "claude");
 
 test("marketplace.json is valid and points to an existing plugin", async () => {

@@ -10,12 +10,11 @@ import { promisify } from "node:util";
 /**
  * Behavior tests for the Claude Code plugin's Stop hook (stop-lint.sh),
  * with a stubbed CLI: off-switch, undocumented project, missing CLI,
- * critical findings, and clean lint. Placed with the other plugin tests
- * for now; T-18 will decide the final home for repo-level tests.
+ * critical findings, and clean lint.
  */
 
 const run = promisify(execFile);
-const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const SCRIPT = path.join(REPO_ROOT, "plugins", "claude", "scripts", "stop-lint.sh");
 
 interface HookResult {
