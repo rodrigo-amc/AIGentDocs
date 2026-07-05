@@ -1,7 +1,7 @@
 ---
 type: roadmap
 version: 1.4
-last_updated: 2026-07-04
+last_updated: 2026-07-05
 current_phase: "Phase 4 — Open source & community"
 ---
 
@@ -26,6 +26,7 @@ current_phase: "Phase 4 — Open source & community"
 
 ### [Done]
 
+- [T-22] Runtime floor and workspaces note in `tech_stack.yaml` (design-first: finding 2 of the 2026-07-04 core review + doc observation 1 of the scaffold review): runtime raised to `>=20.12 (LTS)` — core's `readdir({recursive})` needs Node 20.1 and `Dirent.parentPath` needs 20.12; chained fix mirrors it in the `engines` of the root, core, cli, and mcp package.json (plus the coupled repo-level guard test); npm workspaces note now lists `packages/standard` (ADR-0004).
 - [T-21] Scope of ADR-0003's `yaml` import restriction (design-first, finding 2 of the 2026-07-04 scaffold review): ADR-0008 accepted — the Compliance clause covers published packages only; repo build scripts may import `yaml` directly, declared as a root devDependency (never via hoisting); propagated to `tech_stack.yaml` (yaml_parser note); chained fix: `yaml ^2.9.0` added to root devDependencies, legitimizing `scripts/check-standard-version.mjs`'s import.
 - [T-20] Internal dependency pinning policy (design-first, finding 1 of the 2026-07-04 scaffold review): ADR-0007 accepted — every internal `@aigentdocs/*` dependency in published packages is pinned exact, released in lockstep; propagated to `tech_stack.yaml` (global constraint); chained fix: `@aigentdocs/standard` `^1.5.0` → `1.5.0` in `packages/cli/package.json`.
 - [T-19] Maintenance batch from the 2026-07-04 code-review triage: every "fix"-disposition item across the five reports in `local_utils/reports/code_reviewer/` — core: frontmatter-bounded `updateModuleState` edit (highest priority), `compareVersions` input validation, `adr: null` handled like `""`, BOM-tolerant frontmatter, staged wholesale replace in `update`; scaffold: `action.yml` inputs via `env:` (all three), root `engines.npm >=10`; CLI: pre-commit hook guards on a locally resolved CLI (inform-don't-block), CLI-level tests for `update` exit codes, `adapt` parsing, and warnings-only lint; MCP: handshake version from package.json, `--root` without value errors out, fixture-repo happy-path tests for the three untested tools; plugin: Stop hook resolves the CLI locally and requires non-empty lint output, aligned hooks.json description, shell-level hook branch tests.

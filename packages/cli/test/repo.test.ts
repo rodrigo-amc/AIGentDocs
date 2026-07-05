@@ -16,7 +16,7 @@ test("root package.json enforces the npm >=10 floor that tech_stack.yaml declare
   const pkg = JSON.parse(await readFile(path.join(REPO_ROOT, "package.json"), "utf8")) as {
     engines?: Record<string, string>;
   };
-  assert.equal(pkg.engines?.["node"], ">=20");
+  assert.equal(pkg.engines?.["node"], ">=20.12");
   assert.equal(pkg.engines?.["npm"], ">=10");
 });
 

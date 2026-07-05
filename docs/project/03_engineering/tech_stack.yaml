@@ -11,13 +11,14 @@ backend:
     adr: "0002-typescript-on-node-as-runtime.md"
   runtime:
     name: Node.js
-    version: ">=20 (LTS)"
+    version: ">=20.12 (LTS)"
     adr: "0002-typescript-on-node-as-runtime.md"
+    note: "Floor set by core's use of fs.readdir({recursive}) (Node >=20.1) and Dirent.parentPath (Node >=20.12); mirrored in the engines field of every package.json that declares node."
   dependency_manager:
     name: npm
     version: ">=10"
     adr: "0002-typescript-on-node-as-runtime.md"
-    note: "npm workspaces for the monorepo (packages/core, packages/cli, packages/mcp)."
+    note: "npm workspaces for the monorepo (packages/core, packages/cli, packages/mcp, packages/standard)."
   yaml_parser:
     name: yaml (npm package)
     version: "^2.9"
