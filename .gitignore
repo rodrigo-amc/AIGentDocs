@@ -3,3 +3,4 @@ node_modules/
 dist/
 *.tsbuildinfo
 packages/standard/standard/
+.claude/settings.local.json
