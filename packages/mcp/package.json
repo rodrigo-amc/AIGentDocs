@@ -1,6 +1,6 @@
 {
   "name": "@aigentdocs/mcp",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "MCP server for the AIGentDocs docs-as-code standard: exposes the standard's operations as tools for any MCP-capable AI agent.",
   "license": "MIT",
   "homepage": "https://github.com/rodrigo-amc/AIGentDocs#readme",
@@ -32,7 +32,7 @@
     "node": ">=20.12"
   },
   "dependencies": {
-    "@aigentdocs/core": "0.1.2",
+    "@aigentdocs/core": "0.2.0",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "zod": "^3.25.0"
   }
