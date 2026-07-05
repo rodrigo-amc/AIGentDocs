@@ -1,5 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -39,6 +41,25 @@ test("lint on this repository exits 0 and reports files checked", async () => {
   const c = capture();
   assert.equal(await main(["lint", repoRoot], c.io), 0);
   assert.match(c.out(), /No findings\. \d+ file\(s\) checked: 0 critical/);
+});
+
+test("lint with warnings but no criticals exits 0 (only criticals block)", async () => {
+  const dir = await mkdtemp(path.join(os.tmpdir(), "agd-warnings-"));
+  try {
+    // A valid roadmap whose only defect is an unresolved '(see X.md)' reference — a warning.
+    const roadmapPath = path.join(dir, "docs", "project", "01_product", "roadmap.md");
+    await mkdir(path.dirname(roadmapPath), { recursive: true });
+    await writeFile(
+      roadmapPath,
+      "---\ntype: roadmap\nversion: 1.0\nlast_updated: 2026-07-04\ncurrent_phase: MVP\n---\n\n## Current Phase/Milestone\n\nMVP.\n\n## Task Board\n\n- [T-1] Ghost task (see ghost.md)\n",
+    );
+    const c = capture();
+    assert.equal(await main(["lint", dir], c.io), 0);
+    assert.match(c.out(), /0 critical, 1 warning/);
+    assert.match(c.out(), /ref\/roadmap-reference/);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
 });
 
 test("lint outside a documented repository exits 2 with a clear error", async () => {

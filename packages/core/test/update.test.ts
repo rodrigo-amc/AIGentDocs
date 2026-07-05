@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { access, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { access, chmod, mkdtemp, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -29,6 +29,19 @@ test("compareVersions handles dotted versions of different lengths", () => {
   assert.equal(compareVersions("1.4", "1.4.0"), 0);
   assert.equal(compareVersions("1.3.0", "1.4.3"), -1);
   assert.equal(compareVersions("2.0", "1.9.9"), 1);
+});
+
+test("compareVersions rejects non-numeric versions instead of guessing", () => {
+  assert.throws(() => compareVersions("1.4.x", "1.4.3"), /invalid version '1\.4\.x'/);
+  assert.throws(() => compareVersions("1.4.3", "1.4.x"), /invalid version '1\.4\.x'/);
+  assert.throws(() => compareVersions("", "1.0"), /invalid version ''/);
+});
+
+test("a malformed adopter changelog version yields a clear error, not a nonsense status", async () => {
+  await withAdopter(async (dir) => {
+    await writeFile(path.join(dir, "docs/standard/changelog.yaml"), `- version: "1.4.x"\n  summary: "typo"\n`);
+    await assert.rejects(() => updateStandard(dir, STANDARD_DIR), /invalid version '1\.4\.x'/);
+  });
 });
 
 test("a fresh init is up to date", async () => {
@@ -72,6 +85,33 @@ test("--check reports without modifying anything", async () => {
     assert.equal(result.status, "would-update");
     const changelog = await readFile(path.join(dir, "docs/standard/changelog.yaml"), "utf8");
     assert.equal(changelog, OLD_CHANGELOG, "check must not touch the adopter");
+  });
+});
+
+test("a successful update leaves no staging directory behind", async () => {
+  await withAdopter(async (dir) => {
+    await writeFile(path.join(dir, "docs/standard/changelog.yaml"), OLD_CHANGELOG);
+    const result = await updateStandard(dir, STANDARD_DIR);
+    assert.equal(result.status, "updated");
+    const leftovers = (await readdir(path.join(dir, "docs"))).filter((entry) => entry.includes("staging"));
+    assert.deepEqual(leftovers, []);
+  });
+});
+
+test("a failed update never leaves the adopter without docs/standard/", { skip: process.getuid?.() === 0 }, async () => {
+  await withAdopter(async (dir) => {
+    await writeFile(path.join(dir, "docs/standard/changelog.yaml"), OLD_CHANGELOG);
+    // Make docs/ read-only so the staged copy cannot even be created.
+    const docsDir = path.join(dir, "docs");
+    await chmod(docsDir, 0o555);
+    try {
+      await assert.rejects(() => updateStandard(dir, STANDARD_DIR));
+    } finally {
+      await chmod(docsDir, 0o755);
+    }
+    assert.ok(await exists(path.join(dir, "docs/standard/README.md")), "the installed standard must survive the failure");
+    const changelog = await readFile(path.join(dir, "docs/standard/changelog.yaml"), "utf8");
+    assert.equal(changelog, OLD_CHANGELOG, "the installed standard must be intact");
   });
 });
 

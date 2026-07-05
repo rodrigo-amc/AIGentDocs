@@ -2,7 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { STATES, type State } from "./index.js";
-import { extractFrontmatter, setYamlKey } from "./frontmatter.js";
+import { extractFrontmatter, locateFrontmatterBlock, setYamlKey } from "./frontmatter.js";
 import { loadProject } from "./project.js";
 
 /** One section of the roadmap's Kanban board, e.g. "[In Progress]". */
@@ -80,10 +80,18 @@ export async function updateModuleState(repoRoot: string, moduleName: string, st
   if (fm.data === undefined) {
     throw new Error(`'${moduleDoc.relPath}' has no parseable frontmatter`);
   }
-  const newContent = moduleDoc.content.replace(/^(---\r?\n[\s\S]*?^state:)[^\n]*$/m, `$1 ${state}`);
-  if (newContent === moduleDoc.content && fm.data["state"] !== state) {
+  // Edit only inside the frontmatter block: a 'state:' line in the document
+  // body must never be touched (it would corrupt the file silently).
+  const block = locateFrontmatterBlock(moduleDoc.content);
+  if (block === undefined) {
+    throw new Error(`'${moduleDoc.relPath}' has no parseable frontmatter`);
+  }
+  const fence = moduleDoc.content.slice(block.start, block.end);
+  const newFence = fence.replace(/^(state:)[^\n]*$/m, `$1 ${state}`);
+  if (newFence === fence && fm.data["state"] !== state) {
     throw new Error(`could not locate the 'state:' line in '${moduleDoc.relPath}' frontmatter`);
   }
+  const newContent = moduleDoc.content.slice(0, block.start) + newFence + moduleDoc.content.slice(block.end);
   await writeFile(path.join(repoRoot, moduleDoc.relPath), newContent);
   updated.push(moduleDoc.relPath);
 

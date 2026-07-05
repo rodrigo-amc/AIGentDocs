@@ -154,8 +154,10 @@ function collectAdrRefs(node: unknown, keyPath: string[]): Array<[string, string
   }
   const refs: Array<[string, string]> = [];
   for (const [key, value] of Object.entries(node as Record<string, unknown>)) {
-    if (key === "adr" && typeof value === "string") {
-      refs.push([keyPath.join("."), value]);
+    // A YAML null (`adr:` with no value) expresses the same author intent as
+    // `adr: ""` — both get the Lite-profile suggestion.
+    if (key === "adr" && (typeof value === "string" || value === null)) {
+      refs.push([keyPath.join("."), value ?? ""]);
     } else {
       refs.push(...collectAdrRefs(value, [...keyPath, key]));
     }

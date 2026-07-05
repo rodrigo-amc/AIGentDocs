@@ -1,10 +1,14 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { execFile } from "node:child_process";
 import { mkdir, mkdtemp, readFile, rm, stat } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import { promisify } from "node:util";
 
 import { main, type Io } from "../src/main.js";
+
+const run = promisify(execFile);
 
 function capture(): { io: Io; out: () => string; err: () => string } {
   let out = "";
@@ -35,9 +39,20 @@ test("hooks install writes an executable pre-commit hook with the conscious bypa
     assert.match(content, /^#!\/bin\/sh/);
     assert.match(content, /aigentdocs lint/);
     assert.match(content, /git commit --no-verify/);
+    assert.match(content, /node_modules\/\.bin\/aigentdocs/, "the hook must resolve the CLI locally, not via npx");
     const mode = (await stat(hookPath)).mode & 0o777;
     assert.ok(mode & 0o100, "hook must be executable");
     assert.match(c.out(), /--no-verify/);
+  });
+});
+
+test("the installed hook lets the commit through when the CLI is not installed locally", async () => {
+  await inGitRepo(async (dir) => {
+    assert.equal(await main(["hooks", "install", dir], capture().io), 0);
+    // No node_modules in this repo: the hook must inform and exit 0, not block.
+    const { stdout } = await run("sh", [path.join(dir, ".git", "hooks", "pre-commit")], { cwd: dir });
+    assert.match(stdout, /skipping the documentation check/);
+    assert.match(stdout, /npm install -D aigentdocs/);
   });
 });
 

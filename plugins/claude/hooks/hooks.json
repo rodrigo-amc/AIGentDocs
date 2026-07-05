@@ -1,5 +1,5 @@
 {
-  "description": "AIGentDocs lint feedback on Stop: when the session touched docs/project/, run the deterministic lint and surface critical findings before finishing. Inform-don't-block: disable with AIGENTDOCS_STOP_LINT=off.",
+  "description": "AIGentDocs lint feedback on Stop: in a project documented with the standard (docs/project/ exists) and with the aigentdocs CLI installed locally, run the deterministic lint and surface critical findings before finishing. Inform-don't-block: disable with AIGENTDOCS_STOP_LINT=off.",
   "hooks": {
     "Stop": [
       {
