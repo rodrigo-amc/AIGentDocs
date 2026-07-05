@@ -14,7 +14,15 @@ const HOOK = `#!/bin/sh
 # The tool informs, the human decides: only critical findings block,
 # and you can always consciously bypass this check.
 
-npx --no-install aigentdocs lint
+# A missing CLI is a tooling condition, not a documentation finding:
+# inform and let the commit through instead of blocking every commit.
+if [ ! -x "node_modules/.bin/aigentdocs" ]; then
+  echo "aigentdocs: CLI not installed locally — skipping the documentation check."
+  echo "Enable it with: npm install -D aigentdocs"
+  exit 0
+fi
+
+node_modules/.bin/aigentdocs lint
 status=$?
 if [ $status -ne 0 ]; then
   echo ""

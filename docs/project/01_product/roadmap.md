@@ -1,7 +1,7 @@
 ---
 type: roadmap
 version: 1.4
-last_updated: 2026-07-03
+last_updated: 2026-07-04
 current_phase: "Phase 4 — Open source & community"
 ---
 
@@ -20,11 +20,13 @@ current_phase: "Phase 4 — Open source & community"
 ### [To Do / Next]
 
 - [T-16] Open-source prep: decide what's needed before making the repo public (showcase, announcement, automation token for CI publishing).
+- [T-18] Deferred minor items from the 2026-07-04 code-review triage (details in each report's Disposition, `local_utils/reports/code_reviewer/`): CLI exit-code taxonomy (usage errors → 2; update the coupled assert in `main.test.ts`), plugin structure tests location (repo-level, not `packages/cli/test/`), MCP `SESSION_FILES` existence test against `docs/standard/`, and the standard-design question of a persistent review-report artifact.
 
 ### [Blocked / Review]
 
 ### [Done]
 
+- [T-19] Maintenance batch from the 2026-07-04 code-review triage: every "fix"-disposition item across the five reports in `local_utils/reports/code_reviewer/` — core: frontmatter-bounded `updateModuleState` edit (highest priority), `compareVersions` input validation, `adr: null` handled like `""`, BOM-tolerant frontmatter, staged wholesale replace in `update`; scaffold: `action.yml` inputs via `env:` (all three), root `engines.npm >=10`; CLI: pre-commit hook guards on a locally resolved CLI (inform-don't-block), CLI-level tests for `update` exit codes, `adapt` parsing, and warnings-only lint; MCP: handshake version from package.json, `--root` without value errors out, fixture-repo happy-path tests for the three untested tools; plugin: Stop hook resolves the CLI locally and requires non-empty lint output, aligned hooks.json description, shell-level hook branch tests.
 - [T-17] Standard v1.5.0: `AGENT.md` renamed to `PROTOCOL.md` — the one-letter collision with the `AGENTS.md` entry-point convention confused humans and agents (surfaced by an external AI review of the README). References propagated across the standard, templates, CLI/MCP generated output, and the Claude Code plugin; historical changelog entries left untouched. README improved for comprehension: early "start here" pointer, repository map table, adaptation-layers diagram, no-CLI adoption path, "permanent, not per-feature" positioning (no direct tool comparisons by choice).
 - [T-14] Published to npm (2026-06-14): `@aigentdocs/standard@1.4.6`, `@aigentdocs/core@0.1.1`, `@aigentdocs/mcp@0.1.0` (first release), `aigentdocs@0.1.1` (EPIPE fix). Verified from a clean directory: `npx aigentdocs@latest` scaffolds the 1.4.6 standard; the MCP package resolves `core@0.1.1`.
 - [T-15] Documentation restructure: the root README is the single human-facing guide (QUICKSTART removed); `docs/standard/README.md` pruned to the spec; project conventions moved to `AGENTS.md`; `update` replaces `docs/standard/` wholesale. Recorded as ADR-0006; standard v1.4.6.

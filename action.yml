@@ -33,12 +33,18 @@ runs:
         node-version: "20"
     - name: Run aigentdocs lint
       shell: bash
+      # Inputs are routed through env, never interpolated into the script:
+      # an adopter wiring untrusted data into them must not gain script injection.
+      env:
+        AIGENTDOCS_LINT_PATH: ${{ inputs.path }}
+        AIGENTDOCS_CLI_VERSION: ${{ inputs.version }}
+        AIGENTDOCS_FAIL_ON: ${{ inputs.fail-on }}
       run: |
         set +e
-        npx --yes "aigentdocs@${{ inputs.version }}" lint "${{ inputs.path }}"
+        npx --yes "aigentdocs@${AIGENTDOCS_CLI_VERSION}" lint "${AIGENTDOCS_LINT_PATH}"
         status=$?
         set -e
-        if [ "${{ inputs.fail-on }}" = "never" ]; then
+        if [ "${AIGENTDOCS_FAIL_ON}" = "never" ]; then
           if [ $status -ne 0 ]; then
             echo "::warning::aigentdocs lint reported findings (fail-on: never, so this step does not fail)."
           fi

@@ -1,4 +1,4 @@
-import { access, cp, readFile, rm } from "node:fs/promises";
+import { access, cp, readFile, rename, rm } from "node:fs/promises";
 import path from "node:path";
 
 import { parseYaml } from "./frontmatter.js";
@@ -35,10 +35,19 @@ export interface UpdateResult {
   notes: ChangelogEntry[];
 }
 
-/** Compare dotted numeric versions ("1.4.3" vs "1.4"): -1 | 0 | 1. */
+/** Split a dotted version into numeric segments. Throws on anything else. */
+function versionSegments(version: string): number[] {
+  const segments = version.split(".");
+  if (segments.some((segment) => !/^\d+$/.test(segment))) {
+    throw new Error(`invalid version '${version}' — expected dotted numeric segments like "1.4.3"`);
+  }
+  return segments.map(Number);
+}
+
+/** Compare dotted numeric versions ("1.4.3" vs "1.4"): -1 | 0 | 1. Throws on non-numeric versions. */
 export function compareVersions(a: string, b: string): number {
-  const pa = a.split(".").map(Number);
-  const pb = b.split(".").map(Number);
+  const pa = versionSegments(a);
+  const pb = versionSegments(b);
   for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
     const diff = (pa[i] ?? 0) - (pb[i] ?? 0);
     if (diff !== 0) {
@@ -86,8 +95,17 @@ export async function updateStandard(
   }
 
   // docs/standard/ carries nothing project-specific — replace it wholesale.
-  await rm(installedDir, { recursive: true, force: true });
-  await cp(packagedStandardDir, installedDir, { recursive: true });
+  // Stage the copy in a sibling directory and rename-swap, so a failure
+  // mid-copy never leaves the adopter without a docs/standard/ at all.
+  const stagingDir = `${installedDir}.aigentdocs-staging`;
+  await rm(stagingDir, { recursive: true, force: true });
+  try {
+    await cp(packagedStandardDir, stagingDir, { recursive: true });
+    await rm(installedDir, { recursive: true, force: true });
+    await rename(stagingDir, installedDir);
+  } finally {
+    await rm(stagingDir, { recursive: true, force: true });
+  }
 
   return { ...base, status: "updated", notes };
 }

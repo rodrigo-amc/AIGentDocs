@@ -16,6 +16,9 @@ export interface FrontmatterResult {
 
 const FENCE = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/;
 
+/** Byte-order mark some Windows editors prepend — tolerated, never required. */
+const BOM = "\uFEFF";
+
 /** Parse a full YAML document. Throws on invalid YAML (caller decides severity). */
 export function parseYaml(text: string): unknown {
   return parse(text);
@@ -34,8 +37,23 @@ export function setYamlKey(text: string, path: Array<string | number>, value: un
   return doc.toString();
 }
 
+/**
+ * Locate the frontmatter fence block at the top of the file (after an
+ * optional BOM). Returns absolute offsets into `markdown` — the slice
+ * `[start, end)` is the whole block including both `---` fences — so
+ * callers can edit the block in place without ever touching the body.
+ */
+export function locateFrontmatterBlock(markdown: string): { start: number; end: number } | undefined {
+  const offset = markdown.startsWith(BOM) ? BOM.length : 0;
+  const match = FENCE.exec(markdown.slice(offset));
+  if (!match) {
+    return undefined;
+  }
+  return { start: offset, end: offset + match[0].length };
+}
+
 export function extractFrontmatter(markdown: string): FrontmatterResult {
-  const match = FENCE.exec(markdown);
+  const match = FENCE.exec(markdown.startsWith(BOM) ? markdown.slice(BOM.length) : markdown);
   if (!match) {
     return { found: false };
   }

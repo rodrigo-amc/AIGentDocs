@@ -40,6 +40,14 @@ test("tech_stack ADR reference to a missing file is critical; empty is a suggest
   assert.ok(rules.includes("ref/tech-stack-adr-empty"));
 });
 
+test("a YAML-null adr gets the same Lite suggestion as an empty string", async () => {
+  const rules = await rulesOf({
+    "docs/project/03_engineering/tech_stack.yaml":
+      "backend:\n  language:\n    name: Go\n    version: '1.22'\n    adr:\n",
+  });
+  assert.deepEqual(rules, ["ref/tech-stack-adr-empty"]);
+});
+
 test("ADR supersedes/superseded_by reciprocity is enforced", async () => {
   const broken = await rulesOf({
     "docs/project/04_adrs/0001-a.md": fm(`type: adr\n${COMMON}\nid: 1\nstatus: accepted\ndate: 2026-06-11`),

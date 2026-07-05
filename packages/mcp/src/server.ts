@@ -1,4 +1,5 @@
 import { readFile } from "node:fs/promises";
+import { createRequire } from "node:module";
 import path from "node:path";
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -20,6 +21,9 @@ import {
  *
  * Reference spec: the routing table "question type -> document to read".
  */
+
+const require = createRequire(import.meta.url);
+const { version } = require("../../package.json") as { version: string };
 
 const text = (value: unknown): { content: Array<{ type: "text"; text: string }> } => ({
   content: [{ type: "text", text: typeof value === "string" ? value : JSON.stringify(value, null, 2) }],
@@ -59,7 +63,7 @@ const SESSION_FILES: Record<string, { files: string[]; writeScope: string }> = {
 };
 
 export function buildServer(repoRoot: string): McpServer {
-  const server = new McpServer({ name: "aigentdocs", version: "0.1.0" });
+  const server = new McpServer({ name: "aigentdocs", version });
 
   server.registerTool(
     "get_project_status",

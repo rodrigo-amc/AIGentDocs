@@ -7,13 +7,18 @@
 
 [ "$AIGENTDOCS_STOP_LINT" = "off" ] && exit 0
 [ -d "docs/project" ] || exit 0
-command -v npx >/dev/null 2>&1 || exit 0
 
-output=$(npx --no-install aigentdocs lint 2>/dev/null)
+# Resolve the CLI locally before trusting any exit code: a missing CLI is a
+# tooling condition, not a documentation finding — stay silent. (This also
+# avoids npx and its registry round-trip on every Stop.)
+CLI="node_modules/.bin/aigentdocs"
+[ -x "$CLI" ] || exit 0
+
+output=$("$CLI" lint 2>/dev/null)
 status=$?
 
-# 127/none: CLI not installed in this project — stay silent.
-if [ $status -eq 1 ]; then
+# Exit 1 means critical findings — but never claim findings without output.
+if [ $status -eq 1 ] && [ -n "$output" ]; then
   echo "AIGentDocs lint found critical documentation findings:" >&2
   echo "$output" >&2
   echo "Repair the documentation (Anti-Drift Protocol) before finishing, or tell the user why you can't." >&2

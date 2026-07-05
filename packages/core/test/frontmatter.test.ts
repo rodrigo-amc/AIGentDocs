@@ -27,6 +27,12 @@ test("rejects non-mapping frontmatter", () => {
   assert.match(result.error ?? "", /not a YAML mapping/);
 });
 
+test("a leading UTF-8 BOM is tolerated", () => {
+  const result = extractFrontmatter("\uFEFF---\ntype: vision\nversion: 1.0\n---\n\n# Title\n");
+  assert.equal(result.found, true);
+  assert.equal(result.data?.["type"], "vision");
+});
+
 test("ISO dates stay strings under the core schema", () => {
   const result = extractFrontmatter("---\nlast_updated: 2026-06-11\n---\n");
   assert.equal(typeof result.data?.["last_updated"], "string");
