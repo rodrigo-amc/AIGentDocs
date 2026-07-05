@@ -14,7 +14,10 @@ Usage: aigentdocs <command>   (or its short alias: agd <command>)
 
 Commands:
   init [path] [--lite]   Scaffold docs/ into a repository (path defaults to
-                         the current directory; --lite for the minimal profile)
+                         the current directory; --lite for the minimal
+                         profile). Additive: an existing docs/ is fine — it
+                         refuses only if docs/standard or docs/project
+                         already exist, and never touches other docs/ content.
   lint [path]            Validate documentation compliance (exits 1 on
                          critical findings)
   hooks install [path]   Install the pre-commit hook that runs lint (only

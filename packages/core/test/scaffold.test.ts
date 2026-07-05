@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { access, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { access, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -69,10 +69,39 @@ test("after a lite init, lint reports the empty sections as the to-do list", asy
   });
 });
 
-test("init refuses to overwrite an existing docs/ directory", async () => {
+test("init refuses to overwrite a prior adoption", async () => {
   await inTmp(async (dir) => {
     await initProject(dir, STANDARD_DIR, "full");
     await assert.rejects(() => initProject(dir, STANDARD_DIR, "full"), /refusing to overwrite/);
+  });
+});
+
+test("init refuses when docs/standard/ already exists", async () => {
+  await inTmp(async (dir) => {
+    await mkdir(path.join(dir, "docs", "standard"), { recursive: true });
+    await assert.rejects(() => initProject(dir, STANDARD_DIR, "full"), /docs.standard.*refusing to overwrite/);
+  });
+});
+
+test("init refuses when docs/project/ already exists", async () => {
+  await inTmp(async (dir) => {
+    await mkdir(path.join(dir, "docs", "project"), { recursive: true });
+    await assert.rejects(() => initProject(dir, STANDARD_DIR, "lite"), /docs.project.*refusing to overwrite/);
+  });
+});
+
+test("init proceeds alongside an unrelated docs/ directory and leaves its content untouched", async () => {
+  await inTmp(async (dir) => {
+    await mkdir(path.join(dir, "docs", "api"), { recursive: true });
+    await writeFile(path.join(dir, "docs", "api", "reference.md"), "not ours\n");
+    await writeFile(path.join(dir, "docs", "notes.md"), "also not ours\n");
+
+    await initProject(dir, STANDARD_DIR, "full");
+
+    assert.ok(await exists(path.join(dir, "docs/standard/PROTOCOL.md")));
+    assert.ok(await exists(path.join(dir, "docs/project/project_status.yaml")));
+    assert.equal(await readFile(path.join(dir, "docs", "api", "reference.md"), "utf8"), "not ours\n");
+    assert.equal(await readFile(path.join(dir, "docs", "notes.md"), "utf8"), "also not ours\n");
   });
 });
 

@@ -12,6 +12,10 @@ import path from "node:path";
  *   (vision.md, roadmap.md, tech_stack.yaml) + AGENTS.md. Running `lint`
  *   right after a lite init lists the empty [REQUIRED] sections — that is
  *   the adopter's documentation to-do list, by design.
+ *
+ * init is additive: an existing docs/ directory is not an obstacle — it
+ * refuses only when docs/standard/ or docs/project/ already exist (a prior
+ * adoption), and it never deletes or overwrites other docs/ content.
  */
 
 export type InitProfile = "full" | "lite";
@@ -34,8 +38,11 @@ const FULL_PROJECT_DIRS = [
 
 export async function initProject(targetDir: string, standardDir: string, profile: InitProfile): Promise<InitResult> {
   const docsDir = path.join(targetDir, "docs");
-  if (await exists(docsDir)) {
-    throw new Error(`'${docsDir}' already exists — refusing to overwrite. Remove it or run init in a clean repository.`);
+  for (const adoptionDir of ["standard", "project"]) {
+    const p = path.join(docsDir, adoptionDir);
+    if (await exists(p)) {
+      throw new Error(`'${p}' already exists (a prior adoption?) — refusing to overwrite. Remove it or run init in a clean repository.`);
+    }
   }
   if (!(await exists(path.join(standardDir, "PROTOCOL.md")))) {
     throw new Error(`'${standardDir}' does not look like the standard (PROTOCOL.md not found)`);
