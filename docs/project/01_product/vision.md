@@ -1,8 +1,8 @@
 ---
 type: vision
-version: 1.1
-last_updated: 2026-06-12
-change_summary: "MCP server and native adapters (Claude Code plugin) now in scope as implemented"
+version: 1.2
+last_updated: 2026-07-05
+change_summary: "Scope aligned with reality: --lang marked as deferred, lint's Mechanical-layer claim qualified (ToC checks deferred), init's docs/ guard narrowed to docs/standard/ and docs/project/ (2026-07-04 core review, doc observations 1-2 and finding 7)"
 ---
 
 # Product Vision — AIGentDocs Tooling
@@ -33,8 +33,8 @@ The AIGentDocs standard works today by copying markdown files and trusting agent
 
 ### In Scope
 
-- `init`: scaffold `docs/` (standard + empty project structure + `AGENTS.md` stub) into a repository, with `--lite` and `--lang` options.
-- `lint`: deterministic validation of an adopting project's documentation — exactly the Mechanical layer of `AGENT_REVIEW.md`.
+- `init`: scaffold `docs/` (standard + empty project structure + `AGENTS.md` stub) into a repository, with a `--lite` option (`--lang` is future work, deferred until a frozen Spanish translation exists — see T-06 on the roadmap board). Refuses to run only when `docs/standard/` or `docs/project/` already exist (a prior adoption); an unrelated `docs/` directory is not an obstacle.
+- `lint`: deterministic validation of an adopting project's documentation — the Mechanical layer of `AGENT_REVIEW.md` (its structural/ToC checks, § 1, remain deferred — see T-04 on the roadmap board).
 - `adapt`: generation of per-tool adapter files (`CLAUDE.md`, `.cursor/rules`, `copilot-instructions.md`, etc.) from the single source of truth.
 - `update`: upgrade an adopter's `docs/standard/` to a newer version of the standard, reporting changes that need human attention.
 - Distribution: npm package (npx-runnable), a pre-commit hook template, a reusable GitHub Action, and a no-CLI tarball per release.
