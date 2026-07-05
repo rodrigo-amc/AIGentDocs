@@ -9,7 +9,7 @@ current_phase: "Phase 4 — Open source & community"
 
 ## Current Phase/Milestone
 
-**Phase 4 — Open source & community**: with the standard, the CLI, the MCP server, and the Claude Code plugin all built and published to npm, the remaining work is opening the project up. (The repository stays private until the phase work is ready.) Phases 1-3 are complete.
+**Phase 4 — Open source & community**: with the standard, the CLI, the MCP server, and the Claude Code plugin all built and published to npm, the remaining work is opening the project up. The repository is public as of 2026-07-05; the remaining phase work (T-16) is post-publication operational polish. Phases 1-3 are complete.
 
 ---
 
@@ -17,9 +17,11 @@ current_phase: "Phase 4 — Open source & community"
 
 ### [In Progress]
 
+- [T-26] Release 0.2.0 of the tooling to npm: `@aigentdocs/core@0.2.0`, `aigentdocs@0.2.0`, `@aigentdocs/mcp@0.2.0` — ships the whole 2026-07-04/05 review round (T-19…T-25). Minor (not patch) because the release raises `engines.node` to `>=20.12` and changes CLI behavior (unknown command exits 2; pre-commit hook resolves the local CLI instead of npx). Internal pins updated in lockstep per ADR-0007; the standard stays at 1.5.0 (untouched — no `standard-v*` tag, no GitHub release). Publish is manual (core first, then cli and mcp; maintainer 2FA — automation token still pending in T-16).
+
 ### [To Do / Next]
 
-- [T-16] Open-source prep: decide what's needed before making the repo public (showcase, announcement, automation token for CI publishing). Plugin version governance (decided 2026-07-05 under T-23, from doc observation 1 of the 2026-07-04 plugin review): the Claude Code plugin versions independently with its own semver — any change under `plugins/claude/` bumps `plugin.json` and adds an entry to `plugins/claude/CHANGELOG.md` in the same PR; merging to main is the release (the marketplace points at the repo); bump to `1.0.0` when the repo goes public. Chained engineering follow-up: create the plugin `CHANGELOG.md` (seeded with 0.1.0) and a structure test enforcing the bump-with-changelog rule.
+- [T-16] Open-source operational polish (the repo went public on 2026-07-05 without waiting on these; they remain the post-publication backlog): showcase, announcement, automation token for CI publishing. Plugin version governance (decided 2026-07-05 under T-23, from doc observation 1 of the 2026-07-04 plugin review): the Claude Code plugin versions independently with its own semver — any change under `plugins/claude/` bumps `plugin.json` and adds an entry to `plugins/claude/CHANGELOG.md` in the same PR; merging to main is the release (the marketplace points at the repo); the pending `1.0.0` bump is no longer gated on going public. Chained engineering follow-up: create the plugin `CHANGELOG.md` (seeded with 0.1.0) and a structure test enforcing the bump-with-changelog rule.
 - [T-18] Standard-design question deferred from the 2026-07-04 code-review triage (details in the reports' Dispositions, `local_utils/reports/code_reviewer/`): should review reports be a persistent artifact of the standard? Product decision pending. (The triage's four deferred code minors were resolved as T-25.)
 
 ### [Blocked / Review]
