@@ -1,6 +1,6 @@
 ---
 type: roadmap
-version: 1.5
+version: 1.6
 last_updated: 2026-07-05
 current_phase: "Phase 4 — Open source & community"
 ---
@@ -20,13 +20,13 @@ current_phase: "Phase 4 — Open source & community"
 ### [To Do / Next]
 
 - [T-16] Open-source prep: decide what's needed before making the repo public (showcase, announcement, automation token for CI publishing). Plugin version governance (decided 2026-07-05 under T-23, from doc observation 1 of the 2026-07-04 plugin review): the Claude Code plugin versions independently with its own semver — any change under `plugins/claude/` bumps `plugin.json` and adds an entry to `plugins/claude/CHANGELOG.md` in the same PR; merging to main is the release (the marketplace points at the repo); bump to `1.0.0` when the repo goes public. Chained engineering follow-up: create the plugin `CHANGELOG.md` (seeded with 0.1.0) and a structure test enforcing the bump-with-changelog rule.
-- [T-24] Narrow `init`'s docs/ guard (Maintenance; chained from finding 7 of the 2026-07-04 core review, decided 2026-07-05 under T-23): refuse only when `docs/standard/` or `docs/project/` already exist — an unrelated `docs/` directory must not block adoption (`init` never deletes or overwrites other `docs/` content). Update the guard in `packages/core/src/scaffold.ts` + tests, and surface the behavior in the README/CLI help. The decided behavior is documented in `vision.md` (In Scope, init).
 - [T-18] Deferred minor items from the 2026-07-04 code-review triage (details in each report's Disposition, `local_utils/reports/code_reviewer/`): CLI exit-code taxonomy (usage errors → 2; update the coupled assert in `main.test.ts`), plugin structure tests location (repo-level, not `packages/cli/test/`), MCP `SESSION_FILES` existence test against `docs/standard/`, and the standard-design question of a persistent review-report artifact.
 
 ### [Blocked / Review]
 
 ### [Done]
 
+- [T-24] `init`'s docs/ guard narrowed (Maintenance; chained from finding 7 of the 2026-07-04 core review, decided 2026-07-05 under T-23): the guard in `packages/core/src/scaffold.ts` now refuses only when `docs/standard/` or `docs/project/` already exist (a prior adoption) — an unrelated `docs/` no longer blocks adoption, and `init` never deletes or overwrites other `docs/` content. Tests cover the unrelated-docs, prior-standard, and prior-project cases; behavior surfaced in the root README (Quick start) and the CLI help. Implements what `vision.md` (In Scope, init) documents.
 - [T-23] Session 01_product — `vision.md` aligned with reality and two product decisions settled (design-first items from the 2026-07-04 reviews): `--lang` marked as deferred in the vision (core doc obs 1, → T-06); lint's "exactly the Mechanical layer" claim qualified — structural/ToC checks deferred (core doc obs 2, → T-04); `init` docs/ guard narrowed by decision to `docs/standard/` / `docs/project/` (core finding 7; code change chained as T-24); plugin version governance decided and folded into T-16 (plugin doc obs 1). Vision bumped to 1.2.
 - [T-22] Runtime floor and workspaces note in `tech_stack.yaml` (design-first: finding 2 of the 2026-07-04 core review + doc observation 1 of the scaffold review): runtime raised to `>=20.12 (LTS)` — core's `readdir({recursive})` needs Node 20.1 and `Dirent.parentPath` needs 20.12; chained fix mirrors it in the `engines` of the root, core, cli, and mcp package.json (plus the coupled repo-level guard test); npm workspaces note now lists `packages/standard` (ADR-0004).
 - [T-21] Scope of ADR-0003's `yaml` import restriction (design-first, finding 2 of the 2026-07-04 scaffold review): ADR-0008 accepted — the Compliance clause covers published packages only; repo build scripts may import `yaml` directly, declared as a root devDependency (never via hoisting); propagated to `tech_stack.yaml` (yaml_parser note); chained fix: `yaml ^2.9.0` added to root devDependencies, legitimizing `scripts/check-standard-version.mjs`'s import.

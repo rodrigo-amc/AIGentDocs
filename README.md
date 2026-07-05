@@ -61,6 +61,8 @@ The standard is plain markdown and works on its own; the tooling is what makes "
 npx aigentdocs init     # scaffold docs/ + the AGENTS.md entry point
 ```
 
+`init` is additive: a repository with an existing `docs/` folder can adopt as-is — it refuses to run only if `docs/standard/` or `docs/project/` already exist (a prior adoption), and it never deletes or overwrites your other `docs/` content.
+
 Prefer no tooling at all? Every release of the standard also ships as a downloadable bundle (tar.gz/zip with `docs/standard/` and the `AGENTS.md` entry point already assembled) on [GitHub Releases](../../releases) — or just copy `docs/standard/` into your repo by hand. The CLI is the convenient path, not the only one.
 
 Then open the repo with your AI agent and point it at `docs/standard/PROTOCOL.md`: for a new project it drafts `vision.md` with you (design first); for existing code it reverse-engineers the docs (onboarding). The agent drafts, you approve.
