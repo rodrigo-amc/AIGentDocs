@@ -95,17 +95,35 @@ export async function updateStandard(
   }
 
   // docs/standard/ carries nothing project-specific — replace it wholesale.
-  // Stage the copy in a sibling directory and rename-swap, so a failure
-  // mid-copy never leaves the adopter without a docs/standard/ at all.
+  // Stage the copy in a sibling directory and swap via backup, so no failure
+  // point ever leaves the adopter without a docs/standard/ at all.
   const stagingDir = `${installedDir}.aigentdocs-staging`;
+  const backupDir = `${installedDir}.aigentdocs-old`;
   await rm(stagingDir, { recursive: true, force: true });
+  await rm(backupDir, { recursive: true, force: true });
   try {
     await cp(packagedStandardDir, stagingDir, { recursive: true });
-    await rm(installedDir, { recursive: true, force: true });
-    await rename(stagingDir, installedDir);
+    await replaceDirectory(installedDir, stagingDir, backupDir);
   } finally {
     await rm(stagingDir, { recursive: true, force: true });
   }
 
   return { ...base, status: "updated", notes };
+}
+
+/**
+ * Replace `target` with `replacement` without ever leaving `target` missing:
+ * `target` is parked at `backup` during the swap and restored if the final
+ * rename fails (realistic as a Windows file-lock EPERM). Exported for tests
+ * only — not part of the package's public API.
+ */
+export async function replaceDirectory(target: string, replacement: string, backup: string): Promise<void> {
+  await rename(target, backup);
+  try {
+    await rename(replacement, target);
+  } catch (error) {
+    await rename(backup, target);
+    throw error;
+  }
+  await rm(backup, { recursive: true, force: true });
 }

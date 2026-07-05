@@ -1,11 +1,12 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { access, chmod, mkdtemp, readdir, readFile, rm, writeFile } from "node:fs/promises";
+import { access, chmod, mkdir, mkdtemp, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { compareVersions, initProject, updateStandard } from "../src/index.js";
+import { replaceDirectory } from "../src/update.js";
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
 const STANDARD_DIR = path.join(REPO_ROOT, "docs", "standard");
@@ -88,14 +89,36 @@ test("--check reports without modifying anything", async () => {
   });
 });
 
-test("a successful update leaves no staging directory behind", async () => {
+test("a successful update leaves no staging or backup directory behind", async () => {
   await withAdopter(async (dir) => {
     await writeFile(path.join(dir, "docs/standard/changelog.yaml"), OLD_CHANGELOG);
     const result = await updateStandard(dir, STANDARD_DIR);
     assert.equal(result.status, "updated");
-    const leftovers = (await readdir(path.join(dir, "docs"))).filter((entry) => entry.includes("staging"));
+    const leftovers = (await readdir(path.join(dir, "docs"))).filter((entry) => entry.includes(".aigentdocs-"));
     assert.deepEqual(leftovers, []);
   });
+});
+
+test("a failed final swap restores the installed standard (2026-07-05 review, finding 1)", async () => {
+  // The residual gap: the final rename fails after the installed standard was
+  // already moved aside. The real-world trigger is a Windows file-lock EPERM,
+  // which the real fs cannot produce on Linux — so this drives the same
+  // failure point with an ENOENT (a replacement that does not exist) and
+  // asserts the backup swap restores the original.
+  const dir = await mkdtemp(path.join(os.tmpdir(), "agd-swap-"));
+  try {
+    const target = path.join(dir, "standard");
+    await mkdir(target);
+    await writeFile(path.join(target, "README.md"), "installed\n");
+    await assert.rejects(
+      () => replaceDirectory(target, path.join(dir, "missing-staging"), path.join(dir, "standard.old")),
+      { code: "ENOENT" },
+    );
+    assert.equal(await readFile(path.join(target, "README.md"), "utf8"), "installed\n", "the installed standard must be restored");
+    assert.deepEqual(await readdir(dir), ["standard"], "no backup leftover after the restore");
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
 });
 
 test("a failed update never leaves the adopter without docs/standard/", { skip: process.getuid?.() === 0 }, async () => {

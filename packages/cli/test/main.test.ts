@@ -29,9 +29,9 @@ test("--version prints a semver-looking version and exits 0", async () => {
   assert.match(c.out(), /^\d+\.\d+\.\d+/);
 });
 
-test("unknown command reports an error and exits 1", async () => {
+test("unknown command reports an error and exits 2, like every other usage error", async () => {
   const c = capture();
-  assert.equal(await main(["frobnicate"], c.io), 1);
+  assert.equal(await main(["frobnicate"], c.io), 2);
   assert.match(c.err(), /unknown or not yet implemented command 'frobnicate'/);
   assert.equal(c.out(), "");
 });

@@ -14,8 +14,8 @@
   "scripts": {
     "sync-standard": "node scripts/sync-standard.mjs",
     "build": "npm run sync-standard && tsc -b",
-    "test": "npm run build && node --test packages/core/dist/test/ packages/cli/dist/test/ packages/mcp/dist/test/",
-    "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo"
+    "test": "npm run build && node --test packages/core/dist/test/ packages/cli/dist/test/ packages/mcp/dist/test/ test/dist/",
+    "clean": "rm -rf packages/*/dist packages/*/*.tsbuildinfo test/dist test/*.tsbuildinfo"
   },
   "devDependencies": {
     "@types/node": "^20.19.0",
