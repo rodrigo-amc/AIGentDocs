@@ -1,6 +1,6 @@
 # Documentation Standard for AI-Augmented Software Engineering
 
-A **docs-as-code standard**: it treats a project's documentation as code — versioned, reviewed, and validated like source — so it becomes a living source of truth that AI agents use across the whole lifecycle. Agent profiles cover both **design** (product via DDD, architecture, engineering, decisions) and **implementation** (scaffolding, building, reviewing, and testing code from those docs). Adoptable in new and existing projects.
+A **docs-as-code standard**: it treats a project's documentation as code — versioned, reviewed, and validated like source — so it becomes a living source of truth that AI agents use across the whole lifecycle. Agent profiles cover **design** (product via DDD, architecture, engineering, decisions), **implementation** (scaffolding, building, reviewing, and testing code from those docs), and **consultation** (answering questions across all of it, read-only). Adoptable in new and existing projects.
 
 This document is the standard's **specification** — its structure, protocols, and conventions.
 
@@ -40,6 +40,10 @@ This document is the standard's **specification** — its structure, protocols, 
 - [agent_module_developer.md](./agent_module_developer.md) — Domain module implementation (Creation/Maintenance)
 - [agent_code_reviewer.md](./agent_code_reviewer.md) — Read-only compliance and quality review
 - [agent_integration_tester.md](./agent_integration_tester.md) — Validation of the running system against ACs and Business Rules
+
+#### Agent Instructions (Consultation Mode profile)
+
+- [agent_project_expert.md](./agent_project_expert.md) — Cross-cutting, read-only consultation on the project and the standard
 
 #### Reference Templates (`standard/templates/`)
 
@@ -107,6 +111,8 @@ All documents must remain **human-readable** — humans are the ones who create,
 │   ├── agent_module_developer.md          # Implementation profile: module creation/maintenance
 │   ├── agent_code_reviewer.md             # Implementation profile: compliance review (read-only)
 │   ├── agent_integration_tester.md        # Implementation profile: validate the running system
+│   │
+│   ├── agent_project_expert.md            # Consultation profile: read-only answers across the project
 │   │
 │   └── templates/                         # Reference templates for agents
 │       ├── AGENTS.md

@@ -31,6 +31,14 @@ Before acting, identify which mode you are working in, based on the user's instr
 - **Implementation profiles** define the protocols for this mode — read the one matching your task before starting: `agent_scaffold.md` (project bootstrap), `agent_module_developer.md` (module creation/maintenance), `agent_code_reviewer.md` (read-only review), `agent_integration_tester.md` (validation against the running system).
 - The **write scope** for module work is the target module's `code_paths` plus the status artifacts. Touching other modules' code follows the scope restriction in `agent_module_developer.md`.
 
+### Consultation Mode (Questions)
+
+- Applies when the task is to **answer a question** about the project or about this standard, rather than to produce or change anything.
+- It is not a session: no write scope, no bounded area, no fixed reading list. The question decides what is read, across `project/`, `standard/`, and the source code.
+- The profile for this mode is `agent_project_expert.md` — read it before answering.
+- **Nothing is written.** The single exception, available only to the session's main agent, is a report the user explicitly asks for, at a path and filename the user gives.
+- It is the only mode that runs correctly both as the session's main agent and as a delegated subagent — which is how an agent bound to a session's write scope obtains a cross-cutting answer without leaving it.
+
 > If you are unsure which mode to work in, ask the user before proceeding.
 
 ---
@@ -225,7 +233,7 @@ Work under this standard has two execution shapes, and choosing the right one ma
 - **Main agent of the session**: leads the conversation, can pause for user approval mid-protocol, and writes the deliverables. Required for any session of this standard (they all include validation steps with the user) and for any implementation work.
 - **Delegated subagent**: runs in an isolated context with no user interaction, and reports back when finished. Appropriate only for **self-contained, read-only tasks**: reading documents, analyzing code, researching a question.
 
-If a protocol includes "present to the user and wait for approval", it cannot run as a delegated subagent.
+If a protocol includes "present to the user and wait for approval", it cannot run as a delegated subagent. `agent_project_expert.md` (Consultation Mode) is the one profile that qualifies in both shapes, because its protocol has no approval gate; as a delegated subagent it is read-only without exception.
 
 ### The triple distinction
 

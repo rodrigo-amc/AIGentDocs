@@ -1,6 +1,6 @@
 # AIGentDocs plugin for Claude Code
 
-Operate the [AIGentDocs](https://github.com/rodrigo-amc/AIGentDocs) docs-as-code standard from Claude Code. Everything here is a thin compilation of the standard: commands wrap its session protocols, subagents wrap its implementation profiles, and all of them read the **adopting project's own `docs/standard/`** — version-correct, single source of truth.
+Operate the [AIGentDocs](https://github.com/rodrigo-amc/AIGentDocs) docs-as-code standard from Claude Code. Everything here is a thin compilation of the standard: commands wrap its session protocols, subagents wrap its implementation and consultation profiles, and all of them read the **adopting project's own `docs/standard/`** — version-correct, single source of truth.
 
 ## Install
 
@@ -23,6 +23,8 @@ claude plugin install aigentdocs@aigentdocs
 ## Subagents
 
 `scaffold`, `module-developer`, `code-reviewer`, `integration-tester` — the standard's Implementation Mode profiles, ready to delegate to.
+
+`project-expert` — its Consultation Mode profile: ask it anything about the project or the standard and it answers read-only, citing its sources. The one subagent that is also useful *to* the others, when a session needs an answer from outside its write scope.
 
 ## Hook
 

@@ -1,7 +1,7 @@
 ---
 type: roadmap
-version: 1.7
-last_updated: 2026-07-05
+version: 1.8
+last_updated: 2026-08-30
 current_phase: "Phase 4 — Open source & community"
 ---
 
@@ -19,12 +19,15 @@ current_phase: "Phase 4 — Open source & community"
 
 ### [To Do / Next]
 
+- [T-28] Release the standard 1.6.0 and carry it to CLI users: publish `@aigentdocs/standard@1.6.0`, plus the CLI release that ships the bumped pin (already at `1.6.0` in the repo, as ADR-0007 requires — "a new standard release reaches CLI users through a CLI patch release that bumps the pinned version"). Decisions belong to release time, as in T-26: whether the CLI bump is a patch (`0.2.1`) or larger depending on what else has landed by then, whether `@aigentdocs/mcp` moves in lockstep, and whether to cut a `standard-v1.6.0` tag and GitHub release for the no-CLI bundle (T-10) — T-26 deliberately did not tag 1.5.0. Publishing is still manual (maintainer 2FA); the automation token remains pending in T-16.
 - [T-16] Open-source operational polish (the repo went public on 2026-07-05 without waiting on these; they remain the post-publication backlog): showcase, announcement, automation token for CI publishing. Plugin version governance (decided 2026-07-05 under T-23, from doc observation 1 of the 2026-07-04 plugin review): the Claude Code plugin versions independently with its own semver — any change under `plugins/claude/` bumps `plugin.json` and adds an entry to `plugins/claude/CHANGELOG.md` in the same PR; merging to main is the release (the marketplace points at the repo); the pending `1.0.0` bump is no longer gated on going public. Chained engineering follow-up: create the plugin `CHANGELOG.md` (seeded with 0.1.0) and a structure test enforcing the bump-with-changelog rule.
 - [T-18] Standard-design question deferred from the 2026-07-04 code-review triage (details in the reports' Dispositions, `local_utils/reports/code_reviewer/`): should review reports be a persistent artifact of the standard? Product decision pending. (The triage's four deferred code minors were resolved as T-25.)
 
 ### [Blocked / Review]
 
 ### [Done]
+
+- [T-27] Standard v1.6.0 — Consultation Mode and `agent_project_expert.md`: a read-only, cross-cutting *Senior Engineer — Project Subject Matter Expert* that answers any question about the project or about the standard itself, citing the document and section behind every claim, and writes nothing (single exception, main agent only: a report the user explicitly asks for, at a path and filename the user gives). Closes a structural gap — every profile until now was defined by its write scope, so there was no way to *ask* the documentation anything; the Reading Protocol orients an agent picking up a task, not a person with a question. Designed, not restored: the role was proven in the origin project but never carried into `docs/standard/` when the Implementation Mode profiles were generalised (1.4.0). First profile that runs both as the session's main agent and as a delegated subagent (its protocol has no approval gate), which is how a session-bound agent obtains a cross-cutting answer without leaving its write scope; delegated, it is read-only without exception. Chained: Claude Code plugin 0.2.0 (`project-expert` subagent) plus the plugin `CHANGELOG.md` that T-16 had pending as a follow-up, and the CLI pin `@aigentdocs/standard` 1.5.0 → 1.6.0 required by ADR-0007. The CLI release that carries 1.6.0 to users is still pending, as T-26 was for 1.5.0.
 
 - [T-26] Published to npm (2026-07-05): `@aigentdocs/core@0.2.0`, `aigentdocs@0.2.0`, `@aigentdocs/mcp@0.2.0` — ships the whole 2026-07-04/05 review round (T-19…T-25). Minor (not patch) because the release raises `engines.node` to `>=20.12` and changes CLI behavior (unknown command exits 2; pre-commit hook resolves the local CLI instead of npx). Internal pins in lockstep per ADR-0007; the standard stays at 1.5.0 (no `standard-v*` tag, no GitHub release). Verified from a clean directory: `npx aigentdocs@latest --version` → 0.2.0, `init --lite` scaffolds the 1.5.0 standard; registry dist-tags and the cli/mcp exact pins to `core@0.2.0` confirmed. Published manually (2FA); automation token still pending in T-16.
 - [T-25] Maintenance batch — the four deferred code minors from the 2026-07-04/05 triage (split out of T-18, which keeps only the standard-design question): CLI exit-code taxonomy unified — unknown command exits 2 like every other usage error, coupled assert updated (CLI review finding 3); the repo-level tests (`plugin.test.ts`, `plugin-hook.test.ts`, `repo.test.ts`) moved from `packages/cli/test/` to a root `test/` suite with its own tsconfig project and entry in the root test script (CLI review finding 4); MCP test iterates every `SESSION_FILES` entry — session types read back from `start_session`'s own schema — asserting its files exist under `docs/standard/` (MCP review finding 3); `update`'s residual staging gap closed with a backup swap (installed → `.old`, staging → installed, restore on a failed final rename) plus regression test (fix-verification review finding 1).
