@@ -1,6 +1,6 @@
 {
   "name": "aigentdocs",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "CLI for the AIGentDocs docs-as-code standard: scaffold, validate, and maintain AI-agent-ready project documentation. Deterministic — no LLM involved.",
   "license": "MIT",
   "homepage": "https://github.com/rodrigo-amc/AIGentDocs#readme",
