@@ -1,6 +1,38 @@
 # Version History of the Documentation Standard
 # Each entry records a version of the standard and its changes.
 
+- version: "1.6.0"
+  date: "2026-08-30"
+  summary: "Consultation Mode and the Project Expert profile: the documentation becomes something you can ask"
+  changes:
+    - type: added
+      description: >
+        Consultation Mode, a fourth working mode in PROTOCOL.md. The three
+        existing modes are defined by what they write; this one is defined
+        by the opposite. It is not a session: no write scope, no bounded
+        area, no fixed reading list — the question decides what is read,
+        across project/, standard/, and the source code.
+    - type: added
+      description: >
+        agent_project_expert.md, the profile for that mode: Senior Engineer
+        — Project Subject Matter Expert. It answers any question about the
+        project or about the standard itself, citing the document and
+        section every claim comes from, and it writes nothing. The single
+        exception, available only to the session's main agent, is a report
+        the user explicitly asks for, at a path and filename the user
+        gives. It closes a structural gap: every profile until now was
+        defined by a write scope, so there was no way to *ask* the
+        documentation anything — the Reading Protocol orients an agent
+        picking up a task, not a person with a question.
+    - type: added
+      description: >
+        First profile that runs correctly both as the session's main agent
+        and as a delegated subagent, since its protocol has no approval
+        gate. That gives an agent bound to a session's write scope a way to
+        obtain a cross-cutting answer without leaving its session. As a
+        delegated subagent it is read-only without exception. Noted in the
+        'Main agent vs delegated subagent' Operational Pattern.
+
 - version: "1.5.0"
   date: "2026-07-03"
   summary: "AGENT.md renamed to PROTOCOL.md, ending the name collision with AGENTS.md"

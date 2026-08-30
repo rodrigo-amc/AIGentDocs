@@ -40,7 +40,7 @@ test("every command has frontmatter with a description", async () => {
 test("every agent has name and description, and points to its standard profile", async () => {
   const agentsDir = path.join(PLUGIN_ROOT, "agents");
   const files = (await readdir(agentsDir)).filter((f) => f.endsWith(".md"));
-  assert.equal(files.length, 4);
+  assert.equal(files.length, 5);
   for (const file of files) {
     const content = await readFile(path.join(agentsDir, file), "utf8");
     assert.match(content, /name: /);

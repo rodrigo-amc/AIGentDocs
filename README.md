@@ -35,6 +35,9 @@ The documentation isn't an afterthought to the code; it's the source the code is
 
 In both phases the contract is the same: **the agent proposes, a human approves; the documentation is the source of truth, and when code and docs disagree, the code is what's wrong.**
 
+**Consultation — the agent that _answers from_ the documentation**
+- **project-expert** — ask it anything about the project and it reads across every layer to answer, read-only, citing where each answer comes from. It spans both phases, belongs to no session, and writes nothing. It is also the fastest way to find out whether your documentation is any good: the quality of its answers is the measurement.
+
 ## How it's organized
 
 Work happens in **sessions** with bounded write scopes — one area, one document at a time. The **Anti-Drift Protocol** ties every code change to the documentation it must update, in the same change. When reality proves a design wrong, a **Correction Record** fixes the documentation first — with an approved impact map as the audit trail — and the code follows. Four layers under `docs/project/`:
